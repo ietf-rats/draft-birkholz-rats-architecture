@@ -60,6 +60,8 @@ Over the years, the term attestation has been used in multiple contexts and mult
 
 In order to better understand and grasp the intend and meaning of specific attestation procedures in the security area - including the requirements that are addressed by them - this document provides an overview of existing work, its background, and common terminology. As the contribution, from that state-of-the-art a set of terms that provides a stable basis for future work on attestation procedures in the IETF is derived.
 
+The primary application of attestation procedures is to increase the trust and confidence in characteristics or specific attributes about two parties that intend to exchange data. How a party’s characteristics are attested and which characteristics are actually chosen to be attested varies with the requirements, or – in essence – the risk that is intended to be mitigated. It is important to note that the activity of attestation itself in principle only provides a reliable basis for further activities that provide the semantic context of what an attestation procedures actually accomplishes and what it cannot. Hence, this document is also intended to provide a map of terms, concepts and applications that illustrates the ecosystem of current applications of attestation procedures.
+
 Before an adequate set of terms and definitions for the attestation domain can be defined, a general understanding and global definitions of the “what” and the “how” have to be established. In consequence, [enter final structure here].
 
 ## Requirements notation
@@ -69,17 +71,21 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 "OPTIONAL" in this document are to be interpreted as described in RFC
 2119, BCP 14 {{RFC2119}}.
 
-# Basic Roles
+# Basic Attestation Roles
 
-Typically, using the term attestation actually refers to remote attestation. While this is not always true (and section FIXME will elaborate on that), there are in consequence two basic roles that are involved in remote attestation.
+The use of the term attestation always implies the involvement of at least two parties that each take on a specific role in corresponding procedures – the attestee role and the verifier role. Depending on the characteristics attested and the nature of the parties, information is exchanged via specific types of interconnects between them. The type of interconnect ranges from GIO pins, to a bus, to the Internet, or from a direct physical connection, to a wireless association, to a world wide mesh of peers. In other words, virtually every kind communication path can be used by the two roles. In fact, a single party can take on both roles at the same time, but there is only a limited use to this architecture.
 
 Attestee:
 
-: enter text here
+: The role that designates the subject of the attestation
 
-Verfifier: 
+Verfifier:
 
-: enter text here
+: The role that designates the appraiser of the attestee’s attestation
+
+Interconnect:
+
+: A channel of communication between attestee and verifier that enables the appraisal of the attestee’s attestation.
 
 # Computing Context
 
