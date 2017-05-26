@@ -279,7 +279,7 @@ address {
   <link href="#rfc.toc" rel="Contents"/>
 <link href="#rfc.section.1" rel="Chapter" title="1 Introduction"/>
 <link href="#rfc.section.1.1" rel="Chapter" title="1.1 Requirements notation"/>
-<link href="#rfc.section.2" rel="Chapter" title="2 Basic Roles"/>
+<link href="#rfc.section.2" rel="Chapter" title="2 Basic Attestation Roles"/>
 <link href="#rfc.section.3" rel="Chapter" title="3 Computing Context"/>
 <link href="#rfc.section.3.1" rel="Chapter" title="3.1 Formal Semantic Relationships"/>
 <link href="#rfc.section.3.2" rel="Chapter" title="3.2 Characteristics of a computing context"/>
@@ -299,7 +299,7 @@ address {
 
   <meta name="dct.creator" content="Birkholz, H., Wiseman, M., and H. Tschofenig" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-birkholz-attestation-terminology-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2017-5-24" />
+  <meta name="dct.issued" scheme="ISO8601" content="2017-5-26" />
   <meta name="dct.abstract" content="Please help me to become a concise abstract!" />
   <meta name="description" content="Please help me to become a concise abstract!" />
 
@@ -323,7 +323,7 @@ address {
   <td class="right">M. Wiseman</td>
 </tr>
 <tr>
-  <td class="left">Expires: November 25, 2017</td>
+  <td class="left">Expires: November 27, 2017</td>
   <td class="right">GE Global Research</td>
 </tr>
 <tr>
@@ -336,7 +336,7 @@ address {
 </tr>
 <tr>
   <td class="left"></td>
-  <td class="right">May 24, 2017</td>
+  <td class="right">May 26, 2017</td>
 </tr>
 
     	
@@ -356,7 +356,7 @@ address {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on November 25, 2017.</p>
+<p>This Internet-Draft will expire on November 27, 2017.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -370,7 +370,7 @@ address {
 
   	<li>1.   <a href="#rfc.section.1">Introduction</a></li>
 <ul><li>1.1.   <a href="#rfc.section.1.1">Requirements notation</a></li>
-</ul><li>2.   <a href="#rfc.section.2">Basic Roles</a></li>
+</ul><li>2.   <a href="#rfc.section.2">Basic Attestation Roles</a></li>
 <li>3.   <a href="#rfc.section.3">Computing Context</a></li>
 <ul><li>3.1.   <a href="#rfc.section.3.1">Formal Semantic Relationships</a></li>
 <li>3.2.   <a href="#rfc.section.3.2">Characteristics of a computing context</a></li>
@@ -390,18 +390,21 @@ address {
   <h1 id="rfc.section.1"><a href="#rfc.section.1">1.</a> <a href="#introduction" id="introduction">Introduction</a></h1>
 <p id="rfc.section.1.p.1">Over the years, the term attestation has been used in multiple contexts and multiple scopes and therefore accumulated various connotations with slightly different semantic meaning.</p>
 <p id="rfc.section.1.p.2">In order to better understand and grasp the intend and meaning of specific attestation procedures in the security area - including the requirements that are addressed by them - this document provides an overview of existing work, its background, and common terminology. As the contribution, from that state-of-the-art a set of terms that provides a stable basis for future work on attestation procedures in the IETF is derived.</p>
-<p id="rfc.section.1.p.3">Before an adequate set of terms and definitions for the attestation domain can be defined, a general understanding and global definitions of the &#8220;what&#8221; and the &#8220;how&#8221; have to be established. In consequence, [enter final structure here].</p>
+<p id="rfc.section.1.p.3">The primary application of attestation procedures is to increase the trust and confidence in characteristics or specific attributes about two parties that intend to exchange data. How a party&#8217;s characteristics are attested and which characteristics are actually chosen to be attested varies with the requirements, or &#8211; in essence &#8211; the risk that is intended to be mitigated. It is important to note that the activity of attestation itself in principle only provides a reliable basis for further activities that provide the semantic context of what an attestation procedures actually accomplishes and what it cannot. Hence, this document is also intended to provide a map of terms, concepts and applications that illustrates the ecosystem of current applications of attestation procedures.</p>
+<p id="rfc.section.1.p.4">Before an adequate set of terms and definitions for the attestation domain can be defined, a general understanding and global definitions of the &#8220;what&#8221; and the &#8220;how&#8221; have to be established. In consequence, [enter final structure here].</p>
 <h1 id="rfc.section.1.1"><a href="#rfc.section.1.1">1.1.</a> <a href="#requirements-notation" id="requirements-notation">Requirements notation</a></h1>
 <p id="rfc.section.1.1.p.1">The key words &#8220;MUST&#8221;, &#8220;MUST NOT&#8221;, &#8220;REQUIRED&#8221;, &#8220;SHALL&#8221;, &#8220;SHALL NOT&#8221;, &#8220;SHOULD&#8221;, &#8220;SHOULD NOT&#8221;, &#8220;RECOMMENDED&#8221;, &#8220;NOT RECOMMENDED&#8221;, &#8220;MAY&#8221;, and &#8220;OPTIONAL&#8221; in this document are to be interpreted as described in RFC 2119, BCP 14 <a href="#RFC2119">[RFC2119]</a>.</p>
-<h1 id="rfc.section.2"><a href="#rfc.section.2">2.</a> <a href="#basic-roles" id="basic-roles">Basic Roles</a></h1>
-<p id="rfc.section.2.p.1">Typically, using the term attestation actually refers to remote attestation. While this is not always true (and section FIXME will elaborate on that), there are in consequence two basic roles that are involved in remote attestation.</p>
+<h1 id="rfc.section.2"><a href="#rfc.section.2">2.</a> <a href="#basic-attestation-roles" id="basic-attestation-roles">Basic Attestation Roles</a></h1>
+<p id="rfc.section.2.p.1">The use of the term attestation always implies the involvement of at least two parties that each take on a specific role in corresponding procedures &#8211; the attestee role and the verifier role. Depending on the characteristics attested and the nature of the parties, information is exchanged via specific types of interconnects between them. The type of interconnect ranges from GIO pins, to a bus, to the Internet, or from a direct physical connection, to a wireless association, to a world wide mesh of peers. In other words, virtually every kind communication path can be used by the two roles. In fact, a single party can take on both roles at the same time, but there is only a limited use to this architecture.</p>
 <p/>
 
 <dl>
   <dt>Attestee:</dt>
-  <dd style="margin-left: 8">enter text here</dd>
+  <dd style="margin-left: 8">The role that designates the subject of the attestation</dd>
   <dt>Verfifier:</dt>
-  <dd style="margin-left: 8">enter text here</dd>
+  <dd style="margin-left: 8">The role that designates the appraiser of the attestee&#8217;s attestation</dd>
+  <dt>Interconnect:</dt>
+  <dd style="margin-left: 8">A channel of communication between attestee and verifier that enables the appraisal of the attestee&#8217;s attestation.</dd>
 </dl>
 <h1 id="rfc.section.3"><a href="#rfc.section.3">3.</a> <a href="#computing-context" id="computing-context">Computing Context</a></h1>
 <p id="rfc.section.3.p.1">This section introduces the term computing context in order to simplify the definition of attestation terminology.</p>

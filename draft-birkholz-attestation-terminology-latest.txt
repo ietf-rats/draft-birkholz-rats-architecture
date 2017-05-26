@@ -5,10 +5,10 @@
 Network Working Group                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Informational                                M. Wiseman
-Expires: November 25, 2017                            GE Global Research
+Expires: November 27, 2017                            GE Global Research
                                                            H. Tschofenig
                                                                 ARM Ltd.
-                                                            May 24, 2017
+                                                            May 26, 2017
 
 
             Reference Terminology for Attestation Procedures
@@ -33,7 +33,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on November 25, 2017.
+   This Internet-Draft will expire on November 27, 2017.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Birkholz, et al.        Expires November 25, 2017               [Page 1]
+Birkholz, et al.        Expires November 27, 2017               [Page 1]
 
 Internet-Draft              term-attestation                    May 2017
 
@@ -61,17 +61,17 @@ Internet-Draft              term-attestation                    May 2017
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
-     1.1.  Requirements notation . . . . . . . . . . . . . . . . . .   2
-   2.  Basic Roles . . . . . . . . . . . . . . . . . . . . . . . . .   3
+     1.1.  Requirements notation . . . . . . . . . . . . . . . . . .   3
+   2.  Basic Attestation Roles . . . . . . . . . . . . . . . . . . .   3
    3.  Computing Context . . . . . . . . . . . . . . . . . . . . . .   3
      3.1.  Formal Semantic Relationships . . . . . . . . . . . . . .   4
-     3.2.  Characteristics of a computing context  . . . . . . . . .   4
-   4.  Attestation Workflow  . . . . . . . . . . . . . . . . . . . .   5
-     4.1.  The Lying Endpoint Problem  . . . . . . . . . . . . . . .   7
-   5.  Trustworthiness . . . . . . . . . . . . . . . . . . . . . . .   8
-   6.  IANA considerations . . . . . . . . . . . . . . . . . . . . .   8
-   7.  Security Considerations . . . . . . . . . . . . . . . . . . .   8
-   8.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   8
+     3.2.  Characteristics of a computing context  . . . . . . . . .   5
+   4.  Attestation Workflow  . . . . . . . . . . . . . . . . . . . .   6
+     4.1.  The Lying Endpoint Problem  . . . . . . . . . . . . . . .   8
+   5.  Trustworthiness . . . . . . . . . . . . . . . . . . . . . . .   9
+   6.  IANA considerations . . . . . . . . . . . . . . . . . . . . .   9
+   7.  Security Considerations . . . . . . . . . . . . . . . . . . .   9
+   8.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   9
    9.  Change Log  . . . . . . . . . . . . . . . . . . . . . . . . .   9
    10. Normative References  . . . . . . . . . . . . . . . . . . . .   9
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   9
@@ -90,8 +90,30 @@ Table of Contents
    provides a stable basis for future work on attestation procedures in
    the IETF is derived.
 
+   The primary application of attestation procedures is to increase the
+   trust and confidence in characteristics or specific attributes about
+   two parties that intend to exchange data.  How a party's
+   characteristics are attested and which characteristics are actually
+   chosen to be attested varies with the requirements, or - in essence -
+   the risk that is intended to be mitigated.  It is important to note
+   that the activity of attestation itself in principle only provides a
+   reliable basis for further activities that provide the semantic
+   context of what an attestation procedures actually accomplishes and
+   what it cannot.  Hence, this document is also intended to provide a
+   map of terms, concepts and applications that illustrates the
+   ecosystem of current applications of attestation procedures.
+
    Before an adequate set of terms and definitions for the attestation
    domain can be defined, a general understanding and global definitions
+
+
+
+
+Birkholz, et al.        Expires November 27, 2017               [Page 2]
+
+Internet-Draft              term-attestation                    May 2017
+
+
    of the "what" and the "how" have to be established.  In consequence,
    [enter final structure here].
 
@@ -102,28 +124,27 @@ Table of Contents
    "OPTIONAL" in this document are to be interpreted as described in RFC
    2119, BCP 14 [RFC2119].
 
+2.  Basic Attestation Roles
 
+   The use of the term attestation always implies the involvement of at
+   least two parties that each take on a specific role in corresponding
+   procedures - the attestee role and the verifier role.  Depending on
+   the characteristics attested and the nature of the parties,
+   information is exchanged via specific types of interconnects between
+   them.  The type of interconnect ranges from GIO pins, to a bus, to
+   the Internet, or from a direct physical connection, to a wireless
+   association, to a world wide mesh of peers.  In other words,
+   virtually every kind communication path can be used by the two roles.
+   In fact, a single party can take on both roles at the same time, but
+   there is only a limited use to this architecture.
 
+   Attestee:  The role that designates the subject of the attestation
 
+   Verfifier:  The role that designates the appraiser of the attestee's
+      attestation
 
-
-
-
-Birkholz, et al.        Expires November 25, 2017               [Page 2]
-
-Internet-Draft              term-attestation                    May 2017
-
-
-2.  Basic Roles
-
-   Typically, using the term attestation actually refers to remote
-   attestation.  While this is not always true (and section FIXME will
-   elaborate on that), there are in consequence two basic roles that are
-   involved in remote attestation.
-
-   Attestee:  enter text here
-
-   Verfifier:  enter text here
+   Interconnect:  A channel of communication between attestee and
+      verifier that enables the appraisal of the attestee's attestation.
 
 3.  Computing Context
 
@@ -141,6 +162,14 @@ Internet-Draft              term-attestation                    May 2017
    In essence, every physical device is a composite of components that
    are potential computing contexts capable of taking on the roles of
    attestee or verifier.  The scope and application of these roles can
+
+
+
+Birkholz, et al.        Expires November 27, 2017               [Page 3]
+
+Internet-Draft              term-attestation                    May 2017
+
+
    range from continuous mutual attestation of every component in the
    hierarchy of the composite that constitutes a single distinguishable
    endpoint on the management plane, to sporadic attestation of the
@@ -161,14 +190,6 @@ Internet-Draft              term-attestation                    May 2017
    constitute independent and distinguishable slices of a computing
    context created by compartmentalization mechanisms, such as trusted
    execution environments or virtual network security function contexts.
-
-
-
-
-Birkholz, et al.        Expires November 25, 2017               [Page 3]
-
-Internet-Draft              term-attestation                    May 2017
-
 
 3.1.  Formal Semantic Relationships
 
@@ -198,6 +219,13 @@ Internet-Draft              term-attestation                    May 2017
    Subsystem:  A collection of related system components that together
       perform a system function or deliver a system service.
 
+
+
+Birkholz, et al.        Expires November 27, 2017               [Page 4]
+
+Internet-Draft              term-attestation                    May 2017
+
+
    System Component:  A collection of system resources that (a) forms a
       physical or logical part of the system, (b) has specified
       functions and interfaces, and (c) is treated (e.g., by policies or
@@ -218,13 +246,6 @@ Internet-Draft              term-attestation                    May 2017
    understanding of its meaning:
 
    A computing context:
-
-
-
-Birkholz, et al.        Expires November 25, 2017               [Page 4]
-
-Internet-Draft              term-attestation                    May 2017
-
 
    o  creates its own independent environment in regard to executing and
       running software,
@@ -250,6 +271,17 @@ Internet-Draft              term-attestation                    May 2017
    virtualized firewall function running distributed on a cluster of
    physical and virtual nodes, or a trust-zone.
 
+
+
+
+
+
+
+Birkholz, et al.        Expires November 27, 2017               [Page 5]
+
+Internet-Draft              term-attestation                    May 2017
+
+
 4.  Attestation Workflow
 
    This section introduces terms and definitions that are required to
@@ -273,14 +305,6 @@ Internet-Draft              term-attestation                    May 2017
 
    Example: The conveyance of cryptographic evidence is an activity or
    the acquisition of an trusted time stamp token are activities.
-
-
-
-
-Birkholz, et al.        Expires November 25, 2017               [Page 5]
-
-Internet-Draft              term-attestation                    May 2017
-
 
    Task:  A piece of work to be done or undertaken.  In the scope of
       attestation, a task is a procedure to be conducted.
@@ -306,6 +330,14 @@ Internet-Draft              term-attestation                    May 2017
    compose a remote attestation procedure.  # Attestee Reference Use
    Cases
 
+
+
+
+Birkholz, et al.        Expires November 27, 2017               [Page 6]
+
+Internet-Draft              term-attestation                    May 2017
+
+
    This document provides NNN prominent examples of use cases
    attestation procedures are intended to address:
 
@@ -330,14 +362,6 @@ Internet-Draft              term-attestation                    May 2017
 
    Data Integrity:
 
-
-
-
-Birkholz, et al.        Expires November 25, 2017               [Page 6]
-
-Internet-Draft              term-attestation                    May 2017
-
-
       1.  The property that data has not been changed, destroyed, or
           lost in an unauthorized or accidental manner.  (See: data
           integrity service.  Compare: correctness integrity, source
@@ -359,6 +383,15 @@ Internet-Draft              term-attestation                    May 2017
       1.  The process of examining information to establish the truth of
           a claimed fact or value.
 
+
+
+
+
+
+
+Birkholz, et al.        Expires November 27, 2017               [Page 7]
+
+Internet-Draft              term-attestation                    May 2017
 
 
       1.  The process of comparing two levels of system specification
@@ -386,14 +419,6 @@ Internet-Draft              term-attestation                    May 2017
 
    Per definition, a "lying endpoint" cannot be "trusted system".
 
-
-
-
-Birkholz, et al.        Expires November 25, 2017               [Page 7]
-
-Internet-Draft              term-attestation                    May 2017
-
-
    Trusted System:  A system that operates as expected, according to
       design and policy, doing what is required - despite environmental
       disruption, human user and operator errors, and attacks by hostile
@@ -412,6 +437,18 @@ Internet-Draft              term-attestation                    May 2017
    Attestation activities that are intended to create this evidence
    therefore also to also provide guarantees about the validity of the
    evidence they can create.
+
+
+
+
+
+
+
+
+Birkholz, et al.        Expires November 27, 2017               [Page 8]
+
+Internet-Draft              term-attestation                    May 2017
+
 
 5.  Trustworthiness
 
@@ -440,16 +477,6 @@ Internet-Draft              term-attestation                    May 2017
 
    Maybe.
 
-
-
-
-
-
-Birkholz, et al.        Expires November 25, 2017               [Page 8]
-
-Internet-Draft              term-attestation                    May 2017
-
-
 9.  Change Log
 
    No changes yet.
@@ -470,6 +497,13 @@ Authors' Addresses
    Germany
 
    Email: henk.birkholz@sit.fraunhofer.de
+
+
+
+
+Birkholz, et al.        Expires November 27, 2017               [Page 9]
+
+Internet-Draft              term-attestation                    May 2017
 
 
    Monty Wiseman
@@ -501,4 +535,26 @@ Authors' Addresses
 
 
 
-Birkholz, et al.        Expires November 25, 2017               [Page 9]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Birkholz, et al.        Expires November 27, 2017              [Page 10]
