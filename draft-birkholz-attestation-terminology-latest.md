@@ -47,6 +47,8 @@ normative:
   RFC2119:
 
 informative:
+  I-D.ietf-sacm-terminology: sacmterm
+  RFC7519: jwt 
 
 --- abstract 
 
@@ -178,12 +180,12 @@ Procedure:
 : A series of actions that are done in a certain way or order. In the scope of attestation, a procedure is a composition of activities (sequences of actions) that is intended to create a well specified result with a well established semantic context.
 Example: The activities of attestation, conveyance and verification compose a remote attestation procedure.
 
-# Attestee Reference Use Cases
+# Reference Use Cases
 
 This document provides NNN prominent examples of use cases attestation procedures are intended to address:
 
-* verifying the source integrity of a computing context via data integrity proofing of installed software instances that are executed, and
-* verifying the identity proofing of a computing context.
+* Verification of the source integrity of a computing context via data integrity proofing of installed software instances that are executed, and
+* Verification of the identity proofing of a computing context.
 
 These use case summary highlighted above is based in the follow terms defined in RFC4949:
 
@@ -235,6 +237,10 @@ Remote attestation procedures are intended to enable the consumer of information
 
 In contrast, such evidence has to be impossible to create if the software instances used in a computing context are compromised. Attestation activities that are intended to create this evidence therefore also to also provide guarantees about the validity of the evidence they can create.
 
+## Who am I a talking to?
+
+[working title, write up use case here, ref teep requirements]
+
 # Trustworthiness
 
 A “lying endpoint” is not trustworthy. 
@@ -246,6 +252,66 @@ Trusted System:
 Trustworthy:
 
 : pull in text here
+
+# Remote Attestation
+
+Attestation: 
+
+: An object integrity authentication facilitated via the creation of a claim about the properties of an attestee, such that the claim can be used as evidence.
+
+Conveyance: 
+
+: The transfer of evidence from the attestee to the verifier.
+
+Verification:  
+
+: The appraisal of evidence by evaluating it against declarative guidance.
+
+Remote Attestation:
+
+: A procedure composed of the activities attestation, conveyance and verification.
+
+## Building Block Terms
+
+[working title, pulled from various sources, vital]
+
+Attestation Identity Key (AIK):
+
+: A special purpose signature (therefore asymmetric) key that supports identity related operations. The private portion of the key pair is maintained confidential to the computing context via appropriate measures (that have a direct impact on the level of confidence). The public portion of the key pair may be included in AIK credentials that provide a claim about the computing context.
+
+Claim:
+
+: A piece of information asserted about a subject. A claim is represented as a name/value pair consisting of a Claim Name and a Claim Value {{-jwt}}
+
+: In the context of SACM, a claim is also specialized as an attribute/value pair that is intended to be related to a statement {{-sacmterm}}.
+
+Computing Context Characteristics:
+
+: The composition, configuration and state of a computing context.
+
+Evidence:
+
+: A trustworthy set of claims about an computing context's characteristics.
+
+Identity:
+
+: A set of claims that is intended to be related to an entity. [merge with RFC4949 defintion above]
+
+Integrity Measurements:
+
+: Metrics of computing context characteristics (i.e. composition, configuration and state) that affect the confidence in the trustworthiness of a computing context. Digests of integrity measurements can be stored in shielded locations (e.g. a PCR of a TPM).
+
+Reference Integrity Measurements:
+
+: Signed measurements about a computing context's characteristics that are provided by a vendor or manufacturer and are intended to be used as declarative guidannce {{-sacmterm}} (e.g. a signed CoSWID).
+
+Trustworthiness:
+
+: The qualities of computing context characteristics that guarantee a specific behavior specified by declarative guidance. Trustworthiness is not an absolute property but defined with respect to a computing context, corresponding declarative guidance, and has a scope of confidence. A trusted system is trustworthy. [refactor defintion with RFC4949 terms]
+
+: Trustworthy Computing Context: a computing context that guarantees trustworthy behavior and/or composition (with respect to certain declarative guidance and a scope of confideence). A trustworthy computing context is a trusted system.
+
+: Trustworthy Statement: evidence that trustworthy conveyed by a computing context that is not necessarily trustworthy. [update with tamper related terms]
 
 #  IANA considerations
 
