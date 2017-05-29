@@ -284,14 +284,19 @@ address {
 <link href="#rfc.section.3.1" rel="Chapter" title="3.1 Formal Semantic Relationships"/>
 <link href="#rfc.section.3.2" rel="Chapter" title="3.2 Characteristics of a computing context"/>
 <link href="#rfc.section.4" rel="Chapter" title="4 Attestation Workflow"/>
-<link href="#rfc.section.5" rel="Chapter" title="5 Attestee Reference Use Cases"/>
+<link href="#rfc.section.5" rel="Chapter" title="5 Reference Use Cases"/>
 <link href="#rfc.section.5.1" rel="Chapter" title="5.1 The Lying Endpoint Problem"/>
+<link href="#rfc.section.5.2" rel="Chapter" title="5.2 Who am I a talking to?"/>
 <link href="#rfc.section.6" rel="Chapter" title="6 Trustworthiness"/>
-<link href="#rfc.section.7" rel="Chapter" title="7 IANA considerations"/>
-<link href="#rfc.section.8" rel="Chapter" title="8 Security Considerations"/>
-<link href="#rfc.section.9" rel="Chapter" title="9 Acknowledgements"/>
-<link href="#rfc.section.10" rel="Chapter" title="10 Change Log"/>
-<link href="#rfc.references" rel="Chapter" title="11 Normative References"/>
+<link href="#rfc.section.7" rel="Chapter" title="7 Remote Attestation"/>
+<link href="#rfc.section.7.1" rel="Chapter" title="7.1 Building Block Terms"/>
+<link href="#rfc.section.8" rel="Chapter" title="8 IANA considerations"/>
+<link href="#rfc.section.9" rel="Chapter" title="9 Security Considerations"/>
+<link href="#rfc.section.10" rel="Chapter" title="10 Acknowledgements"/>
+<link href="#rfc.section.11" rel="Chapter" title="11 Change Log"/>
+<link href="#rfc.references" rel="Chapter" title="12 References"/>
+<link href="#rfc.references.1" rel="Chapter" title="12.1 Normative References"/>
+<link href="#rfc.references.2" rel="Chapter" title="12.2 Informative References"/>
 <link href="#rfc.authors" rel="Chapter"/>
 
 
@@ -376,15 +381,20 @@ address {
 <ul><li>3.1.   <a href="#rfc.section.3.1">Formal Semantic Relationships</a></li>
 <li>3.2.   <a href="#rfc.section.3.2">Characteristics of a computing context</a></li>
 </ul><li>4.   <a href="#rfc.section.4">Attestation Workflow</a></li>
-<li>5.   <a href="#rfc.section.5">Attestee Reference Use Cases</a></li>
+<li>5.   <a href="#rfc.section.5">Reference Use Cases</a></li>
 <ul><li>5.1.   <a href="#rfc.section.5.1">The Lying Endpoint Problem</a></li>
+<li>5.2.   <a href="#rfc.section.5.2">Who am I a talking to?</a></li>
 </ul><li>6.   <a href="#rfc.section.6">Trustworthiness</a></li>
-<li>7.   <a href="#rfc.section.7">IANA considerations</a></li>
-<li>8.   <a href="#rfc.section.8">Security Considerations</a></li>
-<li>9.   <a href="#rfc.section.9">Acknowledgements</a></li>
-<li>10.   <a href="#rfc.section.10">Change Log</a></li>
-<li>11.   <a href="#rfc.references">Normative References</a></li>
-<li><a href="#rfc.authors">Authors' Addresses</a></li>
+<li>7.   <a href="#rfc.section.7">Remote Attestation</a></li>
+<ul><li>7.1.   <a href="#rfc.section.7.1">Building Block Terms</a></li>
+</ul><li>8.   <a href="#rfc.section.8">IANA considerations</a></li>
+<li>9.   <a href="#rfc.section.9">Security Considerations</a></li>
+<li>10.   <a href="#rfc.section.10">Acknowledgements</a></li>
+<li>11.   <a href="#rfc.section.11">Change Log</a></li>
+<li>12.   <a href="#rfc.references">References</a></li>
+<ul><li>12.1.   <a href="#rfc.references.1">Normative References</a></li>
+<li>12.2.   <a href="#rfc.references.2">Informative References</a></li>
+</ul><li><a href="#rfc.authors">Authors' Addresses</a></li>
 
 
   </ul>
@@ -475,13 +485,13 @@ address {
   <dt>Procedure:</dt>
   <dd style="margin-left: 8">A series of actions that are done in a certain way or order. In the scope of attestation, a procedure is a composition of activities (sequences of actions) that is intended to create a well specified result with a well established semantic context.  Example: The activities of attestation, conveyance and verification compose a remote attestation procedure.</dd>
 </dl>
-<h1 id="rfc.section.5"><a href="#rfc.section.5">5.</a> <a href="#attestee-reference-use-cases" id="attestee-reference-use-cases">Attestee Reference Use Cases</a></h1>
+<h1 id="rfc.section.5"><a href="#rfc.section.5">5.</a> <a href="#reference-use-cases" id="reference-use-cases">Reference Use Cases</a></h1>
 <p id="rfc.section.5.p.1">This document provides NNN prominent examples of use cases attestation procedures are intended to address:</p>
 <p/>
 
 <ul>
-  <li>verifying the source integrity of a computing context via data integrity proofing of installed software instances that are executed, and</li>
-  <li>verifying the identity proofing of a computing context.</li>
+  <li>Verification of the source integrity of a computing context via data integrity proofing of installed software instances that are executed, and</li>
+  <li>Verification of the identity proofing of a computing context.</li>
 </ul>
 <p id="rfc.section.5.p.3">These use case summary highlighted above is based in the follow terms defined in RFC4949:</p>
 <p/>
@@ -518,6 +528,8 @@ address {
 </dl>
 <p id="rfc.section.5.1.p.5">Remote attestation procedures are intended to enable the consumer of information emitted by an computing context to assess the validity and integrity of the information transferred. The approach is based on the assumption that if evidence can be provided in order to prove the integrity of every software instance installed involved in the activity of creating the emitted information in question, the emitted information can be considered valid and integer.</p>
 <p id="rfc.section.5.1.p.6">In contrast, such evidence has to be impossible to create if the software instances used in a computing context are compromised. Attestation activities that are intended to create this evidence therefore also to also provide guarantees about the validity of the evidence they can create.</p>
+<h1 id="rfc.section.5.2"><a href="#rfc.section.5.2">5.2.</a> <a href="#who-am-i-a-talking-to" id="who-am-i-a-talking-to">Who am I a talking to?</a></h1>
+<p id="rfc.section.5.2.p.1">[working title, write up use case here, ref teep requirements]</p>
 <h1 id="rfc.section.6"><a href="#rfc.section.6">6.</a> <a href="#trustworthiness" id="trustworthiness">Trustworthiness</a></h1>
 <p id="rfc.section.6.p.1">A &#8220;lying endpoint&#8221; is not trustworthy.</p>
 <p/>
@@ -528,21 +540,63 @@ address {
   <dt>Trustworthy:</dt>
   <dd style="margin-left: 8">pull in text here</dd>
 </dl>
-<h1 id="rfc.section.7"><a href="#rfc.section.7">7.</a> <a href="#iana-considerations" id="iana-considerations">IANA considerations</a></h1>
-<p id="rfc.section.7.p.1">This document will include requests to IANA:</p>
+<h1 id="rfc.section.7"><a href="#rfc.section.7">7.</a> <a href="#remote-attestation" id="remote-attestation">Remote Attestation</a></h1>
+<p/>
+
+<dl>
+  <dt>Attestation:</dt>
+  <dd style="margin-left: 8">An object integrity authentication facilitated via the creation of a claim about the properties of an attestee, such that the claim can be used as evidence.</dd>
+  <dt>Conveyance:</dt>
+  <dd style="margin-left: 8">The transfer of evidence from the attestee to the verifier.</dd>
+  <dt>Verification:</dt>
+  <dd style="margin-left: 8">The appraisal of evidence by evaluating it against declarative guidance.</dd>
+  <dt>Remote Attestation:</dt>
+  <dd style="margin-left: 8">A procedure composed of the activities attestation, conveyance and verification.</dd>
+</dl>
+<h1 id="rfc.section.7.1"><a href="#rfc.section.7.1">7.1.</a> <a href="#building-block-terms" id="building-block-terms">Building Block Terms</a></h1>
+<p id="rfc.section.7.1.p.1">[working title, pulled from various sources, vital]</p>
+<p/>
+
+<dl>
+  <dt>Attestation Identity Key (AIK):</dt>
+  <dd style="margin-left: 8">A special purpose signature (therefore asymmetric) key that supports identity related operations. The private portion of the key pair is maintained confidential to the computing context via appropriate measures (that have a direct impact on the level of confidence). The public portion of the key pair may be included in AIK credentials that provide a claim about the computing context.</dd>
+  <dt>Claim:</dt>
+  <dd style="margin-left: 8">A piece of information asserted about a subject. A claim is represented as a name/value pair consisting of a Claim Name and a Claim Value <a href="#RFC7519">[RFC7519]</a></dd>
+  <dt></dt>
+  <dd style="margin-left: 8">In the context of SACM, a claim is also specialized as an attribute/value pair that is intended to be related to a statement <a href="#I-D.ietf-sacm-terminology">[I-D.ietf-sacm-terminology]</a>.</dd>
+  <dt>Computing Context Characteristics:</dt>
+  <dd style="margin-left: 8">The composition, configuration and state of a computing context.</dd>
+  <dt>Evidence:</dt>
+  <dd style="margin-left: 8">A trustworthy set of claims about an computing context&#8217;s characteristics.</dd>
+  <dt>Identity:</dt>
+  <dd style="margin-left: 8">A set of claims that is intended to be related to an entity. [merge with RFC4949 defintion above]</dd>
+  <dt>Integrity Measurements:</dt>
+  <dd style="margin-left: 8">Metrics of computing context characteristics (i.e. composition, configuration and state) that affect the confidence in the trustworthiness of a computing context. Digests of integrity measurements can be stored in shielded locations (e.g. a PCR of a TPM).</dd>
+  <dt>Reference Integrity Measurements:</dt>
+  <dd style="margin-left: 8">Signed measurements about a computing context&#8217;s characteristics that are provided by a vendor or manufacturer and are intended to be used as declarative guidannce <a href="#I-D.ietf-sacm-terminology">[I-D.ietf-sacm-terminology]</a> (e.g. a signed CoSWID).</dd>
+  <dt>Trustworthiness:</dt>
+  <dd style="margin-left: 8">The qualities of computing context characteristics that guarantee a specific behavior specified by declarative guidance. Trustworthiness is not an absolute property but defined with respect to a computing context, corresponding declarative guidance, and has a scope of confidence. A trusted system is trustworthy. [refactor defintion with RFC4949 terms]</dd>
+  <dt></dt>
+  <dd style="margin-left: 8">Trustworthy Computing Context: a computing context that guarantees trustworthy behavior and/or composition (with respect to certain declarative guidance and a scope of confideence). A trustworthy computing context is a trusted system.</dd>
+  <dt></dt>
+  <dd style="margin-left: 8">Trustworthy Statement: evidence that trustworthy conveyed by a computing context that is not necessarily trustworthy. [update with tamper related terms]</dd>
+</dl>
+<h1 id="rfc.section.8"><a href="#rfc.section.8">8.</a> <a href="#iana-considerations" id="iana-considerations">IANA considerations</a></h1>
+<p id="rfc.section.8.p.1">This document will include requests to IANA:</p>
 <p/>
 
 <ul>
   <li>first item</li>
   <li>second item</li>
 </ul>
-<h1 id="rfc.section.8"><a href="#rfc.section.8">8.</a> <a href="#security-considerations" id="security-considerations">Security Considerations</a></h1>
-<p id="rfc.section.8.p.1">There are always some.</p>
-<h1 id="rfc.section.9"><a href="#rfc.section.9">9.</a> <a href="#acknowledgements" id="acknowledgements">Acknowledgements</a></h1>
-<p id="rfc.section.9.p.1">Maybe.</p>
-<h1 id="rfc.section.10"><a href="#rfc.section.10">10.</a> <a href="#change-log" id="change-log">Change Log</a></h1>
-<p id="rfc.section.10.p.1">No changes yet.</p>
-<h1 id="rfc.references"><a href="#rfc.references">11.</a> Normative References</h1>
+<h1 id="rfc.section.9"><a href="#rfc.section.9">9.</a> <a href="#security-considerations" id="security-considerations">Security Considerations</a></h1>
+<p id="rfc.section.9.p.1">There are always some.</p>
+<h1 id="rfc.section.10"><a href="#rfc.section.10">10.</a> <a href="#acknowledgements" id="acknowledgements">Acknowledgements</a></h1>
+<p id="rfc.section.10.p.1">Maybe.</p>
+<h1 id="rfc.section.11"><a href="#rfc.section.11">11.</a> <a href="#change-log" id="change-log">Change Log</a></h1>
+<p id="rfc.section.11.p.1">No changes yet.</p>
+<h1 id="rfc.references"><a href="#rfc.references">12.</a> References</h1>
+<h1 id="rfc.references.1"><a href="#rfc.references.1">12.1.</a> Normative References</h1>
 <table>
   <tbody>
     <tr>
@@ -550,6 +604,23 @@ address {
         <b id="RFC2119">[RFC2119]</b>
       </td>
       <td class="top"><a>Bradner, S.</a>, "<a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>", BCP 14, RFC 2119, DOI 10.17487/RFC2119, March 1997.</td>
+    </tr>
+  </tbody>
+</table>
+<h1 id="rfc.references.2"><a href="#rfc.references.2">12.2.</a> Informative References</h1>
+<table>
+  <tbody>
+    <tr>
+      <td class="reference">
+        <b id="I-D.ietf-sacm-terminology">[I-D.ietf-sacm-terminology]</b>
+      </td>
+      <td class="top"><a>Birkholz, H.</a>, <a>Lu, J.</a>, <a>Strassner, J.</a> and <a>N. Cam-Winget</a>, "<a href="http://tools.ietf.org/html/draft-ietf-sacm-terminology-12">Security Automation and Continuous Monitoring (SACM) Terminology</a>", Internet-Draft draft-ietf-sacm-terminology-12, March 2017.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC7519">[RFC7519]</b>
+      </td>
+      <td class="top"><a>Jones, M.</a>, <a>Bradley, J.</a> and <a>N. Sakimura</a>, "<a href="http://tools.ietf.org/html/rfc7519">JSON Web Token (JWT)</a>", RFC 7519, DOI 10.17487/RFC7519, May 2015.</td>
     </tr>
   </tbody>
 </table>
