@@ -97,13 +97,16 @@ In essence, every physical device is a composite of components that are potentia
 
 Analogously, the increasing number of features and functions start to blur the lines that are required to categorize each solution and approach precisely. To address that increasingly difficult categorization, the term computing context defines the characteristics of the entities that can take on the role of an attestee – and in consequence the role of a verifier. This approach is intended to provide a stable basis of definitions for future solutions that continuous to remain viable long-term.
 
-Computing context is an umbrella term that combines the scope of the definitions of endpoint [ref NEA], device [ref 1ar], and thing [ref t2trg], including hardware-based and software-based sub-contexts that constitute independent and distinguishable slices of a computing context created by compartmentalization mechanisms, such as trusted execution environments or virtual network security function contexts.
+Computing context :
+
+: An umbrella term that combines the scope of the definitions of endpoint [ref NEA], device [ref 1ar], and thing [ref t2trg], including hardware-based and software-based sub-contexts that constitute independent and distinguishable slices of a computing context created by compartmentalization mechanisms, such as trusted execution environments or virtual network security function contexts.
 
 ## Formal Semantic Relationships
 
 The formal semantic relationship of a computing context and the definitions provided by RFC 4949 is a as follows.
 
 A computing context:
+
 * is a specific information system
 * is an object and in consequence a system component
 * is a composite of system entities
@@ -158,38 +161,35 @@ In general, attestation is an iterative procedure that is conducted over and ove
 Activity:
 
 : The condition in which things are happening or being done. In the scope of attestation, an activity is a sequence of actions that is intended to produce a specifically defined result. The actual composition of actions can vary, depending on the characteristics of the computing context they are conducted by/in and te protocols used.
-
 Example: The conveyance of cryptographic evidence is an activity or the acquisition of an trusted time stamp token are activities.
 
 Task:
 
 : A piece of work to be done or undertaken. In the scope of attestation, a task is a procedure to be conducted.
-
 Example: A Verifier can be tasked with the appraisal of evidence originating from a specific type of computing contexts.
 
 Action:
 
 : The accomplishment of a thing usually over a period of time, in stages, or with the possibility of repetition. In the scope of attestation, an action is the execution of an operation or function in the scope of an activity conducted by a single computing context.
-
 Example: Signing an existing public key via a specific openssl library, transmitting data, or receiving data are actions.
 
 Procedure:
 
 : A series of actions that are done in a certain way or order. In the scope of attestation, a procedure is a composition of activities (sequences of actions) that is intended to create a well specified result.
-
 Example: The activities of attestation, conveyance and verification compose a remote attestation procedure.
+
 # Attestee Reference Use Cases
 
 This document provides NNN prominent examples of use cases attestation procedures are intended to address:
 
-* proofing the source integrity of a computing context by proofing the data integrity of installed software instances that are executed, and
-* identity proofing a computing context.
+* verifying the source integrity of a computing context via data integrity proofing of installed software instances that are executed, and
+* verifying the identity proofing of a computing context.
 
 These use case summary highlighted above is based in the follow terms defined in RFC4949:
 
 Identity:
 
-: 
+: [pull relevant rfc4949 parts here]
 
 Identity Proofing:
 
@@ -201,9 +201,9 @@ Source Integrity:
 
 Data Integrity:
 
-: 1. The property that data has not been changed, destroyed, or lost in an unauthorized or accidental manner. (See: data integrity service. Compare: correctness integrity, source integrity.)
+: (a) The property that data has not been changed, destroyed, or lost in an unauthorized or accidental manner. (See: data integrity service. Compare: correctness integrity, source integrity.)
 
-: 2. The property that information has not been modified or destroyed in an unauthorized manner.
+: (b) The property that information has not been modified or destroyed in an unauthorized manner.
 
 Correctness:
 
@@ -215,9 +215,9 @@ Correctness integrity:
 
 Verification:
 
-: 1. The process of examining information to establish the truth of a claimed fact or value.
+: (a) The process of examining information to establish the truth of a claimed fact or value.
 
-: 2. The process of comparing two levels of system specification for proper correspondence, such as comparing a security model with a top-level specification, a top-level specification with source code, or source code with object code.
+: (b) The process of comparing two levels of system specification for proper correspondence, such as comparing a security model with a top-level specification, a top-level specification with source code, or source code with object code.
 
 ## The Lying Endpoint Problem
 
