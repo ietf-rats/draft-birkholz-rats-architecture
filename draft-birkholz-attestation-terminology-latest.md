@@ -160,8 +160,8 @@ In general, attestation is an iterative procedure that is conducted over and ove
 
 Activity:
 
-: The condition in which things are happening or being done. In the scope of attestation, an activity is a sequence of actions that is intended to produce a specifically defined result. The actual composition of actions can vary, depending on the characteristics of the computing context they are conducted by/in and te protocols used.
-Example: The conveyance of cryptographic evidence is an activity or the acquisition of an trusted time stamp token are activities.
+: The condition in which things are happening or being done. In the scope of attestation, an activity is a sequence of actions that is intended to produce a specifically defined result. The actual composition of actions can vary, depending on the characteristics of the computing context they are conducted by/in and the protocols used. A single activity provides a only a minimal required amount of semantic context, e.g. by the activity's requirements imposed on the computing context, or via set of actions it is composed of.
+Example: The conveyance of cryptographic evidence or the acquisition of an trusted time stamp token are activities.
 
 Task:
 
@@ -170,12 +170,12 @@ Example: A Verifier can be tasked with the appraisal of evidence originating fro
 
 Action:
 
-: The accomplishment of a thing usually over a period of time, in stages, or with the possibility of repetition. In the scope of attestation, an action is the execution of an operation or function in the scope of an activity conducted by a single computing context.
+: The accomplishment of a thing usually over a period of time, in stages, or with the possibility of repetition. In the scope of attestation, an action is the execution of an operation or function in the scope of an activity conducted by a single computing context. A single action provides no semantic context by itself, although it can limit potential semantic contexts of attestation procedures to a smaller subset.
 Example: Signing an existing public key via a specific openssl library, transmitting data, or receiving data are actions.
 
 Procedure:
 
-: A series of actions that are done in a certain way or order. In the scope of attestation, a procedure is a composition of activities (sequences of actions) that is intended to create a well specified result.
+: A series of actions that are done in a certain way or order. In the scope of attestation, a procedure is a composition of activities (sequences of actions) that is intended to create a well specified result with a well established semantic context.
 Example: The activities of attestation, conveyance and verification compose a remote attestation procedure.
 
 # Attestee Reference Use Cases
