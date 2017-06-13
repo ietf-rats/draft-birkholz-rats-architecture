@@ -52,19 +52,38 @@ informative:
 
 --- abstract 
 
-Please help me to become a concise abstract!
+This document is intended to illustrate and remediate the impedance mismatch of terms related to
+attestation procedures used in different domains today. New terms defined by this document provide
+a consolidated basis to support future work on attestation procedures in the IETF and beyond.
 
 --- middle
 
 # Introduction
 
-Over the years, the term attestation has been used in multiple contexts and multiple scopes and therefore accumulated various connotations with slightly different semantic meaning.
+Over the years, the term attestation has been used in multiple contexts and multiple scopes and
+therefore accumulated various connotations with slightly different semantic meaning.
 
-In order to better understand and grasp the intend and meaning of specific attestation procedures in the security area - including the requirements that are addressed by them - this document provides an overview of existing work, its background, and common terminology. As the contribution, from that state-of-the-art a set of terms that provides a stable basis for future work on attestation procedures in the IETF is derived.
+In order to better understand and grasp the intend and meaning of specific attestation procedures in
+the security area - including the requirements that are addressed by them - this document provides
+an overview of existing work, its background, and common terminology. As the contribution, from that
+state-of-the-art a set of terms that provides a stable basis for future work on attestation
+procedures in the IETF is derived.
 
-The primary application of attestation procedures is to increase the trust and confidence in characteristics or specific attributes about two parties that intend to exchange data. How a party’s characteristics are attested and which characteristics are actually chosen to be attested varies with the requirements, or – in essence – the risk that is intended to be mitigated. It is important to note that the activity of attestation itself in principle only provides a reliable basis for further activities that provide the semantic context of what an attestation procedures actually accomplishes and what it cannot. Hence, this document is also intended to provide a map of terms, concepts and applications that illustrates the ecosystem of current applications of attestation procedures.
+The primary application of attestation procedures is to increase the trust and confidence in the
+integrity of the characteristics and properties of an entity that intends to provide data to other
+entities remotely. How an objects’s characteristics are attested and which characteristics are
+actually chosen to be attested varies with the requirements of the use case, or-–in essence–-depends
+on the risk that is intended to be mitigated via an attestation procedure. It is important to note
+that the activity of attestation itself in principle only provides the evidence that proves
+integrity as a basis for further activities. The resulting attestation procedure defines the greater
+semantic context about how the evidence is used and what an attestation procedures actually
+accomplishes; and what it cannot accomplish, correspondingly. Hence, this document is also intended
+to provide a map of terms, concepts and applications that illustrate the ecosystem of current
+applications of attestation procedures.
 
-Before an adequate set of terms and definitions for the attestation domain can be defined, a general understanding and global definitions of the “what” and the “how” have to be established. In consequence, [enter final structure here].
+Before an adequate set of terms and definitions for the domain of attestation procedures can be
+defined, a general understanding and the global definitions of the “what” and the “how” have to be
+established. In consequence, [enter final structure here].
 
 ## Requirements notation
 
@@ -75,15 +94,22 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 
 # Basic Attestation Roles
 
-The use of the term attestation always implies the involvement of at least two parties that each take on a specific role in corresponding procedures – the attestee role and the verifier role. Depending on the characteristics attested and the nature of the parties, information is exchanged via specific types of interconnects between them. The type of interconnect ranges from GIO pins, to a bus, to the Internet, or from a direct physical connection, to a wireless association, to a world wide mesh of peers. In other words, virtually every kind communication path can be used by the two roles. In fact, a single party can take on both roles at the same time, but there is only a limited use to this architecture.
+The use of the term remote attestation always implies the involvement of at least two parties that
+each take on a specific role in corresponding procedures – the attestee role and the verifier role.
+Depending on the characteristics attested and the nature of the parties, information is exchanged
+via specific types of interconnects between them. The type of interconnect ranges from GIO pins, to
+a bus, to the Internet, or from a direct physical connection, to a wireless association, to a world
+wide mesh of peers. In other words, virtually every kind communication path can be used by the two
+roles. In fact, a single party can take on both roles at the same time, but there is only a limited
+use to this architecture.
 
 Attestee:
 
-: The role that designates the subject of the attestation
+: The role that designates the subject of the attestation. The provider of evidence.
 
 Verfifier:
 
-: The role that designates the appraiser of the attestee’s attestation
+: The role that designates the appraiser of the attestee’s attestation. The consumer of evidence.
 
 Interconnect:
 
@@ -91,11 +117,21 @@ Interconnect:
 
 # Computing Context
 
-This section introduces the term computing context in order to simplify the definition of attestation terminology.
+This section introduces the term computing context in order to simplify the definition of
+attestation terminology.
 
-The number of approaches and solutions to create things that provide the same capabilities as a “simple physical device” continuously increases. Examples include but are not limited to: the compartmentalization of physical resources, the separation of software instances with different dependencies in dedicated containers, and the nesting of virtual components via hardware-based and software-based solutions.
+The number of approaches and solutions to create things that provide the same capabilities as a
+“simple physical device” continuously increases. Examples include but are not limited to: the
+compartmentalization of physical resources, the separation of software instances with different
+dependencies in dedicated containers, and the nesting of virtual components via hardware-based and
+software-based solutions.
 
-In essence, every physical device is a composite of components that are potential computing contexts capable of taking on the roles of attestee or verifier. The scope and application of these roles can range from continuous mutual attestation of every component in the hierarchy of the composite that constitutes a single distinguishable endpoint on the management plane, to sporadic attestation of the integrity of an experiment in earth orbit.
+In essence, every physical or logical system is a composite. Every component in that composite is a
+potential computing context capable of taking on the roles of attestee or verifier. The scope and
+application of these roles can range from continuous mutual attestation procedure, in which every
+component in a hierarchically structured composite that constitutes a single distinguishable
+endpoint on the management plane, to sporadic attestation of the integrity of an experiment in earth
+orbit.
 
 Analogously, the increasing number of features and functions start to blur the lines that are required to categorize each solution and approach precisely. To address that increasingly difficult categorization, the term computing context defines the characteristics of the entities that can take on the role of an attestee – and in consequence the role of a verifier. This approach is intended to provide a stable basis of definitions for future solutions that continuous to remain viable long-term.
 
@@ -187,7 +223,35 @@ This document provides NNN prominent examples of use cases attestation procedure
 * Verification of the source integrity of a computing context via data integrity proofing of installed software instances that are executed, and
 * Verification of the identity proofing of a computing context.
 
-These use case summary highlighted above is based in the follow terms defined in RFC4949:
+These use case summary highlighted above is based in the follow terms defined in RFC4949 and
+complementary sources of terminology:
+
+Assurance: 
+: An attribute of an information system that provides grounds for having confidence that the system
+operates such that the system's security policy is enforced [RFC4949] (see Trusted System below).
+
+: In common criteria, assurance is the basis for the metric level of assurance, which represents the
+"confidence that a system's principal security features are reliably implemented".
+
+: The NIST Handbook [get ref from 4949] notes that the levels of assurance defined in Common Criteria
+represent "a degree of confidence, not a true measure of how secure the system actually is. This
+distinction is necessary because it is extremely difficult--and in many cases, virtually
+impossible--to know exactly how secure a system is."
+
+: Historically, assurance was well-defined in the Orange Book
+[http://csrc.nist.gov/publications/history/dod85.pdf] as "guaranteeing or providing
+confidence that the security policy has been implemented correctly and that the protection-relevant
+elements of the system do, indeed, accurately mediate and enforce the intent of that policy.  By
+extension, assurance must include a guarantee that the trusted portion of the system works only as
+intended."
+
+Confidence:
+
+: The definition of correctness integrity in [RFC4949] notes that "source integrity refers to
+confidence in data values".
+Hence, confidence in an attestation procedure is referring to the degree of trustworthiness of an
+attestation activity that produces evidence (attestee), of an conveyance activity that transfers
+evidence (interconnect), and of a verification activity that appraises evidence (verifier), in respect to correctness integrity.
 
 Identity:
 
