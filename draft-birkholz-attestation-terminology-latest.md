@@ -45,6 +45,7 @@ author:
 
 normative:
   RFC2119:
+  RFC4949:
 
 informative:
   I-D.ietf-sacm-terminology: sacmterm
@@ -113,7 +114,8 @@ Verfifier:
 
 Interconnect:
 
-: A channel of communication between attestee and verifier that enables the appraisal of the attestee’s attestation.
+: A channel of communication between attestee and verifier that enables the appraisal of evidence
+created by the attestee.
 
 # Computing Context
 
@@ -143,13 +145,14 @@ Computing context :
 
 The formal semantic relationship of a computing context and the definitions provided by RFC 4949 is a as follows.
 
-A computing context:
+The scope of the term computing context encompasses
 
-* is a specific information system
-* is an object and in consequence a system component
-* is a composite of system entities
+* an information system,
+* an object and in consequence a system component or a composite of system sub-components, and
+* a system entity or a composite of system entities.
 
-Analogously, a sub-context is a subsystem and as with system components, computing contexts can be nested and therefore be physical system components or logical (“virtual”) system components.
+Analogously, a sub-context is a subsystem and as with system components, computing contexts can be
+nested and therefore be physical system components or logical (“virtual”) system (sub-)components.
 
 The formal semantic relationship is based on the following definitions from RFC 4949.
 
@@ -189,6 +192,14 @@ A computing context:
 In contrast, a docker [ref docker, find a more general term here] context is not a distinguishable slice of a computing system and therefore is not an independent computing context.
 
 Examples include: a smart phone, a nested virtual machine, a virtualized firewall function running distributed on a cluster of physical and virtual nodes, or a trust-zone.
+
+# Computing Context Identity
+
+The identity of a computing context provides a basis for data origin authentication. Confidence in
+the identity assurance level [NIST SP-800-63-3] or the assurance levels for identity authentication
+{{RFC4949}} impacts the confidence in the evidence an attestee provides.
+
+If a secret key is used to sign a public key 
 
 # Attestation Workflow
 
