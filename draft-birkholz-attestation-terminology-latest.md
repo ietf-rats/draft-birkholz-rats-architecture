@@ -86,6 +86,8 @@ Before an adequate set of terms and definitions for the domain of attestation pr
 defined, a general understanding and the global definitions of the “what” and the “how” have to be
 established. In consequence, [enter final structure here].
 
+Please note that the time before the I-D deadline did not suffice to fill in all the references. Most references are therefore still under construction. The majority of definitions is still only originating from IETF work. Future iterations will pull in more complementary definitions from other SDO (e.g. Global Platform, TCG, etc.) and a general structure template to highlight semantic relationships and capable of resolving potential discrepancies will be introduced. A section of context awareness will provide further insight on how attestation procedures are vital to ongoing work in the IETF (e.g. I2NSF & tokbind). The definitions in the section about Remote Attestation are basically self-describing in this version. Additional explanatory text will be added to provide more context and coherence.
+
 ## Requirements notation
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
@@ -234,7 +236,7 @@ This document provides NNN prominent examples of use cases attestation procedure
 * Verification of the source integrity of a computing context via data integrity proofing of installed software instances that are executed, and
 * Verification of the identity proofing of a computing context.
 
-These use case summary highlighted above is based in the follow terms defined in RFC4949 and
+These use case summary highlighted above is based in the following terms defined in RFC4949 and
 complementary sources of terminology:
 
 Assurance: 
