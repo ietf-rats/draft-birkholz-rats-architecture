@@ -71,8 +71,8 @@ Table of Contents
      3.1.  Formal Semantic Relationships . . . . . . . . . . . . . .   5
      3.2.  Characteristics of a computing context  . . . . . . . . .   6
    4.  Computing Context Identity  . . . . . . . . . . . . . . . . .   7
-   5.  Attestation Workflow  . . . . . . . . . . . . . . . . . . . .   7
-   6.  Reference Use Cases . . . . . . . . . . . . . . . . . . . . .   8
+   5.  Attestation Workflow  . . . . . . . . . . . . . . . . . . . .   8
+   6.  Reference Use Cases . . . . . . . . . . . . . . . . . . . . .   9
      6.1.  The Lying Endpoint Problem  . . . . . . . . . . . . . . .  11
      6.2.  Who am I a talking to?  . . . . . . . . . . . . . . . . .  11
    7.  Trustworthiness . . . . . . . . . . . . . . . . . . . . . . .  12
@@ -372,6 +372,48 @@ Internet-Draft              term-attestation                 August 2017
       part of a hardware root of trust or hardware security modules,
       respectively.
 
+   Identity:  [RFC4949] defines an Identity as "the collective aspect of
+      a set of attribute values (i.e., a set of characteristics) by
+      which a system user or other system entity is recognizable or
+      known."  The term may be applied "to either a single entity or a
+      set of entities."
+
+      "Singular Identity": An identity that is registered for an entity
+      that is one person or one process.
+
+      "Group Identity": An identity that is registered for an entity
+      that is a set of entities.
+
+
+
+
+
+
+Birkholz, et al.        Expires February 5, 2018                [Page 7]
+
+Internet-Draft              term-attestation                 August 2017
+
+
+      [NIST SP-800-63-3] defines an Identity as "an attribute or set of
+      attributes that uniquely describe a subject within a given
+      context."
+
+      The definition of Singular Identity in [RFC4949] is difficult to
+      apply in the context of attestation as it is limited to entities
+      that are persons or processes.  The definition of Identity in the
+      NIST's Digital Identity Guidelines is also difficult to apply in
+      the context of attestation as it is limited to uniquely
+      identifiable subjects and does not allow for a Group Identities.
+      In the context of this reference terminology the limitation
+      imposed by both standard references are remediated via the
+      definition of Attestation Identity.
+
+   Attestation Identity:  The collective aspect of a set of attribute
+      value pairs (i.e., a set of characteristics) by which a subject or
+      a set of subjects is recognizable or known in a given context.
+      The most common subjects in respect to attestation are computing
+      contexts and system entities.
+
 5.  Attestation Workflow
 
    This section introduces terms and definitions that are required to
@@ -385,14 +427,6 @@ Internet-Draft              term-attestation                 August 2017
    actual actions to be undertaken in order to conduct an attestation
    procedure can vary significantly depending on the protocols employed
    and types of computing contexts involved.
-
-
-
-
-Birkholz, et al.        Expires February 5, 2018                [Page 7]
-
-Internet-Draft              term-attestation                 August 2017
-
 
    Activity:  The condition in which things are happening or being done.
       In the scope of attestation, an activity is a sequence of actions
@@ -408,6 +442,14 @@ Internet-Draft              term-attestation                 August 2017
 
    Task:  A piece of work to be done or undertaken.  In the scope of
       attestation, a task is an activity to be conducted.  Example: A
+
+
+
+Birkholz, et al.        Expires February 5, 2018                [Page 8]
+
+Internet-Draft              term-attestation                 August 2017
+
+
       Verifier can be tasked with the appraisal of evidence originating
       from a specific type of computing contexts.
 
@@ -442,14 +484,6 @@ Internet-Draft              term-attestation                 August 2017
    These use case summary highlighted above is based in the following
    terms defined in RFC4949 and complementary sources of terminology:
 
-
-
-
-Birkholz, et al.        Expires February 5, 2018                [Page 8]
-
-Internet-Draft              term-attestation                 August 2017
-
-
    Assurance:  An attribute of an information system that provides
       grounds for having confidence that the system operates such that
       the system's security policy is enforced [RFC4949] (see Trusted
@@ -463,6 +497,15 @@ Internet-Draft              term-attestation                 August 2017
       assurance defined in Common Criteria represent "a degree of
       confidence, not a true measure of how secure the system actually
       is.  This distinction is necessary because it is extremely
+
+
+
+
+Birkholz, et al.        Expires February 5, 2018                [Page 9]
+
+Internet-Draft              term-attestation                 August 2017
+
+
       difficult-and in many cases, virtually impossible-to know exactly
       how secure a system is."
 
@@ -483,48 +526,6 @@ Internet-Draft              term-attestation                 August 2017
       evidence (interconnect), and of a verification activity that
       appraises evidence (verifier), in respect to correctness
       integrity.
-
-   Identity:  [RFC4949] defines an Identity as "the collective aspect of
-      a set of attribute values (i.e., a set of characteristics) by
-      which a system user or other system entity is recognizable or
-      known."  The term may be applied "to either a single entity or a
-      set of entities."
-
-      "Singular Identity": An identity that is registered for an entity
-      that is one person or one process.
-
-      "Group Identity": An identity that is registered for an entity
-      that is a set of entities.
-
-
-
-
-
-
-Birkholz, et al.        Expires February 5, 2018                [Page 9]
-
-Internet-Draft              term-attestation                 August 2017
-
-
-      [NIST SP-800-63-3] defines an Identity as "an attribute or set of
-      attributes that uniquely describe a subject within a given
-      context."
-
-      The definition of Singular Identity in [RFC4949] is difficult to
-      apply in the context of attestation as it is limited to entities
-      that are persons or processes.  The definition of Identity in the
-      NIST's Digital Identity Guidelines is also difficult to apply in
-      the context of attestation as it is limited to uniquely
-      identifiable subjects and does not allow for a Group Identities.
-      In the context of this reference terminology the limitation
-      imposed by both standard references are remediated via the
-      definition of Attestation Identity.
-
-   Attestation Identity:  The collective aspect of a set of attribute
-      value pairs (i.e., a set of characteristics) by which a subject or
-      a set of subjects is recognizable or known in a given context.
-      The most common subjects in respect to attestation are computing
-      contexts and system entities.
 
    Identity Proofing:  A process that vets and verifies the information
       that is used to establish the identity of a system entity.
@@ -553,7 +554,6 @@ Internet-Draft              term-attestation                 August 2017
 
       (b) The process of comparing two levels of system specification
       for proper correspondence, such as comparing a security model with
-
 
 
 
