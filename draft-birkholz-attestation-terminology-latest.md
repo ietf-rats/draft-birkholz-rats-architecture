@@ -71,9 +71,12 @@ state-of-the-art a set of terms that provides a stable basis for future work on 
 procedures in the IETF is derived.
 
 The primary application of attestation procedures is to increase the trust and confidence in the
-integrity of the characteristics and properties of an entity that intends to provide data to other
-entities remotely. How an objects’s characteristics are attested and which characteristics are
-actually chosen to be attested varies with the requirements of the use case, or-–in essence–-depends
+integrity of the characteristics and properties of a system entity that intends to provide data to other
+system entities remotely. Hence, the most common application of attestation is Remote Attestation
+(RAT) and - in consequence - will be the most prominent topic of this reference terminology.
+
+How a system entity’s characteristics are attested and which characteristics are
+actually chosen to be attested varies with the requirements of the use cases, or-–in essence–-depends
 on the risk that is intended to be mitigated via an attestation procedure. It is important to note
 that the activity of attestation itself in principle only provides the evidence that proves
 integrity as a basis for further activities. The resulting attestation procedure defines the greater
@@ -82,11 +85,26 @@ accomplishes; and what it cannot accomplish, correspondingly. Hence, this docume
 to provide a map of terms, concepts and applications that illustrate the ecosystem of current
 applications of attestation procedures.
 
+Illustrating the context and the semantics of attestation procedures in this document requires to
+include the domains of trust, trusted systems and the composite of trusted software running on
+trusted hardware (a trusted computing context). A prominent example is Secure Boot; a procedure that
+composes a continuous chain of attestation activities that start with powering up a system entity
+and ultimately extend into user-space characteristics after boot-up in order to provide evidence
+that the composite a computing context composes is a trusted system.
+
 Before an adequate set of terms and definitions for the domain of attestation procedures can be
 defined, a general understanding and the global definitions of the “what” and the “how” have to be
 established. In consequence, [enter final structure here].
 
-Please note that the time before the I-D deadline did not suffice to fill in all the references. Most references are therefore still under construction. The majority of definitions is still only originating from IETF work. Future iterations will pull in more complementary definitions from other SDO (e.g. Global Platform, TCG, etc.) and a general structure template to highlight semantic relationships and capable of resolving potential discrepancies will be introduced. A section of context awareness will provide further insight on how attestation procedures are vital to ongoing work in the IETF (e.g. I2NSF & tokbind). The definitions in the section about Remote Attestation are basically self-describing in this version. Additional explanatory text will be added to provide more context and coherence.
+Please note that the time before the I-D deadline did not suffice to fill in all the references.
+Most references are therefore still under construction. The majority of definitions is still only
+originating from IETF work. Future iterations will pull in more complementary definitions from other
+SDO (e.g. Global Platform, TCG, etc.) and a general structure template to highlight semantic
+relationships and capable of resolving potential discrepancies will be introduced. A section of
+context awareness will provide further insight on how attestation procedures are vital to ongoing
+work in the IETF (e.g. I2NSF & tokbind). The definitions in the section about Remote Attestation are
+basically self-describing in this version. Additional explanatory text will be added to provide more
+context and coherence.
 
 ## Requirements notation
 
@@ -95,7 +113,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 "OPTIONAL" in this document are to be interpreted as described in RFC
 2119, BCP 14 {{RFC2119}}.
 
-# Basic Attestation Roles
+# Essential Remote Attestation Roles
 
 The use of the term remote attestation always implies the involvement of at least two parties that
 each take on a specific role in corresponding procedures – the attestee role and the verifier role.
@@ -137,17 +155,27 @@ component in a hierarchically structured composite that constitutes a single dis
 endpoint on the management plane, to sporadic attestation of the integrity of an experiment in earth
 orbit.
 
-Analogously, the increasing number of features and functions start to blur the lines that are required to categorize each solution and approach precisely. To address that increasingly difficult categorization, the term computing context defines the characteristics of the entities that can take on the role of an attestee – and in consequence the role of a verifier. This approach is intended to provide a stable basis of definitions for future solutions that continuous to remain viable long-term.
+Analogously, the increasing number of features and functions start to blur the lines that are
+required to categorize each solution and approach precisely. To address that increasingly difficult
+categorization, the term computing context defines the characteristics of the entities that can take
+on the role of an attestee – and in consequence the role of a verifier. This approach is intended to
+provide a stable basis of definitions for future solutions that continuous to remain viable
+long-term.
 
 Computing context :
 
-: An umbrella term that combines the scope of the definitions of endpoint [ref NEA], device [ref 1ar], and thing [ref t2trg], including hardware-based and software-based sub-contexts that constitute independent and distinguishable slices of a computing context created by compartmentalization mechanisms, such as trusted execution environments or virtual network security function contexts.
+: An umbrella term that combines the scope of the definitions of endpoint [ref NEA], device [ref
+1ar], and thing [ref t2trg], including hardware-based and software-based sub-contexts that
+constitute independent and distinguishable slices of a computing context created by
+compartmentalization mechanisms, such as trusted execution environments or virtual network security
+function contexts.
 
 ## Formal Semantic Relationships
 
-The formal semantic relationship of a computing context and the definitions provided by RFC 4949 is a as follows.
+The formal semantic relationship of a computing context and the definitions provided by RFC 4949 is
+a as follows.
 
-The scope of the term computing context encompasses
+The scope of the term computing context encompasses:
 
 * an information system,
 * an object and in consequence a system component or a composite of system sub-components, and
@@ -160,7 +188,10 @@ The formal semantic relationship is based on the following definitions from RFC 
 
 (Information) System:
 
-: An organized assembly of computing and communication resources and procedures -- i.e., equipment and services, together with their supporting infrastructure, facilities, and personnel -- that create, collect, record, process, store, transport, retrieve, display, disseminate, control, or dispose of information to accomplish a specified set of functions.
+: An organized assembly of computing and communication resources and procedures -- i.e., equipment
+and services, together with their supporting infrastructure, facilities, and personnel -- that
+create, collect, record, process, store, transport, retrieve, display, disseminate, control, or
+dispose of information to accomplish a specified set of functions.
 
 Object:
 
@@ -168,66 +199,115 @@ Object:
 
 Subsystem:
 
-: A collection of related system components that together perform a system function or deliver a system service.
+: A collection of related system components that together perform a system function or deliver a
+system service.
 
 System Component:
 
-: A collection of system resources that (a) forms a physical or logical part of the system, (b) has specified functions and interfaces, and (c) is treated (e.g., by policies or specifications) as existing independently of other parts of the system. (See: subsystem.)
+: A collection of system resources that (a) forms a physical or logical part of the system, (b) has
+specified functions and interfaces, and (c) is treated (e.g., by policies or specifications) as
+existing independently of other parts of the system. (See: subsystem.)
 
 : An identifiable and self-contained part of a Target of Evaluation.
 
 System Entity:
 
-: An active part of a system -- [...] (see: subsystem) -- that has a specific set of capabilities.
+: An active part of a system that has a specific set of capabilities.
 
 ## Characteristics of a computing context
 
-While the semantic relationships highlighted above constitute the fundamental basis to define the context of computing context, the following list of characteristics is intended to improve the intuitive understanding of the term and provide a better understanding of its meaning:
+While the semantic relationships highlighted above constitute the fundamental basis to define the
+context of computing context, the following list of characteristics is intended to improve the
+intuitive understanding of the term and provide a better understanding of its meaning:
 
 A computing context:
 
-* creates its own independent environment in regard to executing and running software,
-* creates its own separate control plane state (by potentially interacting with other computing contexts) and can provide a dedicated management interface by which control plane behavior can be effected,
-* can be identified uniquely and therefore reliably differentiated in a given scope, and
-* does not necessarily has to include a network interface with associated network addresses (as required, e.g. by the definition of an endpoint) – although it is very likely to have (access to) one.
+* provides its own independent environment in regard to executing and running software,
+* may create its own separate control plane state (by potentially interacting with other
+  computing contexts),
+* may be able to provide a dedicated management interface by which control plane behavior can be
+  effected,
+* can be identified uniquely and therefore reliably differentiated in a given scope,
+* does not necessarily have to include a network interface with associated network addresses (as
+  required, e.g. by the definition of an endpoint) – although it is likely to have (access to) one,
+  and
+* is capable of taking on the role of an attestee or a verifier.
 
-In contrast, a docker [ref docker, find a more general term here] context is not a distinguishable slice of a computing system and therefore is not an independent computing context.
+<!--In contrast, a docker [ref docker, find a more general term here] context is not a distinguishable
+slice of a computing system and therefore is not an independent computing context.-->
 
-Examples include: a smart phone, a nested virtual machine, a virtualized firewall function running distributed on a cluster of physical and virtual nodes, or a trust-zone.
+Examples include: a smartphone, a nested virtual machine, a virtualized firewall function running
+distributed on a cluster of physical and virtual nodes, a SFP+ interface module, or a TEE.
 
 # Computing Context Identity
 
-The identity of a computing context provides a basis for data origin authentication. Confidence in
-the identity assurance level [NIST SP-800-63-3] or the assurance levels for identity authentication
-{{RFC4949}} impacts the confidence in the evidence an attestee provides.
+The identity of a computing context provides the basis for Data Origin Authentication {{RFC4949}}}.
+Confidence in the identity assurance level [NIST SP-800-63-3] or the assurance levels for identity
+authentication {{RFC4949}} impacts the confidence in the evidence an attestee provides.
 
-If a secret key is used to sign a public key 
+In the context of attestation, the authenticity and corresponding proof of integrity in respect to
+an identity are typically based on a secret that is only available to the individual subjects that
+maintain or try to create a trust relationship, e.g. an attestee or certificate authority (CA). If a
+secret key, for example, is used to sign a public key such that the signed public key can be used as
+evidence, the shielding of the secrets involved is essential to the quality of confidence in the
+public key or the signature, and - in consequence - the evidence that constitutes the attested
+identity of the computing system.
+
+Shielded Secret:
+
+: A secret retained inside an atomic component of a composite system entity that can be used for
+operations based on the secret while the shielding of the secret is intended to inhibited voluntary
+or involuntary exposure of the secret itself. The confidence in the shielding can be expressed, for
+example, via the security mechanisms described in the FIPS 140-2 security levels defined by the
+National Institute for Standards and Technology (NIST). Typically, shielded secrets are an essential
+part of a hardware root of trust or hardware security modules, respectively.
 
 # Attestation Workflow
 
-This section introduces terms and definitions that are required to illustrate the scope and the granularity of attestation workflows in the context of security automation. Terms defined in the following sections will be based on this workflow-related definitions.
+This section introduces terms and definitions that are required to illustrate the scope and the
+granularity of attestation workflows in the context of security automation. Terms defined in the
+following sections will be based on this workflow-related definitions.
 
-In general, attestation is an iterative procedure that is conducted over and over again in a computing context under specific conditions. It is neither a generic set of actions nor simply a task, because the actual actions to be undertaken in order to conduct an attestation procedure can vary significantly depending on the protocols employed and types of computing contexts involved.
+In general, attestation is an iterative procedure that is conducted over and over again in a
+computing context under specific conditions. It is neither a generic set of actions nor simply a
+task, because the actual actions to be undertaken in order to conduct an attestation procedure can
+vary significantly depending on the protocols employed and types of computing contexts involved.
 
 Activity:
 
-: The condition in which things are happening or being done. In the scope of attestation, an activity is a sequence of actions that is intended to produce a specifically defined result. The actual composition of actions can vary, depending on the characteristics of the computing context they are conducted by/in and the protocols used. A single activity provides a only a minimal required amount of semantic context, e.g. by the activity's requirements imposed on the computing context, or via set of actions it is composed of.
-Example: The conveyance of cryptographic evidence or the acquisition of an trusted time stamp token are activities.
+: The condition in which things are happening or being done. In the scope of attestation, an
+activity is a sequence of actions that is intended to produce a specifically defined result. The
+actual composition of actions can vary, depending on the characteristics of the computing context
+they are conducted by/in and the protocols used. A single activity provides only a minimal
+required amount of semantic context, e.g. by the activity's requirements imposed on the computing
+context, or via set of actions it is composed of.
+Example: The conveyance of cryptographic evidence or the acquisition of a trusted time stamp token
+are activities.
 
 Task:
 
-: A piece of work to be done or undertaken. In the scope of attestation, a task is a procedure to be conducted.
-Example: A Verifier can be tasked with the appraisal of evidence originating from a specific type of computing contexts.
+: A piece of work to be done or undertaken. In the scope of attestation, a task is an activity to be
+conducted.
+Example: A Verifier can be tasked with the appraisal of evidence originating from a specific type of
+computing contexts.
 
 Action:
 
-: The accomplishment of a thing usually over a period of time, in stages, or with the possibility of repetition. In the scope of attestation, an action is the execution of an operation or function in the scope of an activity conducted by a single computing context. A single action provides no semantic context by itself, although it can limit potential semantic contexts of attestation procedures to a smaller subset.
-Example: Signing an existing public key via a specific openssl library, transmitting data, or receiving data are actions.
+: The accomplishment of a thing usually over a period of time, in stages, or with the possibility of
+repetition. In the scope of attestation, an action is the execution of an operation or function in
+the scope of an activity conducted by a single computing context. A single action provides no
+semantic context by itself, although it can limit potential semantic contexts of attestation
+procedures to a smaller subset.
+Example: Signing an existing public key via a specific openssl library, transmitting data, or
+receiving data are actions.
 
 Procedure:
 
-: A series of actions that are done in a certain way or order. In the scope of attestation, a procedure is a composition of activities (sequences of actions) that is intended to create a well specified result with a well established semantic context.
-Example: The activities of attestation, conveyance and verification compose a remote attestation procedure.
+: A series of actions that are done in a certain way or order. In the scope of attestation, a
+procedure is a composition of activities (sequences of actions) that is intended to create a well
+specified result with a well established semantic context.
+Example: The activities of attestation, conveyance and verification compose a remote attestation
+procedure.
 
 # Reference Use Cases
 
@@ -268,7 +348,29 @@ evidence (interconnect), and of a verification activity that appraises evidence 
 
 Identity:
 
-: [pull relevant rfc4949 parts here]
+: {{RFC4949}} defines an Identity as "the collective aspect of a set of attribute values (i.e., a
+set of characteristics) by which a system user or other system entity is recognizable or known." The term may be applied "to either a single entity or a set of entities."
+
+: "Singular Identity": An identity that is registered for an entity that is one person or one
+process.
+
+: "Group Identity": An identity that is registered for an entity that is a set of entities.
+
+: [NIST SP-800-63-3] defines an Identity as "an attribute or set of attributes that uniquely describe a
+subject within a given context."
+
+: The definition of Singular Identity in {{RFC4949}} is difficult to apply in the context of
+attestation as it is limited to entities that are persons or processes. The definition of Identity
+in the NIST's Digital Identity Guidelines is also difficult to apply in the context of attestation
+as it is limited to uniquely identifiable subjects and does not allow for a Group Identities. In the
+context of this reference terminology the limitation imposed by both standard references are
+remediated via the definition of Attestation Identity.
+
+Attestation Identity:
+
+: The collective aspect of a set of attribute value pairs (i.e., a set of characteristics) by which
+a subject or a set of subjects is recognizable or known in a given context. The most common subjects
+in respect to attestation are computing contexts and system entities.
 
 Identity Proofing:
 
