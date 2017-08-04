@@ -262,6 +262,32 @@ example, via the security mechanisms described in the FIPS 140-2 security levels
 National Institute for Standards and Technology (NIST). Typically, shielded secrets are an essential
 part of a hardware root of trust or hardware security modules, respectively.
 
+Identity:
+
+: {{RFC4949}} defines an Identity as "the collective aspect of a set of attribute values (i.e., a
+set of characteristics) by which a system user or other system entity is recognizable or known." The term may be applied "to either a single entity or a set of entities."
+
+: "Singular Identity": An identity that is registered for an entity that is one person or one
+process.
+
+: "Group Identity": An identity that is registered for an entity that is a set of entities.
+
+: [NIST SP-800-63-3] defines an Identity as "an attribute or set of attributes that uniquely describe a
+subject within a given context."
+
+: The definition of Singular Identity in {{RFC4949}} is difficult to apply in the context of
+attestation as it is limited to entities that are persons or processes. The definition of Identity
+in the NIST's Digital Identity Guidelines is also difficult to apply in the context of attestation
+as it is limited to uniquely identifiable subjects and does not allow for a Group Identities. In the
+context of this reference terminology the limitation imposed by both standard references are
+remediated via the definition of Attestation Identity.
+
+Attestation Identity:
+
+: The collective aspect of a set of attribute value pairs (i.e., a set of characteristics) by which
+a subject or a set of subjects is recognizable or known in a given context. The most common subjects
+in respect to attestation are computing contexts and system entities.
+
 # Attestation Workflow
 
 This section introduces terms and definitions that are required to illustrate the scope and the
@@ -345,32 +371,6 @@ confidence in data values".
 Hence, confidence in an attestation procedure is referring to the degree of trustworthiness of an
 attestation activity that produces evidence (attestee), of an conveyance activity that transfers
 evidence (interconnect), and of a verification activity that appraises evidence (verifier), in respect to correctness integrity.
-
-Identity:
-
-: {{RFC4949}} defines an Identity as "the collective aspect of a set of attribute values (i.e., a
-set of characteristics) by which a system user or other system entity is recognizable or known." The term may be applied "to either a single entity or a set of entities."
-
-: "Singular Identity": An identity that is registered for an entity that is one person or one
-process.
-
-: "Group Identity": An identity that is registered for an entity that is a set of entities.
-
-: [NIST SP-800-63-3] defines an Identity as "an attribute or set of attributes that uniquely describe a
-subject within a given context."
-
-: The definition of Singular Identity in {{RFC4949}} is difficult to apply in the context of
-attestation as it is limited to entities that are persons or processes. The definition of Identity
-in the NIST's Digital Identity Guidelines is also difficult to apply in the context of attestation
-as it is limited to uniquely identifiable subjects and does not allow for a Group Identities. In the
-context of this reference terminology the limitation imposed by both standard references are
-remediated via the definition of Attestation Identity.
-
-Attestation Identity:
-
-: The collective aspect of a set of attribute value pairs (i.e., a set of characteristics) by which
-a subject or a set of subjects is recognizable or known in a given context. The most common subjects
-in respect to attestation are computing contexts and system entities.
 
 Identity Proofing:
 
