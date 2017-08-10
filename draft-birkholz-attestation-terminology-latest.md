@@ -124,13 +124,14 @@ wide mesh of peers. In other words, virtually every kind communication path can 
 roles. In fact, a single party can take on both roles at the same time, but there is only a limited
 use to this architecture.
 
-Attestee:
+Attestee (also known as Requestor):
 
 : The role that designates the subject of the attestation. The provider of evidence.
 
-Verfifier:
 
-: The role that designates the appraiser of the attestee’s attestation. The consumer of evidence.
+Verifier:
+
+: The role that designates the appraiser of the attestee’s attestation. The consumer of attestation as evidence of the Attestee's security posture.
 
 Interconnect:
 
@@ -450,13 +451,99 @@ Remote Attestation:
 
 : A procedure composed of the activities attestation, conveyance and verification.
 
-## Building Block Terms
+
+## Roots ##
+
+Root of Trust (RoT):
+
+: A component that performs one or more security-specific functions, such as
+measurement, storage, reporting, verification, and/or update. It is trusted always
+to behave in the expected manner, because its misbehavior cannot be
+detected (such as by measurement) under normal operation.
+
+### Types of Roots ###
+
+Code Root of Trust for Measurement (CRTM)
+
+:The instructions executed by the platform when it acts as the RTM. [Formerly
+described as “Core Root of Trust for Measurement”. Code Root of
+Trust for Measurement is the preferred expansion.] This acronym expansion
+is preferred.
+
+Dynamic Root of Trust for Measurement (D-RTM)
+
+:A platform-dependent function that initializes the state of the platform and
+provides a new instance of a root of trust for measurement without rebooting
+the platform. The initial state establishes a minimal Trusted Computing
+Base.
+
+Root of Trust for Confidentiality (RTC)
+
+: An RoT providing confidentiality for data stored in TPM Shielded Locations.
+
+Root of Trust for Integrity (RTI)
+
+:An RoT providing integrity for data stored in TPM Shielded Locations.
+
+Root of Trust for Measurement (RTM)
+
+: An RoT that makes the initial integrity measurement, and adds it to a tamper-
+resistant log. Note: A PCR in a TPM is normally used to provide tamper
+evidence because the log is not in a shielded location.
+
+Root of Trust for Reporting (RTR)
+
+:An RoT that reliably provides authenticity and non-repudiation services for
+the purposes of attesting to the origin and integrity of platform characteristics.
+
+Root of Trust for Storage (RTS)
+
+:The combination of an RTC and an RTI
+
+Root of Trust for Update RTU
+
+:An RTV that verifies the integrity and authenticity of an update payload before
+initiating the update process.
+
+RTV Root of Trust for Verification
+An RoT that verifies an integrity measurement against a policy.
+
+
+Static Root of Trust for Measurement (S-RTM)
+
+:An RTM where the initial integrity measurement occurs at platform reset.
+The S-RTM is static because the PCRs associated with it cannot be re-initialized
+without a platform reset.
+
+
+### Boot Types ###
+Measured Boot (also known as Trusted Boot and Authenticated Boot]
+
+: A boot process starting from an RTM creating Integrity Measurement allowing policy enforcement after the boot process.
+
+: The term Measured Boot is preferred.
+
+Secure Boot:
+
+: This term has two definitions:
+
+: [1] A boot process which uses either Measured Boot, Verified Boot, or both.
+
+: [2] Same as Verified Boot
+
+: Usage [1] is preferred in for future usages but current technologies (such as UEFI) use this term for Verified Boot.
+
+Verified Boot
+
+: A boot process starting from an RTV enforcing policy during the boot process.
+
+## Other Building Block Terms
 
 [working title, pulled from various sources, vital]
 
-Attestation Identity Key (AIK):
+Attestation Identity Key (AIK) (also known as Attestation Key (AK):
 
-: A special purpose signature (therefore asymmetric) key that supports identity related operations. The private portion of the key pair is maintained confidential to the computing context via appropriate measures (that have a direct impact on the level of confidence). The public portion of the key pair may be included in AIK credentials that provide a claim about the computing context.
+: A special purpose signature (therefore asymmetric[MW: I believe there is a way to atttest using symmetric keys]) key that supports identity related operations. The private portion of the key pair is maintained confidential to the computing context via appropriate measures (that have a direct impact on the level of confidence). The public portion of the key pair may be included in AIK credentials that provide a claim about the computing context.
 
 Claim:
 
@@ -467,6 +554,10 @@ Claim:
 Computing Context Characteristics:
 
 : The composition, configuration and state of a computing context.
+
+Direct Anonymous Attestation (DAA)
+
+:A protocol for vouching for an AIK using zero-knowledge-proof technology.
 
 Evidence:
 
@@ -482,13 +573,22 @@ Integrity Measurements:
 
 Reference Integrity Measurements:
 
-: Signed measurements about a computing context's characteristics that are provided by a vendor or manufacturer and are intended to be used as declarative guidannce {{-sacmterm}} (e.g. a signed CoSWID).
+: Signed measurements about a computing context's characteristics that are provided by a vendor or manufacturer and are intended to be used as declarative guidance {{-sacmterm}} (e.g. a signed CoSWID).
+
+
+Trusted Building Block (TBB)
+
+:The parts of the Root of Trust that do not have shielded locations or protected
+capabilities. Typically platform-specific. An example of a TBB is the
+combination of the CRTM, connection of the CRTM storage to a motherboard,
+the connection of the TPM to a motherboard, and a mechanisms for
+determining Physical Presence.
 
 Trustworthiness:
 
-: The qualities of computing context characteristics that guarantee a specific behavior specified by declarative guidance. Trustworthiness is not an absolute property but defined with respect to a computing context, corresponding declarative guidance, and has a scope of confidence. A trusted system is trustworthy. [refactor defintion with RFC4949 terms]
+: The qualities of computing context characteristics that guarantee a specific behavior specified by declarative guidance. Trustworthiness is not an absolute property but defined with respect to a computing context, corresponding declarative guidance, and has a scope of confidence. A trusted system is trustworthy. [refactor definition with RFC4949 terms]
 
-: Trustworthy Computing Context: a computing context that guarantees trustworthy behavior and/or composition (with respect to certain declarative guidance and a scope of confideence). A trustworthy computing context is a trusted system.
+: Trustworthy Computing Context: a computing context that guarantees trustworthy behavior and/or composition (with respect to certain declarative guidance and a scope of confidence). A trustworthy computing context is a trusted system.
 
 : Trustworthy Statement: evidence that trustworthy conveyed by a computing context that is not necessarily trustworthy. [update with tamper related terms]
 
