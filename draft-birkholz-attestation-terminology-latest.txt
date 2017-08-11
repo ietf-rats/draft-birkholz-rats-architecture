@@ -5,10 +5,10 @@
 Network Working Group                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Informational                                M. Wiseman
-Expires: February 5, 2018                             GE Global Research
+Expires: February 12, 2018                            GE Global Research
                                                            H. Tschofenig
                                                                 ARM Ltd.
-                                                         August 04, 2017
+                                                         August 11, 2017
 
 
             Reference Terminology for Attestation Procedures
@@ -37,7 +37,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on February 5, 2018.
+   This Internet-Draft will expire on February 12, 2018.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Birkholz, et al.        Expires February 5, 2018                [Page 1]
+Birkholz, et al.        Expires February 12, 2018               [Page 1]
 
 Internet-Draft              term-attestation                 August 2017
 
@@ -71,21 +71,24 @@ Table of Contents
      3.1.  Formal Semantic Relationships . . . . . . . . . . . . . .   5
      3.2.  Characteristics of a computing context  . . . . . . . . .   6
    4.  Computing Context Identity  . . . . . . . . . . . . . . . . .   7
-   5.  Attestation Workflow  . . . . . . . . . . . . . . . . . . . .   8
-   6.  Reference Use Cases . . . . . . . . . . . . . . . . . . . . .   9
-     6.1.  The Lying Endpoint Problem  . . . . . . . . . . . . . . .  11
-     6.2.  Who am I a talking to?  . . . . . . . . . . . . . . . . .  11
-   7.  Trustworthiness . . . . . . . . . . . . . . . . . . . . . . .  12
-   8.  Remote Attestation  . . . . . . . . . . . . . . . . . . . . .  12
-     8.1.  Building Block Terms  . . . . . . . . . . . . . . . . . .  12
-   9.  IANA considerations . . . . . . . . . . . . . . . . . . . . .  13
-   10. Security Considerations . . . . . . . . . . . . . . . . . . .  13
-   11. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  14
-   12. Change Log  . . . . . . . . . . . . . . . . . . . . . . . . .  14
-   13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  14
-     13.1.  Normative References . . . . . . . . . . . . . . . . . .  14
-     13.2.  Informative References . . . . . . . . . . . . . . . . .  14
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  14
+   5.  Types of Root of Trust (ROT)  . . . . . . . . . . . . . . . .   8
+   6.  Nested Computing Contexts . . . . . . . . . . . . . . . . . .   9
+   7.  Freshness Types . . . . . . . . . . . . . . . . . . . . . . .   9
+   8.  Attestation Workflow  . . . . . . . . . . . . . . . . . . . .   9
+   9.  Reference Use Cases . . . . . . . . . . . . . . . . . . . . .  10
+     9.1.  The Lying Endpoint Problem  . . . . . . . . . . . . . . .  12
+     9.2.  Who am I a talking to?  . . . . . . . . . . . . . . . . .  13
+   10. Trustworthiness . . . . . . . . . . . . . . . . . . . . . . .  13
+   11. Remote Attestation  . . . . . . . . . . . . . . . . . . . . .  13
+     11.1.  Building Block Terms . . . . . . . . . . . . . . . . . .  13
+   12. IANA considerations . . . . . . . . . . . . . . . . . . . . .  15
+   13. Security Considerations . . . . . . . . . . . . . . . . . . .  15
+   14. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  15
+   15. Change Log  . . . . . . . . . . . . . . . . . . . . . . . . .  15
+   16. References  . . . . . . . . . . . . . . . . . . . . . . . . .  15
+     16.1.  Normative References . . . . . . . . . . . . . . . . . .  15
+     16.2.  Informative References . . . . . . . . . . . . . . . . .  15
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  16
 
 1.  Introduction
 
@@ -103,17 +106,16 @@ Table of Contents
 
    The primary application of attestation procedures is to increase the
    trust and confidence in the integrity of the characteristics and
-   properties of a system entity that intends to provide data to other
-   system entities remotely.  Hence, the most common application of
 
 
 
-
-Birkholz, et al.        Expires February 5, 2018                [Page 2]
+Birkholz, et al.        Expires February 12, 2018               [Page 2]
 
 Internet-Draft              term-attestation                 August 2017
 
 
+   properties of a system entity that intends to provide data to other
+   system entities remotely.  Hence, the most common application of
    attestation is Remote Attestation (RAT) and - in consequence - will
    be the most prominent topic of this reference terminology.
 
@@ -163,9 +165,7 @@ Internet-Draft              term-attestation                 August 2017
 
 
 
-
-
-Birkholz, et al.        Expires February 5, 2018                [Page 3]
+Birkholz, et al.        Expires February 12, 2018               [Page 3]
 
 Internet-Draft              term-attestation                 August 2017
 
@@ -199,7 +199,7 @@ Internet-Draft              term-attestation                 August 2017
 
    Interconnect:  A channel of communication between attestee and
       verifier that enables the appraisal of evidence created by the
-      attestee.
+      attestee by a (remote) verifier.
 
 3.  Computing Context
 
@@ -221,7 +221,7 @@ Internet-Draft              term-attestation                 August 2017
 
 
 
-Birkholz, et al.        Expires February 5, 2018                [Page 4]
+Birkholz, et al.        Expires February 12, 2018               [Page 4]
 
 Internet-Draft              term-attestation                 August 2017
 
@@ -277,7 +277,7 @@ Internet-Draft              term-attestation                 August 2017
 
 
 
-Birkholz, et al.        Expires February 5, 2018                [Page 5]
+Birkholz, et al.        Expires February 12, 2018               [Page 5]
 
 Internet-Draft              term-attestation                 August 2017
 
@@ -333,7 +333,7 @@ Internet-Draft              term-attestation                 August 2017
 
 
 
-Birkholz, et al.        Expires February 5, 2018                [Page 6]
+Birkholz, et al.        Expires February 12, 2018               [Page 6]
 
 Internet-Draft              term-attestation                 August 2017
 
@@ -359,17 +359,18 @@ Internet-Draft              term-attestation                 August 2017
    evidence, the shielding of the secrets involved is essential to the
    quality of confidence in the public key or the signature, and - in
    consequence - the evidence that constitutes the attested identity of
-   the computing system.
+   the Computing Context.
 
-   Shielded Secret:  A secret retained inside an atomic component of a
-      composite system entity that can be used for operations based on
-      the secret while the shielding of the secret is intended to
-      inhibited voluntary or involuntary exposure of the secret itself.
-      The confidence in the shielding can be expressed, for example, via
-      the security mechanisms described in the FIPS 140-2 security
-      levels defined by the National Institute for Standards and
-      Technology (NIST).  Typically, shielded secrets are an essential
-      part of a hardware root of trust or hardware security modules,
+   Shielded Secret:  A secret retained inside an atomic Component of a
+      composite System Entity - composing a Computing Context - that can
+      be used for operations based on the secret while the shielding of
+      the secret is intended to inhibited voluntary or involuntary
+      exposure of the secret itself.  The confidence in the shielding
+      can be expressed, for example, via the security mechanisms
+      described in the FIPS 140-2 security levels defined by the
+      National Institute for Standards and Technology (NIST).
+      Typically, shielded secrets are an essential part of a hardware
+      root of trust (ROT) or hardware security modules (HSM),
       respectively.
 
    Identity:  [RFC4949] defines an Identity as "the collective aspect of
@@ -388,8 +389,7 @@ Internet-Draft              term-attestation                 August 2017
 
 
 
-
-Birkholz, et al.        Expires February 5, 2018                [Page 7]
+Birkholz, et al.        Expires February 12, 2018               [Page 7]
 
 Internet-Draft              term-attestation                 August 2017
 
@@ -409,12 +409,78 @@ Internet-Draft              term-attestation                 August 2017
       definition of Attestation Identity.
 
    Attestation Identity:  The collective aspect of a set of attribute
-      value pairs (i.e., a set of characteristics) by which a subject or
-      a set of subjects is recognizable or known in a given context.
-      The most common subjects in respect to attestation are computing
-      contexts and system entities.
+      value pairs (i.e., a set of characteristics), by which a subject
+      or a set of subjects is recognizable or known in a given scope.
 
-5.  Attestation Workflow
+   Subject:  [NIST SP-800-63-3] defines a Subject as "a person,
+      organization, device, hardware, network, software, or service."
+      In the scope of attestation terminology, the definition of Subject
+      excludes Person and Organization from the definition.  The most
+      common Subjects in respect to attestation are Computing Contexts
+      or composite System Entities.
+
+5.  Types of Root of Trust (ROT)
+
+   Root of Trust:  The Trusted Computing Group defines ROT as "a
+      component that performs one or more security-specific functions,
+      such as measurement, storage, reporting, verification, and/or
+      update.  It is trusted always to behave in the expected manner,
+      because its misbehavior cannot be detected (such as by
+      measurement) under normal operation."
+
+   In general there are two types of a ROT:
+
+   o  Hardware ROT, and
+
+   o  Virtual ROT.
+
+   Hardware Root of Trust:  define here
+
+   Virtual Root of Trust:  A ROT that requires a parent ROT, to which it
+      is cryptographically bound to.  The parent ROT can either be a
+      Hardware ROT or a Virtual ROT.  I.e. a virtual ROT can create
+      evidence about the integrity of the Computing Context it is an
+      atomic component of and it can create evidence about its
+      cryptographic binding to its parent ROT.
+
+
+
+Birkholz, et al.        Expires February 12, 2018               [Page 8]
+
+Internet-Draft              term-attestation                 August 2017
+
+
+6.  Nested Computing Contexts
+
+   Hierarchically nested System Entities range from composing a physical
+   (tangible) composite device to composing a Physical System Entity
+
+   ntially take on the
+
+   roles of Attestee or Verifier.  Consequently, nested System Entities
+   can be Computing Contexts.  The Root System Entity that provides the
+   basis for the
+
+   Physical System Entity:  A System Entity that can potentially contain
+      a hardware ROT.
+
+   Logical System Entity:  A System Entity that cannot contain a
+      hardware ROT, but can potentially contain a virtual ROT.
+
+   Root System Entity:  A Physical System Entity that constitutes the
+      root of nested Physical System Entities and/or Logical System
+      Entities.
+
+   Deep Attestation:  An attestation activity that supports the use of
+      virtual ROT in nested virtual Computing Contexts.  Deep
+      Attestation always requires a
+
+7.  Freshness Types
+
+   Fresh:  [RFC4949] defines Fresh as "recently generated; not replayed
+      from some earlier interaction of the protocol.
+
+8.  Attestation Workflow
 
    This section introduces terms and definitions that are required to
    illustrate the scope and the granularity of attestation workflows in
@@ -432,6 +498,14 @@ Internet-Draft              term-attestation                 August 2017
       In the scope of attestation, an activity is a sequence of actions
       that is intended to produce a specifically defined result.  The
       actual composition of actions can vary, depending on the
+
+
+
+Birkholz, et al.        Expires February 12, 2018               [Page 9]
+
+Internet-Draft              term-attestation                 August 2017
+
+
       characteristics of the computing context they are conducted by/in
       and the protocols used.  A single activity provides only a minimal
       required amount of semantic context, e.g. by the activity's
@@ -442,14 +516,6 @@ Internet-Draft              term-attestation                 August 2017
 
    Task:  A piece of work to be done or undertaken.  In the scope of
       attestation, a task is an activity to be conducted.  Example: A
-
-
-
-Birkholz, et al.        Expires February 5, 2018                [Page 8]
-
-Internet-Draft              term-attestation                 August 2017
-
-
       Verifier can be tasked with the appraisal of evidence originating
       from a specific type of computing contexts.
 
@@ -470,24 +536,31 @@ Internet-Draft              term-attestation                 August 2017
       Example: The activities of attestation, conveyance and
       verification compose a remote attestation procedure.
 
-6.  Reference Use Cases
+9.  Reference Use Cases
 
    This document provides NNN prominent examples of use cases
    attestation procedures are intended to address:
 
-   o  Verification of the source integrity of a computing context via
-      data integrity proofing of installed software instances that are
+   o  Verification of the Source Integrity of a Computing Context via
+      Data Integrity Proofing of installed software instances that are
       executed, and
 
-   o  Verification of the identity proofing of a computing context.
+   o  Verification of the Identity Proofing of a Computing Context.
 
-   These use case summary highlighted above is based in the following
+   The use case summary highlighted above is based in the following
    terms defined in RFC4949 and complementary sources of terminology:
 
    Assurance:  An attribute of an information system that provides
       grounds for having confidence that the system operates such that
       the system's security policy is enforced [RFC4949] (see Trusted
       System below).
+
+
+
+Birkholz, et al.        Expires February 12, 2018              [Page 10]
+
+Internet-Draft              term-attestation                 August 2017
+
 
       In common criteria, assurance is the basis for the metric level of
       assurance, which represents the "confidence that a system's
@@ -497,15 +570,6 @@ Internet-Draft              term-attestation                 August 2017
       assurance defined in Common Criteria represent "a degree of
       confidence, not a true measure of how secure the system actually
       is.  This distinction is necessary because it is extremely
-
-
-
-
-Birkholz, et al.        Expires February 5, 2018                [Page 9]
-
-Internet-Draft              term-attestation                 August 2017
-
-
       difficult-and in many cases, virtually impossible-to know exactly
       how secure a system is."
 
@@ -546,7 +610,15 @@ Internet-Draft              term-attestation                 August 2017
    Correctness:  The property of a system that is guaranteed as the
       result of formal verification activities.
 
-   Correctness integrity:  The property that the information represented
+
+
+
+Birkholz, et al.        Expires February 12, 2018              [Page 11]
+
+Internet-Draft              term-attestation                 August 2017
+
+
+   Correctness Integrity:  The property that the information represented
       by data is accurate and consistent.
 
    Verification:  (a) The process of examining information to establish
@@ -554,18 +626,10 @@ Internet-Draft              term-attestation                 August 2017
 
       (b) The process of comparing two levels of system specification
       for proper correspondence, such as comparing a security model with
-
-
-
-Birkholz, et al.        Expires February 5, 2018               [Page 10]
-
-Internet-Draft              term-attestation                 August 2017
-
-
       a top-level specification, a top-level specification with source
       code, or source code with object code.
 
-6.1.  The Lying Endpoint Problem
+9.1.  The Lying Endpoint Problem
 
    A very prominent goal of attestation procedures - and therefore a
    suitable example used as reference in this document - is to address
@@ -601,24 +665,23 @@ Internet-Draft              term-attestation                 August 2017
    In contrast, such evidence has to be impossible to create if the
    software instances used in a computing context are compromised.
    Attestation activities that are intended to create this evidence
-   therefore also to also provide guarantees about the validity of the
-   evidence they can create.
-
-6.2.  Who am I a talking to?
-
-   [working title, write up use case here, ref teep requirements]
 
 
 
 
-
-
-Birkholz, et al.        Expires February 5, 2018               [Page 11]
+Birkholz, et al.        Expires February 12, 2018              [Page 12]
 
 Internet-Draft              term-attestation                 August 2017
 
 
-7.  Trustworthiness
+   therefore also to also provide guarantees about the validity of the
+   evidence they can create.
+
+9.2.  Who am I a talking to?
+
+   [working title, write up use case here, ref teep requirements]
+
+10.  Trustworthiness
 
    A "lying endpoint" is not trustworthy.
 
@@ -629,7 +692,7 @@ Internet-Draft              term-attestation                 August 2017
 
    Trustworthy:  pull in text here
 
-8.  Remote Attestation
+11.  Remote Attestation
 
    Attestation:  An object integrity authentication facilitated via the
       creation of a claim about the properties of an attestee, such that
@@ -644,7 +707,7 @@ Internet-Draft              term-attestation                 August 2017
    Remote Attestation:  A procedure composed of the activities
       attestation, conveyance and verification.
 
-8.1.  Building Block Terms
+11.1.  Building Block Terms
 
    [working title, pulled from various sources, vital]
 
@@ -654,9 +717,20 @@ Internet-Draft              term-attestation                 August 2017
       confidential to the computing context via appropriate measures
       (that have a direct impact on the level of confidence).  The
       public portion of the key pair may be included in AIK credentials
-      that provide a claim about the computing context.
+      that provide claims about the characteristics of a Computing
+      Context.
 
-   Claim:  A piece of information asserted about a subject.  A claim is
+
+
+
+
+
+Birkholz, et al.        Expires February 12, 2018              [Page 13]
+
+Internet-Draft              term-attestation                 August 2017
+
+
+   Claim:  A piece of information asserted about a Subject.  A claim is
       represented as a name/value pair consisting of a Claim Name and a
       Claim Value [RFC7519]
 
@@ -666,13 +740,6 @@ Internet-Draft              term-attestation                 August 2017
 
    Computing Context Characteristics:  The composition, configuration
       and state of a computing context.
-
-
-
-Birkholz, et al.        Expires February 5, 2018               [Page 12]
-
-Internet-Draft              term-attestation                 August 2017
-
 
    Evidence:  A trustworthy set of claims about an computing context's
       characteristics.
@@ -707,7 +774,19 @@ Internet-Draft              term-attestation                 August 2017
       computing context that is not necessarily trustworthy. [update
       with tamper related terms]
 
-9.  IANA considerations
+
+
+
+
+
+
+
+Birkholz, et al.        Expires February 12, 2018              [Page 14]
+
+Internet-Draft              term-attestation                 August 2017
+
+
+12.  IANA considerations
 
    This document will include requests to IANA:
 
@@ -715,32 +794,21 @@ Internet-Draft              term-attestation                 August 2017
 
    o  second item
 
-10.  Security Considerations
+13.  Security Considerations
 
    There are always some.
 
-
-
-
-
-
-
-Birkholz, et al.        Expires February 5, 2018               [Page 13]
-
-Internet-Draft              term-attestation                 August 2017
-
-
-11.  Acknowledgements
+14.  Acknowledgements
 
    Maybe.
 
-12.  Change Log
+15.  Change Log
 
    No changes yet.
 
-13.  References
+16.  References
 
-13.1.  Normative References
+16.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -751,7 +819,7 @@ Internet-Draft              term-attestation                 August 2017
               FYI 36, RFC 4949, DOI 10.17487/RFC4949, August 2007,
               <http://www.rfc-editor.org/info/rfc4949>.
 
-13.2.  Informative References
+16.2.  Informative References
 
    [I-D.ietf-sacm-terminology]
               Birkholz, H., Lu, J., Strassner, J., and N. Cam-Winget,
@@ -763,6 +831,17 @@ Internet-Draft              term-attestation                 August 2017
               (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015,
               <http://www.rfc-editor.org/info/rfc7519>.
 
+
+
+
+
+
+
+Birkholz, et al.        Expires February 12, 2018              [Page 15]
+
+Internet-Draft              term-attestation                 August 2017
+
+
 Authors' Addresses
 
    Henk Birkholz
@@ -772,18 +851,6 @@ Authors' Addresses
    Germany
 
    Email: henk.birkholz@sit.fraunhofer.de
-
-
-
-
-
-
-
-
-
-Birkholz, et al.        Expires February 5, 2018               [Page 14]
-
-Internet-Draft              term-attestation                 August 2017
 
 
    Monty Wiseman
@@ -826,15 +893,4 @@ Internet-Draft              term-attestation                 August 2017
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-Birkholz, et al.        Expires February 5, 2018               [Page 15]
+Birkholz, et al.        Expires February 12, 2018              [Page 16]

@@ -282,20 +282,23 @@ address {
 <link href="#rfc.section.3.1" rel="Chapter" title="3.1 Formal Semantic Relationships">
 <link href="#rfc.section.3.2" rel="Chapter" title="3.2 Characteristics of a computing context">
 <link href="#rfc.section.4" rel="Chapter" title="4 Computing Context Identity">
-<link href="#rfc.section.5" rel="Chapter" title="5 Attestation Workflow">
-<link href="#rfc.section.6" rel="Chapter" title="6 Reference Use Cases">
-<link href="#rfc.section.6.1" rel="Chapter" title="6.1 The Lying Endpoint Problem">
-<link href="#rfc.section.6.2" rel="Chapter" title="6.2 Who am I a talking to?">
-<link href="#rfc.section.7" rel="Chapter" title="7 Trustworthiness">
-<link href="#rfc.section.8" rel="Chapter" title="8 Remote Attestation">
-<link href="#rfc.section.8.1" rel="Chapter" title="8.1 Building Block Terms">
-<link href="#rfc.section.9" rel="Chapter" title="9 IANA considerations">
-<link href="#rfc.section.10" rel="Chapter" title="10 Security Considerations">
-<link href="#rfc.section.11" rel="Chapter" title="11 Acknowledgements">
-<link href="#rfc.section.12" rel="Chapter" title="12 Change Log">
-<link href="#rfc.references" rel="Chapter" title="13 References">
-<link href="#rfc.references.1" rel="Chapter" title="13.1 Normative References">
-<link href="#rfc.references.2" rel="Chapter" title="13.2 Informative References">
+<link href="#rfc.section.5" rel="Chapter" title="5 Types of Root of Trust (ROT)">
+<link href="#rfc.section.6" rel="Chapter" title="6 Nested Computing Contexts">
+<link href="#rfc.section.7" rel="Chapter" title="7 Freshness Types">
+<link href="#rfc.section.8" rel="Chapter" title="8 Attestation Workflow">
+<link href="#rfc.section.9" rel="Chapter" title="9 Reference Use Cases">
+<link href="#rfc.section.9.1" rel="Chapter" title="9.1 The Lying Endpoint Problem">
+<link href="#rfc.section.9.2" rel="Chapter" title="9.2 Who am I a talking to?">
+<link href="#rfc.section.10" rel="Chapter" title="10 Trustworthiness">
+<link href="#rfc.section.11" rel="Chapter" title="11 Remote Attestation">
+<link href="#rfc.section.11.1" rel="Chapter" title="11.1 Building Block Terms">
+<link href="#rfc.section.12" rel="Chapter" title="12 IANA considerations">
+<link href="#rfc.section.13" rel="Chapter" title="13 Security Considerations">
+<link href="#rfc.section.14" rel="Chapter" title="14 Acknowledgements">
+<link href="#rfc.section.15" rel="Chapter" title="15 Change Log">
+<link href="#rfc.references" rel="Chapter" title="16 References">
+<link href="#rfc.references.1" rel="Chapter" title="16.1 Normative References">
+<link href="#rfc.references.2" rel="Chapter" title="16.2 Informative References">
 <link href="#rfc.authors" rel="Chapter">
 
 
@@ -304,7 +307,7 @@ address {
 
   <meta name="dct.creator" content="Birkholz, H., Wiseman, M., and H. Tschofenig" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-birkholz-attestation-terminology-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2017-8-04" />
+  <meta name="dct.issued" scheme="ISO8601" content="2017-8-11" />
   <meta name="dct.abstract" content="This document is intended to illustrate and remediate the impedance mismatch of terms related to attestation procedures used in different domains today. New terms defined by this document provide a consolidated basis to support future work on attestation procedures in the IETF and beyond." />
   <meta name="description" content="This document is intended to illustrate and remediate the impedance mismatch of terms related to attestation procedures used in different domains today. New terms defined by this document provide a consolidated basis to support future work on attestation procedures in the IETF and beyond." />
 
@@ -328,7 +331,7 @@ address {
 <td class="right">M. Wiseman</td>
 </tr>
 <tr>
-<td class="left">Expires: February 5, 2018</td>
+<td class="left">Expires: February 12, 2018</td>
 <td class="right">GE Global Research</td>
 </tr>
 <tr>
@@ -341,7 +344,7 @@ address {
 </tr>
 <tr>
 <td class="left"></td>
-<td class="right">August 04, 2017</td>
+<td class="right">August 11, 2017</td>
 </tr>
 
     	
@@ -357,7 +360,7 @@ address {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on February 5, 2018.</p>
+<p>This Internet-Draft will expire on February 12, 2018.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
 <p>Copyright (c) 2017 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (http://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
@@ -381,33 +384,39 @@ address {
 </li>
 </ul><li>4.   <a href="#rfc.section.4">Computing Context Identity</a>
 </li>
-<li>5.   <a href="#rfc.section.5">Attestation Workflow</a>
+<li>5.   <a href="#rfc.section.5">Types of Root of Trust (ROT)</a>
 </li>
-<li>6.   <a href="#rfc.section.6">Reference Use Cases</a>
+<li>6.   <a href="#rfc.section.6">Nested Computing Contexts</a>
 </li>
-<ul><li>6.1.   <a href="#rfc.section.6.1">The Lying Endpoint Problem</a>
+<li>7.   <a href="#rfc.section.7">Freshness Types</a>
 </li>
-<li>6.2.   <a href="#rfc.section.6.2">Who am I a talking to?</a>
+<li>8.   <a href="#rfc.section.8">Attestation Workflow</a>
 </li>
-</ul><li>7.   <a href="#rfc.section.7">Trustworthiness</a>
+<li>9.   <a href="#rfc.section.9">Reference Use Cases</a>
 </li>
-<li>8.   <a href="#rfc.section.8">Remote Attestation</a>
+<ul><li>9.1.   <a href="#rfc.section.9.1">The Lying Endpoint Problem</a>
 </li>
-<ul><li>8.1.   <a href="#rfc.section.8.1">Building Block Terms</a>
+<li>9.2.   <a href="#rfc.section.9.2">Who am I a talking to?</a>
 </li>
-</ul><li>9.   <a href="#rfc.section.9">IANA considerations</a>
+</ul><li>10.   <a href="#rfc.section.10">Trustworthiness</a>
 </li>
-<li>10.   <a href="#rfc.section.10">Security Considerations</a>
+<li>11.   <a href="#rfc.section.11">Remote Attestation</a>
 </li>
-<li>11.   <a href="#rfc.section.11">Acknowledgements</a>
+<ul><li>11.1.   <a href="#rfc.section.11.1">Building Block Terms</a>
 </li>
-<li>12.   <a href="#rfc.section.12">Change Log</a>
+</ul><li>12.   <a href="#rfc.section.12">IANA considerations</a>
 </li>
-<li>13.   <a href="#rfc.references">References</a>
+<li>13.   <a href="#rfc.section.13">Security Considerations</a>
 </li>
-<ul><li>13.1.   <a href="#rfc.references.1">Normative References</a>
+<li>14.   <a href="#rfc.section.14">Acknowledgements</a>
 </li>
-<li>13.2.   <a href="#rfc.references.2">Informative References</a>
+<li>15.   <a href="#rfc.section.15">Change Log</a>
+</li>
+<li>16.   <a href="#rfc.references">References</a>
+</li>
+<ul><li>16.1.   <a href="#rfc.references.1">Normative References</a>
+</li>
+<li>16.2.   <a href="#rfc.references.2">Informative References</a>
 </li>
 </ul><li><a href="#rfc.authors">Authors' Addresses</a>
 </li>
@@ -441,7 +450,7 @@ address {
 <dt>Verfifier:</dt>
 <dd style="margin-left: 8">The role that designates the appraiser of the attestee&#8217;s attestation. The consumer of evidence.</dd>
 <dt>Interconnect:</dt>
-<dd style="margin-left: 8">A channel of communication between attestee and verifier that enables the appraisal of evidence created by the attestee.</dd>
+<dd style="margin-left: 8">A channel of communication between attestee and verifier that enables the appraisal of evidence created by the attestee by a (remote) verifier.</dd>
 </dl>
 <h1 id="rfc.section.3">
 <a href="#rfc.section.3">3.</a> <a href="#computing-context" id="computing-context">Computing Context</a>
@@ -506,12 +515,12 @@ address {
 <a href="#rfc.section.4">4.</a> <a href="#computing-context-identity" id="computing-context-identity">Computing Context Identity</a>
 </h1>
 <p id="rfc.section.4.p.1">The identity of a computing context provides the basis for Data Origin Authentication <a href="#RFC4949" class="xref">[RFC4949]</a>}.  Confidence in the identity assurance level [NIST SP-800-63-3] or the assurance levels for identity authentication <a href="#RFC4949" class="xref">[RFC4949]</a> impacts the confidence in the evidence an attestee provides.</p>
-<p id="rfc.section.4.p.2">In the context of attestation, the authenticity and corresponding proof of integrity in respect to an identity are typically based on a secret that is only available to the individual subjects that maintain or try to create a trust relationship, e.g. an attestee or certificate authority (CA). If a secret key, for example, is used to sign a public key such that the signed public key can be used as evidence, the shielding of the secrets involved is essential to the quality of confidence in the public key or the signature, and - in consequence - the evidence that constitutes the attested identity of the computing system.</p>
+<p id="rfc.section.4.p.2">In the context of attestation, the authenticity and corresponding proof of integrity in respect to an identity are typically based on a secret that is only available to the individual subjects that maintain or try to create a trust relationship, e.g. an attestee or certificate authority (CA). If a secret key, for example, is used to sign a public key such that the signed public key can be used as evidence, the shielding of the secrets involved is essential to the quality of confidence in the public key or the signature, and - in consequence - the evidence that constitutes the attested identity of the Computing Context.</p>
 <p></p>
 
 <dl>
 <dt>Shielded Secret:</dt>
-<dd style="margin-left: 8">A secret retained inside an atomic component of a composite system entity that can be used for operations based on the secret while the shielding of the secret is intended to inhibited voluntary or involuntary exposure of the secret itself. The confidence in the shielding can be expressed, for example, via the security mechanisms described in the FIPS 140-2 security levels defined by the National Institute for Standards and Technology (NIST). Typically, shielded secrets are an essential part of a hardware root of trust or hardware security modules, respectively.</dd>
+<dd style="margin-left: 8">A secret retained inside an atomic Component of a composite System Entity - composing a Computing Context - that can be used for operations based on the secret while the shielding of the secret is intended to inhibited voluntary or involuntary exposure of the secret itself. The confidence in the shielding can be expressed, for example, via the security mechanisms described in the FIPS 140-2 security levels defined by the National Institute for Standards and Technology (NIST). Typically, shielded secrets are an essential part of a hardware root of trust (ROT) or hardware security modules (HSM), respectively.</dd>
 <dt>Identity:</dt>
 <dd style="margin-left: 8">
 <a href="#RFC4949" class="xref">[RFC4949]</a> defines an Identity as &#8220;the collective aspect of a set of attribute values (i.e., a set of characteristics) by which a system user or other system entity is recognizable or known.&#8221; The term may be applied &#8220;to either a single entity or a set of entities.&#8221;</dd>
@@ -524,13 +533,67 @@ address {
 <dt></dt>
 <dd style="margin-left: 8">The definition of Singular Identity in <a href="#RFC4949" class="xref">[RFC4949]</a> is difficult to apply in the context of attestation as it is limited to entities that are persons or processes. The definition of Identity in the NIST&#8217;s Digital Identity Guidelines is also difficult to apply in the context of attestation as it is limited to uniquely identifiable subjects and does not allow for a Group Identities. In the context of this reference terminology the limitation imposed by both standard references are remediated via the definition of Attestation Identity.</dd>
 <dt>Attestation Identity:</dt>
-<dd style="margin-left: 8">The collective aspect of a set of attribute value pairs (i.e., a set of characteristics) by which a subject or a set of subjects is recognizable or known in a given context. The most common subjects in respect to attestation are computing contexts and system entities.</dd>
+<dd style="margin-left: 8">The collective aspect of a set of attribute value pairs (i.e., a set of characteristics), by which a subject or a set of subjects is recognizable or known in a given scope.</dd>
+<dt>Subject:</dt>
+<dd style="margin-left: 8">[NIST SP-800-63-3] defines a Subject as &#8220;a person, organization, device, hardware, network, software, or service.&#8221; In the scope of attestation terminology, the definition of Subject excludes Person and Organization from the definition. The most common Subjects in respect to attestation are Computing Contexts or composite System Entities.</dd>
 </dl>
 <h1 id="rfc.section.5">
-<a href="#rfc.section.5">5.</a> <a href="#attestation-workflow" id="attestation-workflow">Attestation Workflow</a>
+<a href="#rfc.section.5">5.</a> <a href="#types-of-root-of-trust-rot" id="types-of-root-of-trust-rot">Types of Root of Trust (ROT)</a>
 </h1>
-<p id="rfc.section.5.p.1">This section introduces terms and definitions that are required to illustrate the scope and the granularity of attestation workflows in the context of security automation. Terms defined in the following sections will be based on this workflow-related definitions.</p>
-<p id="rfc.section.5.p.2">In general, attestation is an iterative procedure that is conducted over and over again in a computing context under specific conditions. It is neither a generic set of actions nor simply a task, because the actual actions to be undertaken in order to conduct an attestation procedure can vary significantly depending on the protocols employed and types of computing contexts involved.</p>
+<p></p>
+
+<dl>
+<dt>Root of Trust:</dt>
+<dd style="margin-left: 8">The Trusted Computing Group defines ROT as &#8220;a component that performs one or more security-specific functions, such as measurement, storage, reporting, verification, and/or update.  It is trusted always to behave in the expected manner, because its misbehavior cannot be detected (such as by measurement) under normal operation.&#8221;</dd>
+</dl>
+<p id="rfc.section.5.p.2">In general there are two types of a ROT:</p>
+<p></p>
+
+<ul>
+<li>Hardware ROT, and</li>
+<li>Virtual ROT.</li>
+</ul>
+<p></p>
+
+<dl>
+<dt>Hardware Root of Trust:</dt>
+<dd style="margin-left: 8">define here</dd>
+<dt>Virtual Root of Trust:</dt>
+<dd style="margin-left: 8">A ROT that requires a parent ROT, to which it is cryptographically bound to. The parent ROT can either be a Hardware ROT or a Virtual ROT. I.e. a virtual ROT can create evidence about the integrity of the Computing Context it is an atomic component of and it can create evidence about its cryptographic binding to its parent ROT.</dd>
+</dl>
+<h1 id="rfc.section.6">
+<a href="#rfc.section.6">6.</a> <a href="#nested-computing-contexts" id="nested-computing-contexts">Nested Computing Contexts</a>
+</h1>
+<p id="rfc.section.6.p.1">Hierarchically nested System Entities range from composing a physical (tangible) composite device to composing a Physical System Entity</p>
+<p id="rfc.section.6.p.2">ntially take on the</p>
+<p id="rfc.section.6.p.3">roles of Attestee or Verifier. Consequently, nested System Entities can be Computing Contexts. The Root System Entity that provides the basis for the</p>
+<p></p>
+
+<dl>
+<dt>Physical System Entity:</dt>
+<dd style="margin-left: 8">A System Entity that can potentially contain a hardware ROT.</dd>
+<dt>Logical System Entity:</dt>
+<dd style="margin-left: 8">A System Entity that cannot contain a hardware ROT, but can potentially contain a virtual ROT.</dd>
+<dt>Root System Entity:</dt>
+<dd style="margin-left: 8">A Physical System Entity that constitutes the root of nested Physical System Entities and/or Logical System Entities.</dd>
+<dt>Deep Attestation:</dt>
+<dd style="margin-left: 8">An attestation activity that supports the use of virtual ROT in nested virtual Computing Contexts.  Deep Attestation always requires a</dd>
+</dl>
+<h1 id="rfc.section.7">
+<a href="#rfc.section.7">7.</a> <a href="#freshness-types" id="freshness-types">Freshness Types</a>
+</h1>
+<p></p>
+
+<dl>
+<dt>Fresh:</dt>
+<dd style="margin-left: 8">
+<a href="#RFC4949" class="xref">[RFC4949]</a> defines Fresh as &#8220;recently generated; not replayed from some earlier interaction of the protocol.</dd>
+</dl>
+<h1 id="rfc.section.8">
+<a href="#rfc.section.8">8.</a> <a href="#attestation-workflow" id="attestation-workflow">Attestation Workflow</a>
+</h1>
+<p id="rfc.section.8.p.1">This section introduces terms and definitions that are required to illustrate the scope and the granularity of attestation workflows in the context of security automation. Terms defined in the following sections will be based on this workflow-related definitions.</p>
+<p id="rfc.section.8.p.2">In general, attestation is an iterative procedure that is conducted over and over again in a computing context under specific conditions. It is neither a generic set of actions nor simply a task, because the actual actions to be undertaken in order to conduct an attestation procedure can vary significantly depending on the protocols employed and types of computing contexts involved.</p>
 <p></p>
 
 <dl>
@@ -543,17 +606,17 @@ address {
 <dt>Procedure:</dt>
 <dd style="margin-left: 8">A series of actions that are done in a certain way or order. In the scope of attestation, a procedure is a composition of activities (sequences of actions) that is intended to create a well specified result with a well established semantic context.  Example: The activities of attestation, conveyance and verification compose a remote attestation procedure.</dd>
 </dl>
-<h1 id="rfc.section.6">
-<a href="#rfc.section.6">6.</a> <a href="#reference-use-cases" id="reference-use-cases">Reference Use Cases</a>
+<h1 id="rfc.section.9">
+<a href="#rfc.section.9">9.</a> <a href="#reference-use-cases" id="reference-use-cases">Reference Use Cases</a>
 </h1>
-<p id="rfc.section.6.p.1">This document provides NNN prominent examples of use cases attestation procedures are intended to address:</p>
+<p id="rfc.section.9.p.1">This document provides NNN prominent examples of use cases attestation procedures are intended to address:</p>
 <p></p>
 
 <ul>
-<li>Verification of the source integrity of a computing context via data integrity proofing of installed software instances that are executed, and</li>
-<li>Verification of the identity proofing of a computing context.</li>
+<li>Verification of the Source Integrity of a Computing Context via Data Integrity Proofing of installed software instances that are executed, and</li>
+<li>Verification of the Identity Proofing of a Computing Context.</li>
 </ul>
-<p id="rfc.section.6.p.3">These use case summary highlighted above is based in the following terms defined in RFC4949 and complementary sources of terminology:</p>
+<p id="rfc.section.9.p.3">The use case summary highlighted above is based in the following terms defined in RFC4949 and complementary sources of terminology:</p>
 <p></p>
 
 <dl>
@@ -577,35 +640,35 @@ address {
 <dd style="margin-left: 8">(b) The property that information has not been modified or destroyed in an unauthorized manner.</dd>
 <dt>Correctness:</dt>
 <dd style="margin-left: 8">The property of a system that is guaranteed as the result of formal verification activities.</dd>
-<dt>Correctness integrity:</dt>
+<dt>Correctness Integrity:</dt>
 <dd style="margin-left: 8">The property that the information represented by data is accurate and consistent.</dd>
 <dt>Verification:</dt>
 <dd style="margin-left: 8">(a) The process of examining information to establish the truth of a claimed fact or value.</dd>
 <dt></dt>
 <dd style="margin-left: 8">(b) The process of comparing two levels of system specification for proper correspondence, such as comparing a security model with a top-level specification, a top-level specification with source code, or source code with object code.</dd>
 </dl>
-<h1 id="rfc.section.6.1">
-<a href="#rfc.section.6.1">6.1.</a> <a href="#the-lying-endpoint-problem" id="the-lying-endpoint-problem">The Lying Endpoint Problem</a>
+<h1 id="rfc.section.9.1">
+<a href="#rfc.section.9.1">9.1.</a> <a href="#the-lying-endpoint-problem" id="the-lying-endpoint-problem">The Lying Endpoint Problem</a>
 </h1>
-<p id="rfc.section.6.1.p.1">A very prominent goal of attestation procedures &#8211; and therefore a suitable example used as reference in this document - is to address the &#8220;lying endpoint problem&#8221;.</p>
-<p id="rfc.section.6.1.p.2">Information created, relayed, or, in essence, emitted by a computing context does not have to be correct. There can be multiple reasons why that is the case and the &#8220;lying endpoint problem&#8221; represents a scenario, in which the reason is the compromization of computing contexts with malicious intend. A compromised computing context could try to &#8220;pretend&#8221; to be integer, while actually feeding manipulated information into a security domain, therefore compromising the effectiveness of automated security functions. Attestation &#8211; and remote attestation procedures specifically &#8211; is an approach intended to identify compromised software instances in computing contexts.</p>
-<p id="rfc.section.6.1.p.3">Per definition, a &#8220;lying endpoint&#8221; cannot be &#8220;trusted system&#8221;.</p>
+<p id="rfc.section.9.1.p.1">A very prominent goal of attestation procedures &#8211; and therefore a suitable example used as reference in this document - is to address the &#8220;lying endpoint problem&#8221;.</p>
+<p id="rfc.section.9.1.p.2">Information created, relayed, or, in essence, emitted by a computing context does not have to be correct. There can be multiple reasons why that is the case and the &#8220;lying endpoint problem&#8221; represents a scenario, in which the reason is the compromization of computing contexts with malicious intend. A compromised computing context could try to &#8220;pretend&#8221; to be integer, while actually feeding manipulated information into a security domain, therefore compromising the effectiveness of automated security functions. Attestation &#8211; and remote attestation procedures specifically &#8211; is an approach intended to identify compromised software instances in computing contexts.</p>
+<p id="rfc.section.9.1.p.3">Per definition, a &#8220;lying endpoint&#8221; cannot be &#8220;trusted system&#8221;.</p>
 <p></p>
 
 <dl>
 <dt>Trusted System:</dt>
 <dd style="margin-left: 8">A system that operates as expected, according to design and policy, doing what is required &#8211; despite environmental disruption, human user and operator errors, and attacks by hostile parties &#8211; and not doing other things.</dd>
 </dl>
-<p id="rfc.section.6.1.p.5">Remote attestation procedures are intended to enable the consumer of information emitted by an computing context to assess the validity and integrity of the information transferred. The approach is based on the assumption that if evidence can be provided in order to prove the integrity of every software instance installed involved in the activity of creating the emitted information in question, the emitted information can be considered valid and integer.</p>
-<p id="rfc.section.6.1.p.6">In contrast, such evidence has to be impossible to create if the software instances used in a computing context are compromised. Attestation activities that are intended to create this evidence therefore also to also provide guarantees about the validity of the evidence they can create.</p>
-<h1 id="rfc.section.6.2">
-<a href="#rfc.section.6.2">6.2.</a> <a href="#who-am-i-a-talking-to" id="who-am-i-a-talking-to">Who am I a talking to?</a>
+<p id="rfc.section.9.1.p.5">Remote attestation procedures are intended to enable the consumer of information emitted by an computing context to assess the validity and integrity of the information transferred. The approach is based on the assumption that if evidence can be provided in order to prove the integrity of every software instance installed involved in the activity of creating the emitted information in question, the emitted information can be considered valid and integer.</p>
+<p id="rfc.section.9.1.p.6">In contrast, such evidence has to be impossible to create if the software instances used in a computing context are compromised. Attestation activities that are intended to create this evidence therefore also to also provide guarantees about the validity of the evidence they can create.</p>
+<h1 id="rfc.section.9.2">
+<a href="#rfc.section.9.2">9.2.</a> <a href="#who-am-i-a-talking-to" id="who-am-i-a-talking-to">Who am I a talking to?</a>
 </h1>
-<p id="rfc.section.6.2.p.1">[working title, write up use case here, ref teep requirements]</p>
-<h1 id="rfc.section.7">
-<a href="#rfc.section.7">7.</a> <a href="#trustworthiness" id="trustworthiness">Trustworthiness</a>
+<p id="rfc.section.9.2.p.1">[working title, write up use case here, ref teep requirements]</p>
+<h1 id="rfc.section.10">
+<a href="#rfc.section.10">10.</a> <a href="#trustworthiness" id="trustworthiness">Trustworthiness</a>
 </h1>
-<p id="rfc.section.7.p.1">A &#8220;lying endpoint&#8221; is not trustworthy.</p>
+<p id="rfc.section.10.p.1">A &#8220;lying endpoint&#8221; is not trustworthy.</p>
 <p></p>
 
 <dl>
@@ -614,8 +677,8 @@ address {
 <dt>Trustworthy:</dt>
 <dd style="margin-left: 8">pull in text here</dd>
 </dl>
-<h1 id="rfc.section.8">
-<a href="#rfc.section.8">8.</a> <a href="#remote-attestation" id="remote-attestation">Remote Attestation</a>
+<h1 id="rfc.section.11">
+<a href="#rfc.section.11">11.</a> <a href="#remote-attestation" id="remote-attestation">Remote Attestation</a>
 </h1>
 <p></p>
 
@@ -629,17 +692,17 @@ address {
 <dt>Remote Attestation:</dt>
 <dd style="margin-left: 8">A procedure composed of the activities attestation, conveyance and verification.</dd>
 </dl>
-<h1 id="rfc.section.8.1">
-<a href="#rfc.section.8.1">8.1.</a> <a href="#building-block-terms" id="building-block-terms">Building Block Terms</a>
+<h1 id="rfc.section.11.1">
+<a href="#rfc.section.11.1">11.1.</a> <a href="#building-block-terms" id="building-block-terms">Building Block Terms</a>
 </h1>
-<p id="rfc.section.8.1.p.1">[working title, pulled from various sources, vital]</p>
+<p id="rfc.section.11.1.p.1">[working title, pulled from various sources, vital]</p>
 <p></p>
 
 <dl>
 <dt>Attestation Identity Key (AIK):</dt>
-<dd style="margin-left: 8">A special purpose signature (therefore asymmetric) key that supports identity related operations. The private portion of the key pair is maintained confidential to the computing context via appropriate measures (that have a direct impact on the level of confidence). The public portion of the key pair may be included in AIK credentials that provide a claim about the computing context.</dd>
+<dd style="margin-left: 8">A special purpose signature (therefore asymmetric) key that supports identity related operations.  The private portion of the key pair is maintained confidential to the computing context via appropriate measures (that have a direct impact on the level of confidence). The public portion of the key pair may be included in AIK credentials that provide claims about the characteristics of a Computing Context.</dd>
 <dt>Claim:</dt>
-<dd style="margin-left: 8">A piece of information asserted about a subject. A claim is represented as a name/value pair consisting of a Claim Name and a Claim Value <a href="#RFC7519" class="xref">[RFC7519]</a>
+<dd style="margin-left: 8">A piece of information asserted about a Subject. A claim is represented as a name/value pair consisting of a Claim Name and a Claim Value <a href="#RFC7519" class="xref">[RFC7519]</a>
 </dd>
 <dt></dt>
 <dd style="margin-left: 8">In the context of SACM, a claim is also specialized as an attribute/value pair that is intended to be related to a statement <a href="#I-D.ietf-sacm-terminology" class="xref">[I-D.ietf-sacm-terminology]</a>.</dd>
@@ -660,32 +723,32 @@ address {
 <dt></dt>
 <dd style="margin-left: 8">Trustworthy Statement: evidence that trustworthy conveyed by a computing context that is not necessarily trustworthy. [update with tamper related terms]</dd>
 </dl>
-<h1 id="rfc.section.9">
-<a href="#rfc.section.9">9.</a> <a href="#iana-considerations" id="iana-considerations">IANA considerations</a>
+<h1 id="rfc.section.12">
+<a href="#rfc.section.12">12.</a> <a href="#iana-considerations" id="iana-considerations">IANA considerations</a>
 </h1>
-<p id="rfc.section.9.p.1">This document will include requests to IANA:</p>
+<p id="rfc.section.12.p.1">This document will include requests to IANA:</p>
 <p></p>
 
 <ul>
 <li>first item</li>
 <li>second item</li>
 </ul>
-<h1 id="rfc.section.10">
-<a href="#rfc.section.10">10.</a> <a href="#security-considerations" id="security-considerations">Security Considerations</a>
+<h1 id="rfc.section.13">
+<a href="#rfc.section.13">13.</a> <a href="#security-considerations" id="security-considerations">Security Considerations</a>
 </h1>
-<p id="rfc.section.10.p.1">There are always some.</p>
-<h1 id="rfc.section.11">
-<a href="#rfc.section.11">11.</a> <a href="#acknowledgements" id="acknowledgements">Acknowledgements</a>
+<p id="rfc.section.13.p.1">There are always some.</p>
+<h1 id="rfc.section.14">
+<a href="#rfc.section.14">14.</a> <a href="#acknowledgements" id="acknowledgements">Acknowledgements</a>
 </h1>
-<p id="rfc.section.11.p.1">Maybe.</p>
-<h1 id="rfc.section.12">
-<a href="#rfc.section.12">12.</a> <a href="#change-log" id="change-log">Change Log</a>
+<p id="rfc.section.14.p.1">Maybe.</p>
+<h1 id="rfc.section.15">
+<a href="#rfc.section.15">15.</a> <a href="#change-log" id="change-log">Change Log</a>
 </h1>
-<p id="rfc.section.12.p.1">No changes yet.</p>
+<p id="rfc.section.15.p.1">No changes yet.</p>
 <h1 id="rfc.references">
-<a href="#rfc.references">13.</a> References</h1>
+<a href="#rfc.references">16.</a> References</h1>
 <h1 id="rfc.references.1">
-<a href="#rfc.references.1">13.1.</a> Normative References</h1>
+<a href="#rfc.references.1">16.1.</a> Normative References</h1>
 <table><tbody>
 <tr>
 <td class="reference"><b id="RFC2119">[RFC2119]</b></td>
@@ -699,7 +762,7 @@ address {
 </tr>
 </tbody></table>
 <h1 id="rfc.references.2">
-<a href="#rfc.references.2">13.2.</a> Informative References</h1>
+<a href="#rfc.references.2">16.2.</a> Informative References</h1>
 <table><tbody>
 <tr>
 <td class="reference"><b id="I-D.ietf-sacm-terminology">[I-D.ietf-sacm-terminology]</b></td>
