@@ -135,7 +135,7 @@ Verfifier:
 Interconnect:
 
 : A channel of communication between attestee and verifier that enables the appraisal of evidence
-created by the attestee.
+created by the attestee by a (remote) verifier.
 
 # Computing Context
 
@@ -251,16 +251,17 @@ maintain or try to create a trust relationship, e.g. an attestee or certificate 
 secret key, for example, is used to sign a public key such that the signed public key can be used as
 evidence, the shielding of the secrets involved is essential to the quality of confidence in the
 public key or the signature, and - in consequence - the evidence that constitutes the attested
-identity of the computing system.
+identity of the Computing Context.
 
 Shielded Secret:
 
-: A secret retained inside an atomic component of a composite system entity that can be used for
-operations based on the secret while the shielding of the secret is intended to inhibited voluntary
-or involuntary exposure of the secret itself. The confidence in the shielding can be expressed, for
-example, via the security mechanisms described in the FIPS 140-2 security levels defined by the
-National Institute for Standards and Technology (NIST). Typically, shielded secrets are an essential
-part of a hardware root of trust or hardware security modules, respectively.
+: A secret retained inside an atomic Component of a composite System Entity - composing a Computing
+Context - that can be used for operations based on the secret while the shielding of the secret is
+intended to inhibited voluntary or involuntary exposure of the secret itself. The confidence in the
+shielding can be expressed, for example, via the security mechanisms described in the FIPS 140-2
+security levels defined by the National Institute for Standards and Technology (NIST). Typically,
+shielded secrets are an essential part of a hardware root of trust (ROT) or hardware security
+modules (HSM), respectively.
 
 Identity:
 
@@ -284,9 +285,76 @@ remediated via the definition of Attestation Identity.
 
 Attestation Identity:
 
-: The collective aspect of a set of attribute value pairs (i.e., a set of characteristics) by which
-a subject or a set of subjects is recognizable or known in a given context. The most common subjects
-in respect to attestation are computing contexts and system entities.
+: The collective aspect of a set of attribute value pairs (i.e., a set of characteristics), by
+which a subject or a set of subjects is recognizable or known in a given scope.
+
+Subject:
+
+: [NIST SP-800-63-3] defines a Subject as "a person, organization, device, hardware, network,
+software, or service." In the scope of attestation terminology, the definition of Subject excludes
+Person and Organization from the definition. The most common Subjects in respect to attestation are
+Computing Contexts or composite System Entities.
+
+# Types of Root of Trust (ROT)
+
+Root of Trust:
+
+: The Trusted Computing Group defines ROT as "a component that performs one or more
+security-specific functions, such as measurement, storage, reporting, verification, and/or update.
+It is trusted always to behave in the expected manner, because its misbehavior cannot be detected
+(such as by measurement) under normal operation."
+
+In general there are two types of a ROT:
+
+* Hardware ROT, and
+* Virtual ROT.
+
+Hardware Root of Trust:
+
+: define here
+
+Virtual Root of Trust:
+
+: A ROT that requires a parent ROT, to which it is cryptographically bound to. The parent ROT can
+either be a Hardware ROT or a Virtual ROT. I.e. a virtual ROT can create evidence about the
+integrity of the Computing Context it is an atomic component of and it can create evidence about its
+cryptographic binding to its parent ROT.
+
+# Nested Computing Contexts
+
+Hierarchically nested System Entities range from composing a physical (tangible) composite device to
+composing a Physical System Entity 
+
+ntially take on the
+
+
+roles of Attestee or Verifier. Consequently, nested System Entities can be Computing Contexts. The
+Root System Entity that provides the basis for the 
+
+Physical System Entity:
+
+: A System Entity that can potentially contain a hardware ROT.
+
+Logical System Entity:
+
+: A System Entity that cannot contain a hardware ROT, but can potentially contain a virtual ROT.
+
+Root System Entity:
+
+: A Physical System Entity that constitutes the root of nested Physical System Entities and/or
+Logical System Entities.
+
+Deep Attestation:
+
+: An attestation activity that supports the use of virtual ROT in nested virtual Computing Contexts.
+Deep Attestation always requires a 
+
+# Freshness Types
+
+Fresh:
+
+: {{RFC4949}} defines Fresh as "recently generated; not replayed from some earlier interaction of
+the protocol.
 
 # Attestation Workflow
 
@@ -335,14 +403,17 @@ specified result with a well established semantic context.
 Example: The activities of attestation, conveyance and verification compose a remote attestation
 procedure.
 
+
+
+
 # Reference Use Cases
 
 This document provides NNN prominent examples of use cases attestation procedures are intended to address:
 
-* Verification of the source integrity of a computing context via data integrity proofing of installed software instances that are executed, and
-* Verification of the identity proofing of a computing context.
+* Verification of the Source Integrity of a Computing Context via Data Integrity Proofing of installed software instances that are executed, and
+* Verification of the Identity Proofing of a Computing Context.
 
-These use case summary highlighted above is based in the following terms defined in RFC4949 and
+The use case summary highlighted above is based in the following terms defined in RFC4949 and
 complementary sources of terminology:
 
 Assurance: 
@@ -390,7 +461,7 @@ Correctness:
 
 : The property of a system that is guaranteed as the result of formal verification activities.
 
-Correctness integrity:
+Correctness Integrity:
 
 : The property that the information represented by data is accurate and consistent. 
 
@@ -456,11 +527,15 @@ Remote Attestation:
 
 Attestation Identity Key (AIK):
 
-: A special purpose signature (therefore asymmetric) key that supports identity related operations. The private portion of the key pair is maintained confidential to the computing context via appropriate measures (that have a direct impact on the level of confidence). The public portion of the key pair may be included in AIK credentials that provide a claim about the computing context.
+: A special purpose signature (therefore asymmetric) key that supports identity related operations.
+The private portion of the key pair is maintained confidential to the computing context via
+appropriate measures (that have a direct impact on the level of confidence). The public portion of
+the key pair may be included in AIK credentials that provide claims about the characteristics of a
+Computing Context.
 
 Claim:
 
-: A piece of information asserted about a subject. A claim is represented as a name/value pair consisting of a Claim Name and a Claim Value {{-jwt}}
+: A piece of information asserted about a Subject. A claim is represented as a name/value pair consisting of a Claim Name and a Claim Value {{-jwt}}
 
 : In the context of SACM, a claim is also specialized as an attribute/value pair that is intended to be related to a statement {{-sacmterm}}.
 
