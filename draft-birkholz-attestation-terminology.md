@@ -77,9 +77,9 @@ The primary application of RATS is to increase the trust and confidence in the i
 object characteristics and properties of a system entity that is intended to interact and exchange
 data with other system entities remotely. How an objects’s characteristics are attested remotely and
 which characteristics are actually chosen to be attested varies with the requirements of the use
-cases, or-–in essence–-depends on the risk that is intended to be mitigated via RATS. Effectively,
-RATS are a vital tool to be used to increase the confidence in the level of trust of a system that
-is supposed to be a trusted system.
+cases, or -– in essence –- depends on the risk that is intended to be mitigated via RATS.
+Effectively, RATS are a vital tool to be used to increase the confidence in the level of trust of a
+system that is supposed to be a trusted system.
 
 In the remainder of this document a system that is capable to provide an appropriate amount of
 information about its integrity is considered to be a trustworthy system - or simply trustworthy.
@@ -117,29 +117,29 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 # Basic Roles of RATS
 
 The use of the term Remote Attestation Procedures always implies the involvement of at least two
-parties that each take on a specific role in corresponding RATS – the Attestee role and the Verifier
+parties that each take on a specific role in corresponding RATS – the Attestor role and the Verifier
 role. Depending on the object characteristics attested and the nature of the parties, information is
 exchanged via specific types of Interconnects between them. The type of interconnect ranges from GIO
 pins, to a bus component, to the Internet, or from a direct physical connection, to a wireless
 association, to a world wide mesh of peers. In other words, virtually every kind communication path
-(Interconnect) can be used by system entities that take on the role of Attestee and Verifier (in
+(Interconnect) can be used by system entities that take on the role of Attestor and Verifier (in
 fact, a single party can take on both roles at the same time, but there is only a limited use to
 this architecture).
 
-Attestee:
+Attestor:
 
 : The role that designates the subject of the remote attestation. A system entity that is the
-provider of evidence takes on the role of an Attestee.
+provider of evidence takes on the role of an Attestor.
 
 Verifier:
 
 : The role that designates the system entity that is the appraiser of the evidence provided by the
-Attestee. A system entity that is the consumer of evidence takes on the role of a Verifier.
+Attestor. A system entity that is the consumer of evidence takes on the role of a Verifier.
 
 Interconnect:
 
-: A channel of communication between Attestee and Verifier that enables the appraisal of evidence
-created by the Attestee by a remote Verifier.
+: A channel of communication between Attestor and Verifier that enables the appraisal of evidence
+created by the Attestor by a remote Verifier.
 
 # Computing Context
 
@@ -155,7 +155,7 @@ software-based solutions.
 System entities are composed of system entities. In essence, every physical or logical device is a
 composite of system entities. In consequence, a composite device also constitutes a system entity.
 Every component in that composite is a potential Computing Context capable of taking on the roles of
-Attestee or Verifier. The scope and application of these roles can range from:
+Attestor or Verifier. The scope and application of these roles can range from:
 
 * continuous mutual attestation procedures of every system entity inside a composite device, to 
 * sporadic remote attestation of unknown parties via heterogeneous Interconnects.
@@ -163,7 +163,7 @@ Attestee or Verifier. The scope and application of these roles can range from:
 Analogously, the increasing number of features and functions that constitute components of a device
 start to blur the lines that are required to categorize each solution and approach precisely. To
 address this increasingly challenging categorization, the term Computing Context defines the
-characteristics of the system entities that can take on the role of an Attestee and/or the role of a
+characteristics of the system entities that can take on the role of an Attestor and/or the role of a
 Verifier. This approach is intended to provide a stable basis of definitions for future solutions
 that continuous to remain viable long-term.
 
@@ -238,7 +238,7 @@ Examples include: a smart phone, a nested virtual machine, a virtualized firewal
 
 The identity of a Computing Context provides the basis for creating evidence about data origin authenticity. Confidence in
 the identity assurance level [NIST SP-800-63-3] or the assurance levels for identity authentication
-{{RFC4949}} impacts the confidence in the evidence an Attestee provides.
+{{RFC4949}} impacts the confidence in the evidence an Attestor provides.
 
 # Attestation Workflow
 
@@ -320,8 +320,8 @@ Confidence:
 : The definition of correctness integrity in [RFC4949] notes that "source integrity refers to
 confidence in data values".
 Hence, confidence in an attestation procedure is referring to the degree of trustworthiness of an
-attestation activity that produces evidence (attestee), of an conveyance activity that transfers
-evidence (interconnect), and of a verification activity that appraises evidence (verifier), in respect to correctness integrity.
+attestation activity that produces evidence (Attestor), of an conveyance activity that transfers
+evidence (interconnect), and of a verification activity that appraises evidence (Verifier), in respect to correctness integrity.
 
 Identity:
 
@@ -391,11 +391,11 @@ Trustworthy:
 
 Attestation: 
 
-: An object integrity authentication facilitated via the creation of a claim about the properties of an attestee, such that the claim can be used as evidence.
+: An object integrity authentication facilitated via the creation of a claim about the properties of an Attestor, such that the claim can be used as evidence.
 
 Conveyance: 
 
-: The transfer of evidence from the attestee to the verifier.
+: The transfer of evidence from the Attestor to the Verifier.
 
 Verification:  
 
