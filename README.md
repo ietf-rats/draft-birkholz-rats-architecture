@@ -1,11 +1,10 @@
-# Reference Terminology for Attestation Procedures
+# Reference Terminology for Remote Attestation Procedures
 
-This is the working area for the Individual internet-draft, "Reference Terminology for Attestation Procedures".
+This is the working area for the individual Internet-Draft, "Reference Terminology for Remote Attestation Procedures".
 
-* [Editor's copy](https://henkbirkholz.github.io/draft-birkholz-attestation-terminology/)
-* [Individual Draft](https://tools.ietf.org/html/draft-birkholz-attestation-terminology-latest)
-* [Compare Individual Draft and Editor's copy](https://tools.ietf.org/rfcdiff?url1=https://tools.ietf.org/id/draft-birkholz-attestation-terminology-latest.txt&url2=https://henkbirkholz.github.io/draft-birkholz-attestation-terminology/draft-birkholz-attestation-terminology-latest.txt)
-
+* [Editor's Copy](https://ietf-rats.github.io/draft-birkholz-attestation-terminology/#go.draft-birkholz-attestation-terminology.html)
+* [Individual Draft](https://tools.ietf.org/html/draft-birkholz-attestation-terminology)
+* [Compare Editor's Copy to Individual Draft](https://ietf-rats.github.io/draft-birkholz-attestation-terminology/#go.draft-birkholz-attestation-terminology.diff)
 
 ## Building the Draft
 
@@ -22,4 +21,4 @@ This requires that you have the necessary software installed.  See
 ## Contributing
 
 See the
-[guidelines for contributions](https://github.com/henkbirkholz/draft-birkholz-attestation-terminology/blob/master/CONTRIBUTING.md).
+[guidelines for contributions](https://github.com/ietf-rats/draft-birkholz-attestation-terminology/blob/master/CONTRIBUTING.md).
