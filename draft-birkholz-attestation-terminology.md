@@ -199,7 +199,7 @@ This section introduces the term Computing Context in order to specialize the no
 
 A Computing Context could refer to a large variety of endpoints. Examples include but are not limited to: the compartmentalization of physical resources, the separation of software instances with different
 dependencies in dedicated containers, and the nesting of virtual components via hardware-based and
-software-based solutions. The number of approaches and techniques to construct an endpoint continuously changes with new innovation. Hence, it isn't a goal of this document to define remote attesation for a fixed set of endpoints. Rather, it attempts to define endpoints conceptually and rely on Claims management as a way to clarify the details and specific attributes of conceptual endpoints.
+software-based solutions. The number of approaches and techniques to construct an endpoint continuously changes with new innovation. Hence, it isn't a goal of this document to define remote attestation for a fixed set of endpoints. Rather, it attempts to define endpoints conceptually and rely on Claims management as a way to clarify the details and specific attributes of conceptual endpoints.
 
 Computing Contexts may be recursive in nature in that it could be composed of a system entity that is itself a composite of system entities. In consequence, a system entity may be composed of other system entities that may be further composed of one or more Computing Contexts capable of taking on the roles of
 Attestor, Verifier or Claimant. The scope and application of these roles can range from:
@@ -314,7 +314,7 @@ $ Conveyance:
 
 : The transfer of Evidence from the Attestor to the Verifier.
 
-$ Verification:  
+$ Verification:
 
 : The appraisal of Evidence by the Verifier who evaluates it against a reference policy. See also [RFC4949](https://tools.ietf.org/html/rfc4949).
 
