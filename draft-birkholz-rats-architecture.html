@@ -288,15 +288,18 @@ ul.toc li {
 <link href="#rfc.section.2.2" rel="Chapter" title="2.2 Trust and Trustworthiness">
 <link href="#rfc.section.2.3" rel="Chapter" title="2.3 Claims and Evidence">
 <link href="#rfc.section.2.4" rel="Chapter" title="2.4 RATS Roles">
-<link href="#rfc.section.2.5" rel="Chapter" title="2.5 The Scope of RATS">
-<link href="#rfc.section.2.5.1" rel="Chapter" title="2.5.1 The Lying Endpoint Problem">
-<link href="#rfc.section.2.5.2" rel="Chapter" title="2.5.2 How the RATS Architecture Addresses the Lying Endpoint Problem">
+<link href="#rfc.section.2.5" rel="Chapter" title="2.5 Exemplary Composition of Roles">
+<link href="#rfc.section.2.5.1" rel="Chapter" title="2.5.1 Conveyance of Trusted Claim Sets Validated by Signature">
+<link href="#rfc.section.2.5.2" rel="Chapter" title="2.5.2 Conveyance of Attestation Evidence Appraised by a Verifier">
+<link href="#rfc.section.2.6" rel="Chapter" title="2.6 The Scope of RATS">
+<link href="#rfc.section.2.6.1" rel="Chapter" title="2.6.1 The Lying Endpoint Problem">
+<link href="#rfc.section.2.6.2" rel="Chapter" title="2.6.2 How the RATS Architecture Addresses the Lying Endpoint Problem">
 <link href="#rfc.section.3" rel="Chapter" title="3 RATS Terminology">
 <link href="#rfc.section.3.1" rel="Chapter" title="3.1 Computing Context">
 <link href="#rfc.section.3.1.1" rel="Chapter" title="3.1.1 Characteristics of a Computing Context">
 <link href="#rfc.section.3.1.2" rel="Chapter" title="3.1.2 Computing Context Semantic Relationships">
 <link href="#rfc.section.3.1.3" rel="Chapter" title="3.1.3 Computing Context Identity">
-<link href="#rfc.section.3.2" rel="Chapter" title="3.2 Attestation Concepts">
+<link href="#rfc.section.3.2" rel="Chapter" title="3.2 Remote Attestation Concepts">
 <link href="#rfc.section.3.3" rel="Chapter" title="3.3 Core RATS Terminology">
 <link href="#rfc.section.3.4" rel="Chapter" title="3.4 RATS Information Model Terminology">
 <link href="#rfc.section.3.5" rel="Chapter" title="3.5 RATS Work-Flow Terminology">
@@ -378,11 +381,6 @@ ul.toc li {
   
   <h1 id="rfc.abstract"><a href="#rfc.abstract">Abstract</a></h1>
 <p>Remote ATtestation ProcedureS (RATS), such as Remote Integrity VERification (RIVER), the creation of Entity Attestation Tokens (EAT), software integrity Measurement And ATtestation (MAAT), or the attestation of device characteristics, in general, are based on specific operations and qualities provided by hardware and software.  The RATS architecture maps corresponding functions and operation capabilities to specific RATS roles.  The goal is to enable an appropriate conveyance of believable evidence about device health or trusted claims about device capabilities via network protocols.  The flows of data between these roles depend on the composition of RATS roles and their location with respect to devices or services.  The RATS architecture provides these roles as building blocks to enable suitable composition, while remaining hardware-agnostic.  This flexibility is intended to address a significant majority of use cases or usage scenarios in the domain of RATS.  Examples include, but are not limited to: financial transactions, voting machines, critical safety systems, network equipment health, or trustworthy end-user device management.</p>
-<p>title: Architecture and Reference Terminology for Remote Attestation Procedures abbrev: RATS Arch &amp; Terms docname: draft-birkholz-rats-architecture-latest wg: stand_alone: true ipr: trust200902 area: Security kw: Internet-Draft cat: std pi: toc: yes sortrefs: yes symrefs: yes</p>
-<p>author: - ins: H. Birkholz name: Henk Birkholz org: Fraunhofer SIT abbrev: Fraunhofer SIT email: henk.birkholz@sit.fraunhofer.de street: Rheinstrasse 75 code: &#8216;64295&#8217; city: Darmstadt country: Germany - ins: M. Wiseman name: Monty Wiseman org: GE Global Research abbrev: GE Global Research email: monty.wiseman@ge.com street: &#8220;&#8221; code: &#8220;&#8221; city: &#8220;&#8221; region: &#8220;&#8221; country: USA - ins: H. Tschofenig name: Hannes Tschofenig org: ARM Ltd.  abbrev: ARM Ltd.  email: hannes.tschofenig@gmx.net street: 110 Fulbourn Rd code: &#8220;CB1 9NJ&#8221; city: Cambridge country: UK - ins: N. Smith name: Ned Smith org: Intel Corporation abbrev: Intel email: ned.smith@intel.com street: &#8220;&#8221; code: &#8220;&#8221; city: &#8220;&#8221; country: USA</p>
-<p>normative: RFC2119:</p>
-<p>informative: I-D.ietf-sacm-terminology: sacmterm RFC7519: jwt RFC4949:</p>
-<p>Remote ATtestation ProcedureS (RATS), such as Remote Integrity VERification (RIVER), the creation of Entity Attestation Tokens (EAT), software integrity Measurement And ATtestation (MAAT), or the attestation of device characteristics, in general, are based on specific operations and qualities provided by hardware and software.  The RATS architecture maps corresponding functions and operation capabilities to specific RATS roles.  The goal is to enable an appropriate conveyance of believable evidence about device health or trusted claims about device capabilities via network protocols.  The flows of data between these roles depend on the composition of RATS roles and their location with respect to devices or services.  The RATS architecture provides these roles as building blocks to enable suitable composition, while remaining hardware-agnostic.  This flexibility is intended to address a significant majority of use cases or usage scenarios in the domain of RATS.  Examples include, but are not limited to: financial transactions, voting machines, critical safety systems, network equipment health, or trustworthy end-user device management.</p>
 <h1 id="rfc.status"><a href="#rfc.status">Status of This Memo</a></h1>
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
@@ -411,11 +409,17 @@ ul.toc li {
 </li>
 <li>2.4.   <a href="#rfc.section.2.4">RATS Roles</a>
 </li>
-<li>2.5.   <a href="#rfc.section.2.5">The Scope of RATS</a>
+<li>2.5.   <a href="#rfc.section.2.5">Exemplary Composition of Roles</a>
 </li>
-<ul><li>2.5.1.   <a href="#rfc.section.2.5.1">The Lying Endpoint Problem</a>
+<ul><li>2.5.1.   <a href="#rfc.section.2.5.1">Conveyance of Trusted Claim Sets Validated by Signature</a>
 </li>
-<li>2.5.2.   <a href="#rfc.section.2.5.2">How the RATS Architecture Addresses the Lying Endpoint Problem</a>
+<li>2.5.2.   <a href="#rfc.section.2.5.2">Conveyance of Attestation Evidence Appraised by a Verifier</a>
+</li>
+</ul><li>2.6.   <a href="#rfc.section.2.6">The Scope of RATS</a>
+</li>
+<ul><li>2.6.1.   <a href="#rfc.section.2.6.1">The Lying Endpoint Problem</a>
+</li>
+<li>2.6.2.   <a href="#rfc.section.2.6.2">How the RATS Architecture Addresses the Lying Endpoint Problem</a>
 </li>
 </ul></ul><li>3.   <a href="#rfc.section.3">RATS Terminology</a>
 </li>
@@ -427,7 +431,7 @@ ul.toc li {
 </li>
 <li>3.1.3.   <a href="#rfc.section.3.1.3">Computing Context Identity</a>
 </li>
-</ul><li>3.2.   <a href="#rfc.section.3.2">Attestation Concepts</a>
+</ul><li>3.2.   <a href="#rfc.section.3.2">Remote Attestation Concepts</a>
 </li>
 <li>3.3.   <a href="#rfc.section.3.3">Core RATS Terminology</a>
 </li>
@@ -520,251 +524,116 @@ ul.toc li {
 <h1 id="rfc.section.2.4">
 <a href="#rfc.section.2.4">2.4.</a> <a href="#rats-roles" id="rats-roles">RATS Roles</a>
 </h1>
-<p id="rfc.section.2.4.p.1">There are six roles defined in the RATS architecture. Figure 1 provides a simplified overview of the roles defined in this section.</p>
+<p id="rfc.section.2.4.p.1">There are six roles defined in the RATS architecture. i<a href="#figalllevels" class="xref">Figure 1</a> provides a simplified overview of the roles defined in this section.</p>
+<div id="rfc.figure.1"></div>
+<div id="figalllevels"></div>
 <pre>
-
-
-Attester:
-
-: The producer of attestation evidence that has a root of trust for reporting (RTR) and implements a conveyance protocol, authenticates using an attestation credential, consumes assertions about itself and presents it to a consumer of evidence (e.g. a relying party or a verifier).
-
-Claimant:
-
-: The producer of measurements or assertions to certain properties regarding the trustworthiness of a system&#8217;s characteristics that has a root of trust for measurement.
-Examples of output include: the binding of an attester to an RTR, a set of integrity measurements, or an UEID.
-
-Interconnect:
-
-: A communication channel or secure path between systems that take on RATS roles.
-Attestation evidence, for example, can be conveyed from an attester to a verifier via an interconnect.
-Examples include: GIO pins, an USB link, or the Internet.
-
-Relying Party:
-
-: The consumer and assessor of verifier results for the purpose of improved risk management, operational efficiency, security, privacy (natural or legal person) or safety.
-The verifier and relying party roles may be tightly integrated.
-
-Validator:
-
-: The consumer of signed assertions such as trusted claim sets or attestation evidence that assesses the trustworthiness or other trust relationships of the information consumed via trusted third parties or external trust authorities, such as a privacy certificate authority.
-
-Verifier:
-
-: The consumer of attestation evidence that has a root of trust for verification and implements a conveyance protocol, appraises attestation evidence against reference values or policies and makes verification results available to relying parties.
-
-## The Scope of RATS
-
-During its evolution, the term Remote Attestation has been used in multiple contexts and multiple
-scopes and in consequence accumulated various connotations with slightly different semantic meaning.
-Correspondingly, Remote Attestation Procedures (RATS) are employed in various usage scenarios and
-different environments.
-
-In order to better understand and grasp the intent and meaning of specific RATS in the scope of the
-security area - including the requirements that are addressed by them - this document provides an
-overview of existing work, its background, and common terminology. As the contribution, from that
-state-of-the-art a set of terms that provides a stable basis for future work on RATS in the IETF is
-derived.
-
-In essence, a prerequisite for providing an adequate set of terms and definitions in the domain of
-RATS is a general understanding and a common definitions of "what" RATS can accomplish "how" RATS
-can to be used.
-
-Please note that this section is still missing various references and is considered "under
-construction". The majority of definitions is still only originating from IETF work. Future
-iterations will pull in more complementary definitions from other SDO (e.g. Global Platform, TCG,
-etc.) and a general structure template to highlight semantic relationships and capable of resolving
-potential discrepancies will be introduced. A section of context awareness will provide further
-insight on how Attestation procedures are vital to ongoing work in the IETF (e.g. I2NSF &amp; tokbind).
-The definitions in the section about RATS are still self-describing in this version. Additional explanatory text will be added to provide more context and coherence.
-
-### The Lying Endpoint Problem
-
-A very prominent goal of RATS is to address the "lying endpoint problem". The lying endpoint problem is characterized as a condition of a Computing Context where the information or behavior embedded, created, relayed, stored, or emitted by the Computing Context is not "correct" according to expectations of the authorized system designers, operators and users. There can be multiple reasons why these expectations are incorrect, either from malicious Activity, unanticipated conditions or accidental means. The observed behavior, nevertheless appears to be a compromised Computing Context.
-
-Attempts to "scrub" the data or "proxy" control elements implies the existence of a more fundamental trusted endpoint that is operating correctly. Therefore, Attestation - the technology designed to detect and mitigate the "lying endpoint problem" &#8211; must be trusted to behave correctly independent of other controls.
-
-Consequently, a &#8220;lying endpoint&#8221; cannot also be a &#8220;trusted system&#8221;.
-
-Remote Attestation procedures are intended to enable the consumer of information emitted by an Computing Context to assess the validity and integrity of the information transferred. The approach is based on the assumption that if Evidence can be provided in order to prove the integrity of every software instance installed involved in the Activity of creating the emitted information in question, the emitted information can be considered valid and integer.
-
-In contrast, such Evidence has to be impossible to create if the software instances used in a Computing Context are compromised. Attestation activities that are intended to create this Evidence therefore also to also provide guarantees about the validity of the Evidence they can create.
-
-### How the RATS Architecture Addresses the Lying Endpoint Problem
-
-RATS imply the involvement of at least two players (roles) who seek to overcome the lying endpoint problem. The Verifier wishes to consume application data supplied by a Computing Context. But before application data is consumed, the Verifier obtains Attestation Evidence about the Computing Context to assess likelihood of poisoned data due to endpoint compromise or failure. Attestation argues that an object's integrity characteristics should not be believed until rationale for believability is presented to the subject seeking to interact with the object.
-
-An Interconnect defines an untrusted channel between subject and object wherein the rationale for believability is securely exchanged. The type of interconnect technology could vary widely, ranging from GPIO pins, to a PC peripheral IO bus, to the Internet, to a direct physical connection, to a wireless radio-receiver association, or to a world wide mesh of peers. In other words, virtually every kind communication path could be used as the "Interconnect" in RATS. In fact, a single party could take on all roles at the same time (e.g. Self Encrypting Devices).
-
-Attestation evidence can be thought of as the topics of the exchange. Evidence may be structured in an interoperable format called Claims that may include references to the Claimants which are asserting the claims. RATS aims to define "interoperable Remote Attestation" such that evidence can be created and consumed by different ecosystem entities and can be securely exchanged by a broad set of network protocols.
-
-# RATS Terminology
-
-This document relies on terminology found in {{RFC4949}}. This document presumes the reader is familiar with the following terms.
-
-+ Cryptography
-+ Entity (System entity)
-+ Identity
-+ Object
-+ Principal
-+ Proof-of-possession protocol
-+ Security environment (Environment)
-+ Security perimeter
-+ Subject
-+ Subsystem
-+ System
-+ Target-of-Evaluation (TOE)
-+ Trusted Computing Base (TCB)
-+ Trusted Platform Module (TPM)
-+ Trusted (Trustworthy) system
-+ Verification
-
-Terminology defined by this document is preceded by a dollar sign ($) to distinguish it from terms defined elsewhere and as a way to disambiguate term definition from explanatory text.
-
-Terms defined by this document that are subsequently used by this document are distinguished by capitalizing the first letter of the term (e.g. Term or First_word Second_word).
-
-## Computing Context
-
-This section introduces the term Computing Context in order to specialize the notions of environment and endpoint to terminology that has relevance to trusted computing. Attestation is a discipline of trusted computing.
-
-A Computing Context could refer to a large variety of endpoints. Examples include but are not limited to: the compartmentalization of physical resources, the separation of software instances with different dependencies in dedicated containers, and the nesting of virtual components via hardware-based and
-software-based solutions. The number of approaches and techniques to construct an endpoint continuously changes with new innovation. Hence, it isn't a goal of this document to define remote attestation for a fixed set of endpoints. Rather, it attempts to define endpoints conceptually and rely on Claims management as a way to clarify the details and specific attributes of conceptual endpoints.
-
-
-A Computing Context could refer to a large variety of endpoints. Examples include but are not limited to: the compartmentalization of physical resources, the separation of software instances with different dependencies in dedicated containers, and the nesting of virtual components via hardware-based and
-software-based solutions. The number of approaches and techniques to construct an endpoint continuously changes with new innovation. Hence, it isn't a goal of this document to define remote attestation for a fixed set of endpoints. Rather, it attempts to define endpoints conceptually and rely on Claims management as a way to clarify the details and specific attributes of conceptual endpoints.
-
-
-
-
-
-
-# Introduction
-
-This document provides normative guidance how to use, create or adopt network protocols that facilitate remote attestation procedures.
-The foundation of the RATS architecture are specific roles that can be chained and as a result compose remote attestation procedures.
-The term attestation, unfortunately, is an overloaded term.
-There are different interpretations, connotations and meanings to the term attestation and therefore also to terms related to attestation.
-In consequence, this document also provides a detailed definition of Attestation Terminology.
-The intent is to illustrate and remediate the impedance mismatch of terms related to Remote Attestation Procedures used in different domains today.
-New terms defined by this document provide a consolidated basis to support future work on RATS in the IETF and beyond.
-
-## Requirements notation
-
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-"SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
-"OPTIONAL" in this document are to be interpreted as described in RFC
-2119, BCP 14 {{RFC2119}}.
-
-# RATS Architecture
-
-The goal of the RATS architecture is to provide the building blocks - the roles defined by the RATS architecture - to enable the composition of service-chains and work-flows to create and appraise evidence about the trustworthiness of devices and services.
-
-The RATS architecture does not prescribe specific payload definitions, role composition, or protocol use.
-However, it imposes requirements on payload definitions, interfaces, and network protocols with respect to proofs of freshness, attestation provenance, and required operational primitives that are available to devices and services taking on RATS roles.
-For brevity, the term &#8220;system&#8221; is a synonym for &#8220;device or service&#8221; in this document.
-
-## Roles, Devices, and Services
-
-In the RATS architecture, devices or services can take on RATS roles.
-In this context, devices are typically composite devices (in the case of atomically integrated devices that would result in a composite device with one component).
-Services are software components - e.g. a daemon, a virtual network function (vnf) or a network security function (nsf) - that can reside on one or more devices and are not necessarily bound to a specific set of devices.
-
-Devices or Services (Systems) can take on one or more RATS roles either by separate functions or via a collapsed functions that take on multiple RATS roles.
-Systems that take on RATS roles:
-
-* are consumer and/or producer of role-specific information, and
-* can be chained to compose specific work-flows.
-
-Systems can be distinguished on the management plane via identity documents (which includes specific claim sets about device characteristics, see RFC4949) or via trusted claim sets (e.g. the Entity Attestation Token) and can be addressed by network protocols via IP addresses.
-RATS can be used in environments without network protocols and RATS roles can be used to design work-flows in these domains, correspondingly.
-However, the primary focus of the RATS architecture is to facilitate network protocols between RATS roles that convey information via the Internet Protocol.
-
-Relevant decision-factors that influence the composition of RATS roles on systems and resulting work-flows are (amongst others):
-
-* which role (or correspondingly, which system that is taking on specific RATS roles) is triggering a Remote Attestation Procedure
-* which entities are involved in a Remote Attestation Procedure (e.g. the attester itself, trusted third parties, specific trust anchors, or other sources of assertions)
-* the capabilities of the protocols used (e.g. challenge-response based, RESTful, uni-directional)
-* the security requirements and security capabilities of systems in a domain of application
-* the risks and corresponding threats that are intended to be mitigated
-
-## Trust and Trustworthiness
-
-{{RFC4949}} provides definitions that highlight the difference between a "trusted system" and a "trustworthy system".
-The following definitions exclude the explicit specialization of concepts that are "environmental disruption" as well as "human user and operator errors".
-
-A trusted system in the context of RATS "operates as expected, according to design and policy, doing what is required and not doing other things" {{RFC4949}}.
-A trustworthy system is a system "that not only is trusted, but also warrants that trust because the system's behavior can be validated in some convincing way, such as through formal analysis or code review" {{RFC4949}}.
-
-The goal of RATS is to convey information about system component characteristics, such as integrity or authenticity, that can be appraised in a convincing way.
-
-RATS require trust relationships with third parties that qualify assertions about, for example, origin of data, the manufacturer or the capabilities of a system, or the origination of attestation evidence (attestation provenance).
-Without trusted authorities (e.g. a certificate authority) it is virtually impossible to assess the level of assurance (or resulting level of confidence, correspondingly) of information produced by RATS.
-Trusting a system does not make it trustworthy.
-Assessing trustworthiness requires the conveyance of evidence that a system is a trustworthy system, which has to originate from the system itself and has to be convincing.
-If the convincing information is not originating from the system itself, it comprises trusted claim sets and not evidence.
-In essence, the attestation provenance of attestation evidence is the system that intends to present its trustworthiness in a believable manner.
-
-The essential basis for trust in the information created via RATS are roots of trust.
-
-Roots of trust are defined by the NIST special publication 800-164 draft as "security primitives composed of hardware, firmware and/or software that provide a set of trusted, security-critical functions.
-They must always behave in an expected manner because their misbehavior cannot be detected.
-As such, RoTs need to be secured by their design. Hardware RoTs are preferred over software RoTs due to their immutability, smaller attack surface, and more reliable behavior."
-
-If the root of trust involved is a root of trust for measurement (RTM), the producer of information takes on the role of a asserter.
-An asserter can also make use of a root of trust for integrity (RTI) in order to increase the level of assurance in the assertions produced.
-If the root of trust involved is a root of trust for reporting (RTR), the producer of information takes on the role of an attester.
-
-## Claims and Evidence
-
-The RATS asserter role produces measurements about the system&#8217;s characteristics in the form of signed (sometimes un-signed) claim sets in order to convey information.
-A secret signing key is required for this procedure, which is typically stored in a shielded location that can be trusted, for example, via a root of trust for storage (RTS).
-
-The RATS attester role produces signed attestation evidence in order to convey information.
-The secret key required for this procedure is stored in a shielded location that only allows access to that key, if a specific operational state of the system is met.
-The trust with respect to this origination is based on a root of trust for reporting.
-
-## RATS Roles
-
-There are six roles defined in the RATS architecture. Figure 1 provides a simplified overview of the roles defined in this section.
-
++------------+                     +------------------+
+|            |                     |                  |
+|  Attester  |                  +-&gt;|  Verifier        |
+|            |                  |  |                  |
++------------+                  |  +------------------+
+      ^                         |
+      |                         |  +------------------+
+      |     +----------------+  |  |                  |
+      +----&gt;|                |&lt;-+  |  Authentication  |
+            |  Interconnect  |&lt;---&gt;|  Checker         |
+      +----&gt;|                |&lt;-+  |                  |
+      |     +----------------+  |  +------------------+
+      v                         |
++------------+                  |  +------------------+
+|            |                  |  |                  |
+|  Claimant  |                  +-&gt;|  Relying Party   |
+|            |                     |                  |
++------------+                     +------------------+
 </pre>
+<p class="figure">Figure 1: Overall Relationships of Roles in the RATS Architecture</p>
 <p></p>
 
 <dl>
 <dt>Attester:</dt>
-<dd style="margin-left: 8">The producer of attestation evidence that has a root of trust for reporting (RTR) and implements a conveyance protocol, authenticates using an attestation credential, consumes assertions about itself and presents it to a consumer of evidence (e.g. a relying party or a verifier).</dd>
+<dd style="margin-left: 8">The producer of attestation evidence that has a root of trust for reporting (RTR) and implements a conveyance protocol, authenticates using an attestation credential, consumes assertions about itself and presents it to a consumer of evidence (e.g. a relying party or a verifier). Every output of an attester can be appraised via reference values.</dd>
 <dt>Claimant:</dt>
-<dd style="margin-left: 8">The producer of measurements or assertions to certain properties regarding the trustworthiness of a system&#8217;s characteristics that has a root of trust for measurement.  Examples of output include: the binding of an attester to an RTR, a set of integrity measurements, or an UEID.</dd>
+<dd style="margin-left: 8">The producer of measurements or assertions to certain properties regarding the trustworthiness of a system&#8217;s characteristics that has a root of trust for measurement.  It is not guaranteed that a verifier can appraise the output of a claimant via reference values.  Examples of claim output include: the binding of an attester to an RTR, GPS coordinates set of integrity measurements, or an Universal Entity ID (UEID).</dd>
 <dt>Interconnect:</dt>
-<dd style="margin-left: 8">A communication channel or secure path between systems that take on RATS roles.  Attestation evidence, for example, can be conveyed from an attester to a verifier via an interconnect.  Examples include: GIO pins, an USB link, or the Internet.</dd>
+<dd style="margin-left: 8">A communication channel or secure path between systems that take on RATS roles.  Attestation evidence, for example, can be conveyed from an attester to a verifier via an interconnect.  Examples include: GPIO pins, an USB link, or the Internet.</dd>
 <dt>Relying Party:</dt>
-<dd style="margin-left: 8">The consumer and assessor of verifier results for the purpose of improved risk management, operational efficiency, security, privacy (natural or legal person) or safety.  The verifier and relying party roles may be tightly integrated.</dd>
-<dt>Validator:</dt>
-<dd style="margin-left: 8">The consumer of signed assertions such as trusted claim sets or attestation evidence that assesses the trustworthiness or other trust relationships of the information consumed via trusted third parties or external trust authorities, such as a privacy certificate authority.</dd>
+<dd style="margin-left: 8">The consumer and assessor of verifier or Authentication Checker results for the purpose of improved risk management, operational efficiency, security, privacy (natural or legal person) or safety.  The verifier and/or authentication checker roles and the relying party role may be tightly integrated.</dd>
+<dt>Authentication Checker:</dt>
+<dd style="margin-left: 8">The consumer of signed assertions such as trusted claim sets or attestation evidence that assesses the trustworthiness or other trust relationships of the information consumed via trusted third parties or external trust authorities, such as a privacy certificate authority.  In certain environments, an Authentication Checker can assess a system&#8217;s trustworthiness via external trust anchors, implicitly.</dd>
 <dt>Verifier:</dt>
 <dd style="margin-left: 8">The consumer of attestation evidence that has a root of trust for verification and implements a conveyance protocol, appraises attestation evidence against reference values or policies and makes verification results available to relying parties.</dd>
 </dl>
 <h1 id="rfc.section.2.5">
-<a href="#rfc.section.2.5">2.5.</a> <a href="#the-scope-of-rats" id="the-scope-of-rats">The Scope of RATS</a>
+<a href="#rfc.section.2.5">2.5.</a> <a href="#exemplary-composition-of-roles" id="exemplary-composition-of-roles">Exemplary Composition of Roles</a>
 </h1>
-<p id="rfc.section.2.5.p.1">During its evolution, the term Remote Attestation has been used in multiple contexts and multiple scopes and in consequence accumulated various connotations with slightly different semantic meaning.  Correspondingly, Remote Attestation Procedures (RATS) are employed in various usage scenarios and different environments.</p>
-<p id="rfc.section.2.5.p.2">In order to better understand and grasp the intent and meaning of specific RATS in the scope of the security area - including the requirements that are addressed by them - this document provides an overview of existing work, its background, and common terminology. As the contribution, from that state-of-the-art a set of terms that provides a stable basis for future work on RATS in the IETF is derived.</p>
-<p id="rfc.section.2.5.p.3">In essence, a prerequisite for providing an adequate set of terms and definitions in the domain of RATS is a general understanding and a common definitions of &#8220;what&#8221; RATS can accomplish &#8220;how&#8221; RATS can to be used.</p>
-<p id="rfc.section.2.5.p.4">Please note that this section is still missing various references and is considered &#8220;under construction&#8221;. The majority of definitions is still only originating from IETF work. Future iterations will pull in more complementary definitions from other SDO (e.g. Global Platform, TCG, etc.) and a general structure template to highlight semantic relationships and capable of resolving potential discrepancies will be introduced. A section of context awareness will provide further insight on how Attestation procedures are vital to ongoing work in the IETF (e.g. I2NSF &amp; tokbind).  The definitions in the section about RATS are still self-describing in this version. Additional explanatory text will be added to provide more context and coherence.</p>
+<p id="rfc.section.2.5.p.1">In order to provide an intuitive understanding how the roles used in RATS can be composed into work-flows, this document provides a few example work-flows. Boxes in the following examples that include more than one role are systems that take on more than one role.</p>
 <h1 id="rfc.section.2.5.1">
-<a href="#rfc.section.2.5.1">2.5.1.</a> <a href="#the-lying-endpoint-problem" id="the-lying-endpoint-problem">The Lying Endpoint Problem</a>
+<a href="#rfc.section.2.5.1">2.5.1.</a> <a href="#conveyance-of-trusted-claim-sets-validated-by-signature" id="conveyance-of-trusted-claim-sets-validated-by-signature">Conveyance of Trusted Claim Sets Validated by Signature</a>
 </h1>
-<p id="rfc.section.2.5.1.p.1">A very prominent goal of RATS is to address the &#8220;lying endpoint problem&#8221;. The lying endpoint problem is characterized as a condition of a Computing Context where the information or behavior embedded, created, relayed, stored, or emitted by the Computing Context is not &#8220;correct&#8221; according to expectations of the authorized system designers, operators and users. There can be multiple reasons why these expectations are incorrect, either from malicious Activity, unanticipated conditions or accidental means. The observed behavior, nevertheless appears to be a compromised Computing Context.</p>
-<p id="rfc.section.2.5.1.p.2">Attempts to &#8220;scrub&#8221; the data or &#8220;proxy&#8221; control elements implies the existence of a more fundamental trusted endpoint that is operating correctly. Therefore, Attestation - the technology designed to detect and mitigate the &#8220;lying endpoint problem&#8221; &#8211; must be trusted to behave correctly independent of other controls.</p>
-<p id="rfc.section.2.5.1.p.3">Consequently, a &#8220;lying endpoint&#8221; cannot also be a &#8220;trusted system&#8221;.</p>
-<p id="rfc.section.2.5.1.p.4">Remote Attestation procedures are intended to enable the consumer of information emitted by an Computing Context to assess the validity and integrity of the information transferred. The approach is based on the assumption that if Evidence can be provided in order to prove the integrity of every software instance installed involved in the Activity of creating the emitted information in question, the emitted information can be considered valid and integer.</p>
-<p id="rfc.section.2.5.1.p.5">In contrast, such Evidence has to be impossible to create if the software instances used in a Computing Context are compromised. Attestation activities that are intended to create this Evidence therefore also to also provide guarantees about the validity of the Evidence they can create.</p>
+<p id="rfc.section.2.5.1.p.1">If there is a trust relationship between a trusted third party that can assert that signed claims created by a claimant guarantee a trustworthy origination of claim, the work-flow depicted in <a href="#cosecwt" class="xref">Figure 2</a> can facilitate a trust-based implicit remote attestation procedure. The information conveyed are signed claim sets that are trusted via an authoritative third party. In this work-flow claim emission is triggered by the claimant. Variations based on requests emitted by the relying party can be easily facilitated by the same set of roles.</p>
+<div id="rfc.figure.2"></div>
+<div id="cosecwt"></div>
+<pre>
+                                    +---------------------------------------+
+                                    |                                       |
+                                    |  +------------------+  +-----------+  |
++------------+  +----------------+  |  |                  |  |           |  |
+|            |  |                |  |  |  Authentication  |  |  Relying  |  |
+|  Claimant  |-&gt;|  Interconnect  |--+-&gt;|  Checker         |-&gt;|  Party    |  |
+|            |  |                |  |  |                  |  |           |  |
++------------+  +----------------+  |  +------------------+  +-----------+  |
+                                    |                                       |
+                                    +---------------------------------------+
+</pre>
+<p class="figure">Figure 2: Conveyance of Trusted Claim Sets Validated by Signature</p>
 <h1 id="rfc.section.2.5.2">
-<a href="#rfc.section.2.5.2">2.5.2.</a> <a href="#how-the-rats-architecture-addresses-the-lying-endpoint-problem" id="how-the-rats-architecture-addresses-the-lying-endpoint-problem">How the RATS Architecture Addresses the Lying Endpoint Problem</a>
+<a href="#rfc.section.2.5.2">2.5.2.</a> <a href="#conveyance-of-attestation-evidence-appraised-by-a-verifier" id="conveyance-of-attestation-evidence-appraised-by-a-verifier">Conveyance of Attestation Evidence Appraised by a Verifier</a>
 </h1>
-<p id="rfc.section.2.5.2.p.1">RATS imply the involvement of at least two players (roles) who seek to overcome the lying endpoint problem. The Verifier wishes to consume application data supplied by a Computing Context. But before application data is consumed, the Verifier obtains Attestation Evidence about the Computing Context to assess likelihood of poisoned data due to endpoint compromise or failure. Attestation argues that an object&#8217;s integrity characteristics should not be believed until rationale for believability is presented to the subject seeking to interact with the object.</p>
-<p id="rfc.section.2.5.2.p.2">An Interconnect defines an untrusted channel between subject and object wherein the rationale for believability is securely exchanged. The type of interconnect technology could vary widely, ranging from GPIO pins, to a PC peripheral IO bus, to the Internet, to a direct physical connection, to a wireless radio-receiver association, or to a world wide mesh of peers. In other words, virtually every kind communication path could be used as the &#8220;Interconnect&#8221; in RATS. In fact, a single party could take on all roles at the same time (e.g. Self Encrypting Devices).</p>
-<p id="rfc.section.2.5.2.p.3">Attestation evidence can be thought of as the topics of the exchange. Evidence may be structured in an interoperable format called Claims that may include references to the Claimants which are asserting the claims. RATS aims to define &#8220;interoperable Remote Attestation&#8221; such that evidence can be created and consumed by different ecosystem entities and can be securely exchanged by a broad set of network protocols.</p>
+<p id="rfc.section.2.5.2.p.1">If there is trust in the root of trust for reporting based on the assertions of a trusted third party, the work-flow depicted in <a href="#evidence" class="xref">Figure 3</a> can facilitate an evidence-based explicit remote attestation procedure. The information conveyed is signed attestation evidence that is created by the trusted verifier. In this work-flow claims do not necessarily have to be signed and the work-flow is triggered by the attestor that aggregates claims from a root of trust of measurement. Variations based on requests emitted by the verifier can be easily facilitated by the same set of roles.</p>
+<div id="rfc.figure.3"></div>
+<div id="evidence"></div>
+<pre>
++------------------+                      +------------------------+
+|                  |                      |  +------------------+  |
+|  +------------+  |  +----------------+  |  |                  |  |
+|  |            |  |  |                |  |  |  Authentication  |  |
+|  |  Attester  |--+-&gt;|  Interconnect  |--+-&gt;|  Checker         |  |
+|  |            |  |  |                |  |  |                  |  |
+|  +------------+  |  +----------------+  |  +------------------+  |
+|        ^         |  +-------------------+            |           |
+|        |         |  |                                |           |
+|        |         |  |   +-----------+                v           |
+|  +-----+------+  |  |   |           |          +------------+    |
+|  |            |  |  |   |  Relying  |          |            |    |
+|  |  Claimant  |  |  |   |  Party    |&lt;---------|  Verifier  |    |
+|  |            |  |  |   |           |          |            |    |
+|  +------------+  |  |   +-----------+          +------------+    |
+|                  |  |                                            |
++------------------+  +--------------------------------------------+
+</pre>
+<p class="figure">Figure 3: Conveyance of Attestation Evidence Appraised by a Verifier</p>
+<h1 id="rfc.section.2.6">
+<a href="#rfc.section.2.6">2.6.</a> <a href="#the-scope-of-rats" id="the-scope-of-rats">The Scope of RATS</a>
+</h1>
+<p id="rfc.section.2.6.p.1">During its evolution, the term Remote Attestation has been used in multiple contexts and multiple scopes and in consequence accumulated various connotations with slightly different semantic meaning.  Correspondingly, Remote Attestation Procedures (RATS) are employed in various usage scenarios and different environments.</p>
+<p id="rfc.section.2.6.p.2">In order to better understand and grasp the intent and meaning of specific RATS in the scope of the security area - including the requirements that are addressed by them - this document provides an overview of existing work, its background, and common terminology.  As the contribution, from that state-of-the-art a set of terms that provides a stable basis for future work on RATS in the IETF is derived.</p>
+<p id="rfc.section.2.6.p.3">In essence, a prerequisite for providing an adequate set of terms and definitions for the RATS architecute is a general understanding and a common definitions of &#8220;what&#8221; RATS can accomplish &#8220;how&#8221; RATS can to be used.</p>
+<p id="rfc.section.2.6.p.4">Please note that this section is still missing various references and is considered &#8220;under construction&#8221;. The majority of definitions is still only originating from IETF work. Future iterations will pull in more complementary definitions from other SDO (e.g. Global Platform, TCG, etc.) and a general structure template to highlight semantic relationships and capable of resolving potential discrepancies will be introduced. A section of context awareness will provide further insight on how Attestation procedures are vital to ongoing work in the IETF (e.g. I2NSF &amp; tokbind).  The definitions in the section about RATS are still self-describing in this version. Additional explanatory text will be added to provide more context and coherence.</p>
+<h1 id="rfc.section.2.6.1">
+<a href="#rfc.section.2.6.1">2.6.1.</a> <a href="#the-lying-endpoint-problem" id="the-lying-endpoint-problem">The Lying Endpoint Problem</a>
+</h1>
+<p id="rfc.section.2.6.1.p.1">A very prominent goal of RATS is to address the &#8220;lying endpoint problem&#8221;.  The lying endpoint problem is characterized as a condition of a Computing Context where the information or behavior embedded, created, relayed, stored, or emitted by the Computing Context is not &#8220;correct&#8221; according to expectations of the authorized system designers, operators and users.  There can be multiple reasons why these expectations are incorrect, either from malicious Activity, unanticipated conditions or accidental means.  The observed behavior, nevertheless, appears to be a compromised Computing Context.</p>
+<p id="rfc.section.2.6.1.p.2">Attempts to &#8220;scrub&#8221; the data or &#8220;proxy&#8221; control elements implies the existence of a more fundamental trusted endpoint that is operating correctly.  Therefore, Remote Attestation - the technology designed to detect and mitigate the &#8220;lying endpoint problem&#8221; &#8211; must be trusted to behave correctly independent of other controls.</p>
+<p id="rfc.section.2.6.1.p.3">Consequently, a &#8220;lying endpoint&#8221; cannot also be a &#8220;trusted system&#8221;.</p>
+<p id="rfc.section.2.6.1.p.4">Remote Attestation procedures are intended to enable the consumer of information emitted by a Computing Context to assess the validity and integrity of the information transferred.  The approach is based, for example, on the assumption that if attestation evidence can be provided in order to prove the integrity of every software instance installed involved in the activity of creating the emitted information in question, the emitted information can be considered valid and integer.</p>
+<p id="rfc.section.2.6.1.p.5">In contrast, such Evidence has to be impossible to create if the software instances used in a Computing Context are compromised.  Attestation activities that are intended to create this Evidence therefore also provide guarantees about the validity of the Evidence they can create.</p>
+<h1 id="rfc.section.2.6.2">
+<a href="#rfc.section.2.6.2">2.6.2.</a> <a href="#how-the-rats-architecture-addresses-the-lying-endpoint-problem" id="how-the-rats-architecture-addresses-the-lying-endpoint-problem">How the RATS Architecture Addresses the Lying Endpoint Problem</a>
+</h1>
+<p id="rfc.section.2.6.2.p.1">RATS imply the involvement of at least two players (roles) who seek to overcome the lying endpoint problem.  The Verifier wishes to consume application data supplied by a Computing Context.  But before application data is consumed, the Verifier obtains Attestation Evidence about the Computing Context to assess likelihood of poisoned data due to endpoint compromise or failure.  Remote Attestation argues that a systems&#8217;s integrity characteristics should not be believed until rationale for believability is presented to the relying party seeking to interact with the system.</p>
+<p id="rfc.section.2.6.2.p.2">An Interconnect defines an untrusted channel between subject and object wherein the rationale for believability is securely exchanged. The type of interconnect technology could vary widely, ranging from GPIO pins, to a PC peripheral IO bus, to the Internet, to a direct physical connection, to a wireless radio-receiver association, or to a world wide mesh of peers. In other words, virtually every kind communication path could be used as the &#8220;Interconnect&#8221; in RATS. In fact, a single party could take on all roles at the same time (e.g. Self Encrypting Devices).</p>
+<p id="rfc.section.2.6.2.p.3">Attestation evidence can be thought of as the topics of the exchange that is created the operational primitives of a root of trust for reporting.  Evidence may be structured in an interoperable format called claims that may include references to the claimants which are asserting the claims.  RATS aims to define &#8220;interoperable Remote Attestation&#8221; such that evidence can be created and consumed by different ecosystem systems and can be securely exchanged by a broad set of network protocols.</p>
 <h1 id="rfc.section.3">
 <a href="#rfc.section.3">3.</a> <a href="#rats-terminology" id="rats-terminology">RATS Terminology</a>
 </h1>
@@ -795,15 +664,15 @@ There are six roles defined in the RATS architecture. Figure 1 provides a simpli
 <a href="#rfc.section.3.1">3.1.</a> <a href="#computing-context" id="computing-context">Computing Context</a>
 </h1>
 <p id="rfc.section.3.1.p.1">This section introduces the term Computing Context in order to specialize the notions of environment and endpoint to terminology that has relevance to trusted computing. Attestation is a discipline of trusted computing.</p>
-<p id="rfc.section.3.1.p.2">A Computing Context could refer to a large variety of endpoints. Examples include but are not limited to: the compartmentalization of physical resources, the separation of software instances with different dependencies in dedicated containers, and the nesting of virtual components via hardware-based and software-based solutions. The number of approaches and techniques to construct an endpoint continuously changes with new innovation. Hence, it isn&#8217;t a goal of this document to define remote attestation for a fixed set of endpoints. Rather, it attempts to define endpoints conceptually and rely on Claims management as a way to clarify the details and specific attributes of conceptual endpoints.</p>
-<p id="rfc.section.3.1.p.3">Computing Contexts may be recursive in nature in that it could be composed of a system entity that is itself a composite of system entities. In consequence, a system entity may be composed of other system entities that may be further composed of one or more Computing Contexts capable of taking on the roles of Attester, Verifier or Claimant. The scope and application of these roles can range from:</p>
+<p id="rfc.section.3.1.p.2">A Computing Context could refer to a large variety of endpoints. Examples include but are not limited to: the compartmentalization of physical resources, the separation of software instances with different dependencies in dedicated containers, and the nesting of virtual components via hardware-based and software-based solutions.  The number of approaches and techniques to construct an endpoint continuously changes with new innovation.  Hence, it isn&#8217;t a goal of this document to define remote attestation for a fixed set of endpoints.  Rather, it attempts to define endpoints conceptually and rely on Claims management as a way to clarify the details and specific attributes of conceptual endpoints.</p>
+<p id="rfc.section.3.1.p.3">Computing Contexts may be recursive in nature in that it could be composed of a system that is itself a composite of subsystems.  In consequence, a system may be composed of other systems that may be further composed of one or more Computing Contexts capable of taking on the RATS roles.  The scope and application of these roles can range from:</p>
 <p></p>
 
 <ul>
-<li>Continuous mutual Attestation procedures of every system entity inside a composite device, to</li>
+<li>Continuous mutual Attestation procedures of every subsystem inside a composite device, to</li>
 <li>Sporadic Remote Attestation of unknown parties via heterogeneous Interconnects.</li>
 </ul>
-<p id="rfc.section.3.1.p.5">Analogously, the increasing number of features and functions that constitute components of a device start to blur the lines that are required to categorize each solution and approach precisely. To address this increasingly challenging categorization, the term Computing Context defines the characteristics of the system entities that can take on the role of an Attester and/or the role of a Verifier. This approach is intended to provide a stable basis of definitions for future solutions that continuous to remain viable long-term.</p>
+<p id="rfc.section.3.1.p.5">Analogously, the increasing number of features and functions that constitute components of a device start to blur the lines that are required to categorize each solution and approach precisely.  To address this increasingly challenging categorization, the term Computing Context defines the characteristics of the (sub)systems that can take on the role of an Attester and/or the role of a Verifier.  This approach is intended to provide a stable basis of definitions for future solutions that continuous to remain viable long-term.</p>
 <p></p>
 
 <dl>
@@ -823,7 +692,7 @@ There are six roles defined in the RATS architecture. Figure 1 provides a simpli
 <dd style="margin-left: 8">Computing context characteristics provide the following: * An independent environment in regard to executing and running software, * An isolated control plane state (by potentially interacting with other Computing Contexts), * A dedicated management interface by which control plane behavior can be effected, * Unique identification towards reliable disambiguation within a given scope.</dd>
 </dl>
 <p id="rfc.section.3.1.1.p.3">Computing context characteristics do not necessarily include a network interface with associated network addresses (as required by the definition of an endpoint) &#8211; although it is very likely to have (access to) one.</p>
-<p id="rfc.section.3.1.1.p.4">&lt;NMS: I&#8217;m not sure I agree with this conclusion&gt; In contrast, a container [ref docker, find a more general term here] context is not a distinguishable isolated slice of an information system and therefore is not an independent Computing Context. [more feedback on this statement is required as the capabilities of docker-like functions evolve continuously]</p>
+<p id="rfc.section.3.1.1.p.4">[Issue: This conclusion could be incorrect] In contrast, a container [ref docker, find a more general term here] context is not a distinguishable isolated slice of an information system and therefore is not an independent Computing Context. [more feedback on this statement is required as the capabilities of docker-like functions evolve continuously]</p>
 <p id="rfc.section.3.1.1.p.5">Examples include: a smart phone, a nested virtual machine, a virtualized firewall function running distributed on a cluster of physical and virtual nodes, or a trust-zone.</p>
 <h1 id="rfc.section.3.1.2">
 <a href="#rfc.section.3.1.2">3.1.2.</a> <a href="#computing-context-semantic-relationships" id="computing-context-semantic-relationships">Computing Context Semantic Relationships</a>
@@ -872,7 +741,7 @@ There are six roles defined in the RATS architecture. Figure 1 provides a simpli
 </ul>
 <p id="rfc.section.3.1.2.p.7">Analogously, a computing sub-context is a decomposition of a Computing Context; a subsystem is a decomposition of a system; a sub-component is a decomposition of a component; and a peer node is a decomposition of a node cluster.</p>
 <p id="rfc.section.3.1.2.p.8">A formal semantic relationship is therefore expressed using an information model that captures interactions, relationships, bindings and interfaces among systems, subsystems, system components, system entities or objects.</p>
-<p id="rfc.section.3.1.2.p.9">An information model that richly captures Computing Context semantics is therefore believed to be relevant if not fundamental to Remote Attestation.</p>
+<p id="rfc.section.3.1.2.p.9">[Issue: A tangible relationship to an information model is required here] An information model that richly captures Computing Context semantics is therefore believed to be relevant if not fundamental to Remote Attestation.</p>
 <h1 id="rfc.section.3.1.3">
 <a href="#rfc.section.3.1.3">3.1.3.</a> <a href="#computing-context-identity" id="computing-context-identity">Computing Context Identity</a>
 </h1>
@@ -881,13 +750,13 @@ There are six roles defined in the RATS architecture. Figure 1 provides a simpli
 
 <dl>
 <dt>$ Computing Context Identity:</dt>
-<dd style="margin-left: 8">Computing Context Identity provides the basis for associating Evidence about a particular Computing Context.</dd>
+<dd style="margin-left: 8">Computing Context Identity provides the basis for associating attestation Evidence about a particular Computing Context to create believable knowledge about attestation provenance.</dd>
 </dl>
-<p id="rfc.section.3.1.3.p.3">Confidence in the identity assurance level [NIST SP-800-63-3] or the assurance levels for identity authentication <a href="#RFC4949" class="xref">[RFC4949]</a> is a property of the identifier uniqueness properties and binding operation veracity. Such properties impact the trustworthiness of associated Evidence.</p>
+<p id="rfc.section.3.1.3.p.3">Confidence in the identity assurance level [NIST SP-800-63-3] or the assurance levels for identity authentication <a href="#RFC4949" class="xref">[RFC4949]</a> is a property of the identifier uniqueness properties and binding operation veracity. Such properties impact the trustworthiness of associated attestation Evidence.</p>
 <h1 id="rfc.section.3.2">
-<a href="#rfc.section.3.2">3.2.</a> <a href="#attestation-concepts" id="attestation-concepts">Attestation Concepts</a>
+<a href="#rfc.section.3.2">3.2.</a> <a href="#remote-attestation-concepts" id="remote-attestation-concepts">Remote Attestation Concepts</a>
 </h1>
-<p id="rfc.section.3.2.p.1">Attestation Evidence created by RATS is a form of telemetry about a computing environment that enables better security risk management through disclosure of security properties of the environment. Attestation may be performed locally (within the same computing environment) or remotely (between different computing environments). The exchange of Attestation information can be formalized to include well-defined protocol, message syntax and semantics.</p>
+<p id="rfc.section.3.2.p.1">Attestation Evidence created by RATS is a form of telemetry about a computing environment that enables better security risk management through disclosure of security properties of the environment.  Attestation may be performed locally (within the same computing environment) or remotely (between different computing environments). The exchange of attestation evidence can be formalized to include well-defined protocol, message syntax and semantics.</p>
 <h1 id="rfc.section.3.3">
 <a href="#rfc.section.3.3">3.3.</a> <a href="#core-rats-terminology" id="core-rats-terminology">Core RATS Terminology</a>
 </h1>
@@ -946,7 +815,7 @@ There are six roles defined in the RATS architecture. Figure 1 provides a simpli
 <h1 id="rfc.section.3.5">
 <a href="#rfc.section.3.5">3.5.</a> <a href="#rats-work-flow-terminology" id="rats-work-flow-terminology">RATS Work-Flow Terminology</a>
 </h1>
-<p id="rfc.section.3.5.p.1">This section introduces terms and definitions that are required to illustrate the scope and the granularity of RATS workflows in the domain of security automation. Terms defined in the following sections will be based on this workflow-related definitions.</p>
+<p id="rfc.section.3.5.p.1">This section introduces terms and definitions that are required to illustrate the scope and the granularity of RATS workflows in the domain of security automation.  Terms defined in the following sections will be based on this workflow-related definitions.</p>
 <p id="rfc.section.3.5.p.2">In general, RATS are composed of iterative activities that can be conducted in intervals. It is neither a generic set of actions nor simply a task, because the actual actions to be conducted by RATS can vary significantly depending on the protocols employed and types of Computing Contexts involved.</p>
 <p></p>
 
@@ -1093,7 +962,7 @@ There are six roles defined in the RATS architecture. Figure 1 provides a simpli
 <dt>Manifest:</dt>
 <dd style="margin-left: 8">TBD</dd>
 <dt>Telemetry:</dt>
-<dd style="margin-left: 8">An automated communications process by which data, readings, Measurements and Evidence are collected at remote points and transmitted to receiving equipment for monitoring and analysis. Derived from the Greek roots tele = remote, and metron = measure. <a href="https://en.wikipedia.org/wiki/Telemetry">See Wikipedia</a>.</dd>
+<dd style="margin-left: 8">An automated communications process by which data, readings, Measurements and Evidence are collected at remote points and transmitted to receiving equipment for monitoring and analysis. Derived from the Greek roots tele = remote, and metron = measure.</dd>
 </dl>
 <h1 id="rfc.section.4">
 <a href="#rfc.section.4">4.</a> <a href="#iana-considerations" id="iana-considerations">IANA considerations</a>
@@ -1121,18 +990,11 @@ There are six roles defined in the RATS architecture. Figure 1 provides a simpli
 <a href="#rfc.references">8.</a> References</h1>
 <h1 id="rfc.references.1">
 <a href="#rfc.references.1">8.1.</a> Normative References</h1>
-<table><tbody>
-<tr>
+<table><tbody><tr>
 <td class="reference"><b id="RFC2119">[RFC2119]</b></td>
 <td class="top">
 <a>Bradner, S.</a>, "<a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>", BCP 14, RFC 2119, DOI 10.17487/RFC2119, March 1997.</td>
-</tr>
-<tr>
-<td class="reference"><b id="RFC4949">[RFC4949]</b></td>
-<td class="top">
-<a>Shirey, R.</a>, "<a href="https://tools.ietf.org/html/rfc4949">Internet Security Glossary, Version 2</a>", FYI 36, RFC 4949, DOI 10.17487/RFC4949, August 2007.</td>
-</tr>
-</tbody></table>
+</tr></tbody></table>
 <h1 id="rfc.references.2">
 <a href="#rfc.references.2">8.2.</a> Informative References</h1>
 <table><tbody>
@@ -1140,6 +1002,11 @@ There are six roles defined in the RATS architecture. Figure 1 provides a simpli
 <td class="reference"><b id="I-D.ietf-sacm-terminology">[I-D.ietf-sacm-terminology]</b></td>
 <td class="top">
 <a>Birkholz, H.</a>, <a>Lu, J.</a>, <a>Strassner, J.</a>, <a>Cam-Winget, N.</a> and <a>A. Montville</a>, "<a href="https://tools.ietf.org/html/draft-ietf-sacm-terminology-15">Security Automation and Continuous Monitoring (SACM) Terminology</a>", Internet-Draft draft-ietf-sacm-terminology-15, June 2018.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC4949">[RFC4949]</b></td>
+<td class="top">
+<a>Shirey, R.</a>, "<a href="https://tools.ietf.org/html/rfc4949">Internet Security Glossary, Version 2</a>", FYI 36, RFC 4949, DOI 10.17487/RFC4949, August 2007.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC7519">[RFC7519]</b></td>
