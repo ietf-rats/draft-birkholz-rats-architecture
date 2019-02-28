@@ -5,12 +5,12 @@
 Network Working Group                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                              M. Wiseman
-Expires: April 26, 2019                               GE Global Research
+Expires: September 1, 2019                            GE Global Research
                                                            H. Tschofenig
                                                                 ARM Ltd.
                                                                 N. Smith
                                                                    Intel
-                                                        October 23, 2018
+                                                       February 28, 2019
 
 
 Architecture and Reference Terminology for Remote Attestation Procedures
@@ -53,19 +53,19 @@ Status of This Memo
 
 
 
-Birkholz, et al.         Expires April 26, 2019                 [Page 1]
+Birkholz, et al.        Expires September 1, 2019               [Page 1]
 
-Internet-Draft              RATS Arch & Terms               October 2018
+Internet-Draft              RATS Arch & Terms              February 2019
 
 
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on April 26, 2019.
+   This Internet-Draft will expire on September 1, 2019.
 
 Copyright Notice
 
-   Copyright (c) 2018 IETF Trust and the persons identified as the
+   Copyright (c) 2019 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Birkholz, et al.         Expires April 26, 2019                 [Page 2]
+Birkholz, et al.        Expires September 1, 2019               [Page 2]
 
-Internet-Draft              RATS Arch & Terms               October 2018
+Internet-Draft              RATS Arch & Terms              February 2019
 
 
        3.6.1.  Use Case A  . . . . . . . . . . . . . . . . . . . . .  19
@@ -159,17 +159,29 @@ Internet-Draft              RATS Arch & Terms               October 2018
    composition of service-chains and work-flows to create and appraise
    evidence about the trustworthiness of devices and services.
 
+   The RATS architecture specifies the building blocks to create remote
+   attestation procedures applicable Actors, Roles, Duties, and
+   Interactions.  The RATS architecture also defines mandatory and
+
+
+
+Birkholz, et al.        Expires September 1, 2019               [Page 3]
+
+Internet-Draft              RATS Arch & Terms              February 2019
+
+
+   optional trust relationships between its Roles, including Roots of
+   Trusts.  If Roles reside on separate Actors the Interactions between
+   Roles are facilitated via network protocols.
+
+   imposes requirements on payload definitions, interfaces, and network
+   protocols with respect to proofs of freshness, attestation
+   provenance, and required operational primitives that are available to
+   devices and services taking on RATS roles.
+
    The RATS architecture does not prescribe specific payload
    definitions, role composition, or protocol use.  However, it imposes
    requirements on payload definitions, interfaces, and network
-
-
-
-Birkholz, et al.         Expires April 26, 2019                 [Page 3]
-
-Internet-Draft              RATS Arch & Terms               October 2018
-
-
    protocols with respect to proofs of freshness, attestation
    provenance, and required operational primitives that are available to
    devices and services taking on RATS roles.  For brevity, the term
@@ -206,6 +218,14 @@ Internet-Draft              RATS Arch & Terms               October 2018
    Relevant decision-factors that influence the composition of RATS
    roles on systems and resulting work-flows are (amongst others):
 
+
+
+
+Birkholz, et al.        Expires September 1, 2019               [Page 4]
+
+Internet-Draft              RATS Arch & Terms              February 2019
+
+
    o  which role (or correspondingly, which system that is taking on
       specific RATS roles) is triggering a Remote Attestation Procedure
 
@@ -218,13 +238,6 @@ Internet-Draft              RATS Arch & Terms               October 2018
 
    o  the security requirements and security capabilities of systems in
       a domain of application
-
-
-
-Birkholz, et al.         Expires April 26, 2019                 [Page 4]
-
-Internet-Draft              RATS Arch & Terms               October 2018
-
 
    o  the risks and corresponding threats that are intended to be
       mitigated
@@ -260,6 +273,15 @@ Internet-Draft              RATS Arch & Terms               October 2018
    has to originate from the system itself and has to be convincing.  If
    the convincing information is not originating from the system itself,
    it comprises trusted claim sets and not evidence.  In essence, the
+
+
+
+
+Birkholz, et al.        Expires September 1, 2019               [Page 5]
+
+Internet-Draft              RATS Arch & Terms              February 2019
+
+
    attestation provenance of attestation evidence is the system that
    intends to present its trustworthiness in a believable manner.
 
@@ -274,13 +296,6 @@ Internet-Draft              RATS Arch & Terms               October 2018
    their design.  Hardware RoTs are preferred over software RoTs due to
    their immutability, smaller attack surface, and more reliable
    behavior."
-
-
-
-Birkholz, et al.         Expires April 26, 2019                 [Page 5]
-
-Internet-Draft              RATS Arch & Terms               October 2018
-
 
    If the root of trust involved is a root of trust for measurement
    (RTM), the producer of information takes on the role of a asserter.
@@ -318,24 +333,9 @@ Internet-Draft              RATS Arch & Terms               October 2018
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Birkholz, et al.         Expires April 26, 2019                 [Page 6]
+Birkholz, et al.        Expires September 1, 2019               [Page 6]
 
-Internet-Draft              RATS Arch & Terms               October 2018
+Internet-Draft              RATS Arch & Terms              February 2019
 
 
           +------------+                     +------------------+
@@ -389,9 +389,9 @@ Internet-Draft              RATS Arch & Terms               October 2018
 
 
 
-Birkholz, et al.         Expires April 26, 2019                 [Page 7]
+Birkholz, et al.        Expires September 1, 2019               [Page 7]
 
-Internet-Draft              RATS Arch & Terms               October 2018
+Internet-Draft              RATS Arch & Terms              February 2019
 
 
    Authentication Checker:  The consumer of signed assertions such as
@@ -445,9 +445,9 @@ Internet-Draft              RATS Arch & Terms               October 2018
 
 
 
-Birkholz, et al.         Expires April 26, 2019                 [Page 8]
+Birkholz, et al.        Expires September 1, 2019               [Page 8]
 
-Internet-Draft              RATS Arch & Terms               October 2018
+Internet-Draft              RATS Arch & Terms              February 2019
 
 
 2.5.2.  Conveyance of Attestation Evidence Appraised by a Verifier
@@ -501,9 +501,9 @@ Internet-Draft              RATS Arch & Terms               October 2018
 
 
 
-Birkholz, et al.         Expires April 26, 2019                 [Page 9]
+Birkholz, et al.        Expires September 1, 2019               [Page 9]
 
-Internet-Draft              RATS Arch & Terms               October 2018
+Internet-Draft              RATS Arch & Terms              February 2019
 
 
    In essence, a prerequisite for providing an adequate set of terms and
@@ -557,9 +557,9 @@ Internet-Draft              RATS Arch & Terms               October 2018
 
 
 
-Birkholz, et al.         Expires April 26, 2019                [Page 10]
+Birkholz, et al.        Expires September 1, 2019              [Page 10]
 
-Internet-Draft              RATS Arch & Terms               October 2018
+Internet-Draft              RATS Arch & Terms              February 2019
 
 
    In contrast, such Evidence has to be impossible to create if the
@@ -613,9 +613,9 @@ Internet-Draft              RATS Arch & Terms               October 2018
 
 
 
-Birkholz, et al.         Expires April 26, 2019                [Page 11]
+Birkholz, et al.        Expires September 1, 2019              [Page 11]
 
-Internet-Draft              RATS Arch & Terms               October 2018
+Internet-Draft              RATS Arch & Terms              February 2019
 
 
    o  Object
@@ -669,9 +669,9 @@ Internet-Draft              RATS Arch & Terms               October 2018
 
 
 
-Birkholz, et al.         Expires April 26, 2019                [Page 12]
+Birkholz, et al.        Expires September 1, 2019              [Page 12]
 
-Internet-Draft              RATS Arch & Terms               October 2018
+Internet-Draft              RATS Arch & Terms              February 2019
 
 
    this document to define remote attestation for a fixed set of
@@ -725,9 +725,9 @@ Internet-Draft              RATS Arch & Terms               October 2018
 
 
 
-Birkholz, et al.         Expires April 26, 2019                [Page 13]
+Birkholz, et al.        Expires September 1, 2019              [Page 13]
 
-Internet-Draft              RATS Arch & Terms               October 2018
+Internet-Draft              RATS Arch & Terms              February 2019
 
 
       Computing context characteristics provide the following: * An
@@ -781,9 +781,9 @@ Internet-Draft              RATS Arch & Terms               October 2018
 
 
 
-Birkholz, et al.         Expires April 26, 2019                [Page 14]
+Birkholz, et al.        Expires September 1, 2019              [Page 14]
 
-Internet-Draft              RATS Arch & Terms               October 2018
+Internet-Draft              RATS Arch & Terms              February 2019
 
 
    o  A system component,
@@ -837,9 +837,9 @@ Internet-Draft              RATS Arch & Terms               October 2018
 
 
 
-Birkholz, et al.         Expires April 26, 2019                [Page 15]
+Birkholz, et al.        Expires September 1, 2019              [Page 15]
 
-Internet-Draft              RATS Arch & Terms               October 2018
+Internet-Draft              RATS Arch & Terms              February 2019
 
 
    A formal semantic relationship is therefore expressed using an
@@ -893,9 +893,9 @@ Internet-Draft              RATS Arch & Terms               October 2018
 
 
 
-Birkholz, et al.         Expires April 26, 2019                [Page 16]
+Birkholz, et al.        Expires September 1, 2019              [Page 16]
 
-Internet-Draft              RATS Arch & Terms               October 2018
+Internet-Draft              RATS Arch & Terms              February 2019
 
 
    $ Verification:  The appraisal of Evidence by the Verifier who
@@ -949,9 +949,9 @@ Internet-Draft              RATS Arch & Terms               October 2018
 
 
 
-Birkholz, et al.         Expires April 26, 2019                [Page 17]
+Birkholz, et al.        Expires September 1, 2019              [Page 17]
 
-Internet-Draft              RATS Arch & Terms               October 2018
+Internet-Draft              RATS Arch & Terms              February 2019
 
 
    $ Evidence (Claims) Creation:  Instantiation of Attested Claims by a
@@ -1005,9 +1005,9 @@ Internet-Draft              RATS Arch & Terms               October 2018
 
 
 
-Birkholz, et al.         Expires April 26, 2019                [Page 18]
+Birkholz, et al.        Expires September 1, 2019              [Page 18]
 
-Internet-Draft              RATS Arch & Terms               October 2018
+Internet-Draft              RATS Arch & Terms              February 2019
 
 
       specific scope.  Example: Signing an existing public key via a
@@ -1061,9 +1061,9 @@ Internet-Draft              RATS Arch & Terms               October 2018
 
 
 
-Birkholz, et al.         Expires April 26, 2019                [Page 19]
+Birkholz, et al.        Expires September 1, 2019              [Page 19]
 
-Internet-Draft              RATS Arch & Terms               October 2018
+Internet-Draft              RATS Arch & Terms              February 2019
 
 
    $ Claimant Identity:  An identity that refers to an Claimant.
@@ -1117,9 +1117,9 @@ Internet-Draft              RATS Arch & Terms               October 2018
 
 
 
-Birkholz, et al.         Expires April 26, 2019                [Page 20]
+Birkholz, et al.        Expires September 1, 2019              [Page 20]
 
-Internet-Draft              RATS Arch & Terms               October 2018
+Internet-Draft              RATS Arch & Terms              February 2019
 
 
 3.8.  Interpretations of RFC4949 Terminology for Attestation
@@ -1173,9 +1173,9 @@ Internet-Draft              RATS Arch & Terms               October 2018
 
 
 
-Birkholz, et al.         Expires April 26, 2019                [Page 21]
+Birkholz, et al.        Expires September 1, 2019              [Page 21]
 
-Internet-Draft              RATS Arch & Terms               October 2018
+Internet-Draft              RATS Arch & Terms              February 2019
 
 
       (b) The property that information has not been modified or
@@ -1229,9 +1229,9 @@ Internet-Draft              RATS Arch & Terms               October 2018
 
 
 
-Birkholz, et al.         Expires April 26, 2019                [Page 22]
+Birkholz, et al.        Expires September 1, 2019              [Page 22]
 
-Internet-Draft              RATS Arch & Terms               October 2018
+Internet-Draft              RATS Arch & Terms              February 2019
 
 
    Verification:  (a) The process of examining information to establish
@@ -1285,9 +1285,9 @@ Internet-Draft              RATS Arch & Terms               October 2018
 
 
 
-Birkholz, et al.         Expires April 26, 2019                [Page 23]
+Birkholz, et al.        Expires September 1, 2019              [Page 23]
 
-Internet-Draft              RATS Arch & Terms               October 2018
+Internet-Draft              RATS Arch & Terms              February 2019
 
 
 7.  Change Log
@@ -1309,7 +1309,7 @@ Internet-Draft              RATS Arch & Terms               October 2018
               Birkholz, H., Lu, J., Strassner, J., Cam-Winget, N., and
               A. Montville, "Security Automation and Continuous
               Monitoring (SACM) Terminology", draft-ietf-sacm-
-              terminology-15 (work in progress), June 2018.
+              terminology-16 (work in progress), December 2018.
 
    [RFC4949]  Shirey, R., "Internet Security Glossary, Version 2",
               FYI 36, RFC 4949, DOI 10.17487/RFC4949, August 2007,
@@ -1341,9 +1341,9 @@ Authors' Addresses
 
 
 
-Birkholz, et al.         Expires April 26, 2019                [Page 24]
+Birkholz, et al.        Expires September 1, 2019              [Page 24]
 
-Internet-Draft              RATS Arch & Terms               October 2018
+Internet-Draft              RATS Arch & Terms              February 2019
 
 
    Monty Wiseman
@@ -1397,4 +1397,4 @@ Internet-Draft              RATS Arch & Terms               October 2018
 
 
 
-Birkholz, et al.         Expires April 26, 2019                [Page 25]
+Birkholz, et al.        Expires September 1, 2019              [Page 25]
