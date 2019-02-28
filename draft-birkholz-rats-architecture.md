@@ -93,6 +93,15 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 
 The goal of the RATS architecture is to provide the building blocks - the roles defined by the RATS architecture - to enable the composition of service-chains and work-flows to create and appraise evidence about the trustworthiness of devices and services.
 
+The RATS architecture specifies the building blocks to create remote attestation procedures applicable Actors, Roles, Duties, and Interactions.
+The RATS architecture also defines mandatory and optional trust relationships between its Roles, including Roots of Trusts.
+If Roles reside on separate Actors the Interactions between Roles are facilitated via network protocols.
+
+
+
+
+imposes requirements on payload definitions, interfaces, and network protocols with respect to proofs of freshness, attestation provenance, and required operational primitives that are available to devices and services taking on RATS roles.
+
 The RATS architecture does not prescribe specific payload definitions, role composition, or protocol use.
 However, it imposes requirements on payload definitions, interfaces, and network protocols with respect to proofs of freshness, attestation provenance, and required operational primitives that are available to devices and services taking on RATS roles.
 For brevity, the term “system” is a synonym for “device or service” in this document.
