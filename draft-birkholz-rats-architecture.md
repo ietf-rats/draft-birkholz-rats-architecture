@@ -63,24 +63,32 @@ informative:
 --- abstract
 
 Remote ATtestation ProcedureS (RATS), such as Remote Integrity VERification (RIVER), the creation of Entity Attestation Tokens (EAT), software integrity Measurement And ATtestation (MAAT), or the attestation of device characteristics, in general, are based on specific operations and qualities provided by hardware and software.
-The RATS architecture maps corresponding functions and operation capabilities to specific RATS roles.
+The RATS architecture maps corresponding functions and operational capabilities to specific RATS Roles.
 The goal is to enable an appropriate conveyance of believable evidence about device health or trusted claims about device capabilities via network protocols.
-The flows of data between these roles depend on the composition of RATS roles and their location with respect to devices or services.
-The RATS architecture provides these roles as building blocks to enable suitable composition, while remaining hardware-agnostic.
-This flexibility is intended to address a significant majority of use cases or usage scenarios in the domain of RATS.
+The flows of data between these roles depend on the composition of RATS Roles and their location with respect to devices or services.
+The RATS architecture provides these roles as building blocks to enable suitable composition, while remaining hardware-agnostic with respect to the evidence on trustworthiness conveyed.
+This flexibility is intended to address a significant majority of use-cases or usage scenarios in the domain of RATS.
 Examples include, but are not limited to: financial transactions, voting machines, critical safety systems, network equipment health, or trustworthy end-user device management.
 
 --- middle
 
 # Introduction
 
-This document provides normative guidance how to use, create or adopt network protocols that facilitate remote attestation procedures.
-The foundation of the RATS architecture are specific roles that can be chained and as a result compose remote attestation procedures.
-The term attestation, unfortunately, is an overloaded term.
-There are different interpretations, connotations and meanings to the term attestation and therefore also to terms related to attestation.
-In consequence, this document also provides a detailed definition of Attestation Terminology.
-The intent is to illustrate and remediate the impedance mismatch of terms related to Remote Attestation Procedures used in different domains today.
-New terms defined by this document provide a consolidated basis to support future work on RATS in the IETF and beyond.
+In general, this document provides normative guidance how to use, create or adopt network protocols that facilitate remote attestation procedures.
+The RATS Architecture is intended to enable the implementation of a number of custom RATS Actors that compose a variety of Remote Attestation Procedures - both in closed and open ecosystems (maintained by singular stakeholders and by federated cooperations).
+The foundation of the RATS architecture is the specification of RATS Roles that can be chained via RATS Interactions and - as a result - compose use-case specific Remote Attestation Procedures.
+In summary, the goal of the RATS architecture is to enable interoperable interaction between the RATS Roles specified. Hence, the RATS architecture is designed to represent and compose heterogeneous RATS and to enable interoperability via well-defined semantics of the information (mainly assertions/claims) exchanged and via well-defined tasks (RATS Duties & RATS Interactions) that compose domain-specific RATS solutions.
+
+## What is Remote Atttestation
+
+Unfortunately, the term Attestation itself is an overloaded term.
+In consequence, the term Remote Attestation covers a spectrum of meanings.
+The common denominator encompasses the creation, conveyance, and appraisal of evidence pertaining to the trustworthiness of the creator of evidence.
+
+Correspondingly, there are different interpretations, connotations and meanings to the term Remote Attestation.
+To enable consolidation, this document provides a detailed definition of Attestation Terminology to specify interoperable Remote Attestation Procedures.
+Specifically, this document illustrates and remediates the impedance mismatch of terms related to Remote Attestation Procedures used in different domains today in order to enable the afore mentioned interoperability of existing and emerging RATS solutions.
+As an additional contribution, new terms defined by this document provides a consolidated basis in order to simplify future work on RATS in the IETF and beyond.
 
 ## Requirements notation
 
@@ -91,25 +99,61 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 
 # RATS Architecture
 
-The goal of the RATS architecture is to provide the building blocks - the roles defined by the RATS architecture - to enable the composition of service-chains and work-flows to create and appraise evidence about the trustworthiness of devices and services.
+[Editor's Note: the defined architecture still requires a lot more context to the average reader. A corresponding use-case document, dedicated section in this I-D, or appendix are required to provide that context are missing at the moment]
 
-The RATS architecture specifies the building blocks to create remote attestation procedures applicable Actors, Roles, Duties, and Interactions.
-The RATS architecture also defines mandatory and optional trust relationships between its Roles, including Roots of Trusts.
-If Roles reside on separate Actors the Interactions between Roles are facilitated via network protocols.
+The goal of the RATS architecture is to provide the building blocks - the roles defined by the RATS architecture - to enable the composition of service-chains/hierarchies and work-flows to create and appraise evidence about the trustworthiness of devices and services.
 
+The RATS architecture specifies:
 
+* the building blocks to create remote attestation procedures applicable Actors, Roles, Duties, and Interactions,
+* mandatory and optional trust relationships between its Roles, including Roots-of-Trust
+* the interaction between Roles that reside on separate Actors via network protocols,
+* protocol framing, allowing for well-defined and opaque payloads,
+* the means to prove, preserve and convey trust properties, such as identity, varacity, freshness, or provenance, and
+* primitives necessary for the construction of interoperable attestation payloads.
 
+# RATS Roles
 
-imposes requirements on payload definitions, interfaces, and network protocols with respect to proofs of freshness, attestation provenance, and required operational primitives that are available to devices and services taking on RATS roles.
-
-The RATS architecture does not prescribe specific payload definitions, role composition, or protocol use.
-However, it imposes requirements on payload definitions, interfaces, and network protocols with respect to proofs of freshness, attestation provenance, and required operational primitives that are available to devices and services taking on RATS roles.
-For brevity, the term “system” is a synonym for “device or service” in this document.
-
-## Roles, Devices, and Services
-
+A Role in the context of usage scenarios for remote attestation procedures is providing a service to other Roles. Roles are  building blocks that can be providers and consumers of information.
 In the RATS architecture, devices or services can take on RATS roles.
-In this context, devices are typically composite devices (in the case of atomically integrated devices that would result in a composite device with one component).
+They are  composites of internal functions (RATS Duties) and external functions (RATS Interactions) that facilitate a required (sometimes optional) task in a remote attestation procedure.
+
+The base set of RATS roles is:
+
+Claimant:
+
+: The producer of trustworthiness assertions pertaining to an Attester; that may or not have a root-of-trust for measurement.
+
+It is not guaranteed that a Verifier Role can appraise the output of a Claimant via reference values (in contrast to the output of an Attester).
+
+Examples of Claimant assertions include:
+* The hardware, firmware and software components of the Attester.
+* The manufactuer of Attester components.
+* The Attester's current configuration.
+* The Attester's current location - e.g. GPS coordinates.
+* The method by which binding of an attester to an RTR.
+* The identifier(s) available for identifying and authenticating the Attester - e.g. Universal Entity ID (UEID).
+
+Others:
+
+: other content
+
+# RATS Actors
+RATS Actors may be any entity, such as an user, organization, execution environment, device or service provider, that takes on (implements) one or more RATS Roles and performs RATS Duties and/or RATS Interactions.
+RATS Interactions occur between RATS Actors. The methods whereby RATS Actors are identified, discovered, and connectivity established are out-of-scope for this architecture. In contrast, if multiple RATS Roles reside on a single RATS Actor, the definition of RATS Interactions is out-of-scope of the RATS architecture, if no network protocols are required.
+
+RATS Actors have the following properties:
+* Multiplicity - Multiple instances of RATS Actors that possess the same RATS Roles can exist.
+* Decomposability -  A singleton RATS Actor possessing multiple RATS Roles can be separated into multiple RATS Actors.
+RATS Interactions may occur between them.
+* Composablility - RATS Actors possessing different RATS Roles can be combined into a singleton RATS Actor possessing the union of RATS Roles.
+RATS Interactions between combined RATS Actors ceases.
+
+Interactions between RATS Roles belonging to the same RATS Actor are generally believed to be uninteresting.
+
+
+
+Devices are typically composite devices (in the case of atomically integrated devices that would result in a composite device with one component).
 Services are software components - e.g. a daemon, a virtual network function (vnf) or a network security function (nsf) - that can reside on one or more devices and are not necessarily bound to a specific set of devices.
 
 Devices or Services (Systems) can take on one or more RATS roles either by separate functions or via a collapsed functions that take on multiple RATS roles.
