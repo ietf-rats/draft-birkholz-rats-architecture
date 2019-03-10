@@ -65,7 +65,7 @@ informative:
 Remote ATtestation ProcedureS (RATS), such as Remote Integrity VERification (RIVER), the creation of Entity Attestation Tokens (EAT), software integrity Measurement And ATtestation (MAAT), or the attestation of device characteristics, in general, are based on specific operations and qualities provided by hardware and software.
 The RATS architecture maps corresponding functions and operational capabilities to specific RATS Roles.
 The goal is to enable an appropriate conveyance of believable evidence about device health or trusted claims about device capabilities via network protocols.
-The flows of data between these roles depend on the composition of RATS Roles and their location with respect to devices or services.
+The flows of data between these roles depends on the composition of RATS Roles and their location with respect to devices or services.
 The RATS architecture provides these roles as building blocks to enable suitable composition, while remaining hardware-agnostic with respect to the evidence on trustworthiness conveyed.
 This flexibility is intended to address a significant majority of use-cases or usage scenarios in the domain of RATS.
 Examples include, but are not limited to: financial transactions, voting machines, critical safety systems, network equipment health, or trustworthy end-user device management.
@@ -79,16 +79,18 @@ The RATS Architecture is intended to enable the implementation of a number of cu
 The foundation of the RATS architecture is the specification of RATS Roles that can be chained via RATS Interactions and - as a result - compose use-case specific Remote Attestation Procedures.
 In summary, the goal of the RATS architecture is to enable interoperable interaction between the RATS Roles specified. Hence, the RATS architecture is designed to represent and compose heterogeneous RATS and to enable interoperability via well-defined semantics of the information (mainly assertions/claims) exchanged and via well-defined tasks (RATS Duties & RATS Interactions) that compose domain-specific RATS solutions.
 
-## What is Remote Atttestation
+## What is Remote Attestation
 
 Unfortunately, the term Attestation itself is an overloaded term.
 In consequence, the term Remote Attestation covers a spectrum of meanings.
-The common denominator encompasses the creation, conveyance, and appraisal of evidence pertaining to the trustworthiness of the creator of evidence.
-
+The common denominator encompasses the creation, conveyance, and appraisal of evidence pertaining to the trustworthiness of the creator of the evidence.
 Correspondingly, there are different interpretations, connotations and meanings to the term Remote Attestation.
+
+## Contributions to Remote Attestation in the IETF
+
 To enable consolidation, this document provides a detailed definition of Attestation Terminology to specify interoperable Remote Attestation Procedures.
 Specifically, this document illustrates and remediates the impedance mismatch of terms related to Remote Attestation Procedures used in different domains today in order to enable the afore mentioned interoperability of existing and emerging RATS solutions.
-As an additional contribution, new terms defined by this document provides a consolidated basis in order to simplify future work on RATS in the IETF and beyond.
+As an additional contribution, new terms defined by this document provide a consolidated basis in order to simplify future work on RATS in the IETF and beyond.
 
 ## Requirements notation
 
@@ -133,6 +135,32 @@ Examples of Claimant assertions include:
 * The Attester's current location - e.g. GPS coordinates.
 * The method by which binding of an attester to an RTR.
 * The identifier(s) available for identifying and authenticating the Attester - e.g. Universal Entity ID (UEID).
+
+Attester:
+
+: The producer of attestation evidence that has a root of trust for reporting (RTR) and implements a conveyance protocol, authenticates using an attestation credential, consumes assertions about itself and presents it to a consumer of evidence (e.g. a relying party or a verifier). Every output of an attester can be appraised via reference values.
+
+;Interconnect:
+;
+;: A communication channel or secure path between systems that take on RATS roles.
+;Attestation evidence, for example, can be conveyed from an attester to a verifier via an interconnect.
+Examples include: GPIO pins, an USB link, or the Internet.
+
+Relying Party:
+
+: The consumer and assessor of verifier or Authentication Checker results for the purpose of improved risk management, operational efficiency, security, privacy (natural or legal person) or safety.
+The verifier and/or authentication checker roles and the relying party role may be tightly integrated.
+
+Authentication Checker:
+
+: The consumer of signed assertions such as trusted claim sets or attestation evidence that assesses the trustworthiness or other trust relationships of the information consumed via trusted third parties or external trust authorities, such as a privacy certificate authority.
+In certain environments, an Authentication Checker can assess a system's trustworthiness via external trust anchors, implicitly.
+
+Verifier:
+
+: The consumer of attestation evidence that has a root of trust for verification and implements a conveyance protocol, appraises attestation evidence against reference values or policies and makes verification results available to relying parties.
+
+
 
 Others:
 
