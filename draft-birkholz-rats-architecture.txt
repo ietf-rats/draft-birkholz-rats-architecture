@@ -5,12 +5,12 @@
 Network Working Group                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                              M. Wiseman
-Expires: September 11, 2019                           GE Global Research
+Expires: September 12, 2019                           GE Global Research
                                                            H. Tschofenig
                                                                 ARM Ltd.
                                                                 N. Smith
                                                                    Intel
-                                                          March 10, 2019
+                                                          March 11, 2019
 
 
 Architecture and Reference Terminology for Remote Attestation Procedures
@@ -53,7 +53,7 @@ Status of This Memo
 
 
 
-Birkholz, et al.       Expires September 11, 2019               [Page 1]
+Birkholz, et al.       Expires September 12, 2019               [Page 1]
 
 Internet-Draft              RATS Arch & Terms                 March 2019
 
@@ -61,7 +61,7 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on September 11, 2019.
+   This Internet-Draft will expire on September 12, 2019.
 
 Copyright Notice
 
@@ -81,56 +81,63 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
-     1.1.  What is Remote Attestation  . . . . . . . . . . . . . . .   3
-     1.2.  Contributions to Remote Attestation in the IETF . . . . .   4
+     1.1.  What is Remote Attestation  . . . . . . . . . . . . . . .   4
+     1.2.  The purpose of RATS Architecture and Terminology  . . . .   4
      1.3.  Requirements notation . . . . . . . . . . . . . . . . . .   4
    2.  RATS Architecture . . . . . . . . . . . . . . . . . . . . . .   4
-   3.  RATS Roles  . . . . . . . . . . . . . . . . . . . . . . . . .   5
+   3.  Architectural Components  . . . . . . . . . . . . . . . . . .   5
+     3.1.  RATS Roles  . . . . . . . . . . . . . . . . . . . . . . .   5
    4.  RATS Actors . . . . . . . . . . . . . . . . . . . . . . . . .   6
-     4.1.  Trust and Trustworthiness . . . . . . . . . . . . . . . .   7
-     4.2.  Claims and Evidence . . . . . . . . . . . . . . . . . . .   8
-     4.3.  RATS Roles  . . . . . . . . . . . . . . . . . . . . . . .   9
-     4.4.  Exemplary Composition of Roles  . . . . . . . . . . . . .  10
-       4.4.1.  Conveyance of Trusted Claim Sets Validated by
-               Signature . . . . . . . . . . . . . . . . . . . . . .  10
-       4.4.2.  Conveyance of Attestation Evidence Appraised by a
-               Verifier  . . . . . . . . . . . . . . . . . . . . . .  11
-     4.5.  The Scope of RATS . . . . . . . . . . . . . . . . . . . .  12
-       4.5.1.  The Lying Endpoint Problem  . . . . . . . . . . . . .  12
-       4.5.2.  How the RATS Architecture Addresses the Lying
-               Endpoint Problem  . . . . . . . . . . . . . . . . . .  13
-   5.  RATS Terminology  . . . . . . . . . . . . . . . . . . . . . .  14
-     5.1.  Computing Context . . . . . . . . . . . . . . . . . . . .  15
-       5.1.1.  Characteristics of a Computing Context  . . . . . . .  16
-       5.1.2.  Computing Context Semantic Relationships  . . . . . .  16
-       5.1.3.  Computing Context Identity  . . . . . . . . . . . . .  18
-     5.2.  Remote Attestation Concepts . . . . . . . . . . . . . . .  18
-     5.3.  Core RATS Terminology . . . . . . . . . . . . . . . . . .  19
+     4.1.  RATS Duties . . . . . . . . . . . . . . . . . . . . . . .   7
+       4.1.1.  Attester Duties . . . . . . . . . . . . . . . . . . .   7
+       4.1.2.  Verifier Duties . . . . . . . . . . . . . . . . . . .   7
+       4.1.3.  Supply Chain Entity (SCE) Duties  . . . . . . . . . .   7
+       4.1.4.  Relying Party Duties  . . . . . . . . . . . . . . . .   8
+       4.1.5.  RATS Interactions . . . . . . . . . . . . . . . . . .   8
+     4.2.  Trust and Trustworthiness . . . . . . . . . . . . . . . .   9
+     4.3.  Claims and Evidence . . . . . . . . . . . . . . . . . . .  10
+     4.4.  RATS Roles  . . . . . . . . . . . . . . . . . . . . . . .  10
+     4.5.  Exemplary Composition of Roles  . . . . . . . . . . . . .  12
+       4.5.1.  Conveyance of Trusted Claim Sets Validated by
+               Signature . . . . . . . . . . . . . . . . . . . . . .  12
+       4.5.2.  Conveyance of Attestation Evidence Appraised by a
+               Verifier  . . . . . . . . . . . . . . . . . . . . . .  13
+     4.6.  The Scope of RATS . . . . . . . . . . . . . . . . . . . .  13
+       4.6.1.  The Lying Endpoint Problem  . . . . . . . . . . . . .  14
+       4.6.2.  How the RATS Architecture Addresses the Lying
+               Endpoint Problem  . . . . . . . . . . . . . . . . . .  15
 
 
 
-Birkholz, et al.       Expires September 11, 2019               [Page 2]
+Birkholz, et al.       Expires September 12, 2019               [Page 2]
 
 Internet-Draft              RATS Arch & Terms                 March 2019
 
 
-     5.4.  RATS Information Model Terminology  . . . . . . . . . . .  19
-     5.5.  RATS Work-Flow Terminology  . . . . . . . . . . . . . . .  20
-     5.6.  RATS Reference Use Cases  . . . . . . . . . . . . . . . .  21
-       5.6.1.  Use Case A  . . . . . . . . . . . . . . . . . . . . .  21
-       5.6.2.  Use Case B  . . . . . . . . . . . . . . . . . . . . .  21
-     5.7.  RATS Reference Terminology  . . . . . . . . . . . . . . .  21
-     5.8.  Interpretations of RFC4949 Terminology for Attestation  .  23
-     5.9.  Building Block Vocabulary (Not in RFC4949)  . . . . . . .  25
-   6.  IANA considerations . . . . . . . . . . . . . . . . . . . . .  25
-   7.  Security Considerations . . . . . . . . . . . . . . . . . . .  26
-   8.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  26
-   9.  Change Log  . . . . . . . . . . . . . . . . . . . . . . . . .  26
-   10. References  . . . . . . . . . . . . . . . . . . . . . . . . .  26
-     10.1.  Normative References . . . . . . . . . . . . . . . . . .  26
-     10.2.  Informative References . . . . . . . . . . . . . . . . .  26
-     10.3.  URIs . . . . . . . . . . . . . . . . . . . . . . . . . .  26
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  26
+   5.  RATS Terminology  . . . . . . . . . . . . . . . . . . . . . .  15
+     5.1.  Computing Context . . . . . . . . . . . . . . . . . . . .  16
+       5.1.1.  Characteristics of a Computing Context  . . . . . . .  17
+       5.1.2.  Computing Context Semantic Relationships  . . . . . .  18
+       5.1.3.  Computing Context Identity  . . . . . . . . . . . . .  20
+     5.2.  Remote Attestation Concepts . . . . . . . . . . . . . . .  20
+     5.3.  Core RATS Terminology . . . . . . . . . . . . . . . . . .  20
+     5.4.  RATS Information Model Terminology  . . . . . . . . . . .  21
+     5.5.  RATS Work-Flow Terminology  . . . . . . . . . . . . . . .  22
+     5.6.  RATS Reference Use Cases  . . . . . . . . . . . . . . . .  23
+       5.6.1.  Use Case A  . . . . . . . . . . . . . . . . . . . . .  23
+       5.6.2.  Use Case B  . . . . . . . . . . . . . . . . . . . . .  23
+     5.7.  RATS Reference Terminology  . . . . . . . . . . . . . . .  23
+     5.8.  Interpretations of RFC4949 Terminology for Attestation  .  25
+     5.9.  Building Block Vocabulary (Not in RFC4949)  . . . . . . .  27
+   6.  IANA considerations . . . . . . . . . . . . . . . . . . . . .  27
+   7.  Security Considerations . . . . . . . . . . . . . . . . . . .  27
+   8.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  27
+   9.  Change Log  . . . . . . . . . . . . . . . . . . . . . . . . .  28
+   10. References  . . . . . . . . . . . . . . . . . . . . . . . . .  28
+     10.1.  Normative References . . . . . . . . . . . . . . . . . .  28
+     10.2.  Informative References . . . . . . . . . . . . . . . . .  28
+     10.3.  URIs . . . . . . . . . . . . . . . . . . . . . . . . . .  28
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  28
 
 1.  Introduction
 
@@ -143,13 +150,25 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    cooperations).  The foundation of the RATS architecture is the
    specification of RATS Roles that can be chained via RATS Interactions
    and - as a result - compose use-case specific Remote Attestation
-   Procedures.  In summary, the goal of the RATS architecture is to
+   Procedures.  In summary, the goal of the RATS Architecture is to
    enable interoperable interaction between the RATS Roles specified.
-   Hence, the RATS architecture is designed to represent and compose
+   Hence, the RATS Architecture is designed to represent and compose
    heterogeneous RATS and to enable interoperability via well-defined
    semantics of the information (mainly assertions/claims) exchanged and
-   via well-defined tasks (RATS Duties & RATS Interactions) that compose
-   domain-specific RATS solutions.
+   via well-defined functions (RATS Duties & RATS Interactions) that
+   compose domain-specific remote attestation solutions.
+
+
+
+
+
+
+
+
+Birkholz, et al.       Expires September 12, 2019               [Page 3]
+
+Internet-Draft              RATS Arch & Terms                 March 2019
+
 
 1.1.  What is Remote Attestation
 
@@ -157,30 +176,21 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    consequence, the term Remote Attestation covers a spectrum of
    meanings.  The common denominator encompasses the creation,
    conveyance, and appraisal of evidence pertaining to the
-   trustworthiness of the creator of the evidence.  Correspondingly,
-   there are different interpretations, connotations and meanings to the
-   term Remote Attestation.
+   trustworthiness characteristics of the creator of the evidence.  In
+   essence, RATS are used to enable the assessment of the
+   trustworthiness of a communication partner.
 
+1.2.  The purpose of RATS Architecture and Terminology
 
-
-
-
-Birkholz, et al.       Expires September 11, 2019               [Page 3]
-
-Internet-Draft              RATS Arch & Terms                 March 2019
-
-
-1.2.  Contributions to Remote Attestation in the IETF
-
-   To enable consolidation, this document provides a detailed definition
-   of Attestation Terminology to specify interoperable Remote
-   Attestation Procedures.  Specifically, this document illustrates and
-   remediates the impedance mismatch of terms related to Remote
-   Attestation Procedures used in different domains today in order to
-   enable the afore mentioned interoperability of existing and emerging
-   RATS solutions.  As an additional contribution, new terms defined by
-   this document provide a consolidated basis in order to simplify
-   future work on RATS in the IETF and beyond.
+   To consolidate the utilization of existing and emerging network
+   protocols in the context of RATS, this document provides a detailed
+   definition of Attestation Terminology that enables interoperability
+   between different types pf RATS.  Specifically, this document
+   illustrates and remediates the impedance mismatch of terms related to
+   Remote Attestation Procedures used in different domains today.  As an
+   additional contribution, new terms defined by this document provide a
+   common basis that simplifies future work on RATS in the IETF and
+   beyond.
 
 1.3.  Requirements notation
 
@@ -192,14 +202,14 @@ Internet-Draft              RATS Arch & Terms                 March 2019
 2.  RATS Architecture
 
    [Editor's Note: the defined architecture still requires a lot more
-   context to the average reader.  A corresponding use-case document,
+   context for the average reader.  A corresponding use-case document,
    dedicated section in this I-D, or appendix are required to provide
-   that context are missing at the moment]
+   that context - and are missing at the moment]
 
-   The goal of the RATS architecture is to provide the building blocks -
-   the roles defined by the RATS architecture - to enable the
-   composition of service-chains/hierarchies and work-flows to create
-   and appraise evidence about the trustworthiness of devices and
+   One of the goals of the RATS Architecture is to provide the building
+   blocks - the roles defined by the RATS Architecture - to enable the
+   composition of service-chains/hierarchies and work-flows that can
+   create and appraise evidence about the trustworthiness of devices and
    services.
 
    The RATS architecture specifies:
@@ -207,8 +217,17 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    o  the building blocks to create remote attestation procedures
       applicable Actors, Roles, Duties, and Interactions,
 
+
+
+
+
+Birkholz, et al.       Expires September 12, 2019               [Page 4]
+
+Internet-Draft              RATS Arch & Terms                 March 2019
+
+
    o  mandatory and optional trust relationships between its Roles,
-      including Roots-of-Trust
+      including Roots-of-Trust,
 
    o  the interaction between Roles that reside on separate Actors via
       network protocols,
@@ -218,18 +237,24 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    o  the means to prove, preserve and convey trust properties, such as
       identity, varacity, freshness, or provenance, and
 
-
-
-
-Birkholz, et al.       Expires September 11, 2019               [Page 4]
-
-Internet-Draft              RATS Arch & Terms                 March 2019
-
-
    o  primitives necessary for the construction of interoperable
       attestation payloads.
 
-3.  RATS Roles
+3.  Architectural Components
+
+   The basic architectural components defined in this document are:
+
+   o  RATS Roles
+
+   o  RATS Actors
+
+   o  RATS Duties
+
+   o  RATS Interactions
+
+   The following sub-section define and elaborate on these terms:
+
+3.1.  RATS Roles
 
    A Role in the context of usage scenarios for remote attestation
    procedures is providing a service to other Roles.  Roles are building
@@ -247,6 +272,15 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    It is not guaranteed that a Verifier Role can appraise the output of
    a Claimant via reference values (in contrast to the output of an
    Attester).
+
+
+
+
+
+Birkholz, et al.       Expires September 12, 2019               [Page 5]
+
+Internet-Draft              RATS Arch & Terms                 March 2019
+
 
    Examples of Claimant assertions include: * The hardware, firmware and
    software components of the Attester.  * The manufactuer of Attester
@@ -268,20 +302,6 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    can be conveyed from an attester to a verifier via an interconnect.
    Examples include: GPIO pins, an USB link, or the Internet.
 
-   Relying Party:  The consumer and assessor of verifier or
-      Authentication Checker results for the purpose of improved risk
-      management, operational efficiency, security, privacy (natural or
-      legal person) or safety.  The verifier and/or authentication
-      checker roles and the relying party role may be tightly
-      integrated.
-
-
-
-Birkholz, et al.       Expires September 11, 2019               [Page 5]
-
-Internet-Draft              RATS Arch & Terms                 March 2019
-
-
    Authentication Checker:  The consumer of signed assertions such as
       trusted claim sets or attestation evidence that assesses the
       trustworthiness or other trust relationships of the information
@@ -291,12 +311,17 @@ Internet-Draft              RATS Arch & Terms                 March 2019
       via external trust anchors, implicitly.
 
    Verifier:  The consumer of attestation evidence that has a root of
-      trust for verification and implements a conveyance protocol,
+      trust for verification (RTV), implements conveyance protocols,
       appraises attestation evidence against reference values or
-      policies and makes verification results available to relying
+      policies, and makes verification results available to relying
       parties.
 
-   Others:  other content
+   Relying Party:  The consumer and assessor of verifier or
+      Authentication Checker results for the purpose of improved risk
+      management, operational efficiency, security, privacy (natural or
+      legal person) or safety.  The verifier and/or authentication
+      checker roles and the relying party role may be tightly
+      integrated.
 
 4.  RATS Actors
 
@@ -305,6 +330,14 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    (implements) one or more RATS Roles and performs RATS Duties and/or
    RATS Interactions.  RATS Interactions occur between RATS Actors.  The
    methods whereby RATS Actors are identified, discovered, and
+
+
+
+Birkholz, et al.       Expires September 12, 2019               [Page 6]
+
+Internet-Draft              RATS Arch & Terms                 March 2019
+
+
    connectivity established are out-of-scope for this architecture.  In
    contrast, if multiple RATS Roles reside on a single RATS Actor, the
    definition of RATS Interactions is out-of-scope of the RATS
@@ -322,21 +355,66 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    Interactions between RATS Roles belonging to the same RATS Actor are
    generally believed to be uninteresting.
 
+4.1.  RATS Duties
+
+   A RATS Role can take on one ore more duties.  RATS Duties are role-
+   internal functions that do not require interaction with other RATS
+   Roles.  In general, and RATS Duties are typically associated with a
+   RATS Role.  The list presented in this document is exhaustive.  Also,
+   there can be usage scenario where RATS Duties are associated with
+   other RATS Roles than illustrated below:
+
+4.1.1.  Attester Duties
+
+   o  Acquisition or collection of assertions about itself
+
+   o  Provide or create proof that an assertion is bound to the Attester
+
+   o  Create Evidence from assertion bundles via roots-of-trust
+
+4.1.2.  Verifier Duties
+
+   o  Acquisition and storage of assertion semantics
+
+   o  Acquisition and storage of appraisal policies
+
+   o  Verification of Attester Identity (attestation provenance) with
+      respect to evidence
+
+4.1.3.  Supply Chain Entity (SCE) Duties
+
+   o  Implement and harden devices or services (i.e. the Attester)
+
+   o  Evaluate Attester trustworthiness during manufacturing
+
+
+
+Birkholz, et al.       Expires September 12, 2019               [Page 7]
+
+Internet-Draft              RATS Arch & Terms                 March 2019
+
+
+   o  Provision of device identities and/or key material
+
+   o  Embedding of assertions in the Attester during manufacturing
+
+4.1.4.  Relying Party Duties
+
+   o  Evaluate assertions/evidence locally as far as possible
+
+   o  Compare trust policies to attestation-results based on assertions
+      or evidence
+
+   o  Enforce policies or create input for risk engines
+
+4.1.5.  RATS Interactions
+
    Devices are typically composite devices (in the case of atomically
    integrated devices that would result in a composite device with one
    component).  Services are software components - e.g. a daemon, a
    virtual network function (vnf) or a network security function (nsf) -
    that can reside on one or more devices and are not necessarily bound
    to a specific set of devices.
-
-
-
-
-
-Birkholz, et al.       Expires September 11, 2019               [Page 6]
-
-Internet-Draft              RATS Arch & Terms                 March 2019
-
 
    Devices or Services (Systems) can take on one or more RATS roles
    either by separate functions or via a collapsed functions that take
@@ -362,6 +440,16 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    o  which role (or correspondingly, which system that is taking on
       specific RATS roles) is triggering a Remote Attestation Procedure
 
+
+
+
+
+
+Birkholz, et al.       Expires September 12, 2019               [Page 8]
+
+Internet-Draft              RATS Arch & Terms                 March 2019
+
+
    o  which entities are involved in a Remote Attestation Procedure
       (e.g. the attester itself, trusted third parties, specific trust
       anchors, or other sources of assertions)
@@ -375,7 +463,7 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    o  the risks and corresponding threats that are intended to be
       mitigated
 
-4.1.  Trust and Trustworthiness
+4.2.  Trust and Trustworthiness
 
    [RFC4949] provides definitions that highlight the difference between
    a "trusted system" and a "trustworthy system".  The following
@@ -386,14 +474,6 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    A trusted system in the context of RATS "operates as expected,
    according to design and policy, doing what is required and not doing
    other things" [RFC4949].  A trustworthy system is a system "that not
-
-
-
-Birkholz, et al.       Expires September 11, 2019               [Page 7]
-
-Internet-Draft              RATS Arch & Terms                 March 2019
-
-
    only is trusted, but also warrants that trust because the system's
    behavior can be validated in some convincing way, such as through
    formal analysis or code review" [RFC4949].
@@ -417,6 +497,15 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    attestation provenance of attestation evidence is the system that
    intends to present its trustworthiness in a believable manner.
 
+
+
+
+
+Birkholz, et al.       Expires September 12, 2019               [Page 9]
+
+Internet-Draft              RATS Arch & Terms                 March 2019
+
+
    The essential basis for trust in the information created via RATS are
    roots of trust.
 
@@ -437,19 +526,11 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    reporting (RTR), the producer of information takes on the role of an
    attester.
 
-4.2.  Claims and Evidence
+4.3.  Claims and Evidence
 
    The RATS asserter role produces measurements about the system's
    characteristics in the form of signed (sometimes un-signed) claim
    sets in order to convey information.  A secret signing key is
-
-
-
-Birkholz, et al.       Expires September 11, 2019               [Page 8]
-
-Internet-Draft              RATS Arch & Terms                 March 2019
-
-
    required for this procedure, which is typically stored in a shielded
    location that can be trusted, for example, via a root of trust for
    storage (RTS).
@@ -461,10 +542,25 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    respect to this origination is based on a root of trust for
    reporting.
 
-4.3.  RATS Roles
+4.4.  RATS Roles
 
    There are six roles defined in the RATS architecture. iFigure 1
    provides a simplified overview of the roles defined in this section.
+
+
+
+
+
+
+
+
+
+
+
+Birkholz, et al.       Expires September 12, 2019              [Page 10]
+
+Internet-Draft              RATS Arch & Terms                 March 2019
+
 
           +------------+                     +------------------+
           |            |                     |                  |
@@ -498,14 +594,6 @@ Internet-Draft              RATS Arch & Terms                 March 2019
       properties regarding the trustworthiness of a system's
       characteristics that has a root of trust for measurement.  It is
       not guaranteed that a verifier can appraise the output of a
-
-
-
-Birkholz, et al.       Expires September 11, 2019               [Page 9]
-
-Internet-Draft              RATS Arch & Terms                 March 2019
-
-
       claimant via reference values.  Examples of claim output include:
       the binding of an attester to an RTR, GPS coordinates set of
       integrity measurements, or an Universal Entity ID (UEID).
@@ -522,6 +610,14 @@ Internet-Draft              RATS Arch & Terms                 March 2019
       checker roles and the relying party role may be tightly
       integrated.
 
+
+
+
+Birkholz, et al.       Expires September 12, 2019              [Page 11]
+
+Internet-Draft              RATS Arch & Terms                 March 2019
+
+
    Authentication Checker:  The consumer of signed assertions such as
       trusted claim sets or attestation evidence that assesses the
       trustworthiness or other trust relationships of the information
@@ -536,14 +632,14 @@ Internet-Draft              RATS Arch & Terms                 March 2019
       policies and makes verification results available to relying
       parties.
 
-4.4.  Exemplary Composition of Roles
+4.5.  Exemplary Composition of Roles
 
    In order to provide an intuitive understanding how the roles used in
    RATS can be composed into work-flows, this document provides a few
    example work-flows.  Boxes in the following examples that include
    more than one role are systems that take on more than one role.
 
-4.4.1.  Conveyance of Trusted Claim Sets Validated by Signature
+4.5.1.  Conveyance of Trusted Claim Sets Validated by Signature
 
    If there is a trust relationship between a trusted third party that
    can assert that signed claims created by a claimant guarantee a
@@ -553,14 +649,6 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    an authoritative third party.  In this work-flow claim emission is
    triggered by the claimant.  Variations based on requests emitted by
    the relying party can be easily facilitated by the same set of roles.
-
-
-
-
-Birkholz, et al.       Expires September 11, 2019              [Page 10]
-
-Internet-Draft              RATS Arch & Terms                 March 2019
-
 
                                     +---------------------------------------+
                                     |                                       |
@@ -575,7 +663,18 @@ Internet-Draft              RATS Arch & Terms                 March 2019
 
      Figure 2: Conveyance of Trusted Claim Sets Validated by Signature
 
-4.4.2.  Conveyance of Attestation Evidence Appraised by a Verifier
+
+
+
+
+
+
+Birkholz, et al.       Expires September 12, 2019              [Page 12]
+
+Internet-Draft              RATS Arch & Terms                 March 2019
+
+
+4.5.2.  Conveyance of Attestation Evidence Appraised by a Verifier
 
    If there is trust in the root of trust for reporting based on the
    assertions of a trusted third party, the work-flow depicted in
@@ -607,18 +706,7 @@ Internet-Draft              RATS Arch & Terms                 March 2019
 
    Figure 3: Conveyance of Attestation Evidence Appraised by a Verifier
 
-
-
-
-
-
-
-Birkholz, et al.       Expires September 11, 2019              [Page 11]
-
-Internet-Draft              RATS Arch & Terms                 March 2019
-
-
-4.5.  The Scope of RATS
+4.6.  The Scope of RATS
 
    During its evolution, the term Remote Attestation has been used in
    multiple contexts and multiple scopes and in consequence accumulated
@@ -633,6 +721,14 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    As the contribution, from that state-of-the-art a set of terms that
    provides a stable basis for future work on RATS in the IETF is
    derived.
+
+
+
+
+Birkholz, et al.       Expires September 12, 2019              [Page 13]
+
+Internet-Draft              RATS Arch & Terms                 March 2019
+
 
    In essence, a prerequisite for providing an adequate set of terms and
    definitions for the RATS architecute is a general understanding and a
@@ -652,7 +748,7 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    Additional explanatory text will be added to provide more context and
    coherence.
 
-4.5.1.  The Lying Endpoint Problem
+4.6.1.  The Lying Endpoint Problem
 
    A very prominent goal of RATS is to address the "lying endpoint
    problem".  The lying endpoint problem is characterized as a condition
@@ -666,14 +762,6 @@ Internet-Draft              RATS Arch & Terms                 March 2019
 
    Attempts to "scrub" the data or "proxy" control elements implies the
    existence of a more fundamental trusted endpoint that is operating
-
-
-
-Birkholz, et al.       Expires September 11, 2019              [Page 12]
-
-Internet-Draft              RATS Arch & Terms                 March 2019
-
-
    correctly.  Therefore, Remote Attestation - the technology designed
    to detect and mitigate the "lying endpoint problem" - must be trusted
    to behave correctly independent of other controls.
@@ -689,13 +777,22 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    information in question, the emitted information can be considered
    valid and integer.
 
+
+
+
+
+Birkholz, et al.       Expires September 12, 2019              [Page 14]
+
+Internet-Draft              RATS Arch & Terms                 March 2019
+
+
    In contrast, such Evidence has to be impossible to create if the
    software instances used in a Computing Context are compromised.
    Attestation activities that are intended to create this Evidence
    therefore also provide guarantees about the validity of the Evidence
    they can create.
 
-4.5.2.  How the RATS Architecture Addresses the Lying Endpoint Problem
+4.6.2.  How the RATS Architecture Addresses the Lying Endpoint Problem
 
    RATS imply the involvement of at least two players (roles) who seek
    to overcome the lying endpoint problem.  The Verifier wishes to
@@ -722,14 +819,6 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    reporting.  Evidence may be structured in an interoperable format
    called claims that may include references to the claimants which are
    asserting the claims.  RATS aims to define "interoperable Remote
-
-
-
-Birkholz, et al.       Expires September 11, 2019              [Page 13]
-
-Internet-Draft              RATS Arch & Terms                 March 2019
-
-
    Attestation" such that evidence can be created and consumed by
    different ecosystem systems and can be securely exchanged by a broad
    set of network protocols.
@@ -744,6 +833,14 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    o  Entity (System entity)
 
    o  Identity
+
+
+
+
+Birkholz, et al.       Expires September 12, 2019              [Page 15]
+
+Internet-Draft              RATS Arch & Terms                 March 2019
+
 
    o  Object
 
@@ -779,13 +876,6 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    document are distinguished by capitalizing the first letter of the
    term (e.g.  Term or First_word Second_word).
 
-
-
-Birkholz, et al.       Expires September 11, 2019              [Page 14]
-
-Internet-Draft              RATS Arch & Terms                 March 2019
-
-
 5.1.  Computing Context
 
    This section introduces the term Computing Context in order to
@@ -800,6 +890,14 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    virtual components via hardware-based and software-based solutions.
    The number of approaches and techniques to construct an endpoint
    continuously changes with new innovation.  Hence, it isn't a goal of
+
+
+
+Birkholz, et al.       Expires September 12, 2019              [Page 16]
+
+Internet-Draft              RATS Arch & Terms                 March 2019
+
+
    this document to define remote attestation for a fixed set of
    endpoints.  Rather, it attempts to define endpoints conceptually and
    rely on Claims management as a way to clarify the details and
@@ -833,15 +931,6 @@ Internet-Draft              RATS Arch & Terms                 March 2019
       [ref t2trg], including hardware-based and software-based sub-
       contexts that constitute independent, isolated and distinguishable
       slices of a Computing Context created by compartmentalization
-
-
-
-
-Birkholz, et al.       Expires September 11, 2019              [Page 15]
-
-Internet-Draft              RATS Arch & Terms                 March 2019
-
-
       mechanisms, such as Trusted Execution Environments (TEE), Hardware
       Security Modules (HSM) or Virtual Network Function (VNF) contexts.
 
@@ -856,6 +945,14 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    $ Computing Context Characteristics:  A representation of the
       identity, composition, configuration and state of a Computing
       Context.
+
+
+
+
+Birkholz, et al.       Expires September 12, 2019              [Page 17]
+
+Internet-Draft              RATS Arch & Terms                 March 2019
+
 
       Computing context characteristics provide the following: * An
       independent environment in regard to executing and running
@@ -890,14 +987,6 @@ Internet-Draft              RATS Arch & Terms                 March 2019
 
    o  Tuples (e.g. 2-tuple, n-tuple),
 
-
-
-
-Birkholz, et al.       Expires September 11, 2019              [Page 16]
-
-Internet-Draft              RATS Arch & Terms                 March 2019
-
-
    o  Nested,
 
    o  Clustered (homogeneous),
@@ -912,6 +1001,14 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    o  An object,
 
    o  A composition of objects,
+
+
+
+
+Birkholz, et al.       Expires September 12, 2019              [Page 18]
+
+Internet-Draft              RATS Arch & Terms                 March 2019
+
 
    o  A system component,
 
@@ -947,13 +1044,6 @@ Internet-Draft              RATS Arch & Terms                 March 2019
 
    o  A controller, sensor, actutor, switch, router or gateway,
 
-
-
-Birkholz, et al.       Expires September 11, 2019              [Page 17]
-
-Internet-Draft              RATS Arch & Terms                 March 2019
-
-
    o  An FPGA,
 
    o  An ASIC,
@@ -966,6 +1056,15 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    Computing Context; a subsystem is a decomposition of a system; a sub-
    component is a decomposition of a component; and a peer node is a
    decomposition of a node cluster.
+
+
+
+
+
+Birkholz, et al.       Expires September 12, 2019              [Page 19]
+
+Internet-Draft              RATS Arch & Terms                 March 2019
+
 
    A formal semantic relationship is therefore expressed using an
    information model that captures interactions, relationships, bindings
@@ -1003,13 +1102,6 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    The exchange of attestation evidence can be formalized to include
    well-defined protocol, message syntax and semantics.
 
-
-
-Birkholz, et al.       Expires September 11, 2019              [Page 18]
-
-Internet-Draft              RATS Arch & Terms                 March 2019
-
-
 5.3.  Core RATS Terminology
 
    $ Attestation:  The creation of evidence by the Attester based on
@@ -1022,6 +1114,13 @@ Internet-Draft              RATS Arch & Terms                 March 2019
 
    $ Conveyance:  The transfer of Evidence from the Attester to the
       Verifier.
+
+
+
+Birkholz, et al.       Expires September 12, 2019              [Page 20]
+
+Internet-Draft              RATS Arch & Terms                 March 2019
+
 
    $ Verification:  The appraisal of Evidence by the Verifier who
       evaluates it against a reference policy.  See also RFC4949 [1].
@@ -1059,13 +1158,6 @@ Internet-Draft              RATS Arch & Terms                 March 2019
 
    3.  Proof of Claimant identity.
 
-
-
-Birkholz, et al.       Expires September 11, 2019              [Page 19]
-
-Internet-Draft              RATS Arch & Terms                 March 2019
-
-
    4.  Proof the Claimant intended to make these Claims.
 
    Note: Proofs of Claims assertions may be separated from the Claim
@@ -1076,6 +1168,15 @@ Internet-Draft              RATS Arch & Terms                 March 2019
 
    $ Attested (Asserted) Claim:  An Attestable Claim where the proof
       elements are populated.
+
+
+
+
+
+Birkholz, et al.       Expires September 12, 2019              [Page 21]
+
+Internet-Draft              RATS Arch & Terms                 March 2019
+
 
    $ Evidence (Claims) Creation:  Instantiation of Attested Claims by a
       Claimant.
@@ -1113,15 +1214,6 @@ Internet-Draft              RATS Arch & Terms                 March 2019
 
    $ Task:  A unit of work to be done or undertaken.
 
-
-
-
-
-Birkholz, et al.       Expires September 11, 2019              [Page 20]
-
-Internet-Draft              RATS Arch & Terms                 March 2019
-
-
       In the scope of RATS, a task is a procedure to be conducted.
       Example: A Verifier can be tasked with the appraisal of Evidence
       originating from a specific type of Computing Contexts providing
@@ -1134,6 +1226,14 @@ Internet-Draft              RATS Arch & Terms                 March 2019
       or function in the scope of an Activity conducted by a Computing
       Context.  A single action provides no semantic context by itself,
       although it can limit potential semantic contexts of RATS to a
+
+
+
+Birkholz, et al.       Expires September 12, 2019              [Page 22]
+
+Internet-Draft              RATS Arch & Terms                 March 2019
+
+
       specific scope.  Example: Signing an existing public key via a
       specific openssl library, transmitting data, or receiving data are
       actions.
@@ -1170,14 +1270,6 @@ Internet-Draft              RATS Arch & Terms                 March 2019
       is able to create Claims, an Attester is able to Attest those
       Claims and a Verifier is able to verify the Claims.
 
-
-
-
-Birkholz, et al.       Expires September 11, 2019              [Page 21]
-
-Internet-Draft              RATS Arch & Terms                 March 2019
-
-
    $ Attestation Identity:  An identity that refers to an Attester.
 
    $ Attestation Identity Credential:  A credential used to authenticate
@@ -1189,6 +1281,14 @@ Internet-Draft              RATS Arch & Terms                 March 2019
       properties that are stronger than the Computing Context about
       which the AIK attests.  A root-of-trust Computing Context normally
       protects AIK private keys.
+
+
+
+
+Birkholz, et al.       Expires September 12, 2019              [Page 23]
+
+Internet-Draft              RATS Arch & Terms                 March 2019
+
 
    $ Claimant Identity:  An identity that refers to an Claimant.
 
@@ -1225,15 +1325,6 @@ Internet-Draft              RATS Arch & Terms                 March 2019
       policies associated with Attestation where no other Computing
       Context is expected to provide its Attestation Evidence.
 
-
-
-
-
-Birkholz, et al.       Expires September 11, 2019              [Page 22]
-
-Internet-Draft              RATS Arch & Terms                 March 2019
-
-
    $ Trustworthy Computing Context:  A Computing Context that guarantees
       trustworthy behavior and/or composition (with respect to certain
       declarative guidance and a scope of confidence).  A trustworthy
@@ -1242,6 +1333,18 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    <NMS: is this necessary?> Trustworthy Statement:  Evidence conveyed
       by a Computing Context that is not necessarily trustworthy.
       [update with tamper related terms]
+
+
+
+
+
+
+
+
+Birkholz, et al.       Expires September 12, 2019              [Page 24]
+
+Internet-Draft              RATS Arch & Terms                 March 2019
+
 
 5.8.  Interpretations of RFC4949 Terminology for Attestation
 
@@ -1282,14 +1385,6 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    Correctness:  The property of a system that is guaranteed as the
       result of formal Verification activities.
 
-
-
-
-Birkholz, et al.       Expires September 11, 2019              [Page 23]
-
-Internet-Draft              RATS Arch & Terms                 March 2019
-
-
    Correctness integrity:  The property that the information represented
       by data is accurate and consistent.
 
@@ -1297,6 +1392,15 @@ Internet-Draft              RATS Arch & Terms                 March 2019
       destroyed, or lost in an unauthorized or accidental manner.  (See:
       data integrity service.  Compare: correctness integrity, source
       integrity.)
+
+
+
+
+
+Birkholz, et al.       Expires September 12, 2019              [Page 25]
+
+Internet-Draft              RATS Arch & Terms                 March 2019
+
 
       (b) The property that information has not been modified or
       destroyed in an unauthorized manner.
@@ -1337,15 +1441,6 @@ Internet-Draft              RATS Arch & Terms                 March 2019
       specifications) outside of other parts of the system.  (See:
       subsystem.)
 
-
-
-
-
-Birkholz, et al.       Expires September 11, 2019              [Page 24]
-
-Internet-Draft              RATS Arch & Terms                 March 2019
-
-
       An identifiable and self-contained part of a $Target-of-
       Evaluation.
 
@@ -1355,6 +1450,13 @@ Internet-Draft              RATS Arch & Terms                 March 2019
       according to design and policy, doing what is required - despite
       environmental disruption, human user and operator errors, and
       attacks by hostile parties - and not doing other things.
+
+
+
+Birkholz, et al.       Expires September 12, 2019              [Page 26]
+
+Internet-Draft              RATS Arch & Terms                 March 2019
+
 
    Verification:  (a) The process of examining information to establish
       the truth of a claimed fact or value.
@@ -1394,14 +1496,6 @@ Internet-Draft              RATS Arch & Terms                 March 2019
 
    o  second item
 
-
-
-
-Birkholz, et al.       Expires September 11, 2019              [Page 25]
-
-Internet-Draft              RATS Arch & Terms                 March 2019
-
-
 7.  Security Considerations
 
    There are always some.
@@ -1409,6 +1503,16 @@ Internet-Draft              RATS Arch & Terms                 March 2019
 8.  Acknowledgements
 
    Maybe.
+
+
+
+
+
+
+Birkholz, et al.       Expires September 12, 2019              [Page 27]
+
+Internet-Draft              RATS Arch & Terms                 March 2019
+
 
 9.  Change Log
 
@@ -1445,19 +1549,6 @@ Internet-Draft              RATS Arch & Terms                 March 2019
 
 Authors' Addresses
 
-
-
-
-
-
-
-
-
-Birkholz, et al.       Expires September 11, 2019              [Page 26]
-
-Internet-Draft              RATS Arch & Terms                 March 2019
-
-
    Henk Birkholz
    Fraunhofer SIT
    Rheinstrasse 75
@@ -1465,6 +1556,18 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    Germany
 
    Email: henk.birkholz@sit.fraunhofer.de
+
+
+
+
+
+
+
+
+
+Birkholz, et al.       Expires September 12, 2019              [Page 28]
+
+Internet-Draft              RATS Arch & Terms                 March 2019
 
 
    Monty Wiseman
@@ -1509,4 +1612,13 @@ Internet-Draft              RATS Arch & Terms                 March 2019
 
 
 
-Birkholz, et al.       Expires September 11, 2019              [Page 27]
+
+
+
+
+
+
+
+
+
+Birkholz, et al.       Expires September 12, 2019              [Page 29]
