@@ -102,11 +102,6 @@ As an additional contribution, new terms defined by this document provide a comm
 
 {::boilerplate bcp14}
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-"SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
-"OPTIONAL" in this document are to be interpreted as described in RFC
-2119, BCP 14 {{RFC2119}}.
-
 # RATS Architecture
 
 One of the goals of the RATS Architecture is to provide the building blocks - the roles defined by the RATS Architecture - to enable the composition of service-chains/hierarchies and work-flows that can create and appraise evidence about the trustworthiness of devices and services.
