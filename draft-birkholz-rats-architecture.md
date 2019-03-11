@@ -54,7 +54,7 @@ author:
 
 normative:
   RFC2119:
-  
+
 
 informative:
   I-D.ietf-sacm-terminology: sacmterm
@@ -258,7 +258,7 @@ Attester/Verifier:
 
 Attester/Relying-Party:
 
-: A Relying Party typically requires external help to either validate authentication information or to appraise evidence presented by an Attester. In most cases, a Relying Party requires a corresponding Verifier to process the assertions/evidence received. In consequence, (a subset of) the information received by an Attester must be relayed securely to a Verifier. 
+: A Relying Party typically requires external help to either validate authentication information or to appraise evidence presented by an Attester. In most cases, a Relying Party requires a corresponding Verifier to process the assertions/evidence received. In consequence, (a subset of) the information received by an Attester must be relayed securely to a Verifier.
 
 Relying-Party/Verifier:
 
@@ -338,12 +338,12 @@ There are six roles defined in the RATS architecture. i{{figalllevels}} provides
 |            |                  |  |                  |
 +------------+                  |  +------------------+
       ^                         |
-      |                         |  +------------------+
-      |     +----------------+  |  |                  |
-      +---->|                |<-+  |  Authentication  |
-            |  Interconnect  |<--->|  Checker         |
-      +---->|                |<-+  |                  |
-      |     +----------------+  |  +------------------+
+      |                         |
+      |     +----------------+  |
+      +---->|                |<-+
+            |  Interconnect  |
+      +---->|                |<-+
+      |     +----------------+  |
       v                         |
 +------------+                  |  +------------------+
 |            |                  |  |                  |
@@ -363,16 +363,13 @@ In order to provide an intuitive understanding how the roles used in RATS can be
 If there is a trust relationship between a trusted third party that can assert that signed claims created by a claimant guarantee a trustworthy origination of claim, the work-flow depicted in {{cosecwt}} can facilitate a trust-based implicit remote attestation procedure. The information conveyed are signed claim sets that are trusted via an authoritative third party. In this work-flow claim emission is triggered by the claimant. Variations based on requests emitted by the relying party can be easily facilitated by the same set of roles.
 
 ~~~~
-                                    +---------------------------------------+
-                                    |                                       |
-                                    |  +------------------+  +-----------+  |
-+------------+  +----------------+  |  |                  |  |           |  |
-|            |  |                |  |  |  Authentication  |  |  Relying  |  |
-|  Claimant  |->|  Interconnect  |--+->|  Checker         |->|  Party    |  |
-|            |  |                |  |  |                  |  |           |  |
-+------------+  +----------------+  |  +------------------+  +-----------+  |
-                                    |                                       |
-                                    +---------------------------------------+
+                                      +-----------+
++------------+  +----------------+    |           |
+|            |  |                |    |  Relying  |
+|  Claimant  |->|  Interconnect  |--->|  Party    |
+|            |  |                |    |           |
++------------+  +----------------+    +-----------+
+
 ~~~~
 {:rats #cosecwt title="Conveyance of Trusted Claim Sets Validated by Signature"}
 
@@ -381,23 +378,23 @@ If there is a trust relationship between a trusted third party that can assert t
 If there is trust in the root of trust for reporting based on the assertions of a trusted third party, the work-flow depicted in {{evidence}} can facilitate an evidence-based explicit remote attestation procedure. The information conveyed is signed attestation evidence that is created by the trusted verifier. In this work-flow claims do not necessarily have to be signed and the work-flow is triggered by the attestor that aggregates claims from a root of trust of measurement. Variations based on requests emitted by the verifier can be easily facilitated by the same set of roles.
 
 ~~~~
-+------------------+                      +------------------------+
-|                  |                      |  +------------------+  |
-|  +------------+  |  +----------------+  |  |                  |  |
-|  |            |  |  |                |  |  |  Authentication  |  |
-|  |  Attester  |--+->|  Interconnect  |--+->|  Checker         |  |
-|  |            |  |  |                |  |  |                  |  |
-|  +------------+  |  +----------------+  |  +------------------+  |
-|        ^         |  +-------------------+            |           |
-|        |         |  |                                |           |
-|        |         |  |   +-----------+                v           |
-|  +-----+------+  |  |   |           |          +------------+    |
-|  |            |  |  |   |  Relying  |          |            |    |
-|  |  Claimant  |  |  |   |  Party    |<---------|  Verifier  |    |
-|  |            |  |  |   |           |          |            |    |
-|  +------------+  |  |   +-----------+          +------------+    |
-|                  |  |                                            |
-+------------------+  +--------------------------------------------+
++------------------+                      +----------------------+
+|                  |                      |  +----------------+  |
+|  +------------+  |  +----------------+  |  |                |  |
+|  |            |  |  |                |  |  |                |  |
+|  |  Attester  |--+->|  Interconnect  |--+->|   Verifier     |  |
+|  |            |  |  |                |  |  |                |  |
+|  +------------+  |  +----------------+  |  +----------------+  |
+|        ^         |                      |          |           |
+|        |         |                      |          v           |
+|        |         |                      |   +-----------+      |
+|  +-----+------+  |                      |   |           |      |
+|  |            |  |                      |   |  Relying  |      |
+|  |  Claimant  |  |                      |   |  Party    |      |
+|  |            |  |                      |   |           |      |
+|  +------------+  |                      |   +-----------+      |
+|                  |                      |                      |
++------------------+                      +----------------------+
 ~~~~
 {:rats #evidence title="Conveyance of Attestation Evidence Appraised by a Verifier"}
 
