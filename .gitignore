@@ -2,6 +2,8 @@
 *.txt
 *.html
 *.pdf
+*.upload
+.tags
 *~
 *.swp
 /*-[0-9][0-9].xml
@@ -10,5 +12,6 @@
 venv/
 issues.json
 pulls.json
+report.xml
 lib
-draft-birkholz-attestation-terminology-latest.xml
+draft-birkholz-attestation-terminology.xml
