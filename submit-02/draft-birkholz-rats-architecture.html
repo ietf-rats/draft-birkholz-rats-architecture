@@ -559,19 +559,12 @@ ul.toc li {
 <dl>
 <dt>Claimant:</dt>
 <dd style="margin-left: 8">The producer of trustworthiness assertions pertaining to an Attester; that may or not have a root-of-trust for measurement.</dd>
-</dl>
-<p id="rfc.section.3.1.p.4">It is not guaranteed that a Verifier Role can appraise the output of a Claimant via reference values (in contrast to the output of an Attester).</p>
-<p id="rfc.section.3.1.p.5">Examples of Claimant assertions include: * The hardware, firmware and software components of the Attester.  * The manufactuer of Attester components.  * The Attester&#8217;s current configuration.  * The Attester&#8217;s current location - e.g. GPS coordinates.  * The method by which binding of an attester to an RTR.  * The identifier(s) available for identifying and authenticating the Attester - e.g. Universal Entity ID (UEID).</p>
-<p></p>
-
-<dl>
+<dt></dt>
+<dd style="margin-left: 8">It is not guaranteed that a Verifier Role can appraise the output of a Claimant via reference values (in contrast to the output of an Attester).</dd>
+<dt></dt>
+<dd style="margin-left: 8">Examples of Claimant assertions include: * The hardware, firmware and software components of the Attester.  * The manufactuer of Attester components.  * The Attester&#8217;s current configuration.  * The Attester&#8217;s current location - e.g. GPS coordinates.  * The method by which binding of an attester to an RTR.  * The identifier(s) available for identifying and authenticating the Attester - e.g. Universal Entity ID (UEID).</dd>
 <dt>Attester:</dt>
 <dd style="margin-left: 8">The producer of attestation evidence that has a root of trust for reporting (RTR) and implements a conveyance protocol, authenticates using an attestation credential, consumes assertions about itself and presents it to a consumer of evidence (e.g. a relying party or a verifier). Every output of an attester can be appraised via reference values.</dd>
-</dl>
-<p id="rfc.section.3.1.p.7">;Interconnect: ; ;: A communication channel or secure path between systems that take on RATS roles.  ;Attestation evidence, for example, can be conveyed from an attester to a verifier via an interconnect.  ;Examples include: GPIO pins, an USB link, or the Internet.</p>
-<p></p>
-
-<dl>
 <dt>Authentication Checker:</dt>
 <dd style="margin-left: 8">The consumer of signed assertions such as trusted claim sets or attestation evidence that assesses the trustworthiness or other trust relationships of the information consumed via trusted third parties or external trust authorities, such as a privacy certificate authority.  In certain environments, an Authentication Checker can assess a system&#8217;s trustworthiness via external trust anchors, implicitly.</dd>
 <dt>Verifier:</dt>
