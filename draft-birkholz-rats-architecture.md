@@ -176,6 +176,27 @@ The verifier and/or authentication checker roles and the relying party role may 
 RATS Actors may be any entity, such as an user, organization, execution environment, device or service provider, that takes on (implements) one or more RATS Roles and performs RATS Duties and/or RATS Interactions.
 RATS Interactions occur between RATS Actors. The methods whereby RATS Actors are identified, discovered, and connectivity established are out-of-scope for this architecture. In contrast, if multiple RATS Roles reside on a single RATS Actor, the definition of RATS Interactions is out-of-scope of the RATS architecture, if no network protocols are required.
 
+{:rats: artwork-align="center"}
+
+~~~~ RATS
++------------------+   +------------------+
+|      Actor 1     |   |      Actor 2     |
+|  +------------+  |   |  +------------+  |
+|  |            |  |   |  |            |  |
+|  |    Role 1  |<-|---|->|    Role 2  |  |
+|  |            |  |   |  |            |  |
+|  +------------+  |   |  +------------+  |
+|                  |   |                  |
+|  +-----+------+  |   |  +-----+------+  |
+|  |            |  |   |  |            |  |
+|  |    Role 2  |<-|---|->|    Role 3  |  |
+|  |            |  |   |  |            |  |
+|  +------------+  |   |  +------------+  |
+|                  |   |                  |
++------------------+   +------------------+
+~~~~
+{:rats #actors title="RATS Actor-Role Interactions"}
+
 RATS Actors have the following properties:
 * Multiplicity - Multiple instances of RATS Actors that possess the same RATS Roles can exist.
 * Decomposability -  A singleton RATS Actor possessing multiple RATS Roles can be separated into multiple RATS Actors.
@@ -184,6 +205,7 @@ RATS Interactions may occur between them.
 RATS Interactions between combined RATS Actors ceases.
 
 Interactions between RATS Roles belonging to the same RATS Actor are generally believed to be uninteresting.
+Actor operations that apply resiliency, scaling, load balancing or replication are generally believed to be uninteresting.
 
 ## RATS Duties
 
@@ -888,4 +910,3 @@ Maybe.
 No changes yet.
 
 --- back
-
