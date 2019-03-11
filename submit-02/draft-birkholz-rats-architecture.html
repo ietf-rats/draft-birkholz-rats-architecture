@@ -519,12 +519,13 @@ ul.toc li {
 <h1 id="rfc.section.1.3">
 <a href="#rfc.section.1.3">1.3.</a> <a href="#requirements-notation" id="requirements-notation">Requirements notation</a>
 </h1>
-<p id="rfc.section.1.3.p.1">The key words &#8220;MUST&#8221;, &#8220;MUST NOT&#8221;, &#8220;REQUIRED&#8221;, &#8220;SHALL&#8221;, &#8220;SHALL NOT&#8221;, &#8220;SHOULD&#8221;, &#8220;SHOULD NOT&#8221;, &#8220;RECOMMENDED&#8221;, &#8220;NOT RECOMMENDED&#8221;, &#8220;MAY&#8221;, and &#8220;OPTIONAL&#8221; in this document are to be interpreted as described in RFC 2119, BCP 14 <a href="#RFC2119" class="xref">[RFC2119]</a>.</p>
+<p id="rfc.section.1.3.p.1">The key words &#8220;MUST&#8221;, &#8220;MUST NOT&#8221;, &#8220;REQUIRED&#8221;, &#8220;SHALL&#8221;, &#8220;SHALL NOT&#8221;, &#8220;SHOULD&#8221;, &#8220;SHOULD NOT&#8221;, &#8220;RECOMMENDED&#8221;, &#8220;NOT RECOMMENDED&#8221;, &#8220;MAY&#8221;, and &#8220;OPTIONAL&#8221; in this document are to be interpreted as described in BCP&#160;14 <a href="#RFC2119" class="xref">[RFC2119]</a> <a href="#RFC8174" class="xref">[RFC8174]</a> when, and only when, they appear in all capitals, as shown here.</p>
+<p id="rfc.section.1.3.p.2">The key words &#8220;MUST&#8221;, &#8220;MUST NOT&#8221;, &#8220;REQUIRED&#8221;, &#8220;SHALL&#8221;, &#8220;SHALL NOT&#8221;, &#8220;SHOULD&#8221;, &#8220;SHOULD NOT&#8221;, &#8220;RECOMMENDED&#8221;, &#8220;NOT RECOMMENDED&#8221;, &#8220;MAY&#8221;, and &#8220;OPTIONAL&#8221; in this document are to be interpreted as described in RFC 2119, BCP 14 <a href="#RFC2119" class="xref">[RFC2119]</a>.</p>
 <h1 id="rfc.section.2">
 <a href="#rfc.section.2">2.</a> <a href="#rats-architecture" id="rats-architecture">RATS Architecture</a>
 </h1>
-<p id="rfc.section.2.p.1">[Editor&#8217;s Note: the defined architecture still requires a lot more context for the average reader. A corresponding use-case document, dedicated section in this I-D, or appendix are required to provide that context - and are missing at the moment]</p>
-<p id="rfc.section.2.p.2">One of the goals of the RATS Architecture is to provide the building blocks - the roles defined by the RATS Architecture - to enable the composition of service-chains/hierarchies and work-flows that can create and appraise evidence about the trustworthiness of devices and services.</p>
+<p id="rfc.section.2.p.1">One of the goals of the RATS Architecture is to provide the building blocks - the roles defined by the RATS Architecture - to enable the composition of service-chains/hierarchies and work-flows that can create and appraise evidence about the trustworthiness of devices and services.</p>
+<p id="rfc.section.2.p.2">The RATS Architecture is based on the use-cases defined in <a href="#I-D.richardson-rats-usecases" class="xref">[I-D.richardson-rats-usecases]</a>.</p>
 <p id="rfc.section.2.p.3">The RATS architecture specifies:</p>
 <p></p>
 
@@ -563,6 +564,8 @@ ul.toc li {
 <dd style="margin-left: 8">It is not guaranteed that a Verifier Role can appraise the output of a Claimant via reference values (in contrast to the output of an Attester).</dd>
 <dt></dt>
 <dd style="margin-left: 8">Examples of Claimant assertions include: * The hardware, firmware and software components of the Attester.  * The manufactuer of Attester components.  * The Attester&#8217;s current configuration.  * The Attester&#8217;s current location - e.g. GPS coordinates.  * The method by which binding of an attester to an RTR.  * The identifier(s) available for identifying and authenticating the Attester - e.g. Universal Entity ID (UEID).</dd>
+<dt></dt>
+<dd style="margin-left: 8">Typically, claimant role are taken on by RATS Actors that supply chain entities (SCE). Various assertions (often represented as Claims or Trusted Claims Sets, e.g. <a href="#I-D.mandyam-eat" class="xref">[I-D.mandyam-eat]</a> or <a href="#I-D.tschofenig-rats-psa-token" class="xref">[I-D.tschofenig-rats-psa-token]</a>).</dd>
 <dt>Attester:</dt>
 <dd style="margin-left: 8">The producer of attestation evidence that has a root of trust for reporting (RTR) and implements a conveyance protocol, authenticates using an attestation credential, consumes assertions about itself and presents it to a consumer of evidence (e.g. a relying party or a verifier). Every output of an attester can be appraised via reference values.</dd>
 <dt>Authentication Checker:</dt>
@@ -649,8 +652,8 @@ ul.toc li {
 <h1 id="rfc.section.4.1.5">
 <a href="#rfc.section.4.1.5">4.1.5.</a> <a href="#rats-interactions" id="rats-interactions">RATS Interactions</a>
 </h1>
-<p id="rfc.section.4.1.5.p.1">The flow of information between RATS Roles located on RATS Actors compose individual remote attestation procedures. The RATS Architecture provides a set of standard interactions between the RATS Roles defined in order to enable this composability. In this section common interactions between roles are specified. This list of interactions is not exhaustive, but provides the basis to create various standard RATS.</p>
-<p id="rfc.section.4.1.5.p.2">Every RATS Interaction specified below is based on the information flow between two RATS Roles defined above. Every RATS Interaction is conducted via an Interconnect between corresponding RATS Roles that RATS Actors take on. If more than one RATS Role resides on the same RATS Actor, a network protocol might not be required. If RATS Roles are collapsed into a singular RATS Actor in this way, the method of conveying information is out-of-scope of this document. If network protocols are used to convey corresponding information between RATS Roles (collapsed on a singular RATS Actor or not), the definitions and requirements defined in this document apply.</p>
+<p id="rfc.section.4.1.5.p.1">The flow of information between RATS Roles located on RATS Actors compose individual remote attestation procedures.  The RATS Architecture provides a set of standard interactions between the RATS Roles defined in this document in order to enable this composability.  In this section, common interactions between roles are specified.  This list of interactions is not exhaustive, but provides the basis to create various standard RATS.</p>
+<p id="rfc.section.4.1.5.p.2">Every RATS Interaction specified below is based on the information flow between two RATS Roles defined above.  Every RATS Interaction is conducted via an Interconnect between corresponding RATS Roles that RATS Actors take on.  If more than one RATS Role resides on the same RATS Actor, a network protocol might not be required.  If RATS Roles are collapsed into a singular RATS Actor in this way, the method of conveying information is out-of-scope of this document.  If network protocols are used to convey corresponding information between RATS Roles (collapsed on a singular RATS Actor or not), the definitions and requirements defined in this document apply.</p>
 <p id="rfc.section.4.1.5.p.3">In essence, an Interconnect is an abstract &#8220;distance-less&#8221; channel between RATS Actors that can range from General Purpose Input Output (GPIO) interfaces to the Internet.</p>
 <p></p>
 
@@ -665,9 +668,9 @@ ul.toc li {
 <dd style="margin-left: 8">Attestation information originating from an Attester that is relayed via a Relying Party must be protected from replay or relay attacks, accordingly. In a closed ecosystem, trustworthiness with respect to the Attester can be achieved via a simply query to the Verifier. In an open ecosystem, the information conveyed in this interaction can include integrity measurements of every distinguishable software component that has been executed since its last boot cycle.</dd>
 <dt></dt>
 <dd style="margin-left: 8">In the scope of RATS, this interaction encompasses the largest variety of information conveyed.</dd>
-<dt>SCE/Verifier:</dt>
+<dt>Claimant/Verifier:</dt>
 <dd style="margin-left: 8">The intended operational state an Attester is intended to be in, is defined by the supply chain entities that manufacture and maintain the Attestor. In order to appraise trusted assertions or evidence conveyed by the Attester, every distinguishable system component the Attester is composed of can provide trusted assertions or evidence about its trustworthiness. A corresponding verifier that is tasked with assessing the trustworthiness of the Attester potentially requires a multitude of sources of reference values according to policies and the information provided. As Relying Parties often have to discover an appropriate Verifier, a Verifier has to obtain and potentially store appropriate reference values in order to asses assertions or evidence about trustworthiness.</dd>
-<dt>SCE/Attester:</dt>
+<dt>Claimant/Attester:</dt>
 <dd style="margin-left: 8">To enable RATS, trustworthy assertions have to be embedded in an Attester by its manufactorer. In some cases this involves various types of roots of trust. In other cases shielded pre-master secrets in combination with key derivation functions (KDF) provide this binding of trusted information to an Attester. A supply chain entity can embed additional trusted assertions to an Attester. These assertion can also be used to assert the trustworthiness on behalf of a separate RATS Actor or they can originate from an external entity (e.g. a security certification authority).</dd>
 </dl>
 <h1 id="rfc.section.5">
@@ -1152,11 +1155,18 @@ ul.toc li {
 <a href="#rfc.references">13.</a> References</h1>
 <h1 id="rfc.references.1">
 <a href="#rfc.references.1">13.1.</a> Normative References</h1>
-<table><tbody><tr>
+<table><tbody>
+<tr>
 <td class="reference"><b id="RFC2119">[RFC2119]</b></td>
 <td class="top">
 <a>Bradner, S.</a>, "<a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>", BCP 14, RFC 2119, DOI 10.17487/RFC2119, March 1997.</td>
-</tr></tbody></table>
+</tr>
+<tr>
+<td class="reference"><b id="RFC8174">[RFC8174]</b></td>
+<td class="top">
+<a>Leiba, B.</a>, "<a href="https://tools.ietf.org/html/rfc8174">Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</a>", BCP 14, RFC 8174, DOI 10.17487/RFC8174, May 2017.</td>
+</tr>
+</tbody></table>
 <h1 id="rfc.references.2">
 <a href="#rfc.references.2">13.2.</a> Informative References</h1>
 <table><tbody>
@@ -1164,6 +1174,21 @@ ul.toc li {
 <td class="reference"><b id="I-D.ietf-sacm-terminology">[I-D.ietf-sacm-terminology]</b></td>
 <td class="top">
 <a>Birkholz, H.</a>, <a>Lu, J.</a>, <a>Strassner, J.</a>, <a>Cam-Winget, N.</a> and <a>A. Montville</a>, "<a href="https://tools.ietf.org/html/draft-ietf-sacm-terminology-16">Security Automation and Continuous Monitoring (SACM) Terminology</a>", Internet-Draft draft-ietf-sacm-terminology-16, December 2018.</td>
+</tr>
+<tr>
+<td class="reference"><b id="I-D.mandyam-eat">[I-D.mandyam-eat]</b></td>
+<td class="top">
+<a>Mandyam, G.</a>, <a>Lundblade, L.</a>, <a>Lundblade, L.</a>, <a>Ballesteros, M.</a> and <a>J. O'Donoghue</a>, "<a href="https://tools.ietf.org/html/draft-mandyam-eat-01">The Entity Attestation Token (EAT)</a>", Internet-Draft draft-mandyam-eat-01, November 2018.</td>
+</tr>
+<tr>
+<td class="reference"><b id="I-D.richardson-rats-usecases">[I-D.richardson-rats-usecases]</b></td>
+<td class="top">
+<a>Richardson, M.</a>, "<a href="https://tools.ietf.org/html/draft-richardson-rats-usecases-00">Use cases for Remote Attestation common encodings</a>", Internet-Draft draft-richardson-rats-usecases-00, March 2019.</td>
+</tr>
+<tr>
+<td class="reference"><b id="I-D.tschofenig-rats-psa-token">[I-D.tschofenig-rats-psa-token]</b></td>
+<td class="top">
+<a>Tschofenig, H.</a>, <a>Frost, S.</a>, <a>Brossard, M.</a> and <a>A. Shaw</a>, "<a href="https://tools.ietf.org/html/draft-tschofenig-rats-psa-token-00">Arm's Platform Security Architecture (PSA) Attestation Token</a>", Internet-Draft draft-tschofenig-rats-psa-token-00, March 2019.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC4949">[RFC4949]</b></td>

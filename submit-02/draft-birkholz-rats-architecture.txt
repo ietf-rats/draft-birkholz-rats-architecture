@@ -92,17 +92,17 @@ Table of Contents
    2.  RATS Architecture . . . . . . . . . . . . . . . . . . . . . .   4
    3.  Architectural Components  . . . . . . . . . . . . . . . . . .   5
      3.1.  RATS Roles  . . . . . . . . . . . . . . . . . . . . . . .   5
-   4.  RATS Actors . . . . . . . . . . . . . . . . . . . . . . . . .   6
-     4.1.  RATS Duties . . . . . . . . . . . . . . . . . . . . . . .   7
+   4.  RATS Actors . . . . . . . . . . . . . . . . . . . . . . . . .   7
+     4.1.  RATS Duties . . . . . . . . . . . . . . . . . . . . . . .   8
        4.1.1.  Attester Duties . . . . . . . . . . . . . . . . . . .   8
        4.1.2.  Verifier Duties . . . . . . . . . . . . . . . . . . .   8
        4.1.3.  Claimant Duties . . . . . . . . . . . . . . . . . . .   8
-       4.1.4.  Relying Party Duties  . . . . . . . . . . . . . . . .   8
+       4.1.4.  Relying Party Duties  . . . . . . . . . . . . . . . .   9
        4.1.5.  RATS Interactions . . . . . . . . . . . . . . . . . .   9
-   5.  Application of RATS . . . . . . . . . . . . . . . . . . . . .  10
+   5.  Application of RATS . . . . . . . . . . . . . . . . . . . . .  11
      5.1.  Trust and Trustworthiness . . . . . . . . . . . . . . . .  11
      5.2.  Claims and Evidence . . . . . . . . . . . . . . . . . . .  12
-     5.3.  RATS Information Flows  . . . . . . . . . . . . . . . . .  12
+     5.3.  RATS Information Flows  . . . . . . . . . . . . . . . . .  13
    6.  Exemplary Composition of Roles  . . . . . . . . . . . . . . .  13
      6.1.  Conveyance of Trusted Claim Sets Validated by Signature .  13
      6.2.  Conveyance of Attestation Evidence Appraised by a
@@ -141,8 +141,8 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  29
      13.1.  Normative References . . . . . . . . . . . . . . . . . .  29
      13.2.  Informative References . . . . . . . . . . . . . . . . .  29
-     13.3.  URIs . . . . . . . . . . . . . . . . . . . . . . . . . .  29
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  29
+     13.3.  URIs . . . . . . . . . . . . . . . . . . . . . . . . . .  30
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  30
 
 1.  Introduction
 
@@ -199,15 +199,16 @@ Internet-Draft              RATS Arch & Terms                 March 2019
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
    "OPTIONAL" in this document are to be interpreted as described in RFC
    2119, BCP 14 [RFC2119].
 
 2.  RATS Architecture
-
-   [Editor's Note: the defined architecture still requires a lot more
-   context for the average reader.  A corresponding use-case document,
-   dedicated section in this I-D, or appendix are required to provide
-   that context - and are missing at the moment]
 
    One of the goals of the RATS Architecture is to provide the building
    blocks - the roles defined by the RATS Architecture - to enable the
@@ -215,9 +216,8 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    create and appraise evidence about the trustworthiness of devices and
    services.
 
-   The RATS architecture specifies:
-
-
+   The RATS Architecture is based on the use-cases defined in
+   [I-D.richardson-rats-usecases].
 
 
 
@@ -225,6 +225,8 @@ Birkholz, et al.       Expires September 12, 2019               [Page 4]
 
 Internet-Draft              RATS Arch & Terms                 March 2019
 
+
+   The RATS architecture specifies:
 
    o  The building blocks to create remote attestation procedures
       applicable Actors, Roles, Duties, and Interactions,
@@ -275,8 +277,6 @@ Internet-Draft              RATS Arch & Terms                 March 2019
 
 
 
-
-
 Birkholz, et al.       Expires September 12, 2019               [Page 5]
 
 Internet-Draft              RATS Arch & Terms                 March 2019
@@ -293,6 +293,11 @@ Internet-Draft              RATS Arch & Terms                 March 2019
       method by which binding of an attester to an RTR.  * The
       identifier(s) available for identifying and authenticating the
       Attester - e.g.  Universal Entity ID (UEID).
+
+      Typically, claimant role are taken on by RATS Actors that supply
+      chain entities (SCE).  Various assertions (often represented as
+      Claims or Trusted Claims Sets, e.g.  [I-D.mandyam-eat] or
+      [I-D.tschofenig-rats-psa-token]).
 
    Attester:  The producer of attestation evidence that has a root of
       trust for reporting (RTR) and implements a conveyance protocol,
@@ -322,14 +327,9 @@ Internet-Draft              RATS Arch & Terms                 March 2019
       checker roles and the relying party role may be tightly
       integrated.
 
-4.  RATS Actors
 
-   RATS Actors may be any entity, such as an user, organization,
-   execution environment, device or service provider, that takes on
-   (implements) one or more RATS Roles and performs RATS Duties and/or
-   RATS Interactions.  RATS Interactions occur between RATS Actors.  The
-   methods whereby RATS Actors are identified, discovered, and
-   connectivity established are out-of-scope for this architecture.  In
+
+
 
 
 
@@ -338,6 +338,14 @@ Birkholz, et al.       Expires September 12, 2019               [Page 6]
 Internet-Draft              RATS Arch & Terms                 March 2019
 
 
+4.  RATS Actors
+
+   RATS Actors may be any entity, such as an user, organization,
+   execution environment, device or service provider, that takes on
+   (implements) one or more RATS Roles and performs RATS Duties and/or
+   RATS Interactions.  RATS Interactions occur between RATS Actors.  The
+   methods whereby RATS Actors are identified, discovered, and
+   connectivity established are out-of-scope for this architecture.  In
    contrast, if multiple RATS Roles reside on a single RATS Actor, the
    definition of RATS Interactions is out-of-scope of the RATS
    architecture, if no network protocols are required.
@@ -374,14 +382,6 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    resiliency, scaling, load balancing or replication are generally
    believed to be uninteresting.
 
-4.1.  RATS Duties
-
-   A RATS Role can take on one ore more duties.  RATS Duties are role-
-   internal functions that do not require interaction with other RATS
-   Roles.  In general, and RATS Duties are typically associated with a
-   RATS Role.  The list presented in this document is exhaustive.  Also,
-   there can be usage scenario where RATS Duties are associated with
-   other RATS Roles than illustrated below:
 
 
 
@@ -393,6 +393,15 @@ Birkholz, et al.       Expires September 12, 2019               [Page 7]
 
 Internet-Draft              RATS Arch & Terms                 March 2019
 
+
+4.1.  RATS Duties
+
+   A RATS Role can take on one ore more duties.  RATS Duties are role-
+   internal functions that do not require interaction with other RATS
+   Roles.  In general, and RATS Duties are typically associated with a
+   RATS Role.  The list presented in this document is exhaustive.  Also,
+   there can be usage scenario where RATS Duties are associated with
+   other RATS Roles than illustrated below:
 
 4.1.1.  Attester Duties
 
@@ -433,6 +442,14 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    o  Embeds trustworthiness assertions about the Attester role in the
       device or service during manufacturing, supply chain or onboarding
 
+
+
+
+Birkholz, et al.       Expires September 12, 2019               [Page 8]
+
+Internet-Draft              RATS Arch & Terms                 March 2019
+
+
 4.1.4.  Relying Party Duties
 
    o  Evaluate assertions/evidence locally as far as possible
@@ -442,23 +459,15 @@ Internet-Draft              RATS Arch & Terms                 March 2019
 
    o  Enforce policies or create input for risk engines
 
-
-
-
-Birkholz, et al.       Expires September 12, 2019               [Page 8]
-
-Internet-Draft              RATS Arch & Terms                 March 2019
-
-
 4.1.5.  RATS Interactions
 
    The flow of information between RATS Roles located on RATS Actors
    compose individual remote attestation procedures.  The RATS
    Architecture provides a set of standard interactions between the RATS
-   Roles defined in order to enable this composability.  In this section
-   common interactions between roles are specified.  This list of
-   interactions is not exhaustive, but provides the basis to create
-   various standard RATS.
+   Roles defined in this document in order to enable this composability.
+   In this section, common interactions between roles are specified.
+   This list of interactions is not exhaustive, but provides the basis
+   to create various standard RATS.
 
    Every RATS Interaction specified below is based on the information
    flow between two RATS Roles defined above.  Every RATS Interaction is
@@ -488,6 +497,15 @@ Internet-Draft              RATS Arch & Terms                 March 2019
       evidence received.  In consequence, (a subset of) the information
       received by an Attester must be relayed securely to a Verifier.
 
+
+
+
+
+Birkholz, et al.       Expires September 12, 2019               [Page 9]
+
+Internet-Draft              RATS Arch & Terms                 March 2019
+
+
    Relying-Party/Verifier:  Typically, trusted assertions or evidence
       are conveyed from an Attester to a Relying Party.  In an open
       ecosystem, such as the Internet, the appraisal of the evidence
@@ -498,13 +516,6 @@ Internet-Draft              RATS Arch & Terms                 March 2019
       RATS Actors - a Relying Party requires appropriate configuration
       or a discovery/join/rendezvous service to initiate a RATS
       Interaction with an appropriate and trusted Verifier.
-
-
-
-Birkholz, et al.       Expires September 12, 2019               [Page 9]
-
-Internet-Draft              RATS Arch & Terms                 March 2019
-
 
       Attestation information originating from an Attester that is
       relayed via a Relying Party must be protected from replay or relay
@@ -518,10 +529,10 @@ Internet-Draft              RATS Arch & Terms                 March 2019
       In the scope of RATS, this interaction encompasses the largest
       variety of information conveyed.
 
-   SCE/Verifier:  The intended operational state an Attester is intended
-      to be in, is defined by the supply chain entities that manufacture
-      and maintain the Attestor.  In order to appraise trusted
-      assertions or evidence conveyed by the Attester, every
+   Claimant/Verifier:  The intended operational state an Attester is
+      intended to be in, is defined by the supply chain entities that
+      manufacture and maintain the Attestor.  In order to appraise
+      trusted assertions or evidence conveyed by the Attester, every
       distinguishable system component the Attester is composed of can
       provide trusted assertions or evidence about its trustworthiness.
       A corresponding verifier that is tasked with assessing the
@@ -532,7 +543,7 @@ Internet-Draft              RATS Arch & Terms                 March 2019
       store appropriate reference values in order to asses assertions or
       evidence about trustworthiness.
 
-   SCE/Attester:  To enable RATS, trustworthy assertions have to be
+   Claimant/Attester:  To enable RATS, trustworthy assertions have to be
       embedded in an Attester by its manufactorer.  In some cases this
       involves various types of roots of trust.  In other cases shielded
       pre-master secrets in combination with key derivation functions
@@ -543,6 +554,14 @@ Internet-Draft              RATS Arch & Terms                 March 2019
       originate from an external entity (e.g. a security certification
       authority).
 
+
+
+
+Birkholz, et al.       Expires September 12, 2019              [Page 10]
+
+Internet-Draft              RATS Arch & Terms                 March 2019
+
+
 5.  Application of RATS
 
    Attester are typically composite devices (in the case of atomically
@@ -551,16 +570,6 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    daemon, a virtual network function (vnf) or a network security
    function (nsf) - that can reside on one or more Attester and are not
    necessarily bound to a specific set of hardware devices.
-
-
-
-
-
-
-Birkholz, et al.       Expires September 12, 2019              [Page 10]
-
-Internet-Draft              RATS Arch & Terms                 March 2019
-
 
    Relevant decision-factors that influence the composition of RATS
    Roles on RATS Actors, which result in specific work-flows are
@@ -602,6 +611,13 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    characteristics, such as integrity or authenticity, that can be
    appraised in a convincing way.
 
+
+
+Birkholz, et al.       Expires September 12, 2019              [Page 11]
+
+Internet-Draft              RATS Arch & Terms                 March 2019
+
+
    RATS require trust relationships with third parties that qualify
    assertions about, for example, origin of data, the manufacturer or
    the capabilities of a system, or the origination of attestation
@@ -610,14 +626,6 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    level of assurance (or resulting level of confidence,
    correspondingly) of information produced by RATS.  Trusting a system
    does not make it trustworthy.  Assessing trustworthiness requires the
-
-
-
-Birkholz, et al.       Expires September 12, 2019              [Page 11]
-
-Internet-Draft              RATS Arch & Terms                 March 2019
-
-
    conveyance of evidence that a system is a trustworthy system, which
    has to originate from the system itself and has to be convincing.  If
    the convincing information is not originating from the system itself,
@@ -658,14 +666,6 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    to convey information.  The secret key required for this procedure is
    stored in a shielded location that only allows access to that key, if
    a specific operational state of the system is met.  The trust with
-   respect to this origination is based on a root of trust for
-   reporting.
-
-5.3.  RATS Information Flows
-
-   There are six roles defined in the RATS architecture. iFigure 2
-   provides a simplified overview of the RATS Roles defined above,
-
 
 
 
@@ -674,6 +674,13 @@ Birkholz, et al.       Expires September 12, 2019              [Page 12]
 Internet-Draft              RATS Arch & Terms                 March 2019
 
 
+   respect to this origination is based on a root of trust for
+   reporting.
+
+5.3.  RATS Information Flows
+
+   There are six roles defined in the RATS architecture. iFigure 2
+   provides a simplified overview of the RATS Roles defined above,
    illustrating a general Interconnect in the center that facilitates
    all RATS Interactions.
 
@@ -715,13 +722,6 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    an authoritative third party.  In this work-flow claim emission is
    triggered by the claimant.  Variations based on requests emitted by
    the relying party can be easily facilitated by the same set of roles.
-
-
-
-
-
-
-
 
 
 
@@ -1591,6 +1591,10 @@ Internet-Draft              RATS Arch & Terms                 March 2019
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
 
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+
 13.2.  Informative References
 
    [I-D.ietf-sacm-terminology]
@@ -1598,6 +1602,35 @@ Internet-Draft              RATS Arch & Terms                 March 2019
               A. Montville, "Security Automation and Continuous
               Monitoring (SACM) Terminology", draft-ietf-sacm-
               terminology-16 (work in progress), December 2018.
+
+   [I-D.mandyam-eat]
+              Mandyam, G., Lundblade, L., Lundblade, L., Ballesteros,
+              M., and J. O'Donoghue, "The Entity Attestation Token
+              (EAT)", draft-mandyam-eat-01 (work in progress), November
+              2018.
+
+   [I-D.richardson-rats-usecases]
+              Richardson, M., "Use cases for Remote Attestation common
+              encodings", draft-richardson-rats-usecases-00 (work in
+              progress), March 2019.
+
+
+
+
+
+
+
+
+Birkholz, et al.       Expires September 12, 2019              [Page 29]
+
+Internet-Draft              RATS Arch & Terms                 March 2019
+
+
+   [I-D.tschofenig-rats-psa-token]
+              Tschofenig, H., Frost, S., Brossard, M., and A. Shaw,
+              "Arm's Platform Security Architecture (PSA) Attestation
+              Token", draft-tschofenig-rats-psa-token-00 (work in
+              progress), March 2019.
 
    [RFC4949]  Shirey, R., "Internet Security Glossary, Version 2",
               FYI 36, RFC 4949, DOI 10.17487/RFC4949, August 2007,
@@ -1612,19 +1645,6 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    [1] https://tools.ietf.org/html/rfc4949
 
 Authors' Addresses
-
-
-
-
-
-
-
-
-
-Birkholz, et al.       Expires September 12, 2019              [Page 29]
-
-Internet-Draft              RATS Arch & Terms                 March 2019
-
 
    Henk Birkholz
    Fraunhofer SIT
@@ -1649,6 +1669,17 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    UK
 
    Email: hannes.tschofenig@gmx.net
+
+
+
+
+
+
+
+
+Birkholz, et al.       Expires September 12, 2019              [Page 30]
+
+Internet-Draft              RATS Arch & Terms                 March 2019
 
 
    Ned Smith
@@ -1677,4 +1708,29 @@ Internet-Draft              RATS Arch & Terms                 March 2019
 
 
 
-Birkholz, et al.       Expires September 12, 2019              [Page 30]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Birkholz, et al.       Expires September 12, 2019              [Page 31]
