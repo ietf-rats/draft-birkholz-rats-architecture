@@ -115,7 +115,7 @@ Internet-Draft              RATS Arch & Terms                 March 2019
 
 
            Verifier  . . . . . . . . . . . . . . . . . . . . . . . .  14
-   7.  The Scope of RATS . . . . . . . . . . . . . . . . . . . . . .  15
+   7.  The Scope of RATS . . . . . . . . . . . . . . . . . . . . . .  14
      7.1.  The Lying Endpoint Problem  . . . . . . . . . . . . . . .  15
        7.1.1.  How the RATS Architecture Addresses the Lying
                Endpoint Problem  . . . . . . . . . . . . . . . . . .  16
@@ -683,12 +683,12 @@ Internet-Draft              RATS Arch & Terms                 March 2019
           |            |                  |  |                  |
           +------------+                  |  +------------------+
                 ^                         |
-                |                         |  +------------------+
-                |     +----------------+  |  |                  |
-                +---->|                |<-+  |  Authentication  |
-                      |  Interconnect  |<--->|  Checker         |
-                +---->|                |<-+  |                  |
-                |     +----------------+  |  +------------------+
+                |                         |
+                |     +----------------+  |
+                +---->|                |<-+
+                      |  Interconnect  |
+                +---->|                |<-+
+                |     +----------------+  |
                 v                         |
           +------------+                  |  +------------------+
           |            |                  |  |                  |
@@ -730,16 +730,13 @@ Birkholz, et al.       Expires September 12, 2019              [Page 13]
 Internet-Draft              RATS Arch & Terms                 March 2019
 
 
-                                    +---------------------------------------+
-                                    |                                       |
-                                    |  +------------------+  +-----------+  |
-+------------+  +----------------+  |  |                  |  |           |  |
-|            |  |                |  |  |  Authentication  |  |  Relying  |  |
-|  Claimant  |->|  Interconnect  |--+->|  Checker         |->|  Party    |  |
-|            |  |                |  |  |                  |  |           |  |
-+------------+  +----------------+  |  +------------------+  +-----------+  |
-                                    |                                       |
-                                    +---------------------------------------+
+                                                  +-----------+
+            +------------+  +----------------+    |           |
+            |            |  |                |    |  Relying  |
+            |  Claimant  |->|  Interconnect  |--->|  Party    |
+            |            |  |                |    |           |
+            +------------+  +----------------+    +-----------+
+
 
      Figure 3: Conveyance of Trusted Claim Sets Validated by Signature
 
@@ -755,28 +752,31 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    measurement.  Variations based on requests emitted by the verifier
    can be easily facilitated by the same set of roles.
 
-   +------------------+                      +------------------------+
-   |                  |                      |  +------------------+  |
-   |  +------------+  |  +----------------+  |  |                  |  |
-   |  |            |  |  |                |  |  |  Authentication  |  |
-   |  |  Attester  |--+->|  Interconnect  |--+->|  Checker         |  |
-   |  |            |  |  |                |  |  |                  |  |
-   |  +------------+  |  +----------------+  |  +------------------+  |
-   |        ^         |  +-------------------+            |           |
-   |        |         |  |                                |           |
-   |        |         |  |   +-----------+                v           |
-   |  +-----+------+  |  |   |           |          +------------+    |
-   |  |            |  |  |   |  Relying  |          |            |    |
-   |  |  Claimant  |  |  |   |  Party    |<---------|  Verifier  |    |
-   |  |            |  |  |   |           |          |            |    |
-   |  +------------+  |  |   +-----------+          +------------+    |
-   |                  |  |                                            |
-   +------------------+  +--------------------------------------------+
+    +------------------+                      +----------------------+
+    |                  |                      |  +----------------+  |
+    |  +------------+  |  +----------------+  |  |                |  |
+    |  |            |  |  |                |  |  |                |  |
+    |  |  Attester  |--+->|  Interconnect  |--+->|   Verifier     |  |
+    |  |            |  |  |                |  |  |                |  |
+    |  +------------+  |  +----------------+  |  +----------------+  |
+    |        ^         |                      |          |           |
+    |        |         |                      |          v           |
+    |        |         |                      |   +-----------+      |
+    |  +-----+------+  |                      |   |           |      |
+    |  |            |  |                      |   |  Relying  |      |
+    |  |  Claimant  |  |                      |   |  Party    |      |
+    |  |            |  |                      |   |           |      |
+    |  +------------+  |                      |   +-----------+      |
+    |                  |                      |                      |
+    +------------------+                      +----------------------+
 
    Figure 4: Conveyance of Attestation Evidence Appraised by a Verifier
 
+7.  The Scope of RATS
 
-
+   During its evolution, the term Remote Attestation has been used in
+   multiple contexts and multiple scopes and in consequence accumulated
+   various connotations with slightly different semantic meaning.
 
 
 
@@ -786,11 +786,6 @@ Birkholz, et al.       Expires September 12, 2019              [Page 14]
 Internet-Draft              RATS Arch & Terms                 March 2019
 
 
-7.  The Scope of RATS
-
-   During its evolution, the term Remote Attestation has been used in
-   multiple contexts and multiple scopes and in consequence accumulated
-   various connotations with slightly different semantic meaning.
    Correspondingly, Remote Attestation Procedures (RATS) are employed in
    various usage scenarios and different environments.
 
@@ -834,6 +829,11 @@ Internet-Draft              RATS Arch & Terms                 March 2019
 
    Attempts to "scrub" the data or "proxy" control elements implies the
    existence of a more fundamental trusted endpoint that is operating
+   correctly.  Therefore, Remote Attestation - the technology designed
+   to detect and mitigate the "lying endpoint problem" - must be trusted
+   to behave correctly independent of other controls.
+
+   Consequently, a "lying endpoint" cannot also be a "trusted system".
 
 
 
@@ -841,12 +841,6 @@ Birkholz, et al.       Expires September 12, 2019              [Page 15]
 
 Internet-Draft              RATS Arch & Terms                 March 2019
 
-
-   correctly.  Therefore, Remote Attestation - the technology designed
-   to detect and mitigate the "lying endpoint problem" - must be trusted
-   to behave correctly independent of other controls.
-
-   Consequently, a "lying endpoint" cannot also be a "trusted system".
 
    Remote Attestation procedures are intended to enable the consumer of
    information emitted by a Computing Context to assess the validity and
@@ -890,6 +884,12 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    reporting.  Evidence may be structured in an interoperable format
    called claims that may include references to the claimants which are
    asserting the claims.  RATS aims to define "interoperable Remote
+   Attestation" such that evidence can be created and consumed by
+   different ecosystem systems and can be securely exchanged by a broad
+   set of network protocols.
+
+
+
 
 
 
@@ -897,10 +897,6 @@ Birkholz, et al.       Expires September 12, 2019              [Page 16]
 
 Internet-Draft              RATS Arch & Terms                 March 2019
 
-
-   Attestation" such that evidence can be created and consumed by
-   different ecosystem systems and can be securely exchanged by a broad
-   set of network protocols.
 
 8.  RATS Terminology
 
@@ -946,6 +942,10 @@ Internet-Draft              RATS Arch & Terms                 March 2019
    Terms defined by this document that are subsequently used by this
    document are distinguished by capitalizing the first letter of the
    term (e.g.  Term or First_word Second_word).
+
+
+
+
 
 
 
