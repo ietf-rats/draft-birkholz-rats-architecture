@@ -137,9 +137,9 @@ Claimant:
 
 : The producer of trustworthiness assertions pertaining to an Attester; that may or not have a root-of-trust for measurement.
 
-It is not guaranteed that a Verifier Role can appraise the output of a Claimant via reference values (in contrast to the output of an Attester).
+: It is not guaranteed that a Verifier Role can appraise the output of a Claimant via reference values (in contrast to the output of an Attester).
 
-Examples of Claimant assertions include:
+: Examples of Claimant assertions include:
 * The hardware, firmware and software components of the Attester.
 * The manufactuer of Attester components.
 * The Attester's current configuration.
@@ -150,12 +150,6 @@ Examples of Claimant assertions include:
 Attester:
 
 : The producer of attestation evidence that has a root of trust for reporting (RTR) and implements a conveyance protocol, authenticates using an attestation credential, consumes assertions about itself and presents it to a consumer of evidence (e.g. a relying party or a verifier). Every output of an attester can be appraised via reference values.
-
-;Interconnect:
-;
-;: A communication channel or secure path between systems that take on RATS roles.
-;Attestation evidence, for example, can be conveyed from an attester to a verifier via an interconnect.
-;Examples include: GPIO pins, an USB link, or the Internet.
 
 Authentication Checker:
 
