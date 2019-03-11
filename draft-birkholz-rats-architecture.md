@@ -54,12 +54,15 @@ author:
 
 normative:
   RFC2119:
+  
 
 informative:
   I-D.ietf-sacm-terminology: sacmterm
   RFC7519: jwt
   RFC4949:
-
+  I-D.richardson-rats-usecases: usecases
+  I-D.tschofenig-rats-psa-token: psat
+  I-D.mandyam-eat: eat
 --- abstract
 
 Remote ATtestation ProcedureS (RATS) architecture facilitates the attestation of device characteristics that, in general, are based on specific trustworthiness qualities intrinsic to a device or service. It includes trusted computing functionality provided by device hardware and software that allows trustworthiness qualities to be asserted and verified as part of, or pre-requisite to, the device's normal operation.
@@ -97,6 +100,8 @@ As an additional contribution, new terms defined by this document provide a comm
 
 ## Requirements notation
 
+{::boilerplate bcp14}
+
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
 "OPTIONAL" in this document are to be interpreted as described in RFC
@@ -104,9 +109,9 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 
 # RATS Architecture
 
-[Editor's Note: the defined architecture still requires a lot more context for the average reader. A corresponding use-case document, dedicated section in this I-D, or appendix are required to provide that context - and are missing at the moment]
-
 One of the goals of the RATS Architecture is to provide the building blocks - the roles defined by the RATS Architecture - to enable the composition of service-chains/hierarchies and work-flows that can create and appraise evidence about the trustworthiness of devices and services.
+
+The RATS Architecture is based on the use-cases defined in {{-usecases}}.
 
 The RATS architecture specifies:
 
@@ -149,6 +154,8 @@ Claimant:
 * The Attester's current location - e.g. GPS coordinates.
 * The method by which binding of an attester to an RTR.
 * The identifier(s) available for identifying and authenticating the Attester - e.g. Universal Entity ID (UEID).
+
+: Typically, claimant role are taken on by RATS Actors that supply chain entities (SCE). Various assertions (often represented as Claims or Trusted Claims Sets, e.g. {{-eat}} or {{-psat}}).
 
 Attester:
 
@@ -237,9 +244,16 @@ A RATS Role can take on one ore more duties. RATS Duties are role-internal funct
 
 ### RATS Interactions
 
-The flow of information between RATS Roles located on RATS Actors compose individual remote attestation procedures. The RATS Architecture provides a set of standard interactions between the RATS Roles defined in order to enable this composability. In this section common interactions between roles are specified. This list of interactions is not exhaustive, but provides the basis to create various standard RATS.
+The flow of information between RATS Roles located on RATS Actors compose individual remote attestation procedures.
+The RATS Architecture provides a set of standard interactions between the RATS Roles defined in this document in order to enable this composability.
+In this section, common interactions between roles are specified.
+This list of interactions is not exhaustive, but provides the basis to create various standard RATS.
 
-Every RATS Interaction specified below is based on the information flow between two RATS Roles defined above. Every RATS Interaction is conducted via an Interconnect between corresponding RATS Roles that RATS Actors take on. If more than one RATS Role resides on the same RATS Actor, a network protocol might not be required. If RATS Roles are collapsed into a singular RATS Actor in this way, the method of conveying information is out-of-scope of this document. If network protocols are used to convey corresponding information between RATS Roles (collapsed on a singular RATS Actor or not), the definitions and requirements defined in this document apply.
+Every RATS Interaction specified below is based on the information flow between two RATS Roles defined above.
+Every RATS Interaction is conducted via an Interconnect between corresponding RATS Roles that RATS Actors take on.
+If more than one RATS Role resides on the same RATS Actor, a network protocol might not be required.
+If RATS Roles are collapsed into a singular RATS Actor in this way, the method of conveying information is out-of-scope of this document.
+If network protocols are used to convey corresponding information between RATS Roles (collapsed on a singular RATS Actor or not), the definitions and requirements defined in this document apply.
 
 In essence, an Interconnect is an abstract "distance-less" channel between RATS Actors that can range from General Purpose Input Output (GPIO) interfaces to the Internet.
 
@@ -259,11 +273,11 @@ Relying-Party/Verifier:
 
 : In the scope of RATS, this interaction encompasses the largest variety of information conveyed.
 
-SCE/Verifier:
+Claimant/Verifier:
 
 : The intended operational state an Attester is intended to be in, is defined by the supply chain entities that manufacture and maintain the Attestor. In order to appraise trusted assertions or evidence conveyed by the Attester, every distinguishable system component the Attester is composed of can provide trusted assertions or evidence about its trustworthiness. A corresponding verifier that is tasked with assessing the trustworthiness of the Attester potentially requires a multitude of sources of reference values according to policies and the information provided. As Relying Parties often have to discover an appropriate Verifier, a Verifier has to obtain and potentially store appropriate reference values in order to asses assertions or evidence about trustworthiness.
 
-SCE/Attester:
+Claimant/Attester:
 
 : To enable RATS, trustworthy assertions have to be embedded in an Attester by its manufactorer. In some cases this involves various types of roots of trust. In other cases shielded pre-master secrets in combination with key derivation functions (KDF) provide this binding of trusted information to an Attester. A supply chain entity can embed additional trusted assertions to an Attester. These assertion can also be used to assert the trustworthiness on behalf of a separate RATS Actor or they can originate from an external entity (e.g. a security certification authority).
 
