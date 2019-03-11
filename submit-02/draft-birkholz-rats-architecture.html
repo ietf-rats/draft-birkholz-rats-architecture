@@ -580,8 +580,28 @@ ul.toc li {
 <a href="#rfc.section.4">4.</a> <a href="#rats-actors" id="rats-actors">RATS Actors</a>
 </h1>
 <p id="rfc.section.4.p.1">RATS Actors may be any entity, such as an user, organization, execution environment, device or service provider, that takes on (implements) one or more RATS Roles and performs RATS Duties and/or RATS Interactions.  RATS Interactions occur between RATS Actors. The methods whereby RATS Actors are identified, discovered, and connectivity established are out-of-scope for this architecture. In contrast, if multiple RATS Roles reside on a single RATS Actor, the definition of RATS Interactions is out-of-scope of the RATS architecture, if no network protocols are required.</p>
+<div id="rfc.figure.1"></div>
+<div id="actors"></div>
+<pre>
++------------------+   +------------------+
+|      Actor 1     |   |      Actor 2     |
+|  +------------+  |   |  +------------+  |
+|  |            |  |   |  |            |  |
+|  |    Role 1  |&lt;-|---|-&gt;|    Role 2  |  |
+|  |            |  |   |  |            |  |
+|  +------------+  |   |  +------------+  |
+|                  |   |                  |
+|  +-----+------+  |   |  +-----+------+  |
+|  |            |  |   |  |            |  |
+|  |    Role 2  |&lt;-|---|-&gt;|    Role 3  |  |
+|  |            |  |   |  |            |  |
+|  +------------+  |   |  +------------+  |
+|                  |   |                  |
++------------------+   +------------------+
+</pre>
+<p class="figure">Figure 1: RATS Actor-Role Interactions</p>
 <p id="rfc.section.4.p.2">RATS Actors have the following properties: * Multiplicity - Multiple instances of RATS Actors that possess the same RATS Roles can exist.  * Decomposability -  A singleton RATS Actor possessing multiple RATS Roles can be separated into multiple RATS Actors.  RATS Interactions may occur between them.  * Composablility - RATS Actors possessing different RATS Roles can be combined into a singleton RATS Actor possessing the union of RATS Roles.  RATS Interactions between combined RATS Actors ceases.</p>
-<p id="rfc.section.4.p.3">Interactions between RATS Roles belonging to the same RATS Actor are generally believed to be uninteresting.</p>
+<p id="rfc.section.4.p.3">Interactions between RATS Roles belonging to the same RATS Actor are generally believed to be uninteresting.  Actor operations that apply resiliency, scaling, load balancing or replication are generally believed to be uninteresting.</p>
 <h1 id="rfc.section.4.1">
 <a href="#rfc.section.4.1">4.1.</a> <a href="#rats-duties" id="rats-duties">RATS Duties</a>
 </h1>
@@ -667,8 +687,8 @@ ul.toc li {
 <h1 id="rfc.section.4.4">
 <a href="#rfc.section.4.4">4.4.</a> <a href="#rats-roles-1" id="rats-roles-1">RATS Roles</a>
 </h1>
-<p id="rfc.section.4.4.p.1">There are six roles defined in the RATS architecture. i<a href="#figalllevels" class="xref">Figure 1</a> provides a simplified overview of the roles defined in this section.</p>
-<div id="rfc.figure.1"></div>
+<p id="rfc.section.4.4.p.1">There are six roles defined in the RATS architecture. i<a href="#figalllevels" class="xref">Figure 2</a> provides a simplified overview of the roles defined in this section.</p>
+<div id="rfc.figure.2"></div>
 <div id="figalllevels"></div>
 <pre>
 +------------+                     +------------------+
@@ -690,7 +710,7 @@ ul.toc li {
 |            |                     |                  |
 +------------+                     +------------------+
 </pre>
-<p class="figure">Figure 1: Overall Relationships of Roles in the RATS Architecture</p>
+<p class="figure">Figure 2: Overall Relationships of Roles in the RATS Architecture</p>
 <p></p>
 
 <dl>
@@ -714,8 +734,8 @@ ul.toc li {
 <h1 id="rfc.section.4.5.1">
 <a href="#rfc.section.4.5.1">4.5.1.</a> <a href="#conveyance-of-trusted-claim-sets-validated-by-signature" id="conveyance-of-trusted-claim-sets-validated-by-signature">Conveyance of Trusted Claim Sets Validated by Signature</a>
 </h1>
-<p id="rfc.section.4.5.1.p.1">If there is a trust relationship between a trusted third party that can assert that signed claims created by a claimant guarantee a trustworthy origination of claim, the work-flow depicted in <a href="#cosecwt" class="xref">Figure 2</a> can facilitate a trust-based implicit remote attestation procedure. The information conveyed are signed claim sets that are trusted via an authoritative third party. In this work-flow claim emission is triggered by the claimant. Variations based on requests emitted by the relying party can be easily facilitated by the same set of roles.</p>
-<div id="rfc.figure.2"></div>
+<p id="rfc.section.4.5.1.p.1">If there is a trust relationship between a trusted third party that can assert that signed claims created by a claimant guarantee a trustworthy origination of claim, the work-flow depicted in <a href="#cosecwt" class="xref">Figure 3</a> can facilitate a trust-based implicit remote attestation procedure. The information conveyed are signed claim sets that are trusted via an authoritative third party. In this work-flow claim emission is triggered by the claimant. Variations based on requests emitted by the relying party can be easily facilitated by the same set of roles.</p>
+<div id="rfc.figure.3"></div>
 <div id="cosecwt"></div>
 <pre>
                                     +---------------------------------------+
@@ -729,12 +749,12 @@ ul.toc li {
                                     |                                       |
                                     +---------------------------------------+
 </pre>
-<p class="figure">Figure 2: Conveyance of Trusted Claim Sets Validated by Signature</p>
+<p class="figure">Figure 3: Conveyance of Trusted Claim Sets Validated by Signature</p>
 <h1 id="rfc.section.4.5.2">
 <a href="#rfc.section.4.5.2">4.5.2.</a> <a href="#conveyance-of-attestation-evidence-appraised-by-a-verifier" id="conveyance-of-attestation-evidence-appraised-by-a-verifier">Conveyance of Attestation Evidence Appraised by a Verifier</a>
 </h1>
-<p id="rfc.section.4.5.2.p.1">If there is trust in the root of trust for reporting based on the assertions of a trusted third party, the work-flow depicted in <a href="#evidence" class="xref">Figure 3</a> can facilitate an evidence-based explicit remote attestation procedure. The information conveyed is signed attestation evidence that is created by the trusted verifier. In this work-flow claims do not necessarily have to be signed and the work-flow is triggered by the attestor that aggregates claims from a root of trust of measurement. Variations based on requests emitted by the verifier can be easily facilitated by the same set of roles.</p>
-<div id="rfc.figure.3"></div>
+<p id="rfc.section.4.5.2.p.1">If there is trust in the root of trust for reporting based on the assertions of a trusted third party, the work-flow depicted in <a href="#evidence" class="xref">Figure 4</a> can facilitate an evidence-based explicit remote attestation procedure. The information conveyed is signed attestation evidence that is created by the trusted verifier. In this work-flow claims do not necessarily have to be signed and the work-flow is triggered by the attestor that aggregates claims from a root of trust of measurement. Variations based on requests emitted by the verifier can be easily facilitated by the same set of roles.</p>
+<div id="rfc.figure.4"></div>
 <div id="evidence"></div>
 <pre>
 +------------------+                      +------------------------+
@@ -755,7 +775,7 @@ ul.toc li {
 |                  |  |                                            |
 +------------------+  +--------------------------------------------+
 </pre>
-<p class="figure">Figure 3: Conveyance of Attestation Evidence Appraised by a Verifier</p>
+<p class="figure">Figure 4: Conveyance of Attestation Evidence Appraised by a Verifier</p>
 <h1 id="rfc.section.4.6">
 <a href="#rfc.section.4.6">4.6.</a> <a href="#the-scope-of-rats" id="the-scope-of-rats">The Scope of RATS</a>
 </h1>
