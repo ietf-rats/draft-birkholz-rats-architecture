@@ -62,22 +62,25 @@ informative:
 
 --- abstract
 
-Remote ATtestation ProcedureS (RATS), such as Remote Integrity VERification (RIVER), the creation of Entity Attestation Tokens (EAT), software integrity Measurement And ATtestation (MAAT), or the attestation of device characteristics, in general, are based on specific operations and qualities provided by hardware and software.
-The RATS architecture maps corresponding functions and operational capabilities to specific RATS Roles.
-The goal is to enable an appropriate conveyance of believable evidence about device health or trusted claims about device capabilities via network protocols.
-The flows of data between these roles depends on the composition of RATS Roles and their location with respect to devices or services.
-The RATS architecture provides these roles as building blocks to enable suitable composition, while remaining hardware-agnostic with respect to the evidence on trustworthiness conveyed.
-This flexibility is intended to address a significant majority of use-cases or usage scenarios in the domain of RATS.
-Examples include, but are not limited to: financial transactions, voting machines, critical safety systems, network equipment health, or trustworthy end-user device management.
+Remote ATtestation ProcedureS (RATS) architecture facilitates the attestation of device characteristics that, in general, are based on specific trustworthiness qualities intrinsic to a device or service. It includes trusted computing functionality provided by device hardware and software that allows trustworthiness qualities to be asserted and verified as part of, or pre-requisite to, the device's normal operation.
+The RATS architecture maps corresponding attestation functions and capabilities to specific RATS Roles.
+The goal is to enable an appropriate conveyance of evidence about device trustworthiness via network protocols.
+RATS Roles provide the endpoint context for understanding the various interaction semantics of the attestation lifecycle.
+The RATS architecture provides the building block concepts, semantics, syntax and framework for interoperable attestation while remaining hardware-agnostic.
+This flexibility is intended to address a significant variety of use-cases and scenarios involving interoperable attestation.
+Example usages include, but are not limited to: financial transactions, voting machines, critical safety systems, network equipment health, or trustworthy end-user device management.
+Existing industry attestation efforts may be helpful toward informing RATS architecture.
+Such as: Remote Integrity VERification (RIVER), the creation of Entity Attestation Tokens (EAT), software integrity Measurement And ATtestation (MAAT)
 
 --- middle
 
 # Introduction
 
 In general, this document provides normative guidance how to use, create or adopt network protocols that facilitate remote attestation procedures.
-The RATS Architecture is intended to enable the implementation of a number of custom RATS Actors that compose a variety of Remote Attestation Procedures - both in closed and open ecosystems (maintained by singular stakeholders and by federated cooperations).
-The foundation of the RATS architecture is the specification of RATS Roles that can be chained via RATS Interactions and - as a result - compose use-case specific Remote Attestation Procedures.
-In summary, the goal of the RATS Architecture is to enable interoperable interaction between the RATS Roles specified. Hence, the RATS Architecture is designed to represent and compose heterogeneous RATS and to enable interoperability via well-defined semantics of the information (mainly assertions/claims) exchanged and via well-defined functions (RATS Duties & RATS Interactions) that compose domain-specific remote attestation solutions.
+The RATS Architecture anticipates broad deployment contexts that range from IoT to Cloud and Edge ecosystems.
+The foundation of the RATS architecture is the specification of RATS Roles that can be chained via RATS Interactions and - as a result - may be composed into use-case specific Remote Attestation Procedures.
+RATS Actors establish an ecosystem neutral context where RATS Roles are hosted and where a variety of Remote Attestation Procedure interactions are defined independent of specific conveyance protocols or message formats.
+In summary, the goal of the RATS Architecture is to enable interoperable interaction between the RATS Roles. Hence, the RATS Architecture is designed to enable interoperability via well-defined semantics of the information model (attestation assertions/claims), associated with RATS Roles following a conveyance model (RATS Interactions) that may be used to compose domain-specific remote attestation solutions.
 
 ## What is Remote Attestation
 
@@ -107,12 +110,12 @@ One of the goals of the RATS Architecture is to provide the building blocks - th
 
 The RATS architecture specifies:
 
-* the building blocks to create remote attestation procedures applicable Actors, Roles, Duties, and Interactions,
-* mandatory and optional trust relationships between its Roles, including Roots-of-Trust,
-* the interaction between Roles that reside on separate Actors via network protocols,
-* protocol framing, allowing for well-defined and opaque payloads,
-* the means to prove, preserve and convey trust properties, such as identity, varacity, freshness, or provenance, and
-* primitives necessary for the construction of interoperable attestation payloads.
+* The building blocks to create remote attestation procedures applicable Actors, Roles, Duties, and Interactions,
+* Mandatory and optional trust relationships between its Roles, that may assume a Root-of-Trust context,
+* The interaction between Roles that reside on separate Actors and interact via network protocols,
+* Protocol/message framing that allows for well-defined and opaque payloads,
+* The means to prove, preserve and convey trust properties, such as identity, varacity, freshness, or provenance, and
+* Primitives necessary for the construction of interoperable attestation payloads.
 
 
 # Architectural Components
@@ -223,12 +226,13 @@ A RATS Role can take on one ore more duties. RATS Duties are role-internal funct
 * Acquisition and storage of appraisal policies
 * Verification of Attester Identity (attestation provenance) with respect to evidence
 
-### Supply Chain Entity (SCE) Duties
+### Claimant Duties
 
-* Implement and harden devices or services (i.e. the Attester)
-* Evaluate Attester trustworthiness during manufacturing
-* Provision of device identities and/or key material
-* Embedding of assertions in the Attester during manufacturing
+* Hardens the device or service that implements the Attester role
+* Provisions device identities and/or key material accessible to the Attester role
+* Evaluates trustworthiness during manufacturing, supply chain and onboarding
+* Produces trustworthiness assertions applicable to the Attestor role
+* Embeds trustworthiness assertions about the Attester role in the device or service during manufacturing, supply chain or onboarding
 
 ### Relying Party Duties
 
