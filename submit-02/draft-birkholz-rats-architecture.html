@@ -292,7 +292,7 @@ ul.toc li {
 <link href="#rfc.section.4.1" rel="Chapter" title="4.1 RATS Duties">
 <link href="#rfc.section.4.1.1" rel="Chapter" title="4.1.1 Attester Duties">
 <link href="#rfc.section.4.1.2" rel="Chapter" title="4.1.2 Verifier Duties">
-<link href="#rfc.section.4.1.3" rel="Chapter" title="4.1.3 Supply Chain Entity (SCE) Duties">
+<link href="#rfc.section.4.1.3" rel="Chapter" title="4.1.3 Claimant Duties">
 <link href="#rfc.section.4.1.4" rel="Chapter" title="4.1.4 Relying Party Duties">
 <link href="#rfc.section.4.1.5" rel="Chapter" title="4.1.5 RATS Interactions">
 <link href="#rfc.section.5" rel="Chapter" title="5 Application of RATS">
@@ -336,8 +336,8 @@ ul.toc li {
   <meta name="dct.creator" content="Birkholz, H., Wiseman, M., Tschofenig, H., and N. Smith" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-birkholz-rats-architecture-latest" />
   <meta name="dct.issued" scheme="ISO8601" content="2019-03-11" />
-  <meta name="dct.abstract" content="Remote ATtestation ProcedureS (RATS), such as Remote Integrity VERification (RIVER), the creation of Entity Attestation Tokens (EAT), software integrity Measurement And ATtestation (MAAT), or the attestation of device characteristics, in general, are based on specific operations and qualities provided by hardware and software.  The RATS architecture maps corresponding functions and operational capabilities to specific RATS Roles.  The goal is to enable an appropriate conveyance of believable evidence about device health or trusted claims about device capabilities via network protocols.  The flows of data between these roles depends on the composition of RATS Roles and their location with respect to devices or services.  The RATS architecture provides these roles as building blocks to enable suitable composition, while remaining hardware-agnostic with respect to the evidence on trustworthiness conveyed.  This flexibility is intended to address a significant majority of use-cases or usage scenarios in the domain of RATS.  Examples include, but are not limited to: financial transactions, voting machines, critical safety systems, network equipment health, or trustworthy end-user device management." />
-  <meta name="description" content="Remote ATtestation ProcedureS (RATS), such as Remote Integrity VERification (RIVER), the creation of Entity Attestation Tokens (EAT), software integrity Measurement And ATtestation (MAAT), or the attestation of device characteristics, in general, are based on specific operations and qualities provided by hardware and software.  The RATS architecture maps corresponding functions and operational capabilities to specific RATS Roles.  The goal is to enable an appropriate conveyance of believable evidence about device health or trusted claims about device capabilities via network protocols.  The flows of data between these roles depends on the composition of RATS Roles and their location with respect to devices or services.  The RATS architecture provides these roles as building blocks to enable suitable composition, while remaining hardware-agnostic with respect to the evidence on trustworthiness conveyed.  This flexibility is intended to address a significant majority of use-cases or usage scenarios in the domain of RATS.  Examples include, but are not limited to: financial transactions, voting machines, critical safety systems, network equipment health, or trustworthy end-user device management." />
+  <meta name="dct.abstract" content="Remote ATtestation ProcedureS (RATS) architecture facilitates the attestation of device characteristics that, in general, are based on specific trustworthiness qualities intrinsic to a device or service. It includes trusted computing functionality provided by device hardware and software that allows trustworthiness qualities to be asserted and verified as part of, or pre-requisite to, the device&#8217;s normal operation.  The RATS architecture maps corresponding attestation functions and capabilities to specific RATS Roles.  The goal is to enable an appropriate conveyance of evidence about device trustworthiness via network protocols.  RATS Roles provide the endpoint context for understanding the various interaction semantics of the attestation lifecycle.  The RATS architecture provides the building block concepts, semantics, syntax and framework for interoperable attestation while remaining hardware-agnostic.  This flexibility is intended to address a significant variety of use-cases and scenarios involving interoperable attestation.  Example usages include, but are not limited to: financial transactions, voting machines, critical safety systems, network equipment health, or trustworthy end-user device management.  Existing industry attestation efforts may be helpful toward informing RATS architecture.  Such as: Remote Integrity VERification (RIVER), the creation of Entity Attestation Tokens (EAT), software integrity Measurement And ATtestation (MAAT)" />
+  <meta name="description" content="Remote ATtestation ProcedureS (RATS) architecture facilitates the attestation of device characteristics that, in general, are based on specific trustworthiness qualities intrinsic to a device or service. It includes trusted computing functionality provided by device hardware and software that allows trustworthiness qualities to be asserted and verified as part of, or pre-requisite to, the device&#8217;s normal operation.  The RATS architecture maps corresponding attestation functions and capabilities to specific RATS Roles.  The goal is to enable an appropriate conveyance of evidence about device trustworthiness via network protocols.  RATS Roles provide the endpoint context for understanding the various interaction semantics of the attestation lifecycle.  The RATS architecture provides the building block concepts, semantics, syntax and framework for interoperable attestation while remaining hardware-agnostic.  This flexibility is intended to address a significant variety of use-cases and scenarios involving interoperable attestation.  Example usages include, but are not limited to: financial transactions, voting machines, critical safety systems, network equipment health, or trustworthy end-user device management.  Existing industry attestation efforts may be helpful toward informing RATS architecture.  Such as: Remote Integrity VERification (RIVER), the creation of Entity Attestation Tokens (EAT), software integrity Measurement And ATtestation (MAAT)" />
 
 </head>
 
@@ -391,7 +391,7 @@ ul.toc li {
   <span class="filename">draft-birkholz-rats-architecture-latest</span></p>
   
   <h1 id="rfc.abstract"><a href="#rfc.abstract">Abstract</a></h1>
-<p>Remote ATtestation ProcedureS (RATS), such as Remote Integrity VERification (RIVER), the creation of Entity Attestation Tokens (EAT), software integrity Measurement And ATtestation (MAAT), or the attestation of device characteristics, in general, are based on specific operations and qualities provided by hardware and software.  The RATS architecture maps corresponding functions and operational capabilities to specific RATS Roles.  The goal is to enable an appropriate conveyance of believable evidence about device health or trusted claims about device capabilities via network protocols.  The flows of data between these roles depends on the composition of RATS Roles and their location with respect to devices or services.  The RATS architecture provides these roles as building blocks to enable suitable composition, while remaining hardware-agnostic with respect to the evidence on trustworthiness conveyed.  This flexibility is intended to address a significant majority of use-cases or usage scenarios in the domain of RATS.  Examples include, but are not limited to: financial transactions, voting machines, critical safety systems, network equipment health, or trustworthy end-user device management.</p>
+<p>Remote ATtestation ProcedureS (RATS) architecture facilitates the attestation of device characteristics that, in general, are based on specific trustworthiness qualities intrinsic to a device or service. It includes trusted computing functionality provided by device hardware and software that allows trustworthiness qualities to be asserted and verified as part of, or pre-requisite to, the device&#8217;s normal operation.  The RATS architecture maps corresponding attestation functions and capabilities to specific RATS Roles.  The goal is to enable an appropriate conveyance of evidence about device trustworthiness via network protocols.  RATS Roles provide the endpoint context for understanding the various interaction semantics of the attestation lifecycle.  The RATS architecture provides the building block concepts, semantics, syntax and framework for interoperable attestation while remaining hardware-agnostic.  This flexibility is intended to address a significant variety of use-cases and scenarios involving interoperable attestation.  Example usages include, but are not limited to: financial transactions, voting machines, critical safety systems, network equipment health, or trustworthy end-user device management.  Existing industry attestation efforts may be helpful toward informing RATS architecture.  Such as: Remote Integrity VERification (RIVER), the creation of Entity Attestation Tokens (EAT), software integrity Measurement And ATtestation (MAAT)</p>
 <h1 id="rfc.status"><a href="#rfc.status">Status of This Memo</a></h1>
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
@@ -428,7 +428,7 @@ ul.toc li {
 </li>
 <li>4.1.2.   <a href="#rfc.section.4.1.2">Verifier Duties</a>
 </li>
-<li>4.1.3.   <a href="#rfc.section.4.1.3">Supply Chain Entity (SCE) Duties</a>
+<li>4.1.3.   <a href="#rfc.section.4.1.3">Claimant Duties</a>
 </li>
 <li>4.1.4.   <a href="#rfc.section.4.1.4">Relying Party Duties</a>
 </li>
@@ -507,7 +507,7 @@ ul.toc li {
   <h1 id="rfc.section.1">
 <a href="#rfc.section.1">1.</a> <a href="#introduction" id="introduction">Introduction</a>
 </h1>
-<p id="rfc.section.1.p.1">In general, this document provides normative guidance how to use, create or adopt network protocols that facilitate remote attestation procedures.  The RATS Architecture is intended to enable the implementation of a number of custom RATS Actors that compose a variety of Remote Attestation Procedures - both in closed and open ecosystems (maintained by singular stakeholders and by federated cooperations).  The foundation of the RATS architecture is the specification of RATS Roles that can be chained via RATS Interactions and - as a result - compose use-case specific Remote Attestation Procedures.  In summary, the goal of the RATS Architecture is to enable interoperable interaction between the RATS Roles specified. Hence, the RATS Architecture is designed to represent and compose heterogeneous RATS and to enable interoperability via well-defined semantics of the information (mainly assertions/claims) exchanged and via well-defined functions (RATS Duties &amp; RATS Interactions) that compose domain-specific remote attestation solutions.</p>
+<p id="rfc.section.1.p.1">In general, this document provides normative guidance how to use, create or adopt network protocols that facilitate remote attestation procedures.  The RATS Architecture anticipates broad deployment contexts that range from IoT to Cloud and Edge ecosystems.  The foundation of the RATS architecture is the specification of RATS Roles that can be chained via RATS Interactions and - as a result - may be composed into use-case specific Remote Attestation Procedures.  RATS Actors establish an ecosystem neutral context where RATS Roles are hosted and where a variety of Remote Attestation Procedure interactions are defined independent of specific conveyance protocols or message formats.  In summary, the goal of the RATS Architecture is to enable interoperable interaction between the RATS Roles. Hence, the RATS Architecture is designed to enable interoperability via well-defined semantics of the information model (attestation assertions/claims), associated with RATS Roles following a conveyance model (RATS Interactions) that may be used to compose domain-specific remote attestation solutions.</p>
 <h1 id="rfc.section.1.1">
 <a href="#rfc.section.1.1">1.1.</a> <a href="#what-is-remote-attestation" id="what-is-remote-attestation">What is Remote Attestation</a>
 </h1>
@@ -529,12 +529,12 @@ ul.toc li {
 <p></p>
 
 <ul>
-<li>the building blocks to create remote attestation procedures applicable Actors, Roles, Duties, and Interactions,</li>
-<li>mandatory and optional trust relationships between its Roles, including Roots-of-Trust,</li>
-<li>the interaction between Roles that reside on separate Actors via network protocols,</li>
-<li>protocol framing, allowing for well-defined and opaque payloads,</li>
-<li>the means to prove, preserve and convey trust properties, such as identity, varacity, freshness, or provenance, and</li>
-<li>primitives necessary for the construction of interoperable attestation payloads.</li>
+<li>The building blocks to create remote attestation procedures applicable Actors, Roles, Duties, and Interactions,</li>
+<li>Mandatory and optional trust relationships between its Roles, that may assume a Root-of-Trust context,</li>
+<li>The interaction between Roles that reside on separate Actors and interact via network protocols,</li>
+<li>Protocol/message framing that allows for well-defined and opaque payloads,</li>
+<li>The means to prove, preserve and convey trust properties, such as identity, varacity, freshness, or provenance, and</li>
+<li>Primitives necessary for the construction of interoperable attestation payloads.</li>
 </ul>
 <h1 id="rfc.section.3">
 <a href="#rfc.section.3">3.</a> <a href="#architectural-components" id="architectural-components">Architectural Components</a>
@@ -625,15 +625,16 @@ ul.toc li {
 <li>Validate authentication information based on public keys, signatures, secrets that are shielded, or secrets that are access restricted via protection profiles</li>
 </ul>
 <h1 id="rfc.section.4.1.3">
-<a href="#rfc.section.4.1.3">4.1.3.</a> <a href="#supply-chain-entity-sce-duties" id="supply-chain-entity-sce-duties">Supply Chain Entity (SCE) Duties</a>
+<a href="#rfc.section.4.1.3">4.1.3.</a> <a href="#claimant-duties" id="claimant-duties">Claimant Duties</a>
 </h1>
 <p></p>
 
 <ul>
-<li>Implement and harden devices or services (i.e. the Attester)</li>
-<li>Evaluate Attester trustworthiness during manufacturing</li>
-<li>Provision of device identities and/or key material</li>
-<li>Embedding of assertions in the Attester during manufacturing</li>
+<li>Hardens the device or service that implements the Attester role</li>
+<li>Provisions device identities and/or key material accessible to the Attester role</li>
+<li>Evaluates trustworthiness during manufacturing, supply chain and onboarding</li>
+<li>Produces trustworthiness assertions applicable to the Attestor role</li>
+<li>Embeds trustworthiness assertions about the Attester role in the device or service during manufacturing, supply chain or onboarding</li>
 </ul>
 <h1 id="rfc.section.4.1.4">
 <a href="#rfc.section.4.1.4">4.1.4.</a> <a href="#relying-party-duties" id="relying-party-duties">Relying Party Duties</a>
