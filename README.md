@@ -1,4 +1,4 @@
-# Reference Terminology for Remote Attestation Procedures
+# Architecture and Reference Terminology for Remote Attestation Procedures
 
 This is the working area for the individual Internet-Draft, "Reference Terminology for Remote Attestation Procedures".
 
