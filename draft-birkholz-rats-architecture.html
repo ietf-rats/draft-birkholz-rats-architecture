@@ -462,7 +462,7 @@ ul.toc li {
 <dt>Entity:</dt>
 <dd style="margin-left: 8">a user, organization, device or computing environment.</dd>
 <dt>Principal:</dt>
-<dd style="margin-left: 8">an Entity that implements RATS Roles and creates provable Claims or Attestation Results (see <a href="#ABLP" class="xref">[ABLP]</a> and <a href="#Lampson2007" class="xref">[Lampson2007]</a>.</dd>
+<dd style="margin-left: 8">an Entity that implements RATS Roles and creates provable Claims or Attestation Results (see <a href="#ABLP" class="xref">[ABLP]</a> and <a href="#Lampson2007" class="xref">[Lampson2007]</a>).</dd>
 <dt>Trustworthiness:</dt>
 <dd style="margin-left: 8">an expectation about a computing environment that it will behave in a way that is intended and nothing more.</dd>
 <dt>Computing Environment:</dt>
@@ -512,8 +512,8 @@ ul.toc li {
 <h1 id="rfc.section.3.3">
 <a href="#rfc.section.3.3">3.3.</a> <a href="#rats-workflow" id="rats-workflow">RATS Workflow</a>
 </h1>
-<p id="rfc.section.3.3.p.1">The basic function of RATS is creation, conveyance and appraisal of attestation evidence.  An Attester creates attestation Evidence (signed claims) that are conveyed to a Verifier for appraisal.  The appraisals compare Evidence with expected known good values called Assertions obtained from supply entities called Asserters.  There can be multiple forms of appraisal (e.g., software integrity verification, device composition and configuration verification, device identity and provenance verification).  Attestation Results are the output of appraisals that are signed and conveyed to Relying Parties. Attestation Results provide the basis by which the Relying Party may determine a level of confidence to place in the application data or operations that follow.</p>
-<p id="rfc.section.3.3.p.2">RATS architecture defines attestation Roles (i.e., Attester, Verifier, Asserter and Relying Party), the messages they exchange, their structure and the various legal ways in which roles may be hosted, combined and divided. RATS messages are defined by an information model that defines claims, environment and protocol semantics. Information model representations are realized as data structure and conveyance protocol binding specifications.</p>
+<p id="rfc.section.3.3.p.1">The basic function of RATS is creation, conveyance and appraisal of attestation Evidence.  An Attester creates attestation Evidence that are conveyed to a Verifier for appraisal.  The appraisals compare Evidence with expected Known-Good-Values called obtained from Asserters (e.g. Prinicipals that are Supply Chain Entities).  There can be multiple forms of appraisal (e.g., software integrity verification, device composition and configuration verification, device identity and provenance verification).  Attestation Results are the output of appraisals. Attestation Results are signed and conveyed to Relying Parties. Attestation Results provide the basis by which the Relying Party may determine a level of confidence to place in the application data or operations that follow.</p>
+<p id="rfc.section.3.3.p.2">RATS architecture defines attestation Roles (i.e., Attester, Verifier, Asserter and Relying Party), the messages they exchange, their structure and the various legal ways in which Roles may be hosted, combined and divided (see Principals below). RATS messages are defined by an information model that defines Claims, environment and protocol semantics. Information Model representations are realized as data structure and conveyance protocol binding specifications.</p>
 <h1 id="rfc.section.3.4">
 <a href="#rfc.section.3.4">3.4.</a> <a href="#interoperability-between-rats" id="interoperability-between-rats">Interoperability between RATS</a>
 </h1>
