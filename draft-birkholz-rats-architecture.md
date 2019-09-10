@@ -54,13 +54,40 @@ author:
 
 normative:
   RFC2119:
-  I-D.richardson-rats-usecases: rats-usecases
+  RFC8174:
 
 informative:
   DOLEV-YAO: DOI.10.1109_tit.1983.1056650
+  ABLP:
+    title: A Calculus for Access Control in Distributed Systems
+    author:
+    - ins: M. Abadi
+      name: Martin Abadi
+    - ins: M. Burrows
+      name: Michael Burrows
+    - ins: B. Lampson
+      name: Butler Lampson
+    - ins: G. Plotkin
+      name: Gordon Plotkin
+    seriesinfo:
+      Springer: Annual International Cryptology Conference
+      page: 1-23
+      DOI: 10.1.1.36.691
+    date: 1991
+  Lampson2007:
+    title: Practical Principles for Computer Security
+    author:
+    - ins: B. Lampson
+      name: Butler Lampson
+    seriesinfo:
+      IOSPress: Proceedings of Software System Reliability and Security
+      page: 151-195
+      DOI: 10.1.1.63.5360
+    date: 2007
   RFC5209:
   RFC3552:
   RFC4949:
+  I-D.richardson-rats-usecases: rats-usecases
 
 --- abstract
 
@@ -74,22 +101,24 @@ By making trustworthiness attributes explicit, they can be evaluated dynamically
 The long-standing Internet Threat Model {{RFC3552}} focuses on threats to the communication channel, as pioneered by Dolev and Yao {{DOLEV-YAO}} in 1983.
 However, threats to the endpoint {{RFC5209}} and system components {{RFC4949}} of transited communication gear (i.e. hosts) are increasingly relevant for assessing the trustworthiness properties of a communication channel.
 Beyond the collection and conveyance of security posture {{RFC5209}} about an endpoint (host), remote attestation provides believable trustworthiness claims ("Evidence") about an endpoint (host).
+In general, this document provides normative guidance how to use, create or adopt network protocols that facilitate RATS.
 
 ## RATS in a nutshell
 
-RATS architecture provides a basis to assess the trustworthiness of endpoints by other parties:
+The RATS architecture provides a basis to assess the trustworthiness of endpoints by other parties:
 
-* In remote attestation workflow, trustworthiness Claims are accompanied by a proof of veracity. Typically, this proof is a cryptographic expression such as a digital signature or message digest. Trustworthiness Claims with proof is what makes attestation Evidence believable.
-* A corresponding attestation provisioning workflow uses trustworthiness Claims to convey believable Endorsements and Known-Good-Values used by a Verifier to assess Evidence.
+* In remote attestation workflows, trustworthiness Claims are accompanied by a proof of veracity. Typically, this proof is a cryptographic expression such as a digital signature or message digest. Trustworthiness Claims with proof is what makes attestation Evidence believable.
+* A corresponding attestation provisioning workflow uses trustworthiness Claims to convey believable Endorsements and Known-Good-Values used by a Verifier to appraise Evidence.
 
-In RATS architecture specific content items are identified (and described in more detail below):
+In the RATS architecture, specific content items are identified (and described in more detail below):
 
-* Evidence is provable Claims about a specific computing environment made by an Attester.
-* Known-Good-Values are reference Claims used to assess Evidence.
-* Endorsements are reference Claims about the environment protecting the Attestation key. It answers the question "why Evidence is believable"
-* Attestation Results are the output from the assessment of Evidence, Known-Good-Values and Endorsements.
+* Evidence is provable Claims about a specific Computing Environment made by an Attester.
+* Known-Good-Values are reference Claims used to appraise Evidence.
+* Endorsements are reference Claims about the environment protecting the Attesters capabilities to create believable Evidence (e.g. the type of protection for an attestation key). It answers the question "why Evidence is believable".
+* Attestation Results are the output from the appraisal of Evidence, Known-Good-Values and Endorsements.
 
-Attestation Results are the output of RATS attestation. Appraisal of attestation Results can be multi-faceted, but is out of scope for RATS architecture.
+Attestation Results are the output of RATS.
+Assessment of Attestation Results can be multi-faceted, but is out-of-scope for the RATS architecture.
 If appropriate Endorsements about the Attester are available, Known-Good-Values about the Attester are available, and if the Attester is capable of creating believable Evidence -- then the Verifier is able to create Attestation Results that enable Relying Parties to establish a level of confidence in the trustworthiness of the Attester.
 
 # Terminology
@@ -104,11 +133,11 @@ Entity:
 
 Principal:
 
-: an Entity that implements RATS roles and creates provable Claims or Results.
+: an Entity that implements RATS Roles and creates provable Claims or Attestation Results (see {{ABLP}} and {{Lampson2007}}.
 
 Trustworthiness:
 
-: an expectation about a computing environment that it will behave in a way that is expected and nothing more.
+: an expectation about a computing environment that it will behave in a way that is intended and nothing more.
 
 Computing Environment:
 
@@ -116,11 +145,11 @@ Computing Environment:
 
 Attesting Computing Environment:
 
-: a computing environment capabile of monitoring and attesting a target Computing Environment.
+: a Computing Environment capabile of monitoring and attesting a target Computing Environment.
 
 Attested Computing Environment:
 
-: a target computing environment that is monitored and attested by an Attesting Computing Environment.
+: a target Computing Environment that is monitored and attested by an Attesting Computing Environment.
 
 ## Requirements Notation
 
@@ -201,7 +230,8 @@ RATS architecture has the following goals:
 
 * Enable semantic interoperability of attestation semantics through information models about computing environments and trustworthiness.
 * Enable data structure interoperability related to claims, endpoint composition / structure, and end-to-end integrity and confidentiality protection mechanisms.
-* enable programmatic assessment of trustworthiness. (Note: Mechanisms that manage risk, justify a level of confidence, or determine a consequence of an attestation result are out of scope).
+* Enable programmatic assessment of trustworthiness. (Note: Mechanisms that manage risk, justify a level of confidence, or determine a consequence of an attestation result are out of scope).
+* Provide the building blocks, including Roles and Principals that enable the composition of service-chains/hierarchies and workflows that can create and appraise evidence about the trustworthiness of devices and services.
 * Use-case driven architecture and design (RATS use cases are summarized in {{-rats-usecases}}).
 * Terminology conventions that are consistently applied across RATS specifications.
 * Reinforce trusted computing principles that include attestation.
@@ -263,8 +293,8 @@ It presents Evidence to a Verifier using a conveyance mechanism or protocol.
 Verifier:
 
 : An Attestation Function that accepts Evidence from an Attester using a conveyance mechanism or protocol.
-It also accepts Provable Assertions from an Asserter using a conveyance mechanism or protocol.
-It verifies the protection mechanisms, parses and evaluates Evidence according to good known-valid (or known-invalid) Claims.
+It also accepts Known-Good-Values and Endorsments from an Asserter using a conveyance mechanism or protocol.
+It verifies the protection mechanisms, parses and appraises Evidence according to good-known valid (or known-invalid) Claims and Endorsments.
 It produces Attestation Results that are formatted and protected (e.g., signed).
 It presents Attestation Results to a Relying Party using a conveyance mechanism or protocol.
 
@@ -279,7 +309,7 @@ It presents provable Claims to a Verifier using a conveyance mechanism or protoc
 Relying Party:
 
 : An Attestation Function that accepts Attestation Results from a Verifier using a conveyance mechanism or protocol.
-It assesses Attestation Results protections, parses and appraises attestation results according to an appraisal context (Note: definition of the appraisal context is out-of-scope).
+It assesses Attestation Results protections, parses and assesses Attestation Results according to an assessent context (Note: definition of the assessment context is out-of-scope).
 
 ### Role Messages
 
@@ -287,7 +317,7 @@ Claims:
 
 : Statements about trustworthiness characteristics of an Attested Computing Environment.
 
-: The veracity of a Claim is determined by the reputation of the entity making the Claim. (Note: Reputation may involve identifying, authenticating and tracking transactions associated with an entity. Remote Attestation may be used to establish entity reputation, but not exclusively. Other reputation mechanisms are out-of-scope).
+: The veracity of a Claim is determined by the reputation of the entity making the Claim. (Note: Reputation may involve identifying, authenticating and tracking transactions associated with an entity. RATS may be used to establish entity reputation, but not exclusively. Other reputation mechanisms are out-of-scope).
 
 Evidence:
 
@@ -319,7 +349,6 @@ Attestation Results SHOULD satisfy Relying Party expectations for freshness, ide
 ## RATS Principals
 
 RATS Principals are entities, users, organizations, devices and computing environments (e.g., devices, platforms, services, peripherals).
- can take on one or more RATS Roles.
 
 RATS Principals may implement one or more RATS Roles. Role interactions occurring within the same RATS Principal are out-of-scope.
 
@@ -349,12 +378,19 @@ Principal operations that apply resiliency, scaling, load balancing or replicati
 {:rats #Principals title="RATS Principals-Role Composition"}
 
 RATS Principals have the following properties:
+
 * Multiplicity - Multiple instances of RATS Principals that possess the same RATS Roles can exist.
 * Composition - RATS Principals possessing different RATS Roles can be combined into a singleton RATS Principal possessing the union of RATS Roles. RATS Interactions between combined RATS Principals is uninteresting.
 * Decomposition -  A singleton RATS Principal possessing multiple RATS Roles can be divided into multiple RATS Principals.
+
 RATS Interactions may occur between them.
 
 # Security Considerations
-RATS Evidence, Verifiable Assertions and Results SHOULD use formats that support end-to-end integrity protection and MAY support end-to-end confidentiality protection. Replay attack prevention MAY be supported if a Nonce Claim is included. Nonce Claims often piggy-back other information and can convey attestation semantics that are of essence to RATS, e.g. the last four bytes of a challenge nonce could be replaced by the IPv4 address-value of the Attester in its response.
 
-All other attacks involving RATS structures are not explicitly addressed by RATS architecture. Additional security protections MAY be required of conveyance mechanisms. For example, additional means of authentication, confidentiality, integrity, replay, denial of service and privacy protection of RATS payloads and Principals may be needed.
+RATS Evidence, Verifiable Assertions and Results SHOULD use formats that support end-to-end integrity protection and MAY support end-to-end confidentiality protection.
+Replay attack prevention MAY be supported if a Nonce Claim is included.
+Nonce Claims often piggy-back other information and can convey attestation semantics that are of essence to RATS, e.g. the last four bytes of a challenge nonce could be replaced by the IPv4 address-value of the Attester in its response.
+
+All other attacks involving RATS structures are not explicitly addressed by RATS architecture.
+Additional security protections MAY be required of conveyance mechanisms.
+For example, additional means of authentication, confidentiality, integrity, replay, denial of service and privacy protection of RATS payloads and Principals may be needed.
