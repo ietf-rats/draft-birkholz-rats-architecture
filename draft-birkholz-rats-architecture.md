@@ -133,7 +133,7 @@ Entity:
 
 Principal:
 
-: an Entity that implements RATS Roles and creates provable Claims or Attestation Results (see {{ABLP}} and {{Lampson2007}}.
+: an Entity that implements RATS Roles and creates provable Claims or Attestation Results (see {{ABLP}} and {{Lampson2007}}).
 
 Trustworthiness:
 
@@ -210,13 +210,13 @@ For this reason, trustworthy RATS depend on trustworthy manufacturing and supply
 
 ## RATS Workflow
 
-The basic function of RATS is creation, conveyance and appraisal of attestation evidence.
-An Attester creates attestation Evidence (signed claims) that are conveyed to a Verifier for appraisal.
-The appraisals compare Evidence with expected known good values called Assertions obtained from supply entities called Asserters.
+The basic function of RATS is creation, conveyance and appraisal of attestation Evidence.
+An Attester creates attestation Evidence that are conveyed to a Verifier for appraisal.
+The appraisals compare Evidence with expected Known-Good-Values called obtained from Asserters (e.g. Prinicipals that are Supply Chain Entities).
 There can be multiple forms of appraisal (e.g., software integrity verification, device composition and configuration verification, device identity and provenance verification).
-Attestation Results are the output of appraisals that are signed and conveyed to Relying Parties. Attestation Results provide the basis by which the Relying Party may determine a level of confidence to place in the application data or operations that follow.
+Attestation Results are the output of appraisals. Attestation Results are signed and conveyed to Relying Parties. Attestation Results provide the basis by which the Relying Party may determine a level of confidence to place in the application data or operations that follow.
 
-RATS architecture defines attestation Roles (i.e., Attester, Verifier, Asserter and Relying Party), the messages they exchange, their structure and the various legal ways in which roles may be hosted, combined and divided. RATS messages are defined by an information model that defines claims, environment and protocol semantics. Information model representations are realized as data structure and conveyance protocol binding specifications.
+RATS architecture defines attestation Roles (i.e., Attester, Verifier, Asserter and Relying Party), the messages they exchange, their structure and the various legal ways in which Roles may be hosted, combined and divided (see Principals below). RATS messages are defined by an information model that defines Claims, environment and protocol semantics. Information Model representations are realized as data structure and conveyance protocol binding specifications.
 
 ## Interoperability between RATS
 
