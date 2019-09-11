@@ -103,7 +103,7 @@ However, threats to the endpoint {{RFC5209}} and system components {{RFC4949}} o
 Beyond the collection and conveyance of security posture {{RFC5209}} about an endpoint (host), remote attestation provides believable trustworthiness claims ("Evidence") about an endpoint (host).
 In general, this document provides normative guidance how to use, create or adopt network protocols that facilitate RATS.
 
-## RATS in a nutshell
+## RATS in a Nutshell
 
 The RATS architecture provides a basis to assess the trustworthiness of endpoints by other parties:
 
