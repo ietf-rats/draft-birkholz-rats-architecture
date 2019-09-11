@@ -5,12 +5,12 @@
 Network Working Group                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                              M. Wiseman
-Expires: March 13, 2020                               GE Global Research
+Expires: March 14, 2020                               GE Global Research
                                                            H. Tschofenig
                                                                 ARM Ltd.
                                                                 N. Smith
                                                                    Intel
-                                                      September 10, 2019
+                                                      September 11, 2019
 
 
                Remote Attestation Procedures Architecture
@@ -42,7 +42,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on March 13, 2020.
+   This Internet-Draft will expire on March 14, 2020.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Birkholz, et al.         Expires March 13, 2020                 [Page 1]
+Birkholz, et al.         Expires March 14, 2020                 [Page 1]
 
 Internet-Draft              RATS Arch & Terms             September 2019
 
@@ -71,7 +71,7 @@ Internet-Draft              RATS Arch & Terms             September 2019
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
-     1.1.  RATS in a nutshell  . . . . . . . . . . . . . . . . . . .   3
+     1.1.  RATS in a Nutshell  . . . . . . . . . . . . . . . . . . .   3
    2.  Terminology . . . . . . . . . . . . . . . . . . . . . . . . .   3
      2.1.  Requirements Notation . . . . . . . . . . . . . . . . . .   4
    3.  Conceptual Overview . . . . . . . . . . . . . . . . . . . . .   4
@@ -109,12 +109,12 @@ Table of Contents
 
 
 
-Birkholz, et al.         Expires March 13, 2020                 [Page 2]
+Birkholz, et al.         Expires March 14, 2020                 [Page 2]
 
 Internet-Draft              RATS Arch & Terms             September 2019
 
 
-1.1.  RATS in a nutshell
+1.1.  RATS in a Nutshell
 
    The RATS architecture provides a basis to assess the trustworthiness
    of endpoints by other parties:
@@ -165,7 +165,7 @@ Internet-Draft              RATS Arch & Terms             September 2019
 
 
 
-Birkholz, et al.         Expires March 13, 2020                 [Page 3]
+Birkholz, et al.         Expires March 14, 2020                 [Page 3]
 
 Internet-Draft              RATS Arch & Terms             September 2019
 
@@ -221,7 +221,7 @@ Internet-Draft              RATS Arch & Terms             September 2019
 
 
 
-Birkholz, et al.         Expires March 13, 2020                 [Page 4]
+Birkholz, et al.         Expires March 14, 2020                 [Page 4]
 
 Internet-Draft              RATS Arch & Terms             September 2019
 
@@ -277,7 +277,7 @@ Internet-Draft              RATS Arch & Terms             September 2019
 
 
 
-Birkholz, et al.         Expires March 13, 2020                 [Page 5]
+Birkholz, et al.         Expires March 14, 2020                 [Page 5]
 
 Internet-Draft              RATS Arch & Terms             September 2019
 
@@ -333,7 +333,7 @@ Internet-Draft              RATS Arch & Terms             September 2019
 
 
 
-Birkholz, et al.         Expires March 13, 2020                 [Page 6]
+Birkholz, et al.         Expires March 14, 2020                 [Page 6]
 
 Internet-Draft              RATS Arch & Terms             September 2019
 
@@ -389,7 +389,7 @@ Internet-Draft              RATS Arch & Terms             September 2019
 
 
 
-Birkholz, et al.         Expires March 13, 2020                 [Page 7]
+Birkholz, et al.         Expires March 14, 2020                 [Page 7]
 
 Internet-Draft              RATS Arch & Terms             September 2019
 
@@ -445,7 +445,7 @@ Internet-Draft              RATS Arch & Terms             September 2019
 
 
 
-Birkholz, et al.         Expires March 13, 2020                 [Page 8]
+Birkholz, et al.         Expires March 14, 2020                 [Page 8]
 
 Internet-Draft              RATS Arch & Terms             September 2019
 
@@ -501,7 +501,7 @@ Internet-Draft              RATS Arch & Terms             September 2019
 
 
 
-Birkholz, et al.         Expires March 13, 2020                 [Page 9]
+Birkholz, et al.         Expires March 14, 2020                 [Page 9]
 
 Internet-Draft              RATS Arch & Terms             September 2019
 
@@ -557,7 +557,7 @@ Internet-Draft              RATS Arch & Terms             September 2019
 
 
 
-Birkholz, et al.         Expires March 13, 2020                [Page 10]
+Birkholz, et al.         Expires March 14, 2020                [Page 10]
 
 Internet-Draft              RATS Arch & Terms             September 2019
 
@@ -613,7 +613,7 @@ Internet-Draft              RATS Arch & Terms             September 2019
 
 
 
-Birkholz, et al.         Expires March 13, 2020                [Page 11]
+Birkholz, et al.         Expires March 14, 2020                [Page 11]
 
 Internet-Draft              RATS Arch & Terms             September 2019
 
@@ -669,7 +669,7 @@ Internet-Draft              RATS Arch & Terms             September 2019
 
 
 
-Birkholz, et al.         Expires March 13, 2020                [Page 12]
+Birkholz, et al.         Expires March 14, 2020                [Page 12]
 
 Internet-Draft              RATS Arch & Terms             September 2019
 
@@ -725,7 +725,7 @@ Authors' Addresses
 
 
 
-Birkholz, et al.         Expires March 13, 2020                [Page 13]
+Birkholz, et al.         Expires March 14, 2020                [Page 13]
 
 Internet-Draft              RATS Arch & Terms             September 2019
 
@@ -781,4 +781,4 @@ Internet-Draft              RATS Arch & Terms             September 2019
 
 
 
-Birkholz, et al.         Expires March 13, 2020                [Page 14]
+Birkholz, et al.         Expires March 14, 2020                [Page 14]
