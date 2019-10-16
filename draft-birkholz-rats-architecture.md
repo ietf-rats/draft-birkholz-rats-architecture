@@ -123,7 +123,15 @@ Attestation Results are the output of RATS.
 Assessment of Attestation Results can be multi-faceted, but is out-of-scope for the RATS architecture.
 If appropriate Endorsements about the Attester are available, Known-Good-Values about the Attester are available, and if the Attester is capable of creating believable Evidence -- then the Verifier is able to create Attestation Results that enable Relying Parties to establish a level of confidence in the trustworthiness of the Attester.
 
-# Terminology
+# Essential Terms
+
+The RATS vocabulary provides a concise definition of the terms used throughout the document. More detailed descriptions of the terms defined (terminology) is included in later sections. The relationship of terms in the glossary is illustrated by diagrams later in this section. A definition in the vocabulary provided can use Forward References to other vocabulary definitions.
+
+Forward Reference:
+
+: Words that start with an upper case letter (although they would normally start with a lower case letter) are Forward References, which means that the definition will be found later in the same section the Forward Reference is found in. Forward References are only used in the RATS vocabulary that summarizes the essential terms used in this document. The purpose of the vocabulary is to introduce essential terms and provide concise definitions at the beginning of the RATS architecture document, so there will be no further Forward References in the remainder of this document.
+
+## RATS Vocabulary
 
 Appraisal:
 
@@ -135,11 +143,11 @@ Architectural Constituents:
 
 Asserter:
 
-: An Architectural Constituent. The origin of Endorsements and Known-Good-Values. The Role that designates an Entity that facilitates attestation provision workflows and potentially provides trust anchors.
+: An Architectural Constituent. An Asserter is the origin of Endorsements and Known-Good-Values. The Role that designates an Entity that facilitates attestation provision workflows and potentially provides trust anchors.
 
 Attestation Result:
 
-: A Message type created and conveyed by the Verifier Role. Attestation Results can be consumed by Relying Parties.
+: A Message type created by the Verifier Role and ultimately consumed by Relying Parties.
 
 Attester: 
 
@@ -165,6 +173,10 @@ Claims:
 
 : Statements about trustworthiness properties of an Attested Environment that are incorporated in Evidence, Known-Good-Values, or Endorsements.
 
+Conveyance:
+
+: The process of transferring Messages between Roles and Entities via a network protocols in a way that preserves required Message Properties.
+
 Endorsement:
 
 : A Message type created and distributed by the Asserter Role and consumed by the Verifier Role. Endorsements provide Claims about Components of an Attester that an Attesting Environment cannot create Evidence about.
@@ -172,10 +184,6 @@ Endorsement:
 Environment:
 
 : An Architectural Constituent. A distinguishable computing context (typically composed of, e.g. memory, CPU, storage, networking, firmware, software) that is able to take one or more of Roles defined in this document.
-
-Conveyance:
-
-: The process of transferring Messages between Roles and Entities via a network protocols in a way that preserves required Message Properties.
 
 Entity:
 
@@ -195,7 +203,7 @@ Message:
 
 Message Properties:
 
-: A set of Architectural Constituents. Architectural Constituent are specific properties that pertain to the Messages defined in this document: Freshness, Identity, Context, Provenance, Validity, Relevance, Veracity.
+: A set of Architectural Constituents. Message Properties are specific security aspects that pertain to the Messages defined in this document: Freshness, Identity, Context, Provenance, Validity, Relevance, Veracity.
 
 Profile: 
 
