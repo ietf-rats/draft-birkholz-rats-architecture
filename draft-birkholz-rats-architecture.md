@@ -2,7 +2,7 @@
 title: Remote Attestation Procedures Architecture
 abbrev: RATS Arch & Terms
 docname: draft-birkholz-rats-architecture-latest
-wg:
+wg: RATS Working Group
 stand_alone: true
 ipr: trust200902
 area: Security
@@ -91,8 +91,10 @@ informative:
 
 --- abstract
 
-The Remote ATtestation procedureS (RATS) architecture facilitates interoperability of attestation mechanisms by defining a set of participant roles and interactions that reveal information about the trustworthiness attributes of an attester's computing environment.
-By making trustworthiness attributes explicit, they can be evaluated dynamically and within an operational context where risk mitigation depends on having a more complete understanding of the possible vulnerabilities germane to the attester's environment.
+Remote ATtestation procedureS enable the assessment of the trustworthiness (RATS) of remote peers in various usage scenarios.
+In order to support a resilient and vendor-interoperable solution ecosystem, the architecture module defined in this document enables a semantic mapping of existing remote attestation workflows, including solutions, such as Fast Identity Online (FIDO), Android Key Attestation (of the W3C Web Authentication), or Trusted Computing Group (TCG) Remote Integrity Verification (RIV).
+The RATS architecture also provides a simple and unified basis to accommodate emerging solutions, such as the Device Identifier Composition Engine (DICE) or Time-based Uni-Directional Attestation (TUDA).
+As a result, the RATS architectural model defined is composable, extensible & uses well-defined terminology.
 
 --- middle
 
@@ -123,33 +125,99 @@ If appropriate Endorsements about the Attester are available, Known-Good-Values 
 
 # Terminology
 
+Appraisal:
+
+: The process of assessing Evidence with respect to its Message Properties and the Claims it contains by using Endorsements and Known-Good-Values.
+
+Architectural Constituents:
+
+: Entities, Roles, Messages, Message Properties, and potential Interactions defined by this architecture document. Architectural Constituents are the components to define Profiles with.
+
+Asserter:
+
+: An Architectural Constituent. The origin of Endorsements and Known-Good-Values. The Role that designates an Entity that facilitates attestation provision workflows and potentially provides trust anchors.
+
+Attestation Result:
+
+: A Message type created and conveyed by the Verifier Role. Attestation Results can be consumed by Relying Parties.
+
+Attester: 
+
+: A Architectural Constituent. The creator of Evidence. The Role that designates an Entity to be assessed with respect to its trustworthiness properties in the scope of a specific Profile.
+
+Attested:
+
+: The state of being scrutinized by monitoring trustworthiness properties or collecting Claims about the Environments of an Attester.
+
+Attested Environment:
+
+: An Environment that is Attested and part of an Entity taking on the Role of Attester.
+
+Attesting:
+
+: The process of aggregating Claims and creating Evidence about Environments by an Attester.
+
+Attesting Environment:
+
+: An Environment capable of monitoring and Attesting target Environments of an Attester and reporting Evidence.
+
+Claims:
+
+: Statements about trustworthiness properties of an Attested Environment that are incorporated in Evidence, Known-Good-Values, or Endorsements.
+
+Endorsement:
+
+: A Message type created and distributed by the Asserter Role and consumed by the Verifier Role. Endorsements provide Claims about Components of an Attester that an Attesting Environment cannot create Evidence about.
+
+Environment:
+
+: An Architectural Constituent. A distinguishable computing context (typically composed of, e.g. memory, CPU, storage, networking, firmware, software) that is able to take one or more of Roles defined in this document.
+
 Conveyance:
 
-: a mechanism for transferring RATS Evidence, Endorsements, Known-Good-Values or Attestation Results.
+: The process of transferring Messages between Roles and Entities via a network protocols in a way that preserves required Message Properties.
 
 Entity:
 
-: a user, organization, device or computing environment.
+: An Architectural Constituent. In the RATS context, this is a device, a component {{RFC4949}}, or an Environment (see the tutorial on component in {{RFC4949}}).
 
-Principal:
+Evidence:
 
-: an Entity that implements RATS Roles and creates provable Claims or Attestation Results (see {{ABLP}} and {{Lampson2007}}).
+: A Message type created and conveyed by the Attester Role. Attestation Evidence can be consumed and relayed by other Roles, primarily the Verifier Role to appraise the Evidence.
+
+Known-Good-Values:
+
+: A Message type created and distributed by the Asserter Role and consumed by the Verifier Role. Known-Good-Values are reference Claims that are used to appraise the believability and veracity of attestation Evidence.
+
+Message:
+
+: An Architectural Constituent. The serialized and protected information conveyed via network protocols. Messages are created and consumed by Entities taking on one or more Roles.
+
+Message Properties:
+
+: A set of Architectural Constituents. Architectural Constituent are specific properties that pertain to the Messages defined in this document: Freshness, Identity, Context, Provenance, Validity, Relevance, Veracity.
+
+Profile: 
+
+: Either (1) a named set of constraints to the base RATS architectural model (subset) or, (2) more identified base specification (specialization).
+
+: A Profile in the RATS context includes the identification of any required subsets of Architectural Constituents, semantic interpretations, or terminology, necessary to accomplish a particular remote attestation procedure usage scenario. Profiles aim to increase interoperability within a community of users by introducing certain constraints on the use of the more general RATS architecture.
+
+Relying Party:
+
+: An Architectural Constituent. The consumer or proxy of Attestation Results. The Role that designates an Entity that requires reliable and believable statements about the Trustworthiness of an Attester Role.
+
+Role:
+
+: An Architectural Constituent. The basic components of the architecture defined in this document that can be composed in several ways to create Profiles (i.e. specific Role compositions that enable 
 
 Trustworthiness:
 
-: an expectation about a computing environment that it will behave in a way that is intended and nothing more.
+: A essential expectation about an Entity that it will behave in a way that is intended and nothing more. The definition of Trustworthiness is a derived and simplified definition based on "Trusted System" {{RFC4949}} excluding, for example, "environmental disruption".
 
-Computing Environment:
+Verifier:
 
-: a computing context consisting of system components.
-
-Attesting Computing Environment:
-
-: a Computing Environment capabile of monitoring and attesting a target Computing Environment.
-
-Attested Computing Environment:
-
-: a target Computing Environment that is monitored and attested by an Attesting Computing Environment.
+: An Architectural Constituent. The consumer of Evidence for appraisal. The Role that designates an Entity to create Attestation Results based on Evidence, Known-Good-Values, and Endorsements.
 
 ## Requirements Notation
 
@@ -157,7 +225,7 @@ Attested Computing Environment:
 
 # Conceptual Overview
 
-In network protocol exchanges, it is often the case that one entity (a Relying Party) requires an assessment of the trustworthiness of a remote entity (an Attester or specifc system components {{RFC4949}} thereof).
+In network protocol exchanges, it is often the case that one entity (a Relying Party) requires an assessment of the trustworthiness of a remote entity (an Attester or specific system components {{RFC4949}} thereof).
 Remote ATtestation procedureS (RATS) enable Relying Parties to establish a level of confidence in the trustworthiness of remote system components through the creation of attestation evidence by remote system components and a processing chain of architectural constituents towards the relying party.
 
 The corresponding trustworthiness attributes processed may not be just a finite set of values. Additionally, the system characteristics of remote components themselves have an impact on the veracity of trustworthiness attributes included in Evidence.
@@ -212,7 +280,7 @@ For this reason, trustworthy RATS depend on trustworthy manufacturing and supply
 
 The basic function of RATS is creation, conveyance and appraisal of attestation Evidence.
 An Attester creates attestation Evidence that are conveyed to a Verifier for appraisal.
-The appraisals compare Evidence with expected Known-Good-Values called obtained from Asserters (e.g. Prinicipals that are Supply Chain Entities).
+The appraisals compare Evidence with expected Known-Good-Values called obtained from Asserters (e.g. Principals that are Supply Chain Entities).
 There can be multiple forms of appraisal (e.g., software integrity verification, device composition and configuration verification, device identity and provenance verification).
 Attestation Results are the output of appraisals. Attestation Results are signed and conveyed to Relying Parties. Attestation Results provide the basis by which the Relying Party may determine a level of confidence to place in the application data or operations that follow.
 
@@ -293,8 +361,8 @@ It presents Evidence to a Verifier using a conveyance mechanism or protocol.
 Verifier:
 
 : An Attestation Function that accepts Evidence from an Attester using a conveyance mechanism or protocol.
-It also accepts Known-Good-Values and Endorsments from an Asserter using a conveyance mechanism or protocol.
-It verifies the protection mechanisms, parses and appraises Evidence according to good-known valid (or known-invalid) Claims and Endorsments.
+It also accepts Known-Good-Values and Endorsements from an Asserter using a conveyance mechanism or protocol.
+It verifies the protection mechanisms, parses and appraises Evidence according to good-known valid (or known-invalid) Claims and Endorsements.
 It produces Attestation Results that are formatted and protected (e.g., signed).
 It presents Attestation Results to a Relying Party using a conveyance mechanism or protocol.
 
@@ -343,7 +411,7 @@ Attestation Results:
 
 : Statements about the output of an appraisal of Evidence that are created, formatted and protected by a Verifier.
 
-: Attestation Results provide the basis for a Relying Party to establsh a level of confidence in the trustworthiness of an Attester.
+: Attestation Results provide the basis for a Relying Party to establish a level of confidence in the trustworthiness of an Attester.
 Attestation Results SHOULD satisfy Relying Party expectations for freshness, identity, context, provenance, validity, relevance and veracity.
 
 ## RATS Principals
