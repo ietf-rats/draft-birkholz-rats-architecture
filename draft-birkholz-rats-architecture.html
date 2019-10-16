@@ -284,8 +284,9 @@ ul.toc li {
   <link href="#rfc.toc" rel="Contents">
 <link href="#rfc.section.1" rel="Chapter" title="1 Introduction">
 <link href="#rfc.section.1.1" rel="Chapter" title="1.1 RATS in a Nutshell">
-<link href="#rfc.section.2" rel="Chapter" title="2 Terminology">
-<link href="#rfc.section.2.1" rel="Chapter" title="2.1 Requirements Notation">
+<link href="#rfc.section.2" rel="Chapter" title="2 Essential Terms">
+<link href="#rfc.section.2.1" rel="Chapter" title="2.1 RATS Vocabulary">
+<link href="#rfc.section.2.2" rel="Chapter" title="2.2 Requirements Notation">
 <link href="#rfc.section.3" rel="Chapter" title="3 Conceptual Overview">
 <link href="#rfc.section.3.1" rel="Chapter" title="3.1 Computing Environments">
 <link href="#rfc.section.3.2" rel="Chapter" title="3.2 Trustworthiness">
@@ -385,9 +386,11 @@ ul.toc li {
 </li>
 <ul><li>1.1.   <a href="#rfc.section.1.1">RATS in a Nutshell</a>
 </li>
-</ul><li>2.   <a href="#rfc.section.2">Terminology</a>
+</ul><li>2.   <a href="#rfc.section.2">Essential Terms</a>
 </li>
-<ul><li>2.1.   <a href="#rfc.section.2.1">Requirements Notation</a>
+<ul><li>2.1.   <a href="#rfc.section.2.1">RATS Vocabulary</a>
+</li>
+<li>2.2.   <a href="#rfc.section.2.2">Requirements Notation</a>
 </li>
 </ul><li>3.   <a href="#rfc.section.3">Conceptual Overview</a>
 </li>
@@ -452,7 +455,17 @@ ul.toc li {
 </ul>
 <p id="rfc.section.1.1.p.5">Attestation Results are the output of RATS.  Assessment of Attestation Results can be multi-faceted, but is out-of-scope for the RATS architecture.  If appropriate Endorsements about the Attester are available, Known-Good-Values about the Attester are available, and if the Attester is capable of creating believable Evidence &#8211; then the Verifier is able to create Attestation Results that enable Relying Parties to establish a level of confidence in the trustworthiness of the Attester.</p>
 <h1 id="rfc.section.2">
-<a href="#rfc.section.2">2.</a> <a href="#terminology" id="terminology">Terminology</a>
+<a href="#rfc.section.2">2.</a> <a href="#essential-terms" id="essential-terms">Essential Terms</a>
+</h1>
+<p id="rfc.section.2.p.1">The RATS vocabulary provides a concise definition of the terms used throughout the document. More detailed descriptions of the terms defined (terminology) is included in later sections. The relationship of terms in the glossary is illustrated by diagrams later in this section. A definition in the vocabulary provided can use Forward References to other vocabulary definitions.</p>
+<p></p>
+
+<dl>
+<dt>Forward Reference:</dt>
+<dd style="margin-left: 8">Words that start with an upper case letter (although they would normally start with a lower case letter) are Forward References, which means that the definition will be found later in the same section the Forward Reference is found in. Forward References are only used in the RATS vocabulary that summarizes the essential terms used in this document. The purpose of the vocabulary is to introduce essential terms and provide concise definitions at the beginning of the RATS architecture document, so there will be no further Forward References in the remainder of this document.</dd>
+</dl>
+<h1 id="rfc.section.2.1">
+<a href="#rfc.section.2.1">2.1.</a> <a href="#rats-vocabulary" id="rats-vocabulary">RATS Vocabulary</a>
 </h1>
 <p></p>
 
@@ -462,9 +475,9 @@ ul.toc li {
 <dt>Architectural Constituents:</dt>
 <dd style="margin-left: 8">Entities, Roles, Messages, Message Properties, and potential Interactions defined by this architecture document. Architectural Constituents are the components to define Profiles with.</dd>
 <dt>Asserter:</dt>
-<dd style="margin-left: 8">An Architectural Constituent. The origin of Endorsements and Known-Good-Values. The Role that designates an Entity that facilitates attestation provision workflows and potentially provides trust anchors.</dd>
+<dd style="margin-left: 8">An Architectural Constituent. An Asserter is the origin of Endorsements and Known-Good-Values. The Role that designates an Entity that facilitates attestation provision workflows and potentially provides trust anchors.</dd>
 <dt>Attestation Result:</dt>
-<dd style="margin-left: 8">A Message type created and conveyed by the Verifier Role. Attestation Results can be consumed by Relying Parties.</dd>
+<dd style="margin-left: 8">A Message type created by the Verifier Role and ultimately consumed by Relying Parties.</dd>
 <dt>Attester:</dt>
 <dd style="margin-left: 8">A Architectural Constituent. The creator of Evidence. The Role that designates an Entity to be assessed with respect to its trustworthiness properties in the scope of a specific Profile.</dd>
 <dt>Attested:</dt>
@@ -477,12 +490,12 @@ ul.toc li {
 <dd style="margin-left: 8">An Environment capable of monitoring and Attesting target Environments of an Attester and reporting Evidence.</dd>
 <dt>Claims:</dt>
 <dd style="margin-left: 8">Statements about trustworthiness properties of an Attested Environment that are incorporated in Evidence, Known-Good-Values, or Endorsements.</dd>
+<dt>Conveyance:</dt>
+<dd style="margin-left: 8">The process of transferring Messages between Roles and Entities via a network protocols in a way that preserves required Message Properties.</dd>
 <dt>Endorsement:</dt>
 <dd style="margin-left: 8">A Message type created and distributed by the Asserter Role and consumed by the Verifier Role. Endorsements provide Claims about Components of an Attester that an Attesting Environment cannot create Evidence about.</dd>
 <dt>Environment:</dt>
 <dd style="margin-left: 8">An Architectural Constituent. A distinguishable computing context (typically composed of, e.g. memory, CPU, storage, networking, firmware, software) that is able to take one or more of Roles defined in this document.</dd>
-<dt>Conveyance:</dt>
-<dd style="margin-left: 8">The process of transferring Messages between Roles and Entities via a network protocols in a way that preserves required Message Properties.</dd>
 <dt>Entity:</dt>
 <dd style="margin-left: 8">An Architectural Constituent. In the RATS context, this is a device, a component <a href="#RFC4949" class="xref">[RFC4949]</a>, or an Environment (see the tutorial on component in <a href="#RFC4949" class="xref">[RFC4949]</a>).</dd>
 <dt>Evidence:</dt>
@@ -492,7 +505,7 @@ ul.toc li {
 <dt>Message:</dt>
 <dd style="margin-left: 8">An Architectural Constituent. The serialized and protected information conveyed via network protocols. Messages are created and consumed by Entities taking on one or more Roles.</dd>
 <dt>Message Properties:</dt>
-<dd style="margin-left: 8">A set of Architectural Constituents. Architectural Constituent are specific properties that pertain to the Messages defined in this document: Freshness, Identity, Context, Provenance, Validity, Relevance, Veracity.</dd>
+<dd style="margin-left: 8">A set of Architectural Constituents. Message Properties are specific security aspects that pertain to the Messages defined in this document: Freshness, Identity, Context, Provenance, Validity, Relevance, Veracity.</dd>
 <dt>Profile:</dt>
 <dd style="margin-left: 8">Either (1) a named set of constraints to the base RATS architectural model (subset) or, (2) more identified base specification (specialization).</dd>
 <dt></dt>
@@ -506,10 +519,10 @@ ul.toc li {
 <dt>Verifier:</dt>
 <dd style="margin-left: 8">An Architectural Constituent. The consumer of Evidence for appraisal. The Role that designates an Entity to create Attestation Results based on Evidence, Known-Good-Values, and Endorsements.</dd>
 </dl>
-<h1 id="rfc.section.2.1">
-<a href="#rfc.section.2.1">2.1.</a> <a href="#requirements-notation" id="requirements-notation">Requirements Notation</a>
+<h1 id="rfc.section.2.2">
+<a href="#rfc.section.2.2">2.2.</a> <a href="#requirements-notation" id="requirements-notation">Requirements Notation</a>
 </h1>
-<p id="rfc.section.2.1.p.1">The key words &#8220;MUST&#8221;, &#8220;MUST NOT&#8221;, &#8220;REQUIRED&#8221;, &#8220;SHALL&#8221;, &#8220;SHALL NOT&#8221;, &#8220;SHOULD&#8221;, &#8220;SHOULD NOT&#8221;, &#8220;RECOMMENDED&#8221;, &#8220;NOT RECOMMENDED&#8221;, &#8220;MAY&#8221;, and &#8220;OPTIONAL&#8221; in this document are to be interpreted as described in BCP&#160;14 <a href="#RFC2119" class="xref">[RFC2119]</a> <a href="#RFC8174" class="xref">[RFC8174]</a> when, and only when, they appear in all capitals, as shown here.</p>
+<p id="rfc.section.2.2.p.1">The key words &#8220;MUST&#8221;, &#8220;MUST NOT&#8221;, &#8220;REQUIRED&#8221;, &#8220;SHALL&#8221;, &#8220;SHALL NOT&#8221;, &#8220;SHOULD&#8221;, &#8220;SHOULD NOT&#8221;, &#8220;RECOMMENDED&#8221;, &#8220;NOT RECOMMENDED&#8221;, &#8220;MAY&#8221;, and &#8220;OPTIONAL&#8221; in this document are to be interpreted as described in BCP&#160;14 <a href="#RFC2119" class="xref">[RFC2119]</a> <a href="#RFC8174" class="xref">[RFC8174]</a> when, and only when, they appear in all capitals, as shown here.</p>
 <h1 id="rfc.section.3">
 <a href="#rfc.section.3">3.</a> <a href="#conceptual-overview" id="conceptual-overview">Conceptual Overview</a>
 </h1>
