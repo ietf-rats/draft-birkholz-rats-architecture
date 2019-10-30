@@ -105,7 +105,19 @@ informative:
   RFC3552:
   RFC4949:
   I-D.richardson-rats-usecases: rats-usecases
-
+  I-D.fedorkow-rats-network-device-attestation:
+  keystore:
+    target: "https://developer.android.com/training/articles/keystore"
+    title: "Android Keystore System"
+    author:
+      ins: "Google"
+      date: 2019
+  fido:
+    target: "https://fidoalliance.org/specifications/"
+    title: "FIDO Specification Overview"
+    author:
+      ins: "FIDO Alliance"
+      date: 2019
 
 --- abstract
 
@@ -146,33 +158,44 @@ This is followed by a detailed description of the required mechanisms of the RAT
 
 In this document, terminology which is defined within this document are consistency Capitalized.
 
+Current verticales that use remote attestion include:
+* The Trusted Computing Group "Network Device Attestation Workflow" {{I-D.fedorkow-rats-network-device-attestation}}
+* Android Keystore {{keystore}}
+* Fast Identity Online (FIDO) Alliance attestation {{fido}}
+
 ## RATS in a Nutshell
 
 The RATS architecture provides a basis to assess the trustworthiness of endpoints by other parties:
 
-* In remote attestation workflows, trustworthiness Claims are accompanied by a proof of veracity. Typically, this proof is a cryptographic expression such as a digital signature or message digest. Trustworthiness Claims with proof is what makes attestation Evidence believable.
-* A corresponding attestation provisioning workflow uses trustworthiness Claims to convey believable Endorsements and Known-Good-Values used by a Verifier to appraise Evidence.
+* In remote attestation workflows, trustworthiness Claims are accompanied by a proof of veracity. Typically, this proof is a cryptographic expression such as a digital signature or message digest. Trustworthiness Claims with proof is what makes attestation Evidence believable. [AWKWARD]
+* A corresponding attestation provisioning workflow uses trustworthiness Claims to convey believable Endorsements and Known-Good-Values used by a Verifier to appraise Evidence. [REWORD]
 
-In the RATS architecture, specific content items are identified (and described in more detail below):
+## Protocol Flows
 
-* Evidence is provable Claims about a specific Computing Environment made by an Attester.
-* Known-Good-Values are reference Claims used to appraise Evidence.
-* Endorsements are reference Claims about the environment protecting the Attesters capabilities to create believable Evidence (e.g. the type of protection for an attestation key). It answers the question "why Evidence is believable".
+{:wholeflow: artwork-align="center"}
+~~~~ WHOLEFLOW
+{::include wholeflow.txt}
+~~~~
+{:wholeflow #figalllevels title="RATS Protocol Flows"}
+
+In the RATS architecture shown above, specific content items are identified:
+
+* Evidence is a provable Claim about a specific Computing Environment made by an Attester.
+* Known-Good-Values are reference Claims used to appraise Evidence by the Verifier.
+* Endorsements are reference Claims about the environment protecting the Attesters' capabilities to create believable Evidence (e.g. the type of protection for an attestation key). It answers the question "why Evidence is believable". [REWORD]
 * Attestation Results are the output from the appraisal of Evidence, Known-Good-Values and Endorsements.
 
 Attestation Results are the output of RATS.
+
 Assessment of Attestation Results can be multi-faceted, but is out-of-scope for the RATS architecture.
+
 If appropriate Endorsements about the Attester are available, Known-Good-Values about the Attester are available, and if the Attester is capable of creating believable Evidence -- then the Verifier is able to create Attestation Results that enable Relying Parties to establish a level of confidence in the trustworthiness of the Attester.
 
-# Essential Terms
+The Asserter role and the format for Known-Good-Values and Endorsements are not subject to standarization at this time.  The current verticals already includes provisions for encoding and/or distributing these objects already.
 
-The RATS vocabulary provides a concise definition of the terms used throughout the document. More detailed descriptions of the terms defined (terminology) is included in later sections. The relationship of terms in the glossary is illustrated by diagrams later in this section. A definition in the vocabulary provided can use Forward References to other vocabulary definitions.
+# Terminology
 
-Forward Reference:
-
-: Words that start with an upper case letter (although they would normally start with a lower case letter) are Forward References, which means that the definition will be found later in the same section the Forward Reference is found in. Forward References are only used in the RATS vocabulary that summarizes the essential terms used in this document. The purpose of the vocabulary is to introduce essential terms and provide concise definitions at the beginning of the RATS architecture document, so there will be no further Forward References in the remainder of this document.
-
-## RATS Vocabulary
+{::boilerplate bcp14}
 
 Appraisal:
 
@@ -267,10 +290,6 @@ Trustworthiness:
 Verifier:
 
 : An Architectural Constituent. The consumer of Evidence for appraisal. The Role that designates an Entity to create Attestation Results based on Evidence, Known-Good-Values, and Endorsements.
-
-## Requirements Notation
-
-{::boilerplate bcp14}
 
 # Conceptual Overview
 
@@ -372,31 +391,6 @@ The RATS Roles (roles) are performed by RATS Principals.
 The RATS Architecture provides the building blocks to compose various RATS roles by leveraging existing and new protocols. It defines architecture for composing RATS roles with principals and models their interactions.
 
 Figure {{figalllevels}} provides an overview of the relationships between RATS Roles and the messages they exchange.
-
-{:rats: artwork-align="center"}
-
-~~~~ RATS
-+----------------+                     +-----------------+
-|                |  Known-Good-Values  |                 |
-|   Asserter(s)  |-------------------->|    Verifier     |
-|                |  Endorsements   /-->|                 |
-+----------------+                 |   +-----------------+
-                                   |            |
-                                   |            |
-                                   |            |
-                                   |            |Attestation
-                                   |            |Results
-                                   |            |
-                                   |            |
-                                   |            v
-+----------------+                 |   +-----------------+
-|                |    Evidence     |   |                 |
-|    Attester    |-----------------/   |  Relying Party  |
-|                |                     |                 |
-+----------------+                     +-----------------+
-
-~~~~
-{:rats #figalllevels title="RATS Roles"}
 
 ### Roles
 
