@@ -51,6 +51,15 @@ author:
   code: ""
   city: ""
   country: USA
+- ins: M. Richardson
+  name: Michael Richardson
+  org: Sandelman Software Works
+  email: mcr+ietf@sandelman.ca
+  street: ""
+  code: ""
+  city: ""
+  region: ""
+  country: Canada
 
 normative:
   RFC2119:
