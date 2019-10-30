@@ -51,12 +51,22 @@ author:
   code: ""
   city: ""
   country: USA
+- ins: M. Richardson
+  name: Michael Richardson
+  org: Sandelman Software Works
+  email: mcr+ietf@sandelman.ca
+  street: ""
+  code: ""
+  city: ""
+  region: ""
+  country: Canada
 
 normative:
   RFC2119:
   RFC8174:
 
 informative:
+  I-D.ietf-teep-architecture: TEEP
   DOLEV-YAO: DOI.10.1109_tit.1983.1056650
   ABLP:
     title: A Calculus for Access Control in Distributed Systems
@@ -84,10 +94,30 @@ informative:
       page: 151-195
       DOI: 10.1.1.63.5360
     date: 2007
+  iothreats:
+    title: "The Internet of Things or the Internet of threats?"
+    target: "https://gcn.com/articles/2016/05/03/internet-of-threats.aspx"
+    author:
+    - ins: GDN
+      name: STEVE SARNECKI
+    date: 2016
   RFC5209:
   RFC3552:
   RFC4949:
   I-D.richardson-rats-usecases: rats-usecases
+  I-D.fedorkow-rats-network-device-attestation:
+  keystore:
+    target: "https://developer.android.com/training/articles/keystore"
+    title: "Android Keystore System"
+    author:
+      ins: "Google"
+      date: 2019
+  fido:
+    target: "https://fidoalliance.org/specifications/"
+    title: "FIDO Specification Overview"
+    author:
+      ins: "FIDO Alliance"
+      date: 2019
 
 --- abstract
 
@@ -100,38 +130,99 @@ As a result, the RATS architectural model defined is composable, extensible & us
 
 # Introduction
 
-The long-standing Internet Threat Model {{RFC3552}} focuses on threats to the communication channel, as pioneered by Dolev and Yao {{DOLEV-YAO}} in 1983.
-However, threats to the endpoint {{RFC5209}} and system components {{RFC4949}} of transited communication gear (i.e. hosts) are increasingly relevant for assessing the trustworthiness properties of a communication channel.
-Beyond the collection and conveyance of security posture {{RFC5209}} about an endpoint (host), remote attestation provides believable trustworthiness claims ("Evidence") about an endpoint (host).
-In general, this document provides normative guidance how to use, create or adopt network protocols that facilitate RATS.
+The IETF has long spent it's time focusing on threats to the communication channel (see {{RFC3552}} and {{DOLEV-YAO}}), assuming that the end-points could be trusted, and were under the observation of a trusted, well-trained professional.
+This assumption has not been true since the days of the campus mini-computer, but for time after the desktop PC became ubiquitous the threat to the end-points has been dealt with as an internal matter to enterprises, which have used {{RFC5209}} to assess the security posture about an endpoint (host). 
+
+The movement towards personal mobile devices ("smartphones") and the continuing threat from unmanaged residential desktops calls for a renewed interest in standardizing internet-scale end-point assessment.  
+The rise of the Internet of Things (IoT) has made this issue even more critical: some skeptics have even renamed  it to the Internet of Threats {{iothreats}}!
+
+The Trusted Platform Module (TPM) is now a commonly available peripheral on many commodity compute platforms,  both servers and desktops.
+Smartphones commonly have either an actual TPM, or have the ability to emulate one in software running in a trusted execution environment {{I-D.ietf-teep-architecture}}.
+
+A number of verticals have emerged to enable use of attestion across the Internet, for a variety of use cases.  The architecture described in this document (along with the accompanying protocol implementation documents) enables the use of a common format for communicating Claims about an Attester to a Relying Party.
+
+Many users of these Remote ATtestation procedureS will provide their own transport for the claims, but for those that do not have any prior transport, a transport is described in [XXX].
+
+While it is not anticipated that the different verticals described in the use cases section will exchange claims directly, the use of a common format enables common code.
+As some of the code needs to be in intentionally hard to modify trusted module, the use of a common format significantly reduces the cost of adoption to all parties.
+This commonality also significantly reduces the incidence of critical bugs.
+
+In some verticals the collection of evidence by the Attester to be provided to the Verifier is part of an  existing protocol: this document does not change that.
+In other verticals, there is a desire to have a standard for Evidence as well as for Claims, and this architecture outlines how that is used.
+
+This introduction gives an overview of the protocol, workflow and roles involved.
+The terminology section is referenced normatively by other documents and is a key part of this document.
+There is then a section on use cases and how they leverage the roles and mechanism.
+
+This is followed by a detailed description of the required mechanisms of the RATS Messages and Roles.
+
+In this document, terminology which is defined within this document are consistency Capitalized.
+
+Current verticales that use remote attestion include:
+* The Trusted Computing Group "Network Device Attestation Workflow" {{I-D.fedorkow-rats-network-device-attestation}}
+* Android Keystore {{keystore}}
+* Fast Identity Online (FIDO) Alliance attestation {{fido}}
 
 ## RATS in a Nutshell
 
 The RATS architecture provides a basis to assess the trustworthiness of endpoints by other parties:
 
-* In remote attestation workflows, trustworthiness Claims are accompanied by a proof of veracity. Typically, this proof is a cryptographic expression such as a digital signature or message digest. Trustworthiness Claims with proof is what makes attestation Evidence believable.
-* A corresponding attestation provisioning workflow uses trustworthiness Claims to convey believable Endorsements and Known-Good-Values used by a Verifier to appraise Evidence.
+* In remote attestation workflows, trustworthiness Claims are accompanied by a proof of veracity. Typically, this proof is a cryptographic expression such as a digital signature or message digest. Trustworthiness Claims with proof is what makes attestation Evidence believable. [AWKWARD]
+* A corresponding attestation provisioning workflow uses trustworthiness Claims to convey believable Endorsements and Known-Good-Values used by a Verifier to appraise Evidence. [REWORD]
 
-In the RATS architecture, specific content items are identified (and described in more detail below):
+## Protocol Flows
 
-* Evidence is provable Claims about a specific Computing Environment made by an Attester.
-* Known-Good-Values are reference Claims used to appraise Evidence.
-* Endorsements are reference Claims about the environment protecting the Attesters capabilities to create believable Evidence (e.g. the type of protection for an attestation key). It answers the question "why Evidence is believable".
+{:wholeflow: artwork-align="center"}
+~~~~ WHOLEFLOW
+{::include wholeflow.txt}
+~~~~
+{:wholeflow #wholeflow title="RATS Protocol Flows"}
+
+In the RATS architecture shown above, specific content items are identified:
+
+* Evidence is a provable Claim about a specific Computing Environment made by an Attester.
+* Known-Good-Values are reference Claims used to appraise Evidence by the Verifier.
+* Endorsements are reference Claims about the environment protecting the Attesters' capabilities to create believable Evidence (e.g. the type of protection for an attestation key). It answers the question "why Evidence is believable". [REWORD]
 * Attestation Results are the output from the appraisal of Evidence, Known-Good-Values and Endorsements.
 
 Attestation Results are the output of RATS.
+
 Assessment of Attestation Results can be multi-faceted, but is out-of-scope for the RATS architecture.
+
 If appropriate Endorsements about the Attester are available, Known-Good-Values about the Attester are available, and if the Attester is capable of creating believable Evidence -- then the Verifier is able to create Attestation Results that enable Relying Parties to establish a level of confidence in the trustworthiness of the Attester.
 
-# Essential Terms
+The Asserter role and the format for Known-Good-Values and Endorsements are not subject to standarization at this time.  The current verticals already includes provisions for encoding and/or distributing these objects already.
 
-The RATS vocabulary provides a concise definition of the terms used throughout the document. More detailed descriptions of the terms defined (terminology) is included in later sections. The relationship of terms in the glossary is illustrated by diagrams later in this section. A definition in the vocabulary provided can use Forward References to other vocabulary definitions.
+## Passport Model {#passport}
 
-Forward Reference:
+In the Passport Model protocol flow the Attester provides it's Evidence directly to the Verifier.  The Verifier will evaluate the Evidence and then sign a Claim.  This Claim is returned to the Attester, and it is up to the Attester to communicate the Claim to the Relying Party.
 
-: Words that start with an upper case letter (although they would normally start with a lower case letter) are Forward References, which means that the definition will be found later in the same section the Forward Reference is found in. Forward References are only used in the RATS vocabulary that summarizes the essential terms used in this document. The purpose of the vocabulary is to introduce essential terms and provide concise definitions at the beginning of the RATS architecture document, so there will be no further Forward References in the remainder of this document.
+{:passportflow: artwork-align="center"}
+~~~~ PASSPORT
+{::include passport-workflow.txt}
+~~~~
+{:passwordflow #passport_diag title="RATS Passport Flow"}
 
-## RATS Vocabulary
+This flow is named in this way because of the resemblance of how Nations issue Passports to their citizens. The nature of the Evidence that an individual needs to provide to it's local authority is specific to the country involved.  The citizen retains control of the resulting document and presents it to other entities when it
+needs to assert a citizenship or identity claim.
+
+## Background Check {#background}
+
+In the Background Check Model protocol flow the Attester provides it's Evidence to the Relying Party.
+The Relying Party sends this evidence to a Verifier of its choice.  The Verifier will evaluate the Evidence and then sign a Claim.  This Claim is returned to the Relying Party, which processes it directly.
+
+{:passportflow: artwork-align="center"}
+~~~~ BACKGROUND
+{::include backgroundcheck-workflow.txt}
+~~~~
+{:passwordflow #background_diag title="RATS Background Check Flow"}
+
+This flow is named in this way because of the resemblance of how employers and volunteer organizations
+perform background checks.  When a prospective employee provides claims about education or previous experience, the employer will contact the respective institutions or former employers to validate the claim.  Volunteer organizations often perform police background checks on volunteers in order to determine the volunteer's trust-worthyness.
+
+# Terminology
+
+{::boilerplate bcp14}
 
 Appraisal:
 
@@ -169,6 +260,11 @@ Attesting Environment:
 
 : An Environment capable of monitoring and Attesting target Environments of an Attester and reporting Evidence.
 
+Background Check Workflow:
+
+: The Background Check Workflow is a specialization of the RATS information flow in which the Attester
+provides it's Evicende to a Relying Party, which it turn consults a Verifier. It is described in {{background}}.
+
 Claims:
 
 : Statements about trustworthiness properties of an Attested Environment that are incorporated in Evidence, Known-Good-Values, or Endorsements.
@@ -205,6 +301,10 @@ Message Properties:
 
 : A set of Architectural Constituents. Message Properties are specific security aspects that pertain to the Messages defined in this document: Freshness, Identity, Context, Provenance, Validity, Relevance, Veracity.
 
+Passport Workflow:
+
+: The Passport Workflow is a specialization of the RATS information flow in which the Attester relays Claims to the Relying Party, described in {{passport}}
+
 Profile: 
 
 : Either (1) a named set of constraints to the base RATS architectural model (subset) or, (2) more identified base specification (specialization).
@@ -226,10 +326,6 @@ Trustworthiness:
 Verifier:
 
 : An Architectural Constituent. The consumer of Evidence for appraisal. The Role that designates an Entity to create Attestation Results based on Evidence, Known-Good-Values, and Endorsements.
-
-## Requirements Notation
-
-{::boilerplate bcp14}
 
 # Conceptual Overview
 
@@ -329,33 +425,6 @@ Specifications developed by the RATS working group apply the following principle
 The RATS Roles (roles) are performed by RATS Principals.
 
 The RATS Architecture provides the building blocks to compose various RATS roles by leveraging existing and new protocols. It defines architecture for composing RATS roles with principals and models their interactions.
-
-Figure {{figalllevels}} provides an overview of the relationships between RATS Roles and the messages they exchange.
-
-{:rats: artwork-align="center"}
-
-~~~~ RATS
-+----------------+                     +-----------------+
-|                |  Known-Good-Values  |                 |
-|   Asserter(s)  |-------------------->|    Verifier     |
-|                |  Endorsements   /-->|                 |
-+----------------+                 |   +-----------------+
-                                   |            |
-                                   |            |
-                                   |            |
-                                   |            |Attestation
-                                   |            |Results
-                                   |            |
-                                   |            |
-                                   |            v
-+----------------+                 |   +-----------------+
-|                |    Evidence     |   |                 |
-|    Attester    |-----------------/   |  Relying Party  |
-|                |                     |                 |
-+----------------+                     +-----------------+
-
-~~~~
-{:rats #figalllevels title="RATS Roles"}
 
 ### Roles
 
