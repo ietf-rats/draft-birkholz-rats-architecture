@@ -66,6 +66,7 @@ normative:
   RFC8174:
 
 informative:
+  I-D.ietf-teep-architecture: TEEP
   DOLEV-YAO: DOI.10.1109_tit.1983.1056650
   ABLP:
     title: A Calculus for Access Control in Distributed Systems
@@ -93,10 +94,18 @@ informative:
       page: 151-195
       DOI: 10.1.1.63.5360
     date: 2007
+  iothreats:
+    title: "The Internet of Things or the Internet of threats?"
+    target: "https://gcn.com/articles/2016/05/03/internet-of-threats.aspx"
+    author:
+    - ins: GDN
+      name: STEVE SARNECKI
+    date: 2016
   RFC5209:
   RFC3552:
   RFC4949:
   I-D.richardson-rats-usecases: rats-usecases
+
 
 --- abstract
 
@@ -109,10 +118,33 @@ As a result, the RATS architectural model defined is composable, extensible & us
 
 # Introduction
 
-The long-standing Internet Threat Model {{RFC3552}} focuses on threats to the communication channel, as pioneered by Dolev and Yao {{DOLEV-YAO}} in 1983.
-However, threats to the endpoint {{RFC5209}} and system components {{RFC4949}} of transited communication gear (i.e. hosts) are increasingly relevant for assessing the trustworthiness properties of a communication channel.
-Beyond the collection and conveyance of security posture {{RFC5209}} about an endpoint (host), remote attestation provides believable trustworthiness claims ("Evidence") about an endpoint (host).
-In general, this document provides normative guidance how to use, create or adopt network protocols that facilitate RATS.
+The IETF has long spent it's time focusing on threats to the communication channel (see {{RFC3552}} and {{DOLEV-YAO}}), assuming that the end-points could be trusted, and were under the observation of a trusted, well-trained professional.
+This assumption has not been true since the days of the campus mini-computer, but for time after the desktop PC became ubiquitous the threat to the end-points has been dealt with as an internal matter to enterprises, which have used {{RFC5209}} to assess the security posture about an endpoint (host). 
+
+The movement towards personal mobile devices ("smartphones") and the continuing threat from unmanaged residential desktops calls for a renewed interest in standardizing internet-scale end-point assessment.  
+The rise of the Internet of Things (IoT) has made this issue even more critical: some skeptics have even renamed  it to the Internet of Threats {{iothreats}}!
+
+The Trusted Platform Module (TPM) is now a commonly available peripheral on many commodity compute platforms,  both servers and desktops.
+Smartphones commonly have either an actual TPM, or have the ability to emulate one in software running in a trusted execution environment {{I-D.ietf-teep-architecture}}.
+
+A number of verticals have emerged to enable use of attestion across the Internet, for a variety of use cases.  The architecture described in this document (along with the accompanying protocol implementation documents) enables the use of a common format for communicating Claims about an Attester to a Relying Party.
+
+Many users of these Remote ATtestation procedureS will provide their own transport for the claims, but for those that do not have any prior transport, a transport is described in [XXX].
+
+While it is not anticipated that the different verticals described in the use cases section will exchange claims directly, the use of a common format enables common code.
+As some of the code needs to be in intentionally hard to modify trusted module, the use of a common format significantly reduces the cost of adoption to all parties.
+This commonality also significantly reduces the incidence of critical bugs.
+
+In some verticals the collection of evidence by the Attester to be provided to the Verifier is part of an  existing protocol: this document does not change that.
+In other verticals, there is a desire to have a standard for Evidence as well as for Claims, and this architecture outlines how that is used.
+
+This introduction gives an overview of the protocol, workflow and roles involved.
+The terminology section is referenced normatively by other documents and is a key part of this document.
+There is then a section on use cases and how they leverage the roles and mechanism.
+
+This is followed by a detailed description of the required mechanisms of the RATS Messages and Roles.
+
+In this document, terminology which is defined within this document are consistency Capitalized.
 
 ## RATS in a Nutshell
 
