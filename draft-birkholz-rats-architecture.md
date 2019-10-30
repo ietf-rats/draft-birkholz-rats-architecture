@@ -176,7 +176,7 @@ The RATS architecture provides a basis to assess the trustworthiness of endpoint
 ~~~~ WHOLEFLOW
 {::include wholeflow.txt}
 ~~~~
-{:wholeflow #figalllevels title="RATS Protocol Flows"}
+{:wholeflow #wholeflow title="RATS Protocol Flows"}
 
 In the RATS architecture shown above, specific content items are identified:
 
@@ -198,13 +198,27 @@ The Asserter role and the format for Known-Good-Values and Endorsements are not 
 In the Passport Model protocol flow the Attester provides it's Evidence directly to the Verifier.  The Verifier will evaluate the Evidence and then sign a Claim.  This Claim is returned to the Attester, and it is up to the Attester to communicate the Claim to the Relying Party.
 
 {:passportflow: artwork-align="center"}
-~~~~ WHOLEFLOW
+~~~~ PASSPORT
 {::include passport-workflow.txt}
 ~~~~
-{:passwordflow #figalllevels title="RATS Passport Flow"}
+{:passwordflow #passport_diag title="RATS Passport Flow"}
 
 This flow is named in this way because of the resemblance of how Nations issue Passports to their citizens. The nature of the Evidence that an individual needs to provide to it's local authority is specific to the country involved.  The citizen retains control of the resulting document and presents it to other entities when it
 needs to assert a citizenship or identity claim.
+
+## Background Check {#background}
+
+In the Background Check Model protocol flow the Attester provides it's Evidence to the Relying Party.
+The Relying Party sends this evidence to a Verifier of its choice.  The Verifier will evaluate the Evidence and then sign a Claim.  This Claim is returned to the Relying Party, which processes it directly.
+
+{:passportflow: artwork-align="center"}
+~~~~ BACKGROUND
+{::include backgroundcheck-workflow.txt}
+~~~~
+{:passwordflow #background_diag title="RATS Background Check Flow"}
+
+This flow is named in this way because of the resemblance of how employers and volunteer organizations
+perform background checks.  When a prospective employee provides claims about education or previous experience, the employer will contact the respective institutions or former employers to validate the claim.  Volunteer organizations often perform police background checks on volunteers in order to determine the volunteer's trust-worthyness.
 
 # Terminology
 
@@ -245,6 +259,11 @@ Attesting:
 Attesting Environment:
 
 : An Environment capable of monitoring and Attesting target Environments of an Attester and reporting Evidence.
+
+Background Check Workflow:
+
+: The Background Check Workflow is a specialization of the RATS information flow in which the Attester
+provides it's Evicende to a Relying Party, which it turn consults a Verifier. It is described in {{background}}.
 
 Claims:
 
@@ -406,8 +425,6 @@ Specifications developed by the RATS working group apply the following principle
 The RATS Roles (roles) are performed by RATS Principals.
 
 The RATS Architecture provides the building blocks to compose various RATS roles by leveraging existing and new protocols. It defines architecture for composing RATS roles with principals and models their interactions.
-
-Figure {{figalllevels}} provides an overview of the relationships between RATS Roles and the messages they exchange.
 
 ### Roles
 

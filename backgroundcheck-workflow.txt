@@ -1,0 +1,27 @@
+
+
+
+
+
+                                               ************
+                                               * Asserter *
+                                               ************
+                                                     |Known-Good-Values
+                                                     |Endorsements     
+                                                     |
+                                                     v
+                                             .---------------.
+                                             |   Verifier    |
+                                             |               |
+                                             |               |
+                                             '--^---------|--'
+                                                |         |
+                                                |         |Attestation Results
+                                       Evidence |         |(Claims)           
+                                                |         |
+                                                |         v
+       .---------------.                     .--|------------.
+       |   Attester    |      Evidence       | Relying Party |
+       |               ---------------------->               |
+       |               |                     |               |
+       '---------------'                     '---------------'
