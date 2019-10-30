@@ -193,6 +193,19 @@ If appropriate Endorsements about the Attester are available, Known-Good-Values 
 
 The Asserter role and the format for Known-Good-Values and Endorsements are not subject to standarization at this time.  The current verticals already includes provisions for encoding and/or distributing these objects already.
 
+## Passport Model {#passport}
+
+In the Passport Model protocol flow the Attester provides it's Evidence directly to the Verifier.  The Verifier will evaluate the Evidence and then sign a Claim.  This Claim is returned to the Attester, and it is up to the Attester to communicate the Claim to the Relying Party.
+
+{:passportflow: artwork-align="center"}
+~~~~ WHOLEFLOW
+{::include passport-workflow.txt}
+~~~~
+{:passwordflow #figalllevels title="RATS Passport Flow"}
+
+This flow is named in this way because of the resemblance of how Nations issue Passports to their citizens. The nature of the Evidence that an individual needs to provide to it's local authority is specific to the country involved.  The citizen retains control of the resulting document and presents it to other entities when it
+needs to assert a citizenship or identity claim.
+
 # Terminology
 
 {::boilerplate bcp14}
@@ -268,6 +281,10 @@ Message:
 Message Properties:
 
 : A set of Architectural Constituents. Message Properties are specific security aspects that pertain to the Messages defined in this document: Freshness, Identity, Context, Provenance, Validity, Relevance, Veracity.
+
+Passport Workflow:
+
+: The Passport Workflow is a specialization of the RATS information flow in which the Attester relays Claims to the Relying Party, described in {{passport}}
 
 Profile: 
 
