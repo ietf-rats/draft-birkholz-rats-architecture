@@ -5,12 +5,14 @@
 RATS Working Group                                           H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                              M. Wiseman
-Expires: April 18, 2020                               GE Global Research
+Expires: May 2, 2020                                  GE Global Research
                                                            H. Tschofenig
                                                                 ARM Ltd.
                                                                 N. Smith
                                                                    Intel
-                                                        October 16, 2019
+                                                           M. Richardson
+                                                Sandelman Software Works
+                                                        October 30, 2019
 
 
                Remote Attestation Procedures Architecture
@@ -47,13 +49,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on April 18, 2020.
+   This Internet-Draft will expire on May 2, 2020.
 
 
 
-
-
-Birkholz, et al.         Expires April 18, 2020                 [Page 1]
+Birkholz, et al.           Expires May 2, 2020                  [Page 1]
 
 Internet-Draft              RATS Arch & Terms               October 2019
 
@@ -76,49 +76,110 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
-     1.1.  RATS in a Nutshell  . . . . . . . . . . . . . . . . . . .   3
-   2.  Essential Terms . . . . . . . . . . . . . . . . . . . . . . .   4
-     2.1.  RATS Vocabulary . . . . . . . . . . . . . . . . . . . . .   4
-     2.2.  Requirements Notation . . . . . . . . . . . . . . . . . .   6
-   3.  Conceptual Overview . . . . . . . . . . . . . . . . . . . . .   7
-     3.1.  Computing Environments  . . . . . . . . . . . . . . . . .   7
-     3.2.  Trustworthiness . . . . . . . . . . . . . . . . . . . . .   8
-     3.3.  RATS Workflow . . . . . . . . . . . . . . . . . . . . . .   9
-     3.4.  Interoperability between RATS . . . . . . . . . . . . . .   9
-   4.  RATS Architecture . . . . . . . . . . . . . . . . . . . . . .   9
-     4.1.  Goals . . . . . . . . . . . . . . . . . . . . . . . . . .   9
-     4.2.  Attestation Principles  . . . . . . . . . . . . . . . . .  10
-     4.3.  RATS Roles and Messages . . . . . . . . . . . . . . . . .  11
-       4.3.1.  Roles . . . . . . . . . . . . . . . . . . . . . . . .  11
-       4.3.2.  Role Messages . . . . . . . . . . . . . . . . . . . .  12
-     4.4.  RATS Principals . . . . . . . . . . . . . . . . . . . . .  13
-   5.  Security Considerations . . . . . . . . . . . . . . . . . . .  14
-   6.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  15
-     6.1.  Normative References  . . . . . . . . . . . . . . . . . .  15
-     6.2.  Informative References  . . . . . . . . . . . . . . . . .  15
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  16
+     1.1.  RATS in a Nutshell  . . . . . . . . . . . . . . . . . . .   4
+     1.2.  Protocol Flows  . . . . . . . . . . . . . . . . . . . . .   4
+     1.3.  Passport Model  . . . . . . . . . . . . . . . . . . . . .   6
+     1.4.  Background Check  . . . . . . . . . . . . . . . . . . . .   7
+   2.  Terminology . . . . . . . . . . . . . . . . . . . . . . . . .   8
+   3.  Conceptual Overview . . . . . . . . . . . . . . . . . . . . .  10
+     3.1.  Computing Environments  . . . . . . . . . . . . . . . . .  11
+     3.2.  Trustworthiness . . . . . . . . . . . . . . . . . . . . .  12
+     3.3.  RATS Workflow . . . . . . . . . . . . . . . . . . . . . .  12
+     3.4.  Interoperability between RATS . . . . . . . . . . . . . .  13
+   4.  RATS Architecture . . . . . . . . . . . . . . . . . . . . . .  13
+     4.1.  Goals . . . . . . . . . . . . . . . . . . . . . . . . . .  13
+     4.2.  Attestation Principles  . . . . . . . . . . . . . . . . .  14
+     4.3.  RATS Roles and Messages . . . . . . . . . . . . . . . . .  14
+       4.3.1.  Roles . . . . . . . . . . . . . . . . . . . . . . . .  14
+       4.3.2.  Role Messages . . . . . . . . . . . . . . . . . . . .  15
+     4.4.  RATS Principals . . . . . . . . . . . . . . . . . . . . .  16
+   5.  Security Considerations . . . . . . . . . . . . . . . . . . .  17
+   6.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  18
+     6.1.  Normative References  . . . . . . . . . . . . . . . . . .  18
+     6.2.  Informative References  . . . . . . . . . . . . . . . . .  18
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  19
 
 1.  Introduction
 
-   The long-standing Internet Threat Model [RFC3552] focuses on threats
-   to the communication channel, as pioneered by Dolev and Yao
-   [DOLEV-YAO] in 1983.  However, threats to the endpoint [RFC5209] and
-   system components [RFC4949] of transited communication gear (i.e.
-   hosts) are increasingly relevant for assessing the trustworthiness
-   properties of a communication channel.  Beyond the collection and
+   The IETF has long spent it's time focusing on threats to the
+   communication channel (see [RFC3552] and [DOLEV-YAO]), assuming that
+   the end-points could be trusted, and were under the observation of a
+   trusted, well-trained professional.  This assumption has not been
+   true since the days of the campus mini-computer, but for time after
 
 
 
-Birkholz, et al.         Expires April 18, 2020                 [Page 2]
+Birkholz, et al.           Expires May 2, 2020                  [Page 2]
 
 Internet-Draft              RATS Arch & Terms               October 2019
 
 
-   conveyance of security posture [RFC5209] about an endpoint (host),
-   remote attestation provides believable trustworthiness claims
-   ("Evidence") about an endpoint (host).  In general, this document
-   provides normative guidance how to use, create or adopt network
-   protocols that facilitate RATS.
+   the desktop PC became ubiquitous the threat to the end-points has
+   been dealt with as an internal matter to enterprises, which have used
+   [RFC5209] to assess the security posture about an endpoint (host).
+
+   The movement towards personal mobile devices ("smartphones") and the
+   continuing threat from unmanaged residential desktops calls for a
+   renewed interest in standardizing internet-scale end-point
+   assessment.
+   The rise of the Internet of Things (IoT) has made this issue even
+   more critical: some skeptics have even renamed it to the Internet of
+   Threats [iothreats]!
+
+   The Trusted Platform Module (TPM) is now a commonly available
+   peripheral on many commodity compute platforms, both servers and
+   desktops.  Smartphones commonly have either an actual TPM, or have
+   the ability to emulate one in software running in a trusted execution
+   environment [I-D.ietf-teep-architecture].
+
+   A number of verticals have emerged to enable use of attestion across
+   the Internet, for a variety of use cases.  The architecture described
+   in this document (along with the accompanying protocol implementation
+   documents) enables the use of a common format for communicating
+   Claims about an Attester to a Relying Party.
+
+   Many users of these Remote ATtestation procedureS will provide their
+   own transport for the claims, but for those that do not have any
+   prior transport, a transport is described in [XXX].
+
+   While it is not anticipated that the different verticals described in
+   the use cases section will exchange claims directly, the use of a
+   common format enables common code.  As some of the code needs to be
+   in intentionally hard to modify trusted module, the use of a common
+   format significantly reduces the cost of adoption to all parties.
+   This commonality also significantly reduces the incidence of critical
+   bugs.
+
+   In some verticals the collection of evidence by the Attester to be
+   provided to the Verifier is part of an existing protocol: this
+   document does not change that.  In other verticals, there is a desire
+   to have a standard for Evidence as well as for Claims, and this
+   architecture outlines how that is used.
+
+   This introduction gives an overview of the protocol, workflow and
+   roles involved.  The terminology section is referenced normatively by
+   other documents and is a key part of this document.  There is then a
+   section on use cases and how they leverage the roles and mechanism.
+
+
+
+
+
+Birkholz, et al.           Expires May 2, 2020                  [Page 3]
+
+Internet-Draft              RATS Arch & Terms               October 2019
+
+
+   This is followed by a detailed description of the required mechanisms
+   of the RATS Messages and Roles.
+
+   In this document, terminology which is defined within this document
+   are consistency Capitalized.
+
+   Current verticales that use remote attestion include: * The Trusted
+   Computing Group "Network Device Attestation Workflow"
+   [I-D.fedorkow-rats-network-device-attestation] * Android Keystore
+   [keystore] * Fast Identity Online (FIDO) Alliance attestation [fido]
 
 1.1.  RATS in a Nutshell
 
@@ -129,68 +190,221 @@ Internet-Draft              RATS Arch & Terms               October 2019
       accompanied by a proof of veracity.  Typically, this proof is a
       cryptographic expression such as a digital signature or message
       digest.  Trustworthiness Claims with proof is what makes
-      attestation Evidence believable.
+      attestation Evidence believable.  [AWKWARD]
 
    o  A corresponding attestation provisioning workflow uses
       trustworthiness Claims to convey believable Endorsements and
       Known-Good-Values used by a Verifier to appraise Evidence.
+      [REWORD]
 
-   In the RATS architecture, specific content items are identified (and
-   described in more detail below):
-
-   o  Evidence is provable Claims about a specific Computing Environment
-      made by an Attester.
-
-   o  Known-Good-Values are reference Claims used to appraise Evidence.
-
-   o  Endorsements are reference Claims about the environment protecting
-      the Attesters capabilities to create believable Evidence (e.g. the
-      type of protection for an attestation key).  It answers the
-      question "why Evidence is believable".
-
-   o  Attestation Results are the output from the appraisal of Evidence,
-      Known-Good-Values and Endorsements.
-
-   Attestation Results are the output of RATS.  Assessment of
-   Attestation Results can be multi-faceted, but is out-of-scope for the
-   RATS architecture.  If appropriate Endorsements about the Attester
-   are available, Known-Good-Values about the Attester are available,
-   and if the Attester is capable of creating believable Evidence - then
-   the Verifier is able to create Attestation Results that enable
-   Relying Parties to establish a level of confidence in the
-   trustworthiness of the Attester.
+1.2.  Protocol Flows
 
 
 
 
 
 
-Birkholz, et al.         Expires April 18, 2020                 [Page 3]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Birkholz, et al.           Expires May 2, 2020                  [Page 4]
 
 Internet-Draft              RATS Arch & Terms               October 2019
 
 
-2.  Essential Terms
+                            ************
+                            * Asserter *
+                            ************
+                                  |
+                                  |
+                                  |Known-Good-Values
+                                  |Endorsements
+                                  |
+                                  v
+                          .---------------.
+                          |   Verifier    |
+               .--------->|               |----------.
+               |          |               |          |
+               |          '---------------'          |
+               |                                     |
+               |Evidence                             |Attestation Results
+               |                                     |(Claims)
+               |                                     |
+               |                                     v
+       .---------------.                     .---------------.
+       |   Attester    |                     | Relying Party |
+       |               |                     |               |
+       |               |                     |               |
+       '---------------'                     '---------------'
 
-   The RATS vocabulary provides a concise definition of the terms used
-   throughout the document.  More detailed descriptions of the terms
-   defined (terminology) is included in later sections.  The
-   relationship of terms in the glossary is illustrated by diagrams
-   later in this section.  A definition in the vocabulary provided can
-   use Forward References to other vocabulary definitions.
+                       Figure 1: RATS Protocol Flows
 
-   Forward Reference:  Words that start with an upper case letter
-      (although they would normally start with a lower case letter) are
-      Forward References, which means that the definition will be found
-      later in the same section the Forward Reference is found in.
-      Forward References are only used in the RATS vocabulary that
-      summarizes the essential terms used in this document.  The purpose
-      of the vocabulary is to introduce essential terms and provide
-      concise definitions at the beginning of the RATS architecture
-      document, so there will be no further Forward References in the
-      remainder of this document.
+   In the RATS architecture shown above, specific content items are
+   identified:
 
-2.1.  RATS Vocabulary
+   o  Evidence is a provable Claim about a specific Computing
+      Environment made by an Attester.
+
+   o  Known-Good-Values are reference Claims used to appraise Evidence
+      by the Verifier.
+
+   o  Endorsements are reference Claims about the environment protecting
+      the Attesters' capabilities to create believable Evidence (e.g.
+      the type of protection for an attestation key).  It answers the
+      question "why Evidence is believable".  [REWORD]
+
+   o  Attestation Results are the output from the appraisal of Evidence,
+      Known-Good-Values and Endorsements.
+
+   Attestation Results are the output of RATS.
+
+   Assessment of Attestation Results can be multi-faceted, but is out-
+   of-scope for the RATS architecture.
+
+
+
+Birkholz, et al.           Expires May 2, 2020                  [Page 5]
+
+Internet-Draft              RATS Arch & Terms               October 2019
+
+
+   If appropriate Endorsements about the Attester are available, Known-
+   Good-Values about the Attester are available, and if the Attester is
+   capable of creating believable Evidence - then the Verifier is able
+   to create Attestation Results that enable Relying Parties to
+   establish a level of confidence in the trustworthiness of the
+   Attester.
+
+   The Asserter role and the format for Known-Good-Values and
+   Endorsements are not subject to standarization at this time.  The
+   current verticals already includes provisions for encoding and/or
+   distributing these objects already.
+
+1.3.  Passport Model
+
+   In the Passport Model protocol flow the Attester provides it's
+   Evidence directly to the Verifier.  The Verifier will evaluate the
+   Evidence and then sign a Claim.  This Claim is returned to the
+   Attester, and it is up to the Attester to communicate the Claim to
+   the Relying Party.
+
+
+
+
+            ************
+            * Asserter *
+            ************
+                  |Known-Good-Values
+                  |Endorsements
+                  |
+                  v
+          .---------------.
+          |   Verifier    |
+          |               |
+          |               |
+          '------------|--'
+              ^        |
+              |        |Attestation Results
+     Evidence |        |(Claims)
+              |        |
+              |        |
+              |        v
+          .---|-----------.                     .---------------.
+          |   Attester    |                     | Relying Party |
+          |               ---------------------->               |
+          |               | Attestation Results |               |
+          '---------------' (Claims)            '---------------'
+
+                       Figure 2: RATS Passport Flow
+
+
+
+Birkholz, et al.           Expires May 2, 2020                  [Page 6]
+
+Internet-Draft              RATS Arch & Terms               October 2019
+
+
+   This flow is named in this way because of the resemblance of how
+   Nations issue Passports to their citizens.  The nature of the
+   Evidence that an individual needs to provide to it's local authority
+   is specific to the country involved.  The citizen retains control of
+   the resulting document and presents it to other entities when it
+   needs to assert a citizenship or identity claim.
+
+1.4.  Background Check
+
+   In the Background Check Model protocol flow the Attester provides
+   it's Evidence to the Relying Party.  The Relying Party sends this
+   evidence to a Verifier of its choice.  The Verifier will evaluate the
+   Evidence and then sign a Claim.  This Claim is returned to the
+   Relying Party, which processes it directly.
+
+
+
+
+
+                                               ************
+                                               * Asserter *
+                                               ************
+                                                     |Known-Good-Values
+                                                     |Endorsements
+                                                     |
+                                                     v
+                                             .---------------.
+                                             |   Verifier    |
+                                             |               |
+                                             |               |
+                                             '--^---------|--'
+                                                |         |
+                                                |         |Attestation Results
+                                       Evidence |         |(Claims)
+                                                |         |
+                                                |         v
+       .---------------.                     .--|------------.
+       |   Attester    |      Evidence       | Relying Party |
+       |               ---------------------->               |
+       |               |                     |               |
+       '---------------'                     '---------------'
+
+                   Figure 3: RATS Background Check Flow
+
+   This flow is named in this way because of the resemblance of how
+   employers and volunteer organizations perform background checks.
+   When a prospective employee provides claims about education or
+   previous experience, the employer will contact the respective
+
+
+
+Birkholz, et al.           Expires May 2, 2020                  [Page 7]
+
+Internet-Draft              RATS Arch & Terms               October 2019
+
+
+   institutions or former employers to validate the claim.  Volunteer
+   organizations often perform police background checks on volunteers in
+   order to determine the volunteer's trust-worthyness.
+
+2.  Terminology
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
 
    Appraisal:  The process of assessing Evidence with respect to its
       Message Properties and the Claims it contains by using
@@ -217,15 +431,6 @@ Internet-Draft              RATS Arch & Terms               October 2019
       trustworthiness properties or collecting Claims about the
       Environments of an Attester.
 
-
-
-
-
-Birkholz, et al.         Expires April 18, 2020                 [Page 4]
-
-Internet-Draft              RATS Arch & Terms               October 2019
-
-
    Attested Environment:  An Environment that is Attested and part of an
       Entity taking on the Role of Attester.
 
@@ -235,6 +440,20 @@ Internet-Draft              RATS Arch & Terms               October 2019
    Attesting Environment:  An Environment capable of monitoring and
       Attesting target Environments of an Attester and reporting
       Evidence.
+
+
+
+
+
+Birkholz, et al.           Expires May 2, 2020                  [Page 8]
+
+Internet-Draft              RATS Arch & Terms               October 2019
+
+
+   Background Check Workflow:  The Background Check Workflow is a
+      specialization of the RATS information flow in which the Attester
+      provides it's Evicende to a Relying Party, which it turn consults
+      a Verifier.  It is described in Section 1.4.
 
    Claims:  Statements about trustworthiness properties of an Attested
       Environment that are incorporated in Evidence, Known-Good-Values,
@@ -273,17 +492,19 @@ Internet-Draft              RATS Arch & Terms               October 2019
 
    Message Properties:  A set of Architectural Constituents.  Message
       Properties are specific security aspects that pertain to the
+      Messages defined in this document: Freshness, Identity, Context,
+      Provenance, Validity, Relevance, Veracity.
+
+   Passport Workflow:  The Passport Workflow is a specialization of the
+      RATS information flow in which the Attester relays Claims to the
+      Relying Party, described in Section 1.3
 
 
 
-
-Birkholz, et al.         Expires April 18, 2020                 [Page 5]
+Birkholz, et al.           Expires May 2, 2020                  [Page 9]
 
 Internet-Draft              RATS Arch & Terms               October 2019
 
-
-      Messages defined in this document: Freshness, Identity, Context,
-      Provenance, Validity, Relevance, Veracity.
 
    Profile:  Either (1) a named set of constraints to the base RATS
       architectural model (subset) or, (2) more identified base
@@ -318,26 +539,6 @@ Internet-Draft              RATS Arch & Terms               October 2019
       Attestation Results based on Evidence, Known-Good-Values, and
       Endorsements.
 
-2.2.  Requirements Notation
-
-   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
-   "OPTIONAL" in this document are to be interpreted as described in
-   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
-   capitals, as shown here.
-
-
-
-
-
-
-
-
-Birkholz, et al.         Expires April 18, 2020                 [Page 6]
-
-Internet-Draft              RATS Arch & Terms               October 2019
-
-
 3.  Conceptual Overview
 
    In network protocol exchanges, it is often the case that one entity
@@ -353,6 +554,14 @@ Internet-Draft              RATS Arch & Terms               October 2019
    just a finite set of values.  Additionally, the system
    characteristics of remote components themselves have an impact on the
    veracity of trustworthiness attributes included in Evidence.
+
+
+
+Birkholz, et al.           Expires May 2, 2020                 [Page 10]
+
+Internet-Draft              RATS Arch & Terms               October 2019
+
+
    Attester environments can vary widely ranging from those highly
    resistant to attacks to those having little or no resistance to
    attacks.  Configuration options, if set poorly, can result in a
@@ -386,14 +595,6 @@ Internet-Draft              RATS Arch & Terms               October 2019
    unique to specific environments.  Consequently, the RATS architecture
    incorporates extensible mechanisms for representing Claims.
 
-
-
-
-Birkholz, et al.         Expires April 18, 2020                 [Page 7]
-
-Internet-Draft              RATS Arch & Terms               October 2019
-
-
    Computing Environments can be complex structurally.  In general,
    every Attester consists of multiple components (e.g. memory, CPU,
    storage, networking, firmware, software).  Components are
@@ -409,6 +610,14 @@ Internet-Draft              RATS Arch & Terms               October 2019
    Analogously, remote attestation capable Computing Environments may
    not be capable of attesting to (creating evidence about) every
    computational element that interacts with the Computing Environment.
+
+
+
+Birkholz, et al.           Expires May 2, 2020                 [Page 11]
+
+Internet-Draft              RATS Arch & Terms               October 2019
+
+
    A Computing Environment with an attestation capability can only be
    endorsed by an external entity and cannot create believable evidence
    about itself by its own.
@@ -442,14 +651,6 @@ Internet-Draft              RATS Arch & Terms               October 2019
    The trustworthiness of remote attestation capabilities is also a
    consideration for the RATS architecture.  It should be possible to
    understand the trustworthiness properties of the remote attestation
-
-
-
-Birkholz, et al.         Expires April 18, 2020                 [Page 8]
-
-Internet-Draft              RATS Arch & Terms               October 2019
-
-
    capability for any set of claims of a remote attestation flow via
    verification operations.  The RATS architecture anticipates recursive
    trustworthiness properties and the need for termination.  Ultimately,
@@ -465,6 +666,14 @@ Internet-Draft              RATS Arch & Terms               October 2019
    are conveyed to a Verifier for appraisal.  The appraisals compare
    Evidence with expected Known-Good-Values called obtained from
    Asserters (e.g.  Principals that are Supply Chain Entities).  There
+
+
+
+Birkholz, et al.           Expires May 2, 2020                 [Page 12]
+
+Internet-Draft              RATS Arch & Terms               October 2019
+
+
    can be multiple forms of appraisal (e.g., software integrity
    verification, device composition and configuration verification,
    device identity and provenance verification).  Attestation Results
@@ -496,16 +705,6 @@ Internet-Draft              RATS Arch & Terms               October 2019
 
    RATS architecture has the following goals:
 
-
-
-
-
-
-Birkholz, et al.         Expires April 18, 2020                 [Page 9]
-
-Internet-Draft              RATS Arch & Terms               October 2019
-
-
    o  Enable semantic interoperability of attestation semantics through
       information models about computing environments and
       trustworthiness.
@@ -523,6 +722,13 @@ Internet-Draft              RATS Arch & Terms               October 2019
       enable the composition of service-chains/hierarchies and workflows
       that can create and appraise evidence about the trustworthiness of
       devices and services.
+
+
+
+Birkholz, et al.           Expires May 2, 2020                 [Page 13]
+
+Internet-Draft              RATS Arch & Terms               October 2019
+
 
    o  Use-case driven architecture and design (RATS use cases are
       summarized in [I-D.richardson-rats-usecases]).
@@ -555,13 +761,6 @@ Internet-Draft              RATS Arch & Terms               October 2019
    o  Relevance - the Claims associated with the Attested Computing
       Environment pertain to trustworthiness metrics.
 
-
-
-Birkholz, et al.         Expires April 18, 2020                [Page 10]
-
-Internet-Draft              RATS Arch & Terms               October 2019
-
-
    o  Veracity - the believability (level of confidence) of Claims is
       based on verifiable proofs.
 
@@ -574,49 +773,23 @@ Internet-Draft              RATS Arch & Terms               October 2019
    architecture for composing RATS roles with principals and models
    their interactions.
 
-   Figure Figure 1 provides an overview of the relationships between
-   RATS Roles and the messages they exchange.
-
-       +----------------+                     +-----------------+
-       |                |  Known-Good-Values  |                 |
-       |   Asserter(s)  |-------------------->|    Verifier     |
-       |                |  Endorsements   /-->|                 |
-       +----------------+                 |   +-----------------+
-                                          |            |
-                                          |            |
-                                          |            |
-                                          |            |Attestation
-                                          |            |Results
-                                          |            |
-                                          |            |
-                                          |            v
-       +----------------+                 |   +-----------------+
-       |                |    Evidence     |   |                 |
-       |    Attester    |-----------------/   |  Relying Party  |
-       |                |                     |                 |
-       +----------------+                     +-----------------+
-
-
-                           Figure 1: RATS Roles
-
 4.3.1.  Roles
 
    RATS roles are implemented by principals that possess cryptographic
    keys used to protect and authenticate Claims or Results.
 
+
+
+
+Birkholz, et al.           Expires May 2, 2020                 [Page 14]
+
+Internet-Draft              RATS Arch & Terms               October 2019
+
+
    Attester:  An Attestation Function that creates Evidence by
       collecting, formatting and protecting (e.g., signing) Claims.  It
       presents Evidence to a Verifier using a conveyance mechanism or
       protocol.
-
-
-
-
-
-Birkholz, et al.         Expires April 18, 2020                [Page 11]
-
-Internet-Draft              RATS Arch & Terms               October 2019
-
 
    Verifier:  An Attestation Function that accepts Evidence from an
       Attester using a conveyance mechanism or protocol.  It also
@@ -661,18 +834,19 @@ Internet-Draft              RATS Arch & Terms               October 2019
       Evidence SHOULD satisfy Verifier expectations for freshness,
       identity, context, provenance, validity, relevance and veracity.
 
+
+
+
+Birkholz, et al.           Expires May 2, 2020                 [Page 15]
+
+Internet-Draft              RATS Arch & Terms               October 2019
+
+
    Known-Good-Values:  Claims about the Attested Computing Environment.
       Typically, KGV Claims are message digests of firmware, software or
       configuration data supplied by various vendors.  If an Attesting
       Computing Environment implements cryptography, they include Claims
       about key material.
-
-
-
-Birkholz, et al.         Expires April 18, 2020                [Page 12]
-
-Internet-Draft              RATS Arch & Terms               October 2019
-
 
       Like Claims, Known-Good-Values SHOULD satisfy a Verifier's
       expectations for freshness, identity, context, provenance,
@@ -719,13 +893,7 @@ Internet-Draft              RATS Arch & Terms               October 2019
 
 
 
-
-
-
-
-
-
-Birkholz, et al.         Expires April 18, 2020                [Page 13]
+Birkholz, et al.           Expires May 2, 2020                 [Page 16]
 
 Internet-Draft              RATS Arch & Terms               October 2019
 
@@ -746,7 +914,7 @@ Internet-Draft              RATS Arch & Terms               October 2019
                 |                  |   |                  |
                 +------------------+   +------------------+
 
-                Figure 2: RATS Principals-Role Composition
+                Figure 4: RATS Principals-Role Composition
 
    RATS Principals have the following properties:
 
@@ -781,7 +949,7 @@ Internet-Draft              RATS Arch & Terms               October 2019
 
 
 
-Birkholz, et al.         Expires April 18, 2020                [Page 14]
+Birkholz, et al.           Expires May 2, 2020                 [Page 17]
 
 Internet-Draft              RATS Arch & Terms               October 2019
 
@@ -814,10 +982,43 @@ Internet-Draft              RATS Arch & Terms               October 2019
               protocols", IEEE Transactions on Information Theory Vol.
               29, pp. 198-208, DOI 10.1109/tit.1983.1056650, March 1983.
 
+   [fido]     FIDO Alliance, ., "FIDO Specification Overview", n.d.,
+              <https://fidoalliance.org/specifications/>.
+
+   [I-D.fedorkow-rats-network-device-attestation]
+              Fedorkow, G. and J. Fitzgerald-McKay, "Network Device
+              Attestation Workflow", draft-fedorkow-rats-network-device-
+              attestation-00 (work in progress), July 2019.
+
+   [I-D.ietf-teep-architecture]
+              Pei, M., Tschofenig, H., Wheeler, D., Atyeo, A., and D.
+              Liu, "Trusted Execution Environment Provisioning (TEEP)
+              Architecture", draft-ietf-teep-architecture-03 (work in
+              progress), July 2019.
+
    [I-D.richardson-rats-usecases]
               Richardson, M., Wallace, C., and W. Pan, "Use cases for
               Remote Attestation common encodings", draft-richardson-
               rats-usecases-05 (work in progress), October 2019.
+
+
+
+
+
+Birkholz, et al.           Expires May 2, 2020                 [Page 18]
+
+Internet-Draft              RATS Arch & Terms               October 2019
+
+
+   [iothreats]
+              GDN, ., "The Internet of Things or the Internet of
+              threats?", 2016, <https://gcn.com/articles/2016/05/03/
+              internet-of-threats.aspx>.
+
+   [keystore]
+              Google, ., "Android Keystore System", n.d.,
+              <https://developer.android.com/training/articles/
+              keystore>.
 
    [Lampson2007]
               Lampson, B., "Practical Principles for Computer Security",
@@ -832,15 +1033,6 @@ Internet-Draft              RATS Arch & Terms               October 2019
    [RFC4949]  Shirey, R., "Internet Security Glossary, Version 2",
               FYI 36, RFC 4949, DOI 10.17487/RFC4949, August 2007,
               <https://www.rfc-editor.org/info/rfc4949>.
-
-
-
-
-
-Birkholz, et al.         Expires April 18, 2020                [Page 15]
-
-Internet-Draft              RATS Arch & Terms               October 2019
-
 
    [RFC5209]  Sangster, P., Khosravi, H., Mani, M., Narayan, K., and J.
               Tardo, "Network Endpoint Assessment (NEA): Overview and
@@ -865,6 +1057,15 @@ Authors' Addresses
    Email: monty.wiseman@ge.com
 
 
+
+
+
+
+Birkholz, et al.           Expires May 2, 2020                 [Page 19]
+
+Internet-Draft              RATS Arch & Terms               October 2019
+
+
    Hannes Tschofenig
    ARM Ltd.
    110 Fulbourn Rd
@@ -881,6 +1082,11 @@ Authors' Addresses
    Email: ned.smith@intel.com
 
 
+   Michael Richardson
+   Sandelman Software Works
+   Canada
+
+   Email: mcr+ietf@sandelman.ca
 
 
 
@@ -893,4 +1099,22 @@ Authors' Addresses
 
 
 
-Birkholz, et al.         Expires April 18, 2020                [Page 16]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Birkholz, et al.           Expires May 2, 2020                 [Page 20]
