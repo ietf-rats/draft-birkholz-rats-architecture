@@ -130,45 +130,66 @@ As a result, the RATS architectural model defined is composable, extensible & us
 
 # Introduction
 
-The IETF has long spent it's time focusing on threats to the communication channel (see {{RFC3552}} and {{DOLEV-YAO}}), assuming that the end-points could be trusted, and were under the observation of a trusted, well-trained professional.
-This assumption has not been true since the days of the campus mini-computer, but for time after the desktop PC became ubiquitous the threat to the end-points has been dealt with as an internal matter to enterprises, which have used {{RFC5209}} to assess the security posture about an endpoint (host). 
+Remote Attestation provides a way for an entity (the Relying Party) to determine the health and provenance of an endpoint (a host, or Attester).  Knowledge of the health of the entity, allows for a determination of trustworthiness of the endpoint.
 
-The movement towards personal mobile devices ("smartphones") and the continuing threat from unmanaged residential desktops calls for a renewed interest in standardizing internet-scale end-point assessment.  
-The rise of the Internet of Things (IoT) has made this issue even more critical: some skeptics have even renamed  it to the Internet of Threats {{iothreats}}!
+## Motivation
+
+The IETF has long spent it's time focusing on threats to the communication channel (see {{RFC3552}} and {{DOLEV-YAO}}), assuming that the end-points could be trusted, and were under the observation of a trusted, well-trained professional.
+This assumption has not been true since the days of the campus mini-computer.
+For some time after the desktop PC became ubiquitous the threat to the end-points has been dealt with as an internal matter, with generally poor results.
+Enterprises have done some deployment of Network Endpoint Assessment ({{RFC5209}}) to assess the security posture about an endpoint (host), but it has not been ubiquitous.
+
+The movement towards personal mobile devices ("smartphones") and the continuing threat from unmanaged residential desktops has resulted in a renewed interest in standardizing internet-scale end-point remote attestation.
+Additionally, the rise of the Internet of Things (IoT) has made this issue even more critical: some skeptics have even renamed it to the Internet of Threats {{iothreats}} :-)  IoT devices have poor or non-existant user interfaces, so there are not even good ways to assess the health of the devices manually: a need to determine the health via remote attestation is now critical.
+
+In addition to the health of the device, knowledge of its provence helps to determine the level of trust, and prevents attacks to the supply chain. [NED TO SUPPLY REFERENCES]
+
+## Opportunities
 
 The Trusted Platform Module (TPM) is now a commonly available peripheral on many commodity compute platforms,  both servers and desktops.
-Smartphones commonly have either an actual TPM, or have the ability to emulate one in software running in a trusted execution environment {{I-D.ietf-teep-architecture}}.
+Smartphones commonly have either an actual TPM, or have the ability to emulate one in software running in a trusted execution environment {{I-D.ietf-teep-architecture}}.  There are now few barriers to creating a standards-based system for remote attestation.
 
-A number of verticals have emerged to enable use of attestion across the Internet, for a variety of use cases.  The architecture described in this document (along with the accompanying protocol implementation documents) enables the use of a common format for communicating Claims about an Attester to a Relying Party.
+A number of niche solutions have emerged that provide for use-case specific remote attestation, but none have the generality needed to be used across the Internet.
 
-Many users of these Remote ATtestation procedureS will provide their own transport for the claims, but for those that do not have any prior transport, a transport is described in [XXX].
+## Overview of Document
 
-While it is not anticipated that the different verticals described in the use cases section will exchange claims directly, the use of a common format enables common code.
-As some of the code needs to be in intentionally hard to modify trusted module, the use of a common format significantly reduces the cost of adoption to all parties.
+The architecture described in this document (along with the accompanying protocol implementation documents) enables the use of a common format for communicating Claims about an Attester to a Relying Party.
+
+Existing transports were not designed to carry attestation Claims.  It is therefore necessary to design serializations of Claims that fit into a variety of transports, for instance: X509 certificates, TLS negotiations, or EtherNet/IP.  There are also new, greenfield uses for remote attestation. Transport and serialization of these can be done without retrofitting. This is described in [TBD].
+
+While it is not anticipated that the existing niche solutions described in the use cases section will exchange claims directly, the use of a common format enables common code.
+As some of the code needs to be in intentionally hard to modify trusted modules, the use of a common format significantly reduces the cost of adoption to all parties.
 This commonality also significantly reduces the incidence of critical bugs.
 
-In some verticals the collection of evidence by the Attester to be provided to the Verifier is part of an  existing protocol: this document does not change that.
-In other verticals, there is a desire to have a standard for Evidence as well as for Claims, and this architecture outlines how that is used.
+In some environments the collection of Evidence by the Attester to be provided to the Verifier is part of an existing protocol: this document does not change that, rather embraces those legacy mechanisms as part of the specification.  This is an evolutionary path forward, not revolutionary.
+Yet in other greenfield environments, there is a desire to have a standard for Evidence as well as for Attestation Results, and this architecture outlines how that is done.
 
-This introduction gives an overview of the protocol, workflow and roles involved.
-The terminology section is referenced normatively by other documents and is a key part of this document.
-There is then a section on use cases and how they leverage the roles and mechanism.
-
-This is followed by a detailed description of the required mechanisms of the RATS Messages and Roles.
+This introduction gives an overview of the protocol, interaction models, messaging models and roles involved.
+Following this, is a terminology section that is referenced normatively by other documents and is a key part of this document.
+There is then a section on use cases and how they leverage the roles and workflows described.
 
 In this document, terminology which is defined within this document are consistency Capitalized.
 
-Current verticales that use remote attestion include:
+Current verticals that use remote attestion include:
 * The Trusted Computing Group "Network Device Attestation Workflow" {{I-D.fedorkow-rats-network-device-attestation}}
 * Android Keystore {{keystore}}
 * Fast Identity Online (FIDO) Alliance attestation {{fido}}
+* A number of Intel SGX niche systems based upon OTRP.
+
+<!--
+Things to be mentioned (XXX):
+* Device Identifier Composition Engine (DICE)
+* Time-based Uni-Directional Attestation (TUDA)
+* TPM discussion
+* Roots of Trust
+-->
+
 
 ## RATS in a Nutshell
 
-The RATS architecture provides a basis to assess the trustworthiness of endpoints by other parties:
-
-* In remote attestation workflows, trustworthiness Claims are accompanied by a proof of veracity. Typically, this proof is a cryptographic expression such as a digital signature or message digest. Trustworthiness Claims with proof is what makes attestation Evidence believable. [AWKWARD]
-* A corresponding attestation provisioning workflow uses trustworthiness Claims to convey believable Endorsements and Known-Good-Values used by a Verifier to appraise Evidence. [REWORD]
+* Attestation workflows typically convey Claims that contain the trustworthiness properties associated with an Attested Environment.
+* A corresponding provisioning workflow conveys reference trustworthiness claims that can be compared with attestation Evidence. Reference values typically consist of firmware or software digests and details about what makes the attesting module trusted.
+* Relying Parties are performing tasks such as managing a resource, controlling access, and/or managing risk. Attestation Results helps Relying Parties determine levels of trust.
 
 ## Protocol Flows
 
@@ -240,7 +261,7 @@ Attestation Result:
 
 : A Message type created by the Verifier Role and ultimately consumed by Relying Parties.
 
-Attester: 
+Attester:
 
 : A Architectural Constituent. The creator of Evidence. The Role that designates an Entity to be assessed with respect to its trustworthiness properties in the scope of a specific Profile.
 
@@ -305,7 +326,7 @@ Passport Workflow:
 
 : The Passport Workflow is a specialization of the RATS information flow in which the Attester relays Claims to the Relying Party, described in {{passport}}
 
-Profile: 
+Profile:
 
 : Either (1) a named set of constraints to the base RATS architectural model (subset) or, (2) more identified base specification (specialization).
 
@@ -317,7 +338,7 @@ Relying Party:
 
 Role:
 
-: An Architectural Constituent. The basic components of the architecture defined in this document that can be composed in several ways to create Profiles (i.e. specific Role compositions that enable 
+: An Architectural Constituent. The basic components of the architecture defined in this document that can be composed in several ways to create Profiles (i.e. specific Role compositions that enable
 
 Trustworthiness:
 
