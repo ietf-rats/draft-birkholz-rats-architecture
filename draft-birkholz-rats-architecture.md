@@ -191,7 +191,7 @@ Things to be mentioned (XXX):
 * A corresponding provisioning workflow conveys reference trustworthiness claims that can be compared with attestation Evidence. Reference values typically consist of firmware or software digests and details about what makes the attesting module trusted.
 * Relying Parties are performing tasks such as managing a resource, controlling access, and/or managing risk. Attestation Results helps Relying Parties determine levels of trust.
 
-## Protocol Flows
+## Attestation workflow
 
 {:wholeflow: artwork-align="center"}
 ~~~~ WHOLEFLOW
