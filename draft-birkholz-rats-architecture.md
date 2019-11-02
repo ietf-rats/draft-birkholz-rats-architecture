@@ -142,7 +142,10 @@ Enterprises have done some deployment of Network Endpoint Assessment ({{RFC5209}
 The movement towards personal mobile devices ("smartphones") and the continuing threat from unmanaged residential desktops has resulted in a renewed interest in standardizing internet-scale end-point remote attestation.
 Additionally, the rise of the Internet of Things (IoT) has made this issue even more critical: some skeptics have even renamed it to the Internet of Threats {{iothreats}} :-)  IoT devices have poor or non-existant user interfaces, so there are not even good ways to assess the health of the devices manually: a need to determine the health via remote attestation is now critical.
 
-In addition to the health of the device, knowledge of its provence helps to determine the level of trust, and prevents attacks to the supply chain. [NED TO SUPPLY REFERENCES]
+In addition to the health of the device, knowledge of its provenance helps to determine the level of trust, and prevents attacks to the supply chain.
+<!--
+[NED TO SUPPLY REFERENCES]
+-->
 
 ## Opportunities
 
@@ -247,106 +250,70 @@ perform background checks.  When a prospective employee provides claims about ed
 
 Appraisal:
 
-: The process of assessing Evidence with respect to its Message Properties and the Claims it contains by using Endorsements and Known-Good-Values.
-
-Architectural Constituents:
-
-: Entities, Roles, Messages, Message Properties, and potential Interactions defined by this architecture document. Architectural Constituents are the components to define Profiles with.
+: A Verifier process that compares Evidence to Reference values and produces Results.
 
 Asserter:
 
-: An Architectural Constituent. An Asserter is the origin of Endorsements and Known-Good-Values. The Role that designates an Entity that facilitates attestation provision workflows and potentially provides trust anchors.
-
-Attestation Result:
-
-: A Message type created by the Verifier Role and ultimately consumed by Relying Parties.
+: See {{asserter}}.
 
 Attester:
 
-: A Architectural Constituent. The creator of Evidence. The Role that designates an Entity to be assessed with respect to its trustworthiness properties in the scope of a specific Profile.
-
-Attested:
-
-: The state of being scrutinized by monitoring trustworthiness properties or collecting Claims about the Environments of an Attester.
+: See {{attester}}.
 
 Attested Environment:
 
-: An Environment that is Attested and part of an Entity taking on the Role of Attester.
-
-Attesting:
-
-: The process of aggregating Claims and creating Evidence about Environments by an Attester.
+: A target environment that is observed or controlled by an Attesting Environment.
 
 Attesting Environment:
 
-: An Environment capable of monitoring and Attesting target Environments of an Attester and reporting Evidence.
+: An environment capable of making trustworthiness Claims about an Attested Environment.
 
-Background Check Workflow:
+Background-check Interaction Model:
 
-: The Background Check Workflow is a specialization of the RATS information flow in which the Attester
-provides it's Evicende to a Relying Party, which it turn consults a Verifier. It is described in {{background}}.
+: An attestation workflow where the Attester provides Evidence to a Relying Party, who consults one or more Verifiers who supply Results to the Relying Party. See {{background}}.
 
-Claims:
+Claim:
 
-: Statements about trustworthiness properties of an Attested Environment that are incorporated in Evidence, Known-Good-Values, or Endorsements.
+: A statement about the construction, composition, validation or behavior of an Entity that affects trustworthiness. Evidence, Reference Values and Results are expressions consisting of one or more Claims.
+<!--
+Statements about trustworthiness characteristics of an Attested Computing Environment. The veracity of a Claim is determined by the reputation of the entity making the Claim. Reputation may involve identifying, authenticating and tracking transactions associated with an entity. RATS may be used to establish entity reputation, but not exclusively. Other reputation mechanisms are out-of-scope.
+-->
 
 Conveyance:
 
-: The process of transferring Messages between Roles and Entities via a network protocols in a way that preserves required Message Properties.
-
-Endorsement:
-
-: A Message type created and distributed by the Asserter Role and consumed by the Verifier Role. Endorsements provide Claims about Components of an Attester that an Attesting Environment cannot create Evidence about.
-
-Environment:
-
-: An Architectural Constituent. A distinguishable computing context (typically composed of, e.g. memory, CPU, storage, networking, firmware, software) that is able to take one or more of Roles defined in this document.
+: The process of transferring Evidence, Reference values and Results between Entities participating in attestation workflow.
 
 Entity:
 
-: An Architectural Constituent. In the RATS context, this is a device, a component {{RFC4949}}, or an Environment (see the tutorial on component in {{RFC4949}}).
+: A device, component (See $System Component {{RFC4949}}), or environment that implements one or more Roles.
 
 Evidence:
 
-: A Message type created and conveyed by the Attester Role. Attestation Evidence can be consumed and relayed by other Roles, primarily the Verifier Role to appraise the Evidence.
+: See {{evidence}}.
 
-Known-Good-Values:
+Passport Interaction Model:
 
-: A Message type created and distributed by the Asserter Role and consumed by the Verifier Role. Known-Good-Values are reference Claims that are used to appraise the believability and veracity of attestation Evidence.
+: An attestation workflow where the Attester provides Evidence to a Verifier who returns Results that are then forwarded to one or more Relying Parties. See {{passport}}.
 
-Message:
+Reference Values:
 
-: An Architectural Constituent. The serialized and protected information conveyed via network protocols. Messages are created and consumed by Entities taking on one or more Roles.
-
-Message Properties:
-
-: A set of Architectural Constituents. Message Properties are specific security aspects that pertain to the Messages defined in this document: Freshness, Identity, Context, Provenance, Validity, Relevance, Veracity.
-
-Passport Workflow:
-
-: The Passport Workflow is a specialization of the RATS information flow in which the Attester relays Claims to the Relying Party, described in {{passport}}
-
-Profile:
-
-: Either (1) a named set of constraints to the base RATS architectural model (subset) or, (2) more identified base specification (specialization).
-
-: A Profile in the RATS context includes the identification of any required subsets of Architectural Constituents, semantic interpretations, or terminology, necessary to accomplish a particular remote attestation procedure usage scenario. Profiles aim to increase interoperability within a community of users by introducing certain constraints on the use of the more general RATS architecture.
+: See {{messages}}.
 
 Relying Party:
 
-: An Architectural Constituent. The consumer or proxy of Attestation Results. The Role that designates an Entity that requires reliable and believable statements about the Trustworthiness of an Attester Role.
+: See {{relyingparty}}.
+
+Results:
+
+: See {{results}}.
 
 Role:
 
-: An Architectural Constituent. The basic components of the architecture defined in this document that can be composed in several ways to create Profiles (i.e. specific Role compositions that enable
-
-Trustworthiness:
-
-: A essential expectation about an Entity that it will behave in a way that is intended and nothing more. The definition of Trustworthiness is a derived and simplified definition based on "Trusted System" {{RFC4949}} excluding, for example, "environmental disruption".
+: A function or process in an attestation workflow, typically described by; Attester, Verifier, Relying Party and Asserter.
 
 Verifier:
 
-: An Architectural Constituent. The consumer of Evidence for appraisal. The Role that designates an Entity to create Attestation Results based on Evidence, Known-Good-Values, and Endorsements.
+: See {{verifier}}.
 
 # Conceptual Overview
 
@@ -441,55 +408,93 @@ Specifications developed by the RATS working group apply the following principle
 * Relevance - the Claims associated with the Attested Computing Environment pertain to trustworthiness metrics.
 * Veracity - the believability (level of confidence) of Claims is based on verifiable proofs.
 
-## RATS Roles and Messages
+## Attestation Workflow
 
+Attestation workflow helps a Relying Party make better decisions by providing insight about the trustworthiness of endpoints participating in a distributed system. The workflow consists primarily of four roles; Relying Party, Verifier, Attester and Asserter. Attestation messages contain information useful for appraising the trustworthiness of an Attester endpoint and informing the Relying Party of the appraisal result.
+
+<!--
 The RATS Roles (roles) are performed by RATS Principals.
 
 The RATS Architecture provides the building blocks to compose various RATS roles by leveraging existing and new protocols. It defines architecture for composing RATS roles with principals and models their interactions.
+-->
+This section details the primary roles of an attestation workflow and the messages they exchange.
 
-### Roles
+### Roles {#roles}
 
-RATS roles are implemented by principals that possess cryptographic keys used to protect and authenticate Claims or Results.
+An endpoint system (a.k.a., Entity) may implement one or more attestation Roles to accommodate a variety of possible interaction models. Exemplary interaction models are described in {{passport}} and {{background}}. Role messages are secured by the Entity that generated it. Entities possess credentials (e.g., cryptographic keys) that authenticate, integrity protect and optionally confidentiality protect attestation messages.
 
-Attester:
+#### Attester {#attester}
 
-: An Attestation Function that creates Evidence by collecting, formatting and protecting (e.g., signing) Claims.
+The Attester consists of both an Attesting Environment and an Attested Environment. In some implementations these environments may be combined. Other implementations may have multiples of Attesting and Attested environments. Although endpoint environments can be complex, and that complexity is security relevant, the basic function of an Attester is to create Evidence that captures operational conditions affecting trustworthiness.
+
+<!--
+...by collecting, formatting and protecting (e.g., signing) Claims.
 It presents Evidence to a Verifier using a conveyance mechanism or protocol.
 
-Verifier:
+The creator of Evidence. The Role that designates an Entity to be assessed with respect to its trustworthiness properties in the scope of a specific Profile.
+-->
 
-: An Attestation Function that accepts Evidence from an Attester using a conveyance mechanism or protocol.
-It also accepts Known-Good-Values and Endorsements from an Asserter using a conveyance mechanism or protocol.
-It verifies the protection mechanisms, parses and appraises Evidence according to good-known valid (or known-invalid) Claims and Endorsements.
-It produces Attestation Results that are formatted and protected (e.g., signed).
-It presents Attestation Results to a Relying Party using a conveyance mechanism or protocol.
+#### Asserter {#asserter}
 
-Asserter:
-
-: An Attestation Function that generates reference Claims about both the Attesting Computing Environment and the Attested Computing Environment.
+The Asserter role
+In reality there are likely to be many Entities that implement the Asserter and many instances of Reference Value messages.
+<!--
+An Attestation Function that generates reference Claims about both the Attesting Computing Environment and the Attested Computing Environment.
 The manufacturing and development processes are presumed to be trustworthy processes.
 In other words the Asserter is presumed, by a Verifier, to produce valid Claims.
 The function collects, formats and protects (e.g. signs) valid Claims known as Endorsements and Known-Good-Values.
 It presents provable Claims to a Verifier using a conveyance mechanism or protocol.
+-->
+<!--
+An Asserter is the origin of Endorsements and Known-Good-Values. The Role that designates an Entity that facilitates attestation provision workflows and potentially provides trust anchors.
+-->
 
-Relying Party:
+#### Verifier {#verifier}
 
-: An Attestation Function that accepts Attestation Results from a Verifier using a conveyance mechanism or protocol.
+The Verifier workflow function accepts Evidence from an Attester and accepts Reference Values from one or more Asserters. Reference values may be supplied a'priori, cached or used to created policies. The Verifier performs an appraisal by matching Claims found in Evidence with Claims found in Reference Values and policies. If an attested Claim value differs from an expected Claim value, the Verifier flags this as a change possibly impacting trust level.
+
+Endorsements may not have corresponding Claims in Evidence (because of their intrinsic nature). Consequently, the Verifier need only authenticate the endpoint and verify the Endorsements match the endpoint identity.
+
+The result of appraisals and Endorsements, informed by owner policies, produces a new set of Claims that a Relying Party is suited to consume.
+<!--
+An Attestation Function that accepts Evidence from an Attester using a conveyance mechanism or protocol.
+It also accepts Known-Good-Values and Endorsements from an Asserter using a conveyance mechanism or protocol.
+It verifies the protection mechanisms, parses and appraises Evidence according to good-known valid (or known-invalid) Claims and Endorsements.
+It produces Attestation Results that are formatted and protected (e.g., signed).
+It presents Attestation Results to a Relying Party using a conveyance mechanism or protocol.
+-->
+<!--
+The consumer of Evidence for appraisal. The Role that designates an Entity to create Attestation Results based on Evidence, Known-Good-Values, and Endorsements.
+-->
+
+#### Relying Party {#relyingparty}
+
+A Role in an attestation workflow that accepts Results from a Verifier that may be used by the Relying Party to inform application specific decision making. How Results are used to inform decision making is out-of-scope for this architecture.
+
+<!--
 It assesses Attestation Results protections, parses and assesses Attestation Results according to an assessent context (Note: definition of the assessment context is out-of-scope).
 
-### Role Messages
+The consumer or proxy of Attestation Results. The Role that designates an Entity that requires reliable and believable statements about the Trustworthiness of an Attester Role.
+-->
 
-Claims:
+### Role Messages {#messages}
 
-: Statements about trustworthiness characteristics of an Attested Computing Environment.
+#### Evidence {#evidence}
 
-: The veracity of a Claim is determined by the reputation of the entity making the Claim. (Note: Reputation may involve identifying, authenticating and tracking transactions associated with an entity. RATS may be used to establish entity reputation, but not exclusively. Other reputation mechanisms are out-of-scope).
+Claims that are formatted and protected by an Attester.
 
-Evidence:
+Evidence SHOULD satisfy Verifier expectations for freshness, identity, context, provenance, validity, relevance and veracity.
+<!--
+ A Message type created and conveyed by the Attester Role. Attestation Evidence can be consumed and relayed by other Roles, primarily the Verifier Role to appraise the Evidence.
+ -->
 
-: Claims that are formatted and protected by an Attester.
+#### Reference Values
 
-: Evidence SHOULD satisfy Verifier expectations for freshness, identity, context, provenance, validity, relevance and veracity.
+Reference-values are Claims that a manufacturer, vendor or other supply chain entity makes that affects the trustworthiness of an Attester endpoint. Claims may be persistent properties of the endpoint due to the physical nature of how it was manufactured or may reflect the processes that were followed as part of moving the endpoint through a supply-chain; e.g., validation or compliance testing. This class of Reference-values is known as Endorsements. Another class of Reference-values identifies the firmware and software that could be installed in the endpoint after its manufacture. A digest of the the firmware or software can be an effective identifier for keeping track of the images produced by vendors and installed on an endpoint. This class of Reference-value is referred to as Known-Good-Value (KGV).
+
+<!--
+NMS What about calling them "Reference Digests"? This is more to the point of what it is.
+-->
 
 Known-Good-Values:
 
@@ -498,19 +503,28 @@ If an Attesting Computing Environment implements cryptography, they include Clai
 
 : Like Claims, Known-Good-Values SHOULD satisfy a Verifier's expectations for freshness, identity, context, provenance, validity, relevance and veracity.
 Known-Good-Values are reference Claims that are - like Evidence - well formatted and protected (e.g. signed).
+<!--
+A Message type created and distributed by the Asserter Role and consumed by the Verifier Role. Known-Good-Values are reference Claims that are used to appraise the believability and veracity of attestation Evidence.
+-->
 
 Endorsements:
 
 : Claims about immutable and implicit characteristics of the Attesting Computing Environment. Typically, endorsement Claims are created by manufacturing or supply chain entities.
 
 : Endorsements are intended to increase the level of confidence with respect to Evidence created by an Attester.
+<!--
+A Message type created and distributed by the Asserter Role and consumed by the Verifier Role. Endorsements provide Claims about Components of an Attester that an Attesting Environment cannot create Evidence about.
+-->
 
-Attestation Results:
+#### Results {#results}
 
-: Statements about the output of an appraisal of Evidence that are created, formatted and protected by a Verifier.
+Statements about the output of an appraisal of Evidence that are created, formatted and protected by a Verifier.
 
-: Attestation Results provide the basis for a Relying Party to establish a level of confidence in the trustworthiness of an Attester.
+Attestation Results provide the basis for a Relying Party to establish a level of confidence in the trustworthiness of an Attester.
 Attestation Results SHOULD satisfy Relying Party expectations for freshness, identity, context, provenance, validity, relevance and veracity.
+<!--
+A Message type created by the Verifier Role and ultimately consumed by Relying Parties.
+-->
 
 ## RATS Principals
 
