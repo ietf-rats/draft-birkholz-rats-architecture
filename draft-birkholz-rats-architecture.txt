@@ -463,8 +463,8 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
    Claim:  A statement about the construction, composition, validation
       or behavior of an Entity that affects trustworthiness.  Evidence,
-      Reference Values and Results are expressions consisting of one or
-      more Claims.
+      Reference Values and Results are expressions that consists of one
+      or more Claims.
 
    Conveyance:  The process of transferring Evidence, Reference values
       and Results between Entities participating in attestation
@@ -480,7 +480,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
       are then forwarded to one or more Relying Parties.  See
       Section 1.6.
 
-   Reference Values:  See Section 4.3.2.
+   Reference Values:  See Section 4.3.2.2.
 
    Relying Party:  See Section 4.3.1.4.
 
