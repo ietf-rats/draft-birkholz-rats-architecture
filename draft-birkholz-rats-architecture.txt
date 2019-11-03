@@ -5,14 +5,14 @@
 RATS Working Group                                           H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                              M. Wiseman
-Expires: May 5, 2020                                  GE Global Research
+Expires: May 6, 2020                                  GE Global Research
                                                            H. Tschofenig
                                                                 ARM Ltd.
                                                                 N. Smith
                                                                    Intel
                                                            M. Richardson
                                                 Sandelman Software Works
-                                                       November 02, 2019
+                                                       November 03, 2019
 
 
                Remote Attestation Procedures Architecture
@@ -20,19 +20,11 @@ Expires: May 5, 2020                                  GE Global Research
 
 Abstract
 
-   Remote ATtestation procedureS enable the assessment of the
-   trustworthiness (RATS) of remote peers in various usage scenarios.
-   In order to support a resilient and vendor-interoperable solution
-   ecosystem, the architecture module defined in this document enables a
-   semantic mapping of existing remote attestation workflows, including
-   solutions, such as Fast Identity Online (FIDO), Android Key
-   Attestation (of the W3C Web Authentication), or Trusted Computing
-   Group (TCG) Remote Integrity Verification (RIV).  The RATS
-   architecture also provides a simple and unified basis to accommodate
-   emerging solutions, such as the Device Identifier Composition Engine
-   (DICE) or Time-based Uni-Directional Attestation (TUDA).  As a
-   result, the RATS architectural model defined is composable,
-   extensible & uses well-defined terminology.
+   An entity (a relying party) requires a source of truth and evidence
+   about a remote peer to assess the peer's trustworthiness.  The
+   evidence is typically a believable set of claims about its host,
+   software or hardware platform.  This document describes an
+   architecture for such remote attestation procedures (RATS).
 
 Status of This Memo
 
@@ -49,14 +41,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on May 5, 2020.
-
-
-
-Birkholz, et al.           Expires May 5, 2020                  [Page 1]
-
-Internet-Draft              RATS Arch & Terms              November 2019
-
+   This Internet-Draft will expire on May 6, 2020.
 
 Copyright Notice
 
@@ -65,6 +50,14 @@ Copyright Notice
 
    This document is subject to BCP 78 and the IETF Trust's Legal
    Provisions Relating to IETF Documents
+
+
+
+Birkholz, et al.           Expires May 6, 2020                  [Page 1]
+
+Internet-Draft              RATS Arch & Terms              November 2019
+
+
    (https://trustee.ietf.org/license-info) in effect on the date of
    publication of this document.  Please review these documents
    carefully, as they describe your rights and restrictions with respect
@@ -75,11 +68,11 @@ Copyright Notice
 
 Table of Contents
 
-   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
      1.1.  Motivation  . . . . . . . . . . . . . . . . . . . . . . .   3
      1.2.  Opportunities . . . . . . . . . . . . . . . . . . . . . .   3
-     1.3.  Overview of Document  . . . . . . . . . . . . . . . . . .   4
-     1.4.  RATS in a Nutshell  . . . . . . . . . . . . . . . . . . .   5
+     1.3.  Overview of Document  . . . . . . . . . . . . . . . . . .   3
+     1.4.  RATS in a Nutshell  . . . . . . . . . . . . . . . . . . .   4
      1.5.  Attestation workflow  . . . . . . . . . . . . . . . . . .   5
      1.6.  Passport Model  . . . . . . . . . . . . . . . . . . . . .   6
      1.7.  Background Check  . . . . . . . . . . . . . . . . . . . .   7
@@ -102,24 +95,24 @@ Table of Contents
      6.2.  Informative References  . . . . . . . . . . . . . . . . .  18
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  19
 
-
-
-
-
-
-
-
-Birkholz, et al.           Expires May 5, 2020                  [Page 2]
-
-Internet-Draft              RATS Arch & Terms              November 2019
-
-
 1.  Introduction
 
    Remote Attestation provides a way for an entity (the Relying Party)
    to determine the health and provenance of an endpoint (a host, or
    Attester).  Knowledge of the health of the entity, allows for a
    determination of trustworthiness of the endpoint.
+
+
+
+
+
+
+
+
+Birkholz, et al.           Expires May 6, 2020                  [Page 2]
+
+Internet-Draft              RATS Arch & Terms              November 2019
+
 
 1.1.  Motivation
 
@@ -161,21 +154,21 @@ Internet-Draft              RATS Arch & Terms              November 2019
    specific remote attestation, but none have the generality needed to
    be used across the Internet.
 
-
-
-
-
-Birkholz, et al.           Expires May 5, 2020                  [Page 3]
-
-Internet-Draft              RATS Arch & Terms              November 2019
-
-
 1.3.  Overview of Document
 
    The architecture described in this document (along with the
    accompanying protocol implementation documents) enables the use of a
    common format for communicating Claims about an Attester to a Relying
    Party.
+
+
+
+
+
+Birkholz, et al.           Expires May 6, 2020                  [Page 3]
+
+Internet-Draft              RATS Arch & Terms              November 2019
+
 
    Existing transports were not designed to carry attestation Claims.
    It is therefore necessary to design serializations of Claims that fit
@@ -216,16 +209,6 @@ Internet-Draft              RATS Arch & Terms              November 2019
    [keystore] * Fast Identity Online (FIDO) Alliance attestation [fido]
    * A number of Intel SGX niche systems based upon OTRP.
 
-
-
-
-
-
-Birkholz, et al.           Expires May 5, 2020                  [Page 4]
-
-Internet-Draft              RATS Arch & Terms              November 2019
-
-
 1.4.  RATS in a Nutshell
 
    o  Attestation workflows typically convey Claims that contain the
@@ -235,6 +218,14 @@ Internet-Draft              RATS Arch & Terms              November 2019
    o  A corresponding provisioning workflow conveys reference
       trustworthiness claims that can be compared with attestation
       Evidence.  Reference values typically consist of firmware or
+
+
+
+Birkholz, et al.           Expires May 6, 2020                  [Page 4]
+
+Internet-Draft              RATS Arch & Terms              November 2019
+
+
       software digests and details about what makes the attesting module
       trusted.
 
@@ -273,15 +264,6 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
                        Figure 1: RATS Protocol Flows
 
-
-
-
-
-Birkholz, et al.           Expires May 5, 2020                  [Page 5]
-
-Internet-Draft              RATS Arch & Terms              November 2019
-
-
    In the RATS architecture shown above, specific content items are
    identified:
 
@@ -290,6 +272,15 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
    o  Known-Good-Values are reference Claims used to appraise Evidence
       by the Verifier.
+
+
+
+
+
+Birkholz, et al.           Expires May 6, 2020                  [Page 5]
+
+Internet-Draft              RATS Arch & Terms              November 2019
+
 
    o  Endorsements are reference Claims about the environment protecting
       the Attesters' capabilities to create believable Evidence (e.g.
@@ -333,7 +324,16 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-Birkholz, et al.           Expires May 5, 2020                  [Page 6]
+
+
+
+
+
+
+
+
+
+Birkholz, et al.           Expires May 6, 2020                  [Page 6]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -389,7 +389,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-Birkholz, et al.           Expires May 5, 2020                  [Page 7]
+Birkholz, et al.           Expires May 6, 2020                  [Page 7]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -445,7 +445,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-Birkholz, et al.           Expires May 5, 2020                  [Page 8]
+Birkholz, et al.           Expires May 6, 2020                  [Page 8]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -501,7 +501,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-Birkholz, et al.           Expires May 5, 2020                  [Page 9]
+Birkholz, et al.           Expires May 6, 2020                  [Page 9]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -557,7 +557,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-Birkholz, et al.           Expires May 5, 2020                 [Page 10]
+Birkholz, et al.           Expires May 6, 2020                 [Page 10]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -613,7 +613,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-Birkholz, et al.           Expires May 5, 2020                 [Page 11]
+Birkholz, et al.           Expires May 6, 2020                 [Page 11]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -669,7 +669,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-Birkholz, et al.           Expires May 5, 2020                 [Page 12]
+Birkholz, et al.           Expires May 6, 2020                 [Page 12]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -725,7 +725,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-Birkholz, et al.           Expires May 5, 2020                 [Page 13]
+Birkholz, et al.           Expires May 6, 2020                 [Page 13]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -781,7 +781,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-Birkholz, et al.           Expires May 5, 2020                 [Page 14]
+Birkholz, et al.           Expires May 6, 2020                 [Page 14]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -837,7 +837,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-Birkholz, et al.           Expires May 5, 2020                 [Page 15]
+Birkholz, et al.           Expires May 6, 2020                 [Page 15]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -893,7 +893,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-Birkholz, et al.           Expires May 5, 2020                 [Page 16]
+Birkholz, et al.           Expires May 6, 2020                 [Page 16]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -949,7 +949,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-Birkholz, et al.           Expires May 5, 2020                 [Page 17]
+Birkholz, et al.           Expires May 6, 2020                 [Page 17]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -1005,7 +1005,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-Birkholz, et al.           Expires May 5, 2020                 [Page 18]
+Birkholz, et al.           Expires May 6, 2020                 [Page 18]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -1061,7 +1061,7 @@ Authors' Addresses
 
 
 
-Birkholz, et al.           Expires May 5, 2020                 [Page 19]
+Birkholz, et al.           Expires May 6, 2020                 [Page 19]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -1117,4 +1117,4 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-Birkholz, et al.           Expires May 5, 2020                 [Page 20]
+Birkholz, et al.           Expires May 6, 2020                 [Page 20]
