@@ -121,10 +121,7 @@ informative:
 
 --- abstract
 
-Remote ATtestation procedureS enable the assessment of the trustworthiness (RATS) of remote peers in various usage scenarios.
-In order to support a resilient and vendor-interoperable solution ecosystem, the architecture module defined in this document enables a semantic mapping of existing remote attestation workflows, including solutions, such as Fast Identity Online (FIDO), Android Key Attestation (of the W3C Web Authentication), or Trusted Computing Group (TCG) Remote Integrity Verification (RIV).
-The RATS architecture also provides a simple and unified basis to accommodate emerging solutions, such as the Device Identifier Composition Engine (DICE) or Time-based Uni-Directional Attestation (TUDA).
-As a result, the RATS architectural model defined is composable, extensible & uses well-defined terminology.
+An entity (a relying party) requires a source of truth and evidence about a remote peer to assess the peer's trustworthiness. The evidence is typically a believable set of claims about its host, software or hardware platform. This document describes an architecture for such remote attestation procedures (RATS).
 
 --- middle
 
