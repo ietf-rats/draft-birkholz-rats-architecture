@@ -90,7 +90,7 @@ Table of Contents
      4.3.  Attestation Workflow  . . . . . . . . . . . . . . . . . .  14
        4.3.1.  Roles . . . . . . . . . . . . . . . . . . . . . . . .  14
        4.3.2.  Role Messages . . . . . . . . . . . . . . . . . . . .  15
-     4.4.  RATS Principals . . . . . . . . . . . . . . . . . . . . .  17
+     4.4.  "Entities" - Containers for the Roles . . . . . . . . . .  17
    5.  Reference use cases . . . . . . . . . . . . . . . . . . . . .  18
      5.1.  Device Capabilities/Firmware Attestation  . . . . . . . .  18
      5.2.  IETF TEEP WG use case . . . . . . . . . . . . . . . . . .  18
@@ -518,14 +518,14 @@ Internet-Draft              RATS Arch & Terms              November 2019
    of attestation Evidence.
 
    Qualities of Evidence:  Evidence is composed of Claims about
-      trustworthiness.  The number of Claims is not finite but
-      continuously growing while technology advances.  Additionally, the
-      system characteristics of Attester, the Environments they are
-      composed, and their continuous development have an impact on the
-      veracity of trustworthiness Claims included in Evidence.  Valid
-      Evidence that includes trustworthy Claims about the intactness of
-      an Attester must be impossible to create by an untrustworthy or
-      compromised Environment of an Attester.
+      trustworthiness (the set of Claims is unbounded).  The system
+      characteristics of Attesters - the Environments they are composed-
+      of, and their continuous development - have an impact on the
+      veracity of trustworthiness Claims included in valid Evidence.
+
+      Valid Evidence about the intactness of an Attester must be
+      impossible to create by an untrustworthy or compromised
+      Environment of an Attester.
 
    Qualities of Environments:  The resilience of Environments that are
       part of an Attester can vary widely - ranging from those highly
@@ -533,10 +533,10 @@ Internet-Draft              RATS Arch & Terms              November 2019
       attacks.  Configuration options, if set poorly, can result in a
       highly resistant environment being operationally less resistant.
       When a trustworthy Environment changes, it is possible that it
-      transitions from a trustworthy operational state to an
-      untrustworthy operational state.  An untrustworthy or compromised
-      Environment must never be able to create valid Evidence expressing
-      the intactness of an Attester.
+      transitions from being trustworthy to being untrustworthy.
+
+      An untrustworthy or compromised Environment must never be able to
+      create valid Evidence expressing the intactness of an Attester.
 
    The RATS architecture provides a framework for anticipating when a
    relevant change with respect to a trustworthiness attribute occurs,
@@ -904,11 +904,12 @@ Internet-Draft              RATS Arch & Terms              November 2019
    expectations for freshness, identity, context, provenance, validity,
    relevance and veracity.
 
-4.4.  RATS Principals
+4.4.  "Entities" - Containers for the Roles
 
-   RATS Principals are entities, users, organizations, devices and
-   computing environments (e.g., devices, platforms, services,
-   peripherals).
+   Containers for the Roles.
+
+   Entities are users, organizations, devices and computing environments
+   (e.g., devices, platforms, services, peripherals).
 
    RATS Principals may implement one or more RATS Roles.  Role
    interactions occurring within the same RATS Principal are out-of-
@@ -925,13 +926,13 @@ Internet-Draft              RATS Arch & Terms              November 2019
                 |  Principal 1     |   |  Principal 2     |
                 |  +------------+  |   |  +------------+  |
                 |  |            |  |   |  |            |  |
-                |  |    Role 1  |<-|---|->|    Role 2  |  |
+                |  |    Role A  |<-|---|->|    Role D  |  |
                 |  |            |  |   |  |            |  |
                 |  +------------+  |   |  +------------+  |
                 |                  |   |                  |
                 |  +-----+------+  |   |  +-----+------+  |
                 |  |            |  |   |  |            |  |
-                |  |    Role 2  |<-|---|->|    Role 3  |  |
+                |  |    Role B  |<-|---|->|    Role E  |  |
                 |  |            |  |   |  |            |  |
                 |  +------------+  |   |  +------------+  |
                 |                  |   |                  |
@@ -944,8 +945,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
    o  Multiplicity - Multiple instances of RATS Principals that possess
       the same RATS Roles can exist.
 
-   o  Composition - RATS Principals possessing different RATS Roles can
-      be combined into a singleton RATS Principal possessing the union
+
 
 
 
@@ -954,6 +954,8 @@ Birkholz, et al.           Expires May 7, 2020                 [Page 17]
 Internet-Draft              RATS Arch & Terms              November 2019
 
 
+   o  Composition - RATS Principals possessing different RATS Roles can
+      be combined into a singleton RATS Principal possessing the union
       of RATS Roles.  RATS Interactions between combined RATS Principals
       is uninteresting.
 
@@ -1001,14 +1003,14 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
    Attester:  Trusted Execution Environment (TEE)
 
-   Relying Party:  end-application
-
 
 
 Birkholz, et al.           Expires May 7, 2020                 [Page 18]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
+
+   Relying Party:  end-application
 
    Description:  The "Trusted Application Manager (TAM)" server wants to
       verify the state of a TEE, or applications in the TEE, of a
@@ -1056,8 +1058,6 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
    Message Flow:  passport
 
-   Attester:  virtual machine hypervisor
-
 
 
 
@@ -1065,6 +1065,8 @@ Birkholz, et al.           Expires May 7, 2020                 [Page 19]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
+
+   Attester:  virtual machine hypervisor
 
    Relying Party:  network operators
 
@@ -1112,8 +1114,6 @@ Internet-Draft              RATS Arch & Terms              November 2019
       Environment is the (smartphone) Rich Execution Environment (REE)
       ([I-D.ietf-teep-architecture] section 2), and the Attesting
       Environment is within the TEE.
-
-
 
 
 

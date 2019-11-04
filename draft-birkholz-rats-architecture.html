@@ -304,7 +304,7 @@ ul.toc li {
 <link href="#rfc.section.4.3" rel="Chapter" title="4.3 Attestation Workflow">
 <link href="#rfc.section.4.3.1" rel="Chapter" title="4.3.1 Roles">
 <link href="#rfc.section.4.3.2" rel="Chapter" title="4.3.2 Role Messages">
-<link href="#rfc.section.4.4" rel="Chapter" title="4.4 RATS Principals">
+<link href="#rfc.section.4.4" rel="Chapter" title="4.4 &#8220;Entities&#8221; &#8211; Containers for the Roles">
 <link href="#rfc.section.5" rel="Chapter" title="5 Reference use cases">
 <link href="#rfc.section.5.1" rel="Chapter" title="5.1 Device Capabilities/Firmware Attestation">
 <link href="#rfc.section.5.2" rel="Chapter" title="5.2 IETF TEEP WG use case">
@@ -448,7 +448,7 @@ ul.toc li {
 </li>
 <li>4.3.2.   <a href="#rfc.section.4.3.2">Role Messages</a>
 </li>
-</ul><li>4.4.   <a href="#rfc.section.4.4">RATS Principals</a>
+</ul><li>4.4.   <a href="#rfc.section.4.4">&#8220;Entities&#8221; &#8211; Containers for the Roles</a>
 </li>
 </ul><li>5.   <a href="#rfc.section.5">Reference use cases</a>
 </li>
@@ -693,9 +693,13 @@ ul.toc li {
 
 <dl>
 <dt>Qualities of Evidence:</dt>
-<dd style="margin-left: 8">Evidence is composed of Claims about trustworthiness. The number of Claims is not finite but continuously growing while technology advances. Additionally, the system characteristics of Attester, the Environments they are composed, and their continuous development have an impact on the veracity of trustworthiness Claims included in Evidence. Valid Evidence that includes trustworthy Claims about the intactness of an Attester must be impossible to create by an untrustworthy or compromised Environment of an Attester.</dd>
+<dd style="margin-left: 8">Evidence is composed of Claims about trustworthiness (the set of Claims is unbounded). The system characteristics of Attesters &#8211; the Environments they are composed-of, and their continuous development &#8211; have an impact on the veracity of trustworthiness Claims included in valid Evidence.</dd>
+<dt></dt>
+<dd style="margin-left: 8">Valid Evidence about the intactness of an Attester must be impossible to create by an untrustworthy or compromised Environment of an Attester.</dd>
 <dt>Qualities of Environments:</dt>
-<dd style="margin-left: 8">The resilience of Environments that are part of an Attester can vary widely - ranging from those highly resistant to attacks to those having little or no resistance to attacks.  Configuration options, if set poorly, can result in a highly resistant environment being operationally less resistant.  When a trustworthy Environment changes, it is possible that it transitions from a trustworthy operational state to an untrustworthy operational state. An untrustworthy or compromised Environment must never be able to create valid Evidence expressing the intactness of an Attester.</dd>
+<dd style="margin-left: 8">The resilience of Environments that are part of an Attester can vary widely - ranging from those highly resistant to attacks to those having little or no resistance to attacks.  Configuration options, if set poorly, can result in a highly resistant environment being operationally less resistant.  When a trustworthy Environment changes, it is possible that it transitions from being trustworthy to being untrustworthy.</dd>
+<dt></dt>
+<dd style="margin-left: 8">An untrustworthy or compromised Environment must never be able to create valid Evidence expressing the intactness of an Attester.</dd>
 </dl>
 <p id="rfc.section.3.p.5">The RATS architecture provides a framework for anticipating when a relevant change with respect to a trustworthiness attribute occurs, what exactly changed and how relevant it is. The RATS architecture also creates a context for enabling an appropriate response by applications, system software and protocol endpoints when changes to trustworthiness attributes do occur.</p>
 <p id="rfc.section.3.p.6">[FIXME suddenly - scope] The scope of this document is based on message flows and corresponding Roles based on the use cases defined in <a href="#I-D.richardson-rats-usecases" class="xref">[I-D.richardson-rats-usecases]</a>.  Protocol specifications for message flows are defined in separate documents.</p>
@@ -827,12 +831,13 @@ ul.toc li {
 <p id="rfc.section.4.3.2.3.p.1">Statements about the output of an appraisal of Evidence that are created, formatted and protected by a Verifier.</p>
 <p id="rfc.section.4.3.2.3.p.2">Attestation Results provide the basis for a Relying Party to establish a level of confidence in the trustworthiness of an Attester.  Attestation Results SHOULD satisfy Relying Party expectations for freshness, identity, context, provenance, validity, relevance and veracity.  </p>
 <h1 id="rfc.section.4.4">
-<a href="#rfc.section.4.4">4.4.</a> <a href="#rats-principals" id="rats-principals">RATS Principals</a>
+<a href="#rfc.section.4.4">4.4.</a> <a href="#entities-containers-for-the-roles" id="entities-containers-for-the-roles">&#8220;Entities&#8221; &#8211; Containers for the Roles</a>
 </h1>
-<p id="rfc.section.4.4.p.1">RATS Principals are entities, users, organizations, devices and computing environments (e.g., devices, platforms, services, peripherals).</p>
-<p id="rfc.section.4.4.p.2">RATS Principals may implement one or more RATS Roles. Role interactions occurring within the same RATS Principal are out-of-scope.</p>
-<p id="rfc.section.4.4.p.3">The methods whereby RATS Principals may be identified, discovered, authenticated, connected and trusted, though important, are out-of-scope.</p>
-<p id="rfc.section.4.4.p.4">Principal operations that apply resiliency, scaling, load balancing or replication are generally believed to be out-of-scope.</p>
+<p id="rfc.section.4.4.p.1">Containers for the Roles.</p>
+<p id="rfc.section.4.4.p.2">Entities are users, organizations, devices and computing environments (e.g., devices, platforms, services, peripherals).</p>
+<p id="rfc.section.4.4.p.3">RATS Principals may implement one or more RATS Roles. Role interactions occurring within the same RATS Principal are out-of-scope.</p>
+<p id="rfc.section.4.4.p.4">The methods whereby RATS Principals may be identified, discovered, authenticated, connected and trusted, though important, are out-of-scope.</p>
+<p id="rfc.section.4.4.p.5">Principal operations that apply resiliency, scaling, load balancing or replication are generally believed to be out-of-scope.</p>
 <div id="rfc.figure.4"></div>
 <div id="Principals"></div>
 <pre>
@@ -840,20 +845,20 @@ ul.toc li {
 |  Principal 1     |   |  Principal 2     |
 |  +------------+  |   |  +------------+  |
 |  |            |  |   |  |            |  |
-|  |    Role 1  |&lt;-|---|-&gt;|    Role 2  |  |
+|  |    Role A  |&lt;-|---|-&gt;|    Role D  |  |
 |  |            |  |   |  |            |  |
 |  +------------+  |   |  +------------+  |
 |                  |   |                  |
 |  +-----+------+  |   |  +-----+------+  |
 |  |            |  |   |  |            |  |
-|  |    Role 2  |&lt;-|---|-&gt;|    Role 3  |  |
+|  |    Role B  |&lt;-|---|-&gt;|    Role E  |  |
 |  |            |  |   |  |            |  |
 |  +------------+  |   |  +------------+  |
 |                  |   |                  |
 +------------------+   +------------------+
 </pre>
 <p class="figure">Figure 4: RATS Principals-Role Composition</p>
-<p id="rfc.section.4.4.p.5">RATS Principals have the following properties:</p>
+<p id="rfc.section.4.4.p.6">RATS Principals have the following properties:</p>
 <p></p>
 
 <ul>
@@ -861,7 +866,7 @@ ul.toc li {
 <li>Composition - RATS Principals possessing different RATS Roles can be combined into a singleton RATS Principal possessing the union of RATS Roles. RATS Interactions between combined RATS Principals is uninteresting.</li>
 <li>Decomposition -  A singleton RATS Principal possessing multiple RATS Roles can be divided into multiple RATS Principals.</li>
 </ul>
-<p id="rfc.section.4.4.p.7">RATS Interactions may occur between them.</p>
+<p id="rfc.section.4.4.p.8">RATS Interactions may occur between them.</p>
 <h1 id="rfc.section.5">
 <a href="#rfc.section.5">5.</a> <a href="#reference-use-cases" id="reference-use-cases">Reference use cases</a>
 </h1>
