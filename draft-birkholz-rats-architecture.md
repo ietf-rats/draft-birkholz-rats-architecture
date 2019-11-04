@@ -129,17 +129,18 @@ An entity (a relying party) requires a source of truth and evidence about a remo
 
 # Introduction
 
-Remote Attestation provides a way for an entity (the Relying Party) to determine the health and provenance of an endpoint (a host, or Attester).  Knowledge of the health of the entity, allows for a determination of trustworthiness of the endpoint.
+Remote Attestation provides a way for an entity (the Relying Party) to determine the health and provenance of an endpoint/host (the Attester).
+Knowledge of the health of the endpoint allows for a determination of trustworthiness of the endpoint.
 
 ## Motivation
 
-The IETF has long spent it's time focusing on threats to the communication channel (see {{RFC3552}} and {{DOLEV-YAO}}), assuming that the end-points could be trusted, and were under the observation of a trusted, well-trained professional.
+The IETF has long spent it's time focusing on threats to the communication channel (see {{RFC3552}} and {{DOLEV-YAO}}), assuming that endpoints could be trusted and were under the observation of trusted, well-trained professionals.
 This assumption has not been true since the days of the campus mini-computer.
-For some time after the desktop PC became ubiquitous the threat to the end-points has been dealt with as an internal matter, with generally poor results.
-Enterprises have done some deployment of Network Endpoint Assessment ({{RFC5209}}) to assess the security posture about an endpoint (host), but it has not been ubiquitous.
+For some time after the desktop PC became ubiquitous, the threat to the endpoints has been dealt with as an internal matter, with generally poor results.
+Enterprises have done some deployment of Network Endpoint Assessment ({{RFC5209}}) to assess the security posture about an endpoint, but it has not been ubiquitous.
 
-The movement towards personal mobile devices ("smartphones") and the continuing threat from unmanaged residential desktops has resulted in a renewed interest in standardizing internet-scale end-point remote attestation.
-Additionally, the rise of the Internet of Things (IoT) has made this issue even more critical: some skeptics have even renamed it to the Internet of Threats {{iothreats}} :-)  IoT devices have poor or non-existant user interfaces, so there are not even good ways to assess the health of the devices manually: a need to determine the health via remote attestation is now critical.
+The movement towards personal mobile devices ("smartphones") and the continuing threat from unmanaged residential desktops has resulted in a renewed interest in standardizing internet-scale endpoint remote attestation.
+Additionally, the rise of the Internet of Things (IoT) has made this issue even more critical: some skeptics have even renamed it to the Internet of Threats {{iothreats}} :-)  IoT devices have poor or non-existent user interfaces, as such as there are not even good ways to assess the health of the devices manually: a need to determine the health via remote attestation is now critical.
 
 In addition to the health of the device, knowledge of its provenance helps to determine the level of trust, and prevents attacks to the supply chain.
 <!--
@@ -149,18 +150,18 @@ In addition to the health of the device, knowledge of its provenance helps to de
 ## Opportunities
 
 The Trusted Platform Module (TPM) is now a commonly available peripheral on many commodity compute platforms,  both servers and desktops.
-Smartphones commonly have either an actual TPM, or have the ability to emulate one in software running in a trusted execution environment {{I-D.ietf-teep-architecture}}.  There are now few barriers to creating a standards-based system for remote attestation procedures.
+Smartphones commonly have either an actual TPM, or have the ability to emulate one in software running in a Trusted Execution Environment {{I-D.ietf-teep-architecture}}.  There are now few barriers to creating a standards-based system for remote attestation procedures.
 
 A number of niche solutions have emerged that provide for use-case specific remote attestation, but none have the generality needed to be used across the Internet.
 
 ## Overview of Document
 
-The architecture described in this document (along with the accompanying protocol implementation documents) enables the use of a common format for communicating Claims about an Attester to a Relying Party.
+The architecture described in this document (along with the accompanying solution and reference documents) enables the use of common formats for communicating Claims about an Attester to a Relying Party. [FIXME Attester? Flows? To what end?]
 
-Existing transports were not designed to carry attestation Claims.  It is therefore necessary to design serializations of Claims that fit into a variety of transports, for instance: X509 certificates, TLS negotiations, or EtherNet/IP.  There are also new, greenfield uses for remote attestation. Transport and serialization of these can be done without retrofitting. This is described in [TBD].
+Existing transports were not designed to carry attestation Claims.  It is therefore necessary to design serializations of Claims that fit into a variety of transports, for instance: X.509 certificates, TLS negotiations, YANG modules or EtherNet/IP.  There are also new, greenfield uses for remote attestation. Transport and serialization of these can be done without retrofitting. This is described in [FIXME what's the ref? The meaning is in the ref... style issue].
 
-While it is not anticipated that the existing niche solutions described in the use cases section will exchange claims directly, the use of a common format enables common code.
-As some of the code needs to be in intentionally hard to modify trusted modules, the use of a common format significantly reduces the cost of adoption to all parties.
+While it is not anticipated that the existing niche solutions described in the use cases section [FIXME shouldn't that be here by now?] will exchange claims directly, the use of a common format enables common code.
+As some of the code needs to be in intentionally hard to modify trusted modules, the use of a common formats and transfer protocols significantly reduces the cost of adoption to all parties.
 This commonality also significantly reduces the incidence of critical bugs.
 
 In some environments the collection of Evidence by the Attester to be provided to the Verifier is part of an existing protocol: this document does not change that, rather embraces those legacy mechanisms as part of the specification.  This is an evolutionary path forward, not revolutionary.
