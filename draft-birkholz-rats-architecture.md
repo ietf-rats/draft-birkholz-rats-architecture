@@ -331,13 +331,18 @@ of attestation Evidence.
 
 Qualities of Evidence:
 
-: Evidence is composed of Claims about trustworthiness. The number of Claims is not finite but continuously growing while technology advances. Additionally, the system characteristics of Attester, the Environments they are composed, and their continuous development have an impact on the veracity of trustworthiness Claims included in Evidence. Valid Evidence that includes trustworthy Claims about the intactness of an Attester must be impossible to create by an untrustworthy or compromised Environment of an Attester.
+: Evidence is composed of Claims about trustworthiness (the set of Claims is unbounded). The system characteristics of Attesters -- the Environments they are composed-of, and their continuous development -- have an impact on the veracity of trustworthiness Claims included in valid Evidence.
+
+: Valid Evidence about the intactness of an Attester must be impossible to create by an untrustworthy or compromised Environment of an Attester.
 
 Qualities of Environments:
 
 : The resilience of Environments that are part of an Attester can vary widely - ranging from those highly resistant to attacks to those having little or no resistance to attacks.
 Configuration options, if set poorly, can result in a highly resistant environment being operationally less resistant.
-When a trustworthy Environment changes, it is possible that it transitions from a trustworthy operational state to an untrustworthy operational state. An untrustworthy or compromised Environment must never be able to create valid Evidence expressing the intactness of an Attester.
+When a trustworthy Environment changes, it is possible that it transitions from
+being trustworthy to being untrustworthy.
+
+: An untrustworthy or compromised Environment must never be able to create valid Evidence expressing the intactness of an Attester.
 
 The RATS architecture provides a framework for anticipating when a relevant change with respect to a trustworthiness attribute occurs, what exactly changed and how relevant it is. The RATS architecture also creates a context for enabling an appropriate response by applications, system software and protocol endpoints when changes to trustworthiness attributes do occur.
 
@@ -539,9 +544,11 @@ Attestation Results SHOULD satisfy Relying Party expectations for freshness, ide
 A Message type created by the Verifier Role and ultimately consumed by Relying Parties.
 -->
 
-## RATS Principals
+## "Entities" -- Containers for the Roles
 
-RATS Principals are entities, users, organizations, devices and computing environments (e.g., devices, platforms, services, peripherals).
+Containers for the Roles.
+
+Entities are users, organizations, devices and computing environments (e.g., devices, platforms, services, peripherals).
 
 RATS Principals may implement one or more RATS Roles. Role interactions occurring within the same RATS Principal are out-of-scope.
 
@@ -556,13 +563,13 @@ Principal operations that apply resiliency, scaling, load balancing or replicati
 |  Principal 1     |   |  Principal 2     |
 |  +------------+  |   |  +------------+  |
 |  |            |  |   |  |            |  |
-|  |    Role 1  |<-|---|->|    Role 2  |  |
+|  |    Role A  |<-|---|->|    Role D  |  |
 |  |            |  |   |  |            |  |
 |  +------------+  |   |  +------------+  |
 |                  |   |                  |
 |  +-----+------+  |   |  +-----+------+  |
 |  |            |  |   |  |            |  |
-|  |    Role 2  |<-|---|->|    Role 3  |  |
+|  |    Role B  |<-|---|->|    Role E  |  |
 |  |            |  |   |  |            |  |
 |  +------------+  |   |  +------------+  |
 |                  |   |                  |
