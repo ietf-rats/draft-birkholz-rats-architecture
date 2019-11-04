@@ -753,7 +753,13 @@ Evidence SHOULD satisfy Verifier expectations for freshness, identity, context, 
 
 #### Reference Values {#reference}
 
-Reference-values are Claims that a manufacturer, vendor or other supply chain entity makes that affects the trustworthiness of an Attester endpoint. Claims may be persistent properties of the endpoint due to the physical nature of how it was manufactured or may reflect the processes that were followed as part of moving the endpoint through a supply-chain; e.g., validation or compliance testing. This class of Reference-values is known as Endorsements. Another class of Reference-values identifies the firmware and software that could be installed in the endpoint after its manufacture. A digest of the the firmware or software can be an effective identifier for keeping track of the images produced by vendors and installed on an endpoint. This class of Reference-value is referred to as Known-Good-Value (KGV).
+Reference-values are Claims that a manufacturer, vendor or other supply chain entity makes that affects the trustworthiness of an Attester endpoint.
+
+Claims may be persistent properties of the endpoint due to the physical nature of how it was manufactured or may reflect the processes that were followed as part of moving the endpoint through a supply-chain; e.g., validation or compliance testing. This class of Reference-values is known as Endorsements.
+
+Another class of Reference-values identifies the firmware and software that could be installed in the endpoint after its manufacture.
+A digest of the the firmware or software can be an effective identifier for keeping track of the images produced by vendors and installed on an endpoint.
+This class of Reference-value is referred to as Known-Good-Value (KGV).
 
 <!--
 NMS What about calling them "Reference Digests"? This is more to the point of what it is.
