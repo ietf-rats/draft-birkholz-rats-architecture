@@ -110,14 +110,16 @@ informative:
     target: "https://developer.android.com/training/articles/keystore"
     title: "Android Keystore System"
     author:
-      ins: "Google"
-      date: 2019
+    -  ins: "Google"
+       name: "Google"
+    date: 2019
   fido:
     target: "https://fidoalliance.org/specifications/"
     title: "FIDO Specification Overview"
     author:
-      ins: "FIDO Alliance"
-      date: 2019
+    -  ins: "FIDO Alliance"
+       name: "FIDO Alliance"
+    date: 2019
 
 --- abstract
 
@@ -214,7 +216,9 @@ If appropriate Endorsements about the Attester are available, Known-Good-Values 
 The Asserter role and the format for Known-Good-Values and Endorsements are not subject to standardization at this time.  The current verticals already include provisions for encoding and/or distributing these objects.
 
 ## Interaction models
-### Passport Model {#passport}
+
+{: #passport}
+### Passport Model
 
 In the Passport Model Interaction Model the Attester provides it's Evidence directly to the Verifier.  The Verifier will evaluate the Evidence and then sign an Attestation Result.  This Attestation Result is returned to the Attester, and it is up to the Attester to communicate the Attestation Result (potentially including the Evidence, if disclosable) to the Relying Party.
 
@@ -226,7 +230,8 @@ In the Passport Model Interaction Model the Attester provides it's Evidence dire
 
 This flow is named in this way because of the resemblance of how Nations issue Passports to their citizens. The nature of the Evidence that an individual needs to provide to it's local authority is specific to the country involved.  The citizen retains control of the resulting document and presents it to other entities when it needs to assert a citizenship or identity claim.
 
-### Background Check {#background}
+{: #background}
+### Background Check
 
 In the Background-Check Interaction Model the Attester provides it's Evidence to the Relying Party.
 The Relying Party sends this evidence to a Verifier of its choice.  The Verifier will evaluate the Evidence and then sign an Attestation Result.  This Attestation Result is returned to the Relying Party, which processes it directly.
