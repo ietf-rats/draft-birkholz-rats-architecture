@@ -849,10 +849,12 @@ Conveyance protocols must detail what kinds of information is disclosed, and to 
 # Security Considerations
 
 Evidence, Verifiable Assertions and Attestation Results SHOULD use formats that support end-to-end integrity protection and MAY support end-to-end confidentiality protection.
-Replay attack prevention MAY be supported if a Nonce Claim is included.
-Nonce Claims often piggy-back other information and can convey attestation semantics that are of essence to RATS, e.g. the last four bytes of a challenge nonce could be replaced by the IPv4 address-value of the Attester in its response.
+
+Replay attacks are a concern that protocol implementations MUST deal with.
+This is typically done via a Nonce Claim, but the details belong to the protocol.
 
 All other attacks involving RATS structures are not explicitly addressed by the architecture.
+
 Additional security protections MAY be required of conveyance mechanisms.
 For example, additional means of authentication, confidentiality, integrity, replay, denial of service and privacy protection of RATS payloads and Principals may be needed.
 
