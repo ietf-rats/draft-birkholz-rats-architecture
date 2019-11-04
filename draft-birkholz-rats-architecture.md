@@ -163,7 +163,7 @@ The architecture described in this document (along with the accompanying solutio
 Existing transports were not designed to carry attestation Claims.  It is therefore necessary to design serializations of Claims that fit into a variety of transports, for instance: X.509 certificates, TLS negotiations, YANG modules or EtherNet/IP.  There are also new, greenfield uses for remote attestation. Transport and serialization of these can be done without retrofitting.
 This is (will be) described in \[INSERT reference to adopted document on transport].
 
-While it is not anticipated that the existing niche solutions described in the use cases section {{usecases}} will exchange claims directly, the use of a common format enables common code.
+While it is not anticipated that the existing niche solutions described in the use cases section {{referenceusecases}} will exchange claims directly, the use of a common format enables common code.
 As some of the code needs to be in intentionally hard to modify trusted modules, the use of a common formats and transfer protocols significantly reduces the cost of adoption to all parties.
 This commonality also significantly reduces the incidence of critical bugs.
 
@@ -326,7 +326,7 @@ Verifier:
 
 : See {{verifier}}.
 
-# Reference use cases {#usecases}
+# Reference use cases {#referenceusecases}
 
 This section provides an overview of a number of distinct use cases that benefit from a standardized claim format.
 In addition to outlining the user, the specific message flow is identified from among the flows detailed in {{messageflows}}.
@@ -637,11 +637,11 @@ The trustworthiness of corresponding Attestation Results also relies on trust to
 A stronger level of security comes when information can be vouched for by hardware or by (unchangeable) firmware, especially if such hardware is physically resistant to hardware tampering.
 The component that is implicitly trusted is often referred to as a Root of Trust.
 
-## RATS Workflow
+## Workflow
 
 The basic function of RATS is creation, conveyance and appraisal of attestation Evidence.
 An Attester creates attestation Evidence that are conveyed to a Verifier for appraisal.
-The appraisals compare Evidence with expected Known-Good-Values called obtained from Asserters (e.g. Principals that are Supply Chain Entities).
+The appraisals compare Evidence with expected Known-Good-Values obtained from Asserters (e.g. Principals that are Supply Chain Entities).
 There can be multiple forms of appraisal (e.g., software integrity verification, device composition and configuration verification, device identity and provenance verification).
 Attestation Results are the output of appraisals. Attestation Results are signed and conveyed to Relying Parties. Attestation Results provide the basis by which the Relying Party may determine a level of confidence to place in the application data or operations that follow.
 
@@ -653,7 +653,7 @@ Information Model representations are realized as data structure and conveyance 
 
 ## Interoperability between RATS
 
-The RATS architecture anticipates use of information modeling techniques that describe computing environment structures -- their components/computational elements and corresponding capabilities -- so that verification operations may rely on the information model as an interoperable way to navigate the structural complexity.
+The RATS architecture anticipates use of information modeling techniques that describe computing structures -- their components/computational elements and corresponding capabilities -- so that verification operations may rely on the information model as an interoperable way to navigate the structural complexity.
 
 # RATS Architecture
 
@@ -665,7 +665,7 @@ RATS architecture has the following goals:
 * Enable data structure interoperability related to claims, endpoint composition / structure, and end-to-end integrity and confidentiality protection mechanisms.
 * Enable programmatic assessment of trustworthiness. (Note: Mechanisms that manage risk, justify a level of confidence, or determine a consequence of an attestation result are out of scope).
 * Provide the building blocks, including Roles and Principals that enable the composition of service-chains/hierarchies and workflows that can create and appraise evidence about the trustworthiness of devices and services.
-* Use-case driven architecture and design (RATS use cases are summarized in {{-rats-usecases}}).
+* Use-case driven architecture and design (see {{-rats-usecases}} and {{referenceusecases}})
 * Terminology conventions that are consistently applied across RATS specifications.
 * Reinforce trusted computing principles that include attestation.
 
