@@ -1109,7 +1109,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
    Claims that are formatted and protected by an Attester.
 
    Evidence SHOULD satisfy Verifier expectations for freshness,
-   identity, context, provenance, validity, relevance and veracity.
+   identity, context, provenance, validity, and veracity.
 
 
 
