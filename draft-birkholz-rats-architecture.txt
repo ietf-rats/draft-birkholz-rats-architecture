@@ -1126,11 +1126,14 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
    Reference-values are Claims that a manufacturer, vendor or other
    supply chain entity makes that affects the trustworthiness of an
-   Attester endpoint.  Claims may be persistent properties of the
-   endpoint due to the physical nature of how it was manufactured or may
-   reflect the processes that were followed as part of moving the
-   endpoint through a supply-chain; e.g., validation or compliance
-   testing.  This class of Reference-values is known as Endorsements.
+   Attester endpoint.
+
+   Claims may be persistent properties of the endpoint due to the
+   physical nature of how it was manufactured or may reflect the
+   processes that were followed as part of moving the endpoint through a
+   supply-chain; e.g., validation or compliance testing.  This class of
+   Reference-values is known as Endorsements.
+
    Another class of Reference-values identifies the firmware and
    software that could be installed in the endpoint after its
    manufacture.  A digest of the the firmware or software can be an
@@ -1170,9 +1173,6 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-
-
-
 Birkholz, et al.           Expires May 7, 2020                 [Page 21]
 
 Internet-Draft              RATS Arch & Terms              November 2019
@@ -1180,7 +1180,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 5.4.  Principals (Entities?) - Containers for the Roles
 
-   [The authors have are happy with the term Principal, and have been
+   [The authors are unhappy with the term Principal, and have been
    looking for something else.  JOSE uses the term Principal]
 
    Principals are Containers for the Roles.
