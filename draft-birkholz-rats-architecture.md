@@ -599,9 +599,7 @@ being trustworthy to being untrustworthy.
 
 The architecture provides a framework for anticipating when a relevant change with respect to a trustworthiness attribute occurs, what exactly changed and how relevant it is. The architecture also creates a context for enabling an appropriate response by applications, system software and protocol endpoints when changes to trustworthiness attributes do occur.
 
-\[FIXME suddenly - scope]
-The scope of this document is based on message flows and corresponding Roles based on the use cases defined in {{-rats-usecases}}.
-Protocol specifications for message flows are defined in separate documents.
+Detailed protocol specifications for message flows are defined in separate documents.
 
 ## Two Types of Environments
 
@@ -851,3 +849,9 @@ Nonce Claims often piggy-back other information and can convey attestation seman
 All other attacks involving RATS structures are not explicitly addressed by the architecture.
 Additional security protections MAY be required of conveyance mechanisms.
 For example, additional means of authentication, confidentiality, integrity, replay, denial of service and privacy protection of RATS payloads and Principals may be needed.
+
+# Acknowledgements
+
+Dave Thaler created the concepts of "Passport" and "Background Check".
+
+
