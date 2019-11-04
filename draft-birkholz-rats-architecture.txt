@@ -74,7 +74,7 @@ Table of Contents
      1.3.  Overview of Document  . . . . . . . . . . . . . . . . . .   4
      1.4.  RATS in a Nutshell  . . . . . . . . . . . . . . . . . . .   5
      1.5.  Remote Attestation Workflow . . . . . . . . . . . . . . .   5
-     1.6.  Interaction models  . . . . . . . . . . . . . . . . . . .   6
+     1.6.  Message Flows . . . . . . . . . . . . . . . . . . . . . .   6
        1.6.1.  Passport Model  . . . . . . . . . . . . . . . . . . .   6
        1.6.2.  Background Check  . . . . . . . . . . . . . . . . . .   7
    2.  Terminology . . . . . . . . . . . . . . . . . . . . . . . . .   8
@@ -93,12 +93,12 @@ Table of Contents
      4.4.  "Entities" - Containers for the Roles . . . . . . . . . .  17
    5.  Reference use cases . . . . . . . . . . . . . . . . . . . . .  18
      5.1.  Device Capabilities/Firmware Attestation  . . . . . . . .  18
-     5.2.  IETF TEEP WG use case . . . . . . . . . . . . . . . . . .  18
+     5.2.  IETF TEEP WG Use-Case . . . . . . . . . . . . . . . . . .  18
      5.3.  Safety Critical Systems . . . . . . . . . . . . . . . . .  19
-     5.4.  Virtualized multi-tenant hosts  . . . . . . . . . . . . .  19
+     5.4.  Virtualized Multi-Tenant Hosts  . . . . . . . . . . . . .  19
      5.5.  Cryptographic Key Attestation . . . . . . . . . . . . . .  20
-     5.6.  Geographic attestation  . . . . . . . . . . . . . . . . .  21
-     5.7.  Device provenance attestation . . . . . . . . . . . . . .  21
+     5.6.  Geographic Evidence . . . . . . . . . . . . . . . . . . .  21
+     5.7.  Device Provenance Attestation . . . . . . . . . . . . . .  21
    6.  Security Considerations . . . . . . . . . . . . . . . . . . .  22
    7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  22
      7.1.  Normative References  . . . . . . . . . . . . . . . . . .  22
@@ -203,11 +203,11 @@ Internet-Draft              RATS Arch & Terms              November 2019
    well as for Attestation Results, and this architecture outlines how
    that is done.
 
-   This introduction gives an overview of the protocol, interaction
-   models, messaging models and roles involved.  Following this, is a
-   terminology section that is referenced normatively by other documents
-   and is a key part of this document.  There is then a section on use
-   cases and how they leverage the roles and workflows described.
+   This introduction gives an overview of the message flows and roles
+   involved.  Following this, is a terminology section that is
+   referenced normatively by other documents and is a key part of this
+   document.  There is then a section on use cases and how they leverage
+   the roles and workflows described.
 
    In this document, terms defined within this document are consistently
    Capitalized [work in progress. please raise issues, if there are
@@ -228,11 +228,11 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 1.4.  RATS in a Nutshell
 
-   o  Remote Attestation Interactions typically convey Claims that
+   o  Remote Attestation message flows typically convey Claims that
       contain the trustworthiness properties associated with an Attested
       Environment (Evidence).
 
-   o  A corresponding provisioning Interaction conveys Reference
+   o  A corresponding provisioning message flows conveys Reference
       trustworthiness claims that can be compared with attestation
       Evidence.  Reference Values typically consist of firmware or
       software digests and details about what makes the attesting module
@@ -283,7 +283,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
    In the RATS architecture shown above, specific content items (payload
-   conveyed by Interactions) are identified:
+   conveyed in message flows) are identified:
 
    o  Evidence is as set of believable Claims about distinguishable
       Environments made by an Attester.
@@ -317,7 +317,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
    current verticals already include provisions for encoding and/or
    distributing these objects.
 
-1.6.  Interaction models
+1.6.  Message Flows
 
 1.6.1.  Passport Model
 
@@ -437,7 +437,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
    Appraisal:  A Verifier process that compares Evidence to Reference
       values while taking into account Endorsements and produces
-      Results.
+      Attestation Results.
 
    Asserter:  See Section 4.3.1.2.
 
@@ -456,35 +456,36 @@ Internet-Draft              RATS Arch & Terms              November 2019
    Attesting Environment:  An environment capable of making
       trustworthiness Claims about an Attested Environment.
 
-   Background-Check message flow:  An attestation workflow where the
+   Background-Check Message Flow:  An attestation workflow where the
       Attester provides Evidence to a Relying Party, who consults one or
-      more Verifiers who supply Results to the Relying Party.  See
-      Section 1.6.2.
+      more Verifiers who supply Attestation Results to the Relying
+      Party.  See Section 1.6.2.
 
    Claim:  A statement about the construction, composition, validation
       or behavior of an Entity that affects trustworthiness.  Evidence,
-      Reference Values and Results are expressions that consists of one
-      or more Claims.
+      Reference Values and Attestation Results are expressions that
+      consists of one or more Claims.
 
    Conveyance:  The process of transferring Evidence, Reference Values
-      and Results between Entities participating in attestation
-      workflow.
+      and Attestation Results between Entities participating in
+      attestation workflow.
 
    Entity:  A device, component (see System Component [RFC4949]), or
       environment that implements one or more Roles.
 
    Evidence:  See Section 4.3.2.1.
 
-   Passport message flow:  An attestation workflow where the Attester
-      provides Evidence to a Verifier who returns Results that are then
-      forwarded to one or more Relying Parties.  See Section 1.6.1.
+   Passport Message Flow:  An attestation workflow where the Attester
+      provides Evidence to a Verifier who returns Attestation Results
+      that are then forwarded to one or more Relying Parties.  See
+      Section 1.6.1.
 
    Reference Values:  See Section 4.3.2.2.  Also referred to as Known-
       Good-Values.
 
    Relying Party:  See Section 4.3.1.4.
 
-   Results:  See Section 4.3.2.3.
+   Attestation Results:  See Section 4.3.2.3.
 
    Role:  A function or process in an attestation workflow, typically
       described by: Attester, Verifier, Relying Party and Asserter.
@@ -497,7 +498,6 @@ Internet-Draft              RATS Arch & Terms              November 2019
    (a Relying Party) requires an assessment of the trustworthiness of a
    remote entity (an Attester or specific system components [RFC4949]
    thereof).  Remote ATtestation procedureS (RATS) enable Relying
-
 
 
 
@@ -772,9 +772,9 @@ Internet-Draft              RATS Arch & Terms              November 2019
 4.3.1.  Roles
 
    An endpoint system (a.k.a., Entity) may implement one or more
-   attestation Roles to accommodate a variety of possible interaction
-   models.  Exemplary interaction models are described in Section 1.6.1
-   and Section 1.6.2.  Role messages are secured by the Entity that
+   attestation Roles to accommodate a variety of possible message flows.
+   Exemplary message flows are described in Section 1.6.1 and
+   Section 1.6.2.  Role messages are secured by the Entity that
    generated it.  Entities possess credentials (e.g., cryptographic
    keys) that authenticate, integrity protect and optionally
    confidentiality protect attestation messages.
@@ -823,10 +823,10 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 4.3.1.4.  Relying Party
 
-   A Role in an attestation workflow that accepts Results from a
-   Verifier that may be used by the Relying Party to inform application
-   specific decision making.  How Results are used to inform decision
-   making is out-of-scope for this architecture.
+   A Role in an attestation workflow that accepts Attestation Results
+   from a Verifier that may be used by the Relying Party to inform
+   application specific decision making.  How Attestation Results are
+   used to inform decision making is out-of-scope for this architecture.
 
 4.3.2.  Role Messages
 
@@ -884,7 +884,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
       Endorsements are intended to increase the level of confidence with
       respect to Evidence created by an Attester.
 
-4.3.2.3.  Results
+4.3.2.3.  Attestation Results
 
    Statements about the output of an appraisal of Evidence that are
    created, formatted and protected by a Verifier.
@@ -911,9 +911,8 @@ Internet-Draft              RATS Arch & Terms              November 2019
    Entities are users, organizations, devices and computing environments
    (e.g., devices, platforms, services, peripherals).
 
-   RATS Principals may implement one or more RATS Roles.  Role
-   interactions occurring within the same RATS Principal are out-of-
-   scope.
+   RATS Principals may implement one or more RATS Roles.  Massage flows
+   occurring within the same RATS Principal are out-of-scope.
 
    The methods whereby RATS Principals may be identified, discovered,
    authenticated, connected and trusted, though important, are out-of-
@@ -945,7 +944,8 @@ Internet-Draft              RATS Arch & Terms              November 2019
    o  Multiplicity - Multiple instances of RATS Principals that possess
       the same RATS Roles can exist.
 
-
+   o  Composition - RATS Principals possessing different RATS Roles can
+      be combined into a singleton RATS Principal possessing the union
 
 
 
@@ -954,15 +954,11 @@ Birkholz, et al.           Expires May 7, 2020                 [Page 17]
 Internet-Draft              RATS Arch & Terms              November 2019
 
 
-   o  Composition - RATS Principals possessing different RATS Roles can
-      be combined into a singleton RATS Principal possessing the union
-      of RATS Roles.  RATS Interactions between combined RATS Principals
-      is uninteresting.
+      of RATS Roles.  Message flows between combined RATS Principals is
+      uninteresting.
 
    o  Decomposition - A singleton RATS Principal possessing multiple
       RATS Roles can be divided into multiple RATS Principals.
-
-   RATS Interactions may occur between them.
 
 5.  Reference use cases
 
@@ -993,7 +989,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
    cases, including [I-D.fedorkow-rats-network-device-attestation]
    section 1.2, "Software Inventory"
 
-5.2.  IETF TEEP WG use case
+5.2.  IETF TEEP WG Use-Case
 
    Use case name:  TAM validation
 
@@ -1003,14 +999,16 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
    Attester:  Trusted Execution Environment (TEE)
 
+   Relying Party:  end-application
+
+
+
 
 
 Birkholz, et al.           Expires May 7, 2020                 [Page 18]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
-
-   Relying Party:  end-application
 
    Description:  The "Trusted Application Manager (TAM)" server wants to
       verify the state of a TEE, or applications in the TEE, of a
@@ -1025,7 +1023,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
    Who will use it:  Power plants and other systems that need to assert
       their current state, but which can not accept any inputs from the
-      outside.  The corollory system is a black-box (such as in an
+      outside.  The corollary system is a black-box (such as in an
       aircraft), which needs to log the state of a system, but which can
       never initiate a handshake.
 
@@ -1036,27 +1034,29 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
    Relying Party:  open
 
-   Claims used as evidence:  the beginning and ending time as endorsed
+   Claims used as Evidence:  the beginning and ending time as endorsed
       by a Time Stamp Authority, represented by a time stamp token.  The
       real time clock of the system itself.  A Root of Trust for time;
       the TPM has a relative time from startup.
 
-   Description:  These requirements motivate the creation of the Time
+   Description:  These requirements motivate the creation of the Time-
       Base Unidirectional Attestation (TUDA) [I-D.birkholz-rats-tuda],
-      the output of TUDA are typically a secure audit log, where
-      freshness is determined by synchronization to an source of
+      the output of TUDA is typically a secure audit log, where
+      freshness is determined by synchronization to a trusted source of
       external time.
 
-      The freshness is preserved in the evidence by the use of a Time
+      The freshness is preserved in the Evidence by the use of a Time
       Stamp Authority (TSA) which provides Time Stamp Tokens (TST).
 
-5.4.  Virtualized multi-tenant hosts
+5.4.  Virtualized Multi-Tenant Hosts
 
    Use case name:  Multi-Tenant Hosts
 
    Who will use it:  Virtual machine systems
 
    Message Flow:  passport
+
+   Attester:  virtual machine hypervisor
 
 
 
@@ -1065,8 +1065,6 @@ Birkholz, et al.           Expires May 7, 2020                 [Page 19]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
-
-   Attester:  virtual machine hypervisor
 
    Relying Party:  network operators
 
@@ -1117,14 +1115,16 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
+
+
 Birkholz, et al.           Expires May 7, 2020                 [Page 20]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
 
-5.6.  Geographic attestation
+5.6.  Geographic Evidence
 
-   Use case name:  Location attestation
+   Use case name:  Location Evidence
 
    Who will use it:  geo-fenced systems
 
@@ -1135,13 +1135,13 @@ Internet-Draft              RATS Arch & Terms              November 2019
    Relying Party:  internet peers
 
    Description:  The relying party wants to know the physical location
-      (on the planet earth) of the device.  This may be provided
-      directly by a GPS/GLONASS/Galileo module that is incorporated into
-      a TPM.  This may also be provided by collecting other proximity
-      messages from other device that the relying party can form a trust
-      relationship with.
+      (on the planet earth, using a geodetic system) of the device.
+      This may be provided directly by a GPS/GLONASS/BeiDou/Galileo
+      module that is incorporated into a TPM.  This may also be provided
+      by collecting other proximity messages from other device that the
+      relying party can form a trust relationship with.
 
-5.7.  Device provenance attestation
+5.7.  Device Provenance Attestation
 
    Use case name:  RIV - Device Provenance
 
@@ -1184,14 +1184,14 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 6.  Security Considerations
 
-   RATS Evidence, Verifiable Assertions and Results SHOULD use formats
-   that support end-to-end integrity protection and MAY support end-to-
-   end confidentiality protection.  Replay attack prevention MAY be
-   supported if a Nonce Claim is included.  Nonce Claims often piggy-
-   back other information and can convey attestation semantics that are
-   of essence to RATS, e.g. the last four bytes of a challenge nonce
-   could be replaced by the IPv4 address-value of the Attester in its
-   response.
+   RATS Evidence, Verifiable Assertions and Attestation Results SHOULD
+   use formats that support end-to-end integrity protection and MAY
+   support end-to-end confidentiality protection.  Replay attack
+   prevention MAY be supported if a Nonce Claim is included.  Nonce
+   Claims often piggy-back other information and can convey attestation
+   semantics that are of essence to RATS, e.g. the last four bytes of a
+   challenge nonce could be replaced by the IPv4 address-value of the
+   Attester in its response.
 
    All other attacks involving RATS structures are not explicitly
    addressed by RATS architecture.  Additional security protections MAY

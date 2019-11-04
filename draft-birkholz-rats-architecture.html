@@ -288,7 +288,7 @@ ul.toc li {
 <link href="#rfc.section.1.3" rel="Chapter" title="1.3 Overview of Document">
 <link href="#rfc.section.1.4" rel="Chapter" title="1.4 RATS in a Nutshell">
 <link href="#rfc.section.1.5" rel="Chapter" title="1.5 Remote Attestation Workflow">
-<link href="#rfc.section.1.6" rel="Chapter" title="1.6 Interaction models">
+<link href="#rfc.section.1.6" rel="Chapter" title="1.6 Message Flows">
 <link href="#rfc.section.1.6.1" rel="Chapter" title="1.6.1 Passport Model">
 <link href="#rfc.section.1.6.2" rel="Chapter" title="1.6.2 Background Check">
 <link href="#rfc.section.2" rel="Chapter" title="2 Terminology">
@@ -307,12 +307,12 @@ ul.toc li {
 <link href="#rfc.section.4.4" rel="Chapter" title="4.4 &#8220;Entities&#8221; &#8211; Containers for the Roles">
 <link href="#rfc.section.5" rel="Chapter" title="5 Reference use cases">
 <link href="#rfc.section.5.1" rel="Chapter" title="5.1 Device Capabilities/Firmware Attestation">
-<link href="#rfc.section.5.2" rel="Chapter" title="5.2 IETF TEEP WG use case">
+<link href="#rfc.section.5.2" rel="Chapter" title="5.2 IETF TEEP WG Use-Case">
 <link href="#rfc.section.5.3" rel="Chapter" title="5.3 Safety Critical Systems">
-<link href="#rfc.section.5.4" rel="Chapter" title="5.4 Virtualized multi-tenant hosts">
+<link href="#rfc.section.5.4" rel="Chapter" title="5.4 Virtualized Multi-Tenant Hosts">
 <link href="#rfc.section.5.5" rel="Chapter" title="5.5 Cryptographic Key Attestation">
-<link href="#rfc.section.5.6" rel="Chapter" title="5.6 Geographic attestation">
-<link href="#rfc.section.5.7" rel="Chapter" title="5.7 Device provenance attestation">
+<link href="#rfc.section.5.6" rel="Chapter" title="5.6 Geographic Evidence">
+<link href="#rfc.section.5.7" rel="Chapter" title="5.7 Device Provenance Attestation">
 <link href="#rfc.section.6" rel="Chapter" title="6 Security Considerations">
 <link href="#rfc.references" rel="Chapter" title="7 References">
 <link href="#rfc.references.1" rel="Chapter" title="7.1 Normative References">
@@ -416,7 +416,7 @@ ul.toc li {
 </li>
 <li>1.5.   <a href="#rfc.section.1.5">Remote Attestation Workflow</a>
 </li>
-<li>1.6.   <a href="#rfc.section.1.6">Interaction models</a>
+<li>1.6.   <a href="#rfc.section.1.6">Message Flows</a>
 </li>
 <ul><li>1.6.1.   <a href="#rfc.section.1.6.1">Passport Model</a>
 </li>
@@ -454,17 +454,17 @@ ul.toc li {
 </li>
 <ul><li>5.1.   <a href="#rfc.section.5.1">Device Capabilities/Firmware Attestation</a>
 </li>
-<li>5.2.   <a href="#rfc.section.5.2">IETF TEEP WG use case</a>
+<li>5.2.   <a href="#rfc.section.5.2">IETF TEEP WG Use-Case</a>
 </li>
 <li>5.3.   <a href="#rfc.section.5.3">Safety Critical Systems</a>
 </li>
-<li>5.4.   <a href="#rfc.section.5.4">Virtualized multi-tenant hosts</a>
+<li>5.4.   <a href="#rfc.section.5.4">Virtualized Multi-Tenant Hosts</a>
 </li>
 <li>5.5.   <a href="#rfc.section.5.5">Cryptographic Key Attestation</a>
 </li>
-<li>5.6.   <a href="#rfc.section.5.6">Geographic attestation</a>
+<li>5.6.   <a href="#rfc.section.5.6">Geographic Evidence</a>
 </li>
-<li>5.7.   <a href="#rfc.section.5.7">Device provenance attestation</a>
+<li>5.7.   <a href="#rfc.section.5.7">Device Provenance Attestation</a>
 </li>
 </ul><li>6.   <a href="#rfc.section.6">Security Considerations</a>
 </li>
@@ -502,7 +502,7 @@ ul.toc li {
 <p id="rfc.section.1.3.p.2">Existing transports were not designed to carry attestation Claims.  It is therefore necessary to design serializations of Claims that fit into a variety of transports, for instance: X.509 certificates, TLS negotiations, YANG modules or EtherNet/IP.  There are also new, greenfield uses for remote attestation. Transport and serialization of these can be done without retrofitting. This is described in [FIXME what&#8217;s the ref? The meaning is in the ref&#8230; style issue].</p>
 <p id="rfc.section.1.3.p.3">While it is not anticipated that the existing niche solutions described in the use cases section [FIXME shouldn&#8217;t that be here by now?] will exchange claims directly, the use of a common format enables common code.  As some of the code needs to be in intentionally hard to modify trusted modules, the use of a common formats and transfer protocols significantly reduces the cost of adoption to all parties.  This commonality also significantly reduces the incidence of critical bugs.</p>
 <p id="rfc.section.1.3.p.4">In some environments the collection of Evidence by the Attester to be provided to the Verifier is part of an existing protocol: this document does not change that, rather embraces those legacy mechanisms as part of the specification.  This is an evolutionary path forward, not revolutionary.  Yet in other greenfield environments, there is a desire to have a standard for Evidence as well as for Attestation Results, and this architecture outlines how that is done.</p>
-<p id="rfc.section.1.3.p.5">This introduction gives an overview of the protocol, interaction models, messaging models and roles involved.  Following this, is a terminology section that is referenced normatively by other documents and is a key part of this document.  There is then a section on use cases and how they leverage the roles and workflows described.</p>
+<p id="rfc.section.1.3.p.5">This introduction gives an overview of the message flows and roles involved.  Following this, is a terminology section that is referenced normatively by other documents and is a key part of this document.  There is then a section on use cases and how they leverage the roles and workflows described.</p>
 <p id="rfc.section.1.3.p.6">In this document, terms defined within this document are consistently Capitalized [work in progress. please raise issues, if there are Blatant inconsistencies].</p>
 <p id="rfc.section.1.3.p.7">Current verticals that use remote attestation include: * The Trusted Computing Group &#8220;Network Device Attestation Workflow&#8221; <a href="#I-D.fedorkow-rats-network-device-attestation" class="xref">[I-D.fedorkow-rats-network-device-attestation]</a> * Android Keystore <a href="#keystore" class="xref">[keystore]</a> * Fast Identity Online (FIDO) Alliance attestation <a href="#fido" class="xref">[fido]</a> * A number of Intel SGX niche systems based upon OTRP.</p>
 <h1 id="rfc.section.1.4">
@@ -511,8 +511,8 @@ ul.toc li {
 <p></p>
 
 <ul>
-<li>Remote Attestation Interactions typically convey Claims that contain the trustworthiness properties associated with an Attested Environment (Evidence).</li>
-<li>A corresponding provisioning Interaction conveys Reference trustworthiness claims that can be compared with attestation Evidence. Reference Values typically consist of firmware or software digests and details about what makes the attesting module a trusted source of Evidence.</li>
+<li>Remote Attestation message flows typically convey Claims that contain the trustworthiness properties associated with an Attested Environment (Evidence).</li>
+<li>A corresponding provisioning message flows conveys Reference trustworthiness claims that can be compared with attestation Evidence. Reference Values typically consist of firmware or software digests and details about what makes the attesting module a trusted source of Evidence.</li>
 <li>Relying Parties are performing tasks such as managing a resource, controlling access, and/or managing risk. Attestation Results helps Relying Parties determine levels of trust.</li>
 </ul>
 <h1 id="rfc.section.1.5">
@@ -549,7 +549,7 @@ ul.toc li {
        '---------------'                     '---------------'
 </pre>
 <p class="figure">Figure 1: RATS Protocol Flows</p>
-<p id="rfc.section.1.5.p.1">In the RATS architecture shown above, specific content items (payload conveyed by Interactions) are identified:</p>
+<p id="rfc.section.1.5.p.1">In the RATS architecture shown above, specific content items (payload conveyed in message flows) are identified:</p>
 <p></p>
 
 <ul>
@@ -563,7 +563,7 @@ ul.toc li {
 <p id="rfc.section.1.5.p.5">If appropriate Endorsements about the Attester are available, Known-Good-Values about the Attester are available, and if the Attester is capable of creating believable Evidence - then the Verifier is able to create Attestation Results that enable Relying Parties to establish a level of confidence in the trustworthiness of the Attester.</p>
 <p id="rfc.section.1.5.p.6">The Asserter role and the format for Known-Good-Values and Endorsements are not subject to standardization at this time.  The current verticals already include provisions for encoding and/or distributing these objects.</p>
 <h1 id="rfc.section.1.6">
-<a href="#rfc.section.1.6">1.6.</a> <a href="#interaction-models" id="interaction-models">Interaction models</a>
+<a href="#rfc.section.1.6">1.6.</a> <a href="#message-flows" id="message-flows">Message Flows</a>
 </h1>
 <h1 id="rfc.section.1.6.1">
 <a href="#rfc.section.1.6.1">1.6.1.</a> <a href="#passport" id="passport">Passport Model</a>
@@ -645,7 +645,7 @@ ul.toc li {
 
 <dl>
 <dt>Appraisal:</dt>
-<dd style="margin-left: 8">A Verifier process that compares Evidence to Reference values while taking into account Endorsements and produces Results.</dd>
+<dd style="margin-left: 8">A Verifier process that compares Evidence to Reference values while taking into account Endorsements and produces Attestation Results.</dd>
 <dt>Asserter:</dt>
 <dd style="margin-left: 8">See <a href="#asserter" class="xref">Section 4.3.1.2</a>.</dd>
 <dt>Attester:</dt>
@@ -654,23 +654,23 @@ ul.toc li {
 <dd style="margin-left: 8">A target environment that is observed or controlled by an Attesting Environment.</dd>
 <dt>Attesting Environment:</dt>
 <dd style="margin-left: 8">An environment capable of making trustworthiness Claims about an Attested Environment.</dd>
-<dt>Background-Check message flow:</dt>
-<dd style="margin-left: 8">An attestation workflow where the Attester provides Evidence to a Relying Party, who consults one or more Verifiers who supply Results to the Relying Party. See <a href="#background" class="xref">Section 1.6.2</a>.</dd>
+<dt>Background-Check Message Flow:</dt>
+<dd style="margin-left: 8">An attestation workflow where the Attester provides Evidence to a Relying Party, who consults one or more Verifiers who supply Attestation Results to the Relying Party. See <a href="#background" class="xref">Section 1.6.2</a>.</dd>
 <dt>Claim:</dt>
-<dd style="margin-left: 8">A statement about the construction, composition, validation or behavior of an Entity that affects trustworthiness. Evidence, Reference Values and Results are expressions that consists of one or more Claims.  </dd>
+<dd style="margin-left: 8">A statement about the construction, composition, validation or behavior of an Entity that affects trustworthiness. Evidence, Reference Values and Attestation Results are expressions that consists of one or more Claims.  </dd>
 <dt>Conveyance:</dt>
-<dd style="margin-left: 8">The process of transferring Evidence, Reference Values and Results between Entities participating in attestation workflow.</dd>
+<dd style="margin-left: 8">The process of transferring Evidence, Reference Values and Attestation Results between Entities participating in attestation workflow.</dd>
 <dt>Entity:</dt>
 <dd style="margin-left: 8">A device, component (see System Component <a href="#RFC4949" class="xref">[RFC4949]</a>), or environment that implements one or more Roles.</dd>
 <dt>Evidence:</dt>
 <dd style="margin-left: 8">See <a href="#evidence" class="xref">Section 4.3.2.1</a>.</dd>
-<dt>Passport message flow:</dt>
-<dd style="margin-left: 8">An attestation workflow where the Attester provides Evidence to a Verifier who returns Results that are then forwarded to one or more Relying Parties. See <a href="#passport" class="xref">Section 1.6.1</a>.</dd>
+<dt>Passport Message Flow:</dt>
+<dd style="margin-left: 8">An attestation workflow where the Attester provides Evidence to a Verifier who returns Attestation Results that are then forwarded to one or more Relying Parties. See <a href="#passport" class="xref">Section 1.6.1</a>.</dd>
 <dt>Reference Values:</dt>
 <dd style="margin-left: 8">See <a href="#reference" class="xref">Section 4.3.2.2</a>. Also referred to as Known-Good-Values.</dd>
 <dt>Relying Party:</dt>
 <dd style="margin-left: 8">See <a href="#relyingparty" class="xref">Section 4.3.1.4</a>.</dd>
-<dt>Results:</dt>
+<dt>Attestation Results:</dt>
 <dd style="margin-left: 8">See <a href="#results" class="xref">Section 4.3.2.3</a>.</dd>
 <dt>Role:</dt>
 <dd style="margin-left: 8">A function or process in an attestation workflow, typically described by: Attester, Verifier, Relying Party and Asserter.</dd>
@@ -782,7 +782,7 @@ ul.toc li {
 <h1 id="rfc.section.4.3.1">
 <a href="#rfc.section.4.3.1">4.3.1.</a> <a href="#roles" id="roles">Roles</a>
 </h1>
-<p id="rfc.section.4.3.1.p.1">An endpoint system (a.k.a., Entity) may implement one or more attestation Roles to accommodate a variety of possible interaction models. Exemplary interaction models are described in <a href="#passport" class="xref">Section 1.6.1</a> and <a href="#background" class="xref">Section 1.6.2</a>. Role messages are secured by the Entity that generated it. Entities possess credentials (e.g., cryptographic keys) that authenticate, integrity protect and optionally confidentiality protect attestation messages.</p>
+<p id="rfc.section.4.3.1.p.1">An endpoint system (a.k.a., Entity) may implement one or more attestation Roles to accommodate a variety of possible message flows. Exemplary message flows are described in <a href="#passport" class="xref">Section 1.6.1</a> and <a href="#background" class="xref">Section 1.6.2</a>. Role messages are secured by the Entity that generated it. Entities possess credentials (e.g., cryptographic keys) that authenticate, integrity protect and optionally confidentiality protect attestation messages.</p>
 <h1 id="rfc.section.4.3.1.1">
 <a href="#rfc.section.4.3.1.1">4.3.1.1.</a> <a href="#attester" id="attester">Attester</a>
 </h1>
@@ -800,7 +800,7 @@ ul.toc li {
 <h1 id="rfc.section.4.3.1.4">
 <a href="#rfc.section.4.3.1.4">4.3.1.4.</a> <a href="#relyingparty" id="relyingparty">Relying Party</a>
 </h1>
-<p id="rfc.section.4.3.1.4.p.1">A Role in an attestation workflow that accepts Results from a Verifier that may be used by the Relying Party to inform application specific decision making. How Results are used to inform decision making is out-of-scope for this architecture.</p>
+<p id="rfc.section.4.3.1.4.p.1">A Role in an attestation workflow that accepts Attestation Results from a Verifier that may be used by the Relying Party to inform application specific decision making. How Attestation Results are used to inform decision making is out-of-scope for this architecture.</p>
 <h1 id="rfc.section.4.3.2">
 <a href="#rfc.section.4.3.2">4.3.2.</a> <a href="#messages" id="messages">Role Messages</a>
 </h1>
@@ -826,7 +826,7 @@ ul.toc li {
 <dd style="margin-left: 8">Endorsements are intended to increase the level of confidence with respect to Evidence created by an Attester.  </dd>
 </dl>
 <h1 id="rfc.section.4.3.2.3">
-<a href="#rfc.section.4.3.2.3">4.3.2.3.</a> <a href="#results" id="results">Results</a>
+<a href="#rfc.section.4.3.2.3">4.3.2.3.</a> <a href="#results" id="results">Attestation Results</a>
 </h1>
 <p id="rfc.section.4.3.2.3.p.1">Statements about the output of an appraisal of Evidence that are created, formatted and protected by a Verifier.</p>
 <p id="rfc.section.4.3.2.3.p.2">Attestation Results provide the basis for a Relying Party to establish a level of confidence in the trustworthiness of an Attester.  Attestation Results SHOULD satisfy Relying Party expectations for freshness, identity, context, provenance, validity, relevance and veracity.  </p>
@@ -835,7 +835,7 @@ ul.toc li {
 </h1>
 <p id="rfc.section.4.4.p.1">Containers for the Roles.</p>
 <p id="rfc.section.4.4.p.2">Entities are users, organizations, devices and computing environments (e.g., devices, platforms, services, peripherals).</p>
-<p id="rfc.section.4.4.p.3">RATS Principals may implement one or more RATS Roles. Role interactions occurring within the same RATS Principal are out-of-scope.</p>
+<p id="rfc.section.4.4.p.3">RATS Principals may implement one or more RATS Roles. Massage flows occurring within the same RATS Principal are out-of-scope.</p>
 <p id="rfc.section.4.4.p.4">The methods whereby RATS Principals may be identified, discovered, authenticated, connected and trusted, though important, are out-of-scope.</p>
 <p id="rfc.section.4.4.p.5">Principal operations that apply resiliency, scaling, load balancing or replication are generally believed to be out-of-scope.</p>
 <div id="rfc.figure.4"></div>
@@ -863,10 +863,9 @@ ul.toc li {
 
 <ul>
 <li>Multiplicity - Multiple instances of RATS Principals that possess the same RATS Roles can exist.</li>
-<li>Composition - RATS Principals possessing different RATS Roles can be combined into a singleton RATS Principal possessing the union of RATS Roles. RATS Interactions between combined RATS Principals is uninteresting.</li>
+<li>Composition - RATS Principals possessing different RATS Roles can be combined into a singleton RATS Principal possessing the union of RATS Roles. Message flows  between combined RATS Principals is uninteresting.</li>
 <li>Decomposition -  A singleton RATS Principal possessing multiple RATS Roles can be divided into multiple RATS Principals.</li>
 </ul>
-<p id="rfc.section.4.4.p.8">RATS Interactions may occur between them.</p>
 <h1 id="rfc.section.5">
 <a href="#rfc.section.5">5.</a> <a href="#reference-use-cases" id="reference-use-cases">Reference use cases</a>
 </h1>
@@ -892,7 +891,7 @@ ul.toc li {
 </dl>
 <p id="rfc.section.5.1.p.3">This is a general description for which there are many specific use cases, including <a href="#I-D.fedorkow-rats-network-device-attestation" class="xref">[I-D.fedorkow-rats-network-device-attestation]</a> section 1.2, &#8220;Software Inventory&#8221;</p>
 <h1 id="rfc.section.5.2">
-<a href="#rfc.section.5.2">5.2.</a> <a href="#ietf-teep-wg-use-case" id="ietf-teep-wg-use-case">IETF TEEP WG use case</a>
+<a href="#rfc.section.5.2">5.2.</a> <a href="#ietf-teep-wg-use-case" id="ietf-teep-wg-use-case">IETF TEEP WG Use-Case</a>
 </h1>
 <p></p>
 
@@ -919,22 +918,22 @@ ul.toc li {
 <dt>Use case name:</dt>
 <dd style="margin-left: 8">Safety Critical Systems</dd>
 <dt>Who will use it:</dt>
-<dd style="margin-left: 8">Power plants and other systems that need to assert their current state, but which can not accept any inputs from the outside.  The corollory system is a black-box (such as in an aircraft), which needs to log the state of a system, but which can never initiate a handshake.</dd>
+<dd style="margin-left: 8">Power plants and other systems that need to assert their current state, but which can not accept any inputs from the outside.  The corollary system is a black-box (such as in an aircraft), which needs to log the state of a system, but which can never initiate a handshake.</dd>
 <dt>Message Flow:</dt>
 <dd style="margin-left: 8">background check</dd>
 <dt>Attester:</dt>
 <dd style="margin-left: 8">web services and other sources of status/sensor information</dd>
 <dt>Relying Party:</dt>
 <dd style="margin-left: 8">open</dd>
-<dt>Claims used as evidence:</dt>
+<dt>Claims used as Evidence:</dt>
 <dd style="margin-left: 8">the beginning and ending time as endorsed by a Time Stamp Authority, represented by a time stamp token.  The real time clock of the system itself.  A Root of Trust for time; the TPM has a relative time from startup.</dd>
 <dt>Description:</dt>
-<dd style="margin-left: 8">These requirements motivate the creation of the Time Base Unidirectional Attestation (TUDA) <a href="#I-D.birkholz-rats-tuda" class="xref">[I-D.birkholz-rats-tuda]</a>, the output of TUDA are typically a secure audit log, where freshness is determined by synchronization to an source of external time.</dd>
+<dd style="margin-left: 8">These requirements motivate the creation of the Time-Base Unidirectional Attestation (TUDA) <a href="#I-D.birkholz-rats-tuda" class="xref">[I-D.birkholz-rats-tuda]</a>, the output of TUDA is typically a secure audit log, where freshness is determined by synchronization to a trusted source of external time.</dd>
 <dt></dt>
-<dd style="margin-left: 8">The freshness is preserved in the evidence by the use of a Time Stamp Authority (TSA) which provides Time Stamp Tokens (TST).</dd>
+<dd style="margin-left: 8">The freshness is preserved in the Evidence by the use of a Time Stamp Authority (TSA) which provides Time Stamp Tokens (TST).</dd>
 </dl>
 <h1 id="rfc.section.5.4">
-<a href="#rfc.section.5.4">5.4.</a> <a href="#virtualized-multi-tenant-hosts" id="virtualized-multi-tenant-hosts">Virtualized multi-tenant hosts</a>
+<a href="#rfc.section.5.4">5.4.</a> <a href="#virtualized-multi-tenant-hosts" id="virtualized-multi-tenant-hosts">Virtualized Multi-Tenant Hosts</a>
 </h1>
 <p></p>
 
@@ -984,13 +983,13 @@ ul.toc li {
 <dd style="margin-left: 8">The Device Type Attestation is provided by a Firmware TPM performing the Verifier function, creating Attestation Results that indicate a particular model/type of device.  In TCG terms, this is called Implicit Attestation, in this case the Attested Environment is the (smartphone) Rich Execution Environment (REE) (<a href="#I-D.ietf-teep-architecture" class="xref">[I-D.ietf-teep-architecture]</a> section 2), and the Attesting Environment is within the TEE.</dd>
 </dl>
 <h1 id="rfc.section.5.6">
-<a href="#rfc.section.5.6">5.6.</a> <a href="#geographic-attestation" id="geographic-attestation">Geographic attestation</a>
+<a href="#rfc.section.5.6">5.6.</a> <a href="#geographic-evidence" id="geographic-evidence">Geographic Evidence</a>
 </h1>
 <p></p>
 
 <dl>
 <dt>Use case name:</dt>
-<dd style="margin-left: 8">Location attestation</dd>
+<dd style="margin-left: 8">Location Evidence</dd>
 <dt>Who will use it:</dt>
 <dd style="margin-left: 8">geo-fenced systems</dd>
 <dt>Message Flow:</dt>
@@ -1000,10 +999,10 @@ ul.toc li {
 <dt>Relying Party:</dt>
 <dd style="margin-left: 8">internet peers</dd>
 <dt>Description:</dt>
-<dd style="margin-left: 8">The relying party wants to know the physical location (on the planet earth) of the device.  This may be provided directly by a GPS/GLONASS/Galileo module that is incorporated into a TPM.  This may also be provided by collecting other proximity messages from other device that the relying party can form a trust relationship with.</dd>
+<dd style="margin-left: 8">The relying party wants to know the physical location (on the planet earth, using a geodetic system) of the device.  This may be provided directly by a GPS/GLONASS/BeiDou/Galileo module that is incorporated into a TPM.  This may also be provided by collecting other proximity messages from other device that the relying party can form a trust relationship with.</dd>
 </dl>
 <h1 id="rfc.section.5.7">
-<a href="#rfc.section.5.7">5.7.</a> <a href="#device-provenance-attestation" id="device-provenance-attestation">Device provenance attestation</a>
+<a href="#rfc.section.5.7">5.7.</a> <a href="#device-provenance-attestation" id="device-provenance-attestation">Device Provenance Attestation</a>
 </h1>
 <p></p>
 
@@ -1026,7 +1025,7 @@ ul.toc li {
 <h1 id="rfc.section.6">
 <a href="#rfc.section.6">6.</a> <a href="#security-considerations" id="security-considerations">Security Considerations</a>
 </h1>
-<p id="rfc.section.6.p.1">RATS Evidence, Verifiable Assertions and Results SHOULD use formats that support end-to-end integrity protection and MAY support end-to-end confidentiality protection.  Replay attack prevention MAY be supported if a Nonce Claim is included.  Nonce Claims often piggy-back other information and can convey attestation semantics that are of essence to RATS, e.g. the last four bytes of a challenge nonce could be replaced by the IPv4 address-value of the Attester in its response.</p>
+<p id="rfc.section.6.p.1">RATS Evidence, Verifiable Assertions and Attestation Results SHOULD use formats that support end-to-end integrity protection and MAY support end-to-end confidentiality protection.  Replay attack prevention MAY be supported if a Nonce Claim is included.  Nonce Claims often piggy-back other information and can convey attestation semantics that are of essence to RATS, e.g. the last four bytes of a challenge nonce could be replaced by the IPv4 address-value of the Attester in its response.</p>
 <p id="rfc.section.6.p.2">All other attacks involving RATS structures are not explicitly addressed by RATS architecture.  Additional security protections MAY be required of conveyance mechanisms.  For example, additional means of authentication, confidentiality, integrity, replay, denial of service and privacy protection of RATS payloads and Principals may be needed.</p>
 <h1 id="rfc.references">
 <a href="#rfc.references">7.</a> References</h1>
