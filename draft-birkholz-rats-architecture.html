@@ -308,7 +308,7 @@ ul.toc li {
 <link href="#rfc.section.5" rel="Chapter" title="5 Reference use cases">
 <link href="#rfc.section.5.1" rel="Chapter" title="5.1 Device Capabilities/Firmware Attestation">
 <link href="#rfc.section.5.2" rel="Chapter" title="5.2 IETF TEEP WG use case">
-<link href="#rfc.section.5.3" rel="Chapter" title="5.3 Time base unidirectional attestation">
+<link href="#rfc.section.5.3" rel="Chapter" title="5.3 Safety Critical Systems">
 <link href="#rfc.section.5.4" rel="Chapter" title="5.4 Virtualized multi-tenant hosts">
 <link href="#rfc.section.5.5" rel="Chapter" title="5.5 Cryptographic Key Attestation">
 <link href="#rfc.section.5.6" rel="Chapter" title="5.6 Geographic attestation">
@@ -456,7 +456,7 @@ ul.toc li {
 </li>
 <li>5.2.   <a href="#rfc.section.5.2">IETF TEEP WG use case</a>
 </li>
-<li>5.3.   <a href="#rfc.section.5.3">Time base unidirectional attestation</a>
+<li>5.3.   <a href="#rfc.section.5.3">Safety Critical Systems</a>
 </li>
 <li>5.4.   <a href="#rfc.section.5.4">Virtualized multi-tenant hosts</a>
 </li>
@@ -879,7 +879,7 @@ ul.toc li {
 <dt>Attester:</dt>
 <dd style="margin-left: 8">varies</dd>
 <dt>Message Flow:</dt>
-<dd style="margin-left: 8">usually passport</dd>
+<dd style="margin-left: 8">sometimes passport and sometimes background check</dd>
 <dt>Relying Party:</dt>
 <dd style="margin-left: 8">varies</dd>
 <dt>Description:</dt>
@@ -906,17 +906,17 @@ ul.toc li {
 <dd style="margin-left: 8">The &#8220;Trusted Application Manager (TAM)&#8221; server wants to verify the state of a TEE, or applications in the TEE, of a device.  The TEE attests to the TAM, which can then decide whether to install sensitive data in the TEE, or whether the TEE is out of compliance and the TAM needs to install updated code in the TEE to bring it back into compliance with the TAM&#8217;s policy.</dd>
 </dl>
 <h1 id="rfc.section.5.3">
-<a href="#rfc.section.5.3">5.3.</a> <a href="#time-base-unidirectional-attestation" id="time-base-unidirectional-attestation">Time base unidirectional attestation</a>
+<a href="#rfc.section.5.3">5.3.</a> <a href="#safety-critical-systems" id="safety-critical-systems">Safety Critical Systems</a>
 </h1>
 <p></p>
 
 <dl>
 <dt>Use case name:</dt>
-<dd style="margin-left: 8">Time base unidirectional attestation (TUDA)</dd>
+<dd style="margin-left: 8">Safety Critical Systems</dd>
 <dt>Who will use it:</dt>
-<dd style="margin-left: 8">high security facilities, with network diode: air gap-ish firewall (information leaves, but never enters).  Any network services that are RESTful can fall into this category!  Clients can GET/ the info, and it must be complete and stand-alone without interaction.  Or it may be pushed via MQTT or CoAP Observe.</dd>
+<dd style="margin-left: 8">Power plants and other systems that need to assert their current state, but which can not accept any inputs from the outside.  The corollory system is a black-box (such as in an aircraft), which needs to log the state of a system, but which can never initiate a handshake.</dd>
 <dt>Message Flow:</dt>
-<dd style="margin-left: 8">passport</dd>
+<dd style="margin-left: 8">background check</dd>
 <dt>Attester:</dt>
 <dd style="margin-left: 8">web services and other sources of status/sensor information</dd>
 <dt>Relying Party:</dt>
@@ -924,9 +924,10 @@ ul.toc li {
 <dt>Claims used as evidence:</dt>
 <dd style="margin-left: 8">the beginning and ending time as endorsed by a Time Stamp Authority, represented by a time stamp token.  The real time clock of the system itself.  A Root of Trust for time; the TPM has a relative time from startup.</dd>
 <dt>Description:</dt>
-<dd style="margin-left: 8">The output of TUDA are typically a secure audit log, where freshness is determined by synchronization to an source of external time.</dd>
+<dd style="margin-left: 8">These requirements motivate the creation of the Time Base Unidirectional Attestation (TUDA) <a href="#I-D.birkholz-rats-tuda" class="xref">[I-D.birkholz-rats-tuda]</a>, the output of TUDA are typically a secure audit log, where freshness is determined by synchronization to an source of external time.</dd>
+<dt></dt>
+<dd style="margin-left: 8">The freshness is preserved in the evidence by the use of a Time Stamp Authority (TSA) which provides Time Stamp Tokens (TST).</dd>
 </dl>
-<p id="rfc.section.5.3.p.2">The freshness is preserved in the evidence, allowing past states of the device can be determined.</p>
 <h1 id="rfc.section.5.4">
 <a href="#rfc.section.5.4">5.4.</a> <a href="#virtualized-multi-tenant-hosts" id="virtualized-multi-tenant-hosts">Virtualized multi-tenant hosts</a>
 </h1>
@@ -934,29 +935,31 @@ ul.toc li {
 
 <dl>
 <dt>Use case name:</dt>
-<dd style="margin-left: 8">Multi-tenant hosts</dd>
+<dd style="margin-left: 8">Multi-Tenant Hosts</dd>
 <dt>Who will use it:</dt>
 <dd style="margin-left: 8">Virtual machine systems</dd>
 <dt>Message Flow:</dt>
-<dd style="margin-left: 8">TBD</dd>
+<dd style="margin-left: 8">passport</dd>
 <dt>Attester:</dt>
 <dd style="margin-left: 8">virtual machine hypervisor</dd>
 <dt>Relying Party:</dt>
 <dd style="margin-left: 8">network operators</dd>
-<dt>Claims used as evidence:</dt>
-<dd style="margin-left: 8">TBD</dd>
 <dt>Description:</dt>
 <dd style="margin-left: 8">The host system will do verification as per <a href="#netattest" class="xref">Section 5.1</a>
 </dd>
+<dt></dt>
+<dd style="margin-left: 8">The tenant virtual machines will do verification as per <a href="#netattest" class="xref">Section 5.1</a>.</dd>
+<dt></dt>
+<dd style="margin-left: 8">The network operator wants to know if the system <em>as a whole</em> is free of malware, but the network operator is not allowed to know who the tenants are.</dd>
+<dt></dt>
+<dd style="margin-left: 8">This is contrasted to the Chassis + Line Cards case (To Be Defined: TBD).</dd>
+<dt></dt>
+<dd style="margin-left: 8">Multiple Line Cards, but a small attestation system on the main card can combine things together.  This is a kind of proxy.</dd>
 </dl>
-<p id="rfc.section.5.4.p.2">The tenant virtual machines will do verification as per <a href="#netattest" class="xref">Section 5.1</a>.</p>
-<p id="rfc.section.5.4.p.3">The network operator wants to know if the system <em>as a whole</em> is free of malware, but the network operator is not allowed to know who the tenants are.</p>
-<p id="rfc.section.5.4.p.4">This is contrasted to the Chassis + Line Cards case (To Be Defined: TBD).</p>
-<p id="rfc.section.5.4.p.5">Multiple Line Cards, but a small attestation system on the main card can combine things together.  This is a kind of proxy.</p>
 <h1 id="rfc.section.5.5">
 <a href="#rfc.section.5.5">5.5.</a> <a href="#cryptattest" id="cryptattest">Cryptographic Key Attestation</a>
 </h1>
-<p id="rfc.section.5.5.p.1">Cryptographic Attestion includes subcategories such as Device Type Attestation (the FIDO use case), and Key storage Attestation (the Android Keystore use case),</p>
+<p id="rfc.section.5.5.p.1">Cryptographic Attestion includes subcategories such as Device Type Attestation (the FIDO use case), and Key storage Attestation (the Android Keystore use case), and End-User Authorization.</p>
 <p></p>
 
 <dl>
@@ -965,15 +968,15 @@ ul.toc li {
 <dt>Who will use it:</dt>
 <dd style="margin-left: 8">network authentication systems</dd>
 <dt>Message Flow:</dt>
-<dd style="margin-left: 8">TBD</dd>
+<dd style="margin-left: 8">passport</dd>
 <dt>Attester:</dt>
 <dd style="margin-left: 8">device platform</dd>
 <dt>Relying Party:</dt>
 <dd style="margin-left: 8">internet peers</dd>
-<dt>Claims used as evidence:</dt>
-<dd style="margin-left: 8">TBD</dd>
 <dt>Description:</dt>
 <dd style="margin-left: 8">The relying party wants to know how secure a private key that identifies an entity is.  Unlike the network attestation, the relying party is not part of the network infrastructure, nor do they necessarily have a business relationship (such as ownership) over the end device.</dd>
+<dt></dt>
+<dd style="margin-left: 8">The Device Type Attestation is provided by a Firmware TPM performing the Verifier function, creating Attestation Results that indicate a particular model/type of device.  In TCG terms, this is called Implicit Attestation, in this case the Attested Environment is the (smartphone) Rich Execution Environment (REE) (<a href="#I-D.ietf-teep-architecture" class="xref">[I-D.ietf-teep-architecture]</a> section 2), and the Attesting Environment is within the TEE.</dd>
 </dl>
 <h1 id="rfc.section.5.6">
 <a href="#rfc.section.5.6">5.6.</a> <a href="#geographic-attestation" id="geographic-attestation">Geographic attestation</a>
@@ -991,8 +994,6 @@ ul.toc li {
 <dd style="margin-left: 8">secure GPS system(s)</dd>
 <dt>Relying Party:</dt>
 <dd style="margin-left: 8">internet peers</dd>
-<dt>Claims used as evidence:</dt>
-<dd style="margin-left: 8">TBD</dd>
 <dt>Description:</dt>
 <dd style="margin-left: 8">The relying party wants to know the physical location (on the planet earth) of the device.  This may be provided directly by a GPS/GLONASS/Galileo module that is incorporated into a TPM.  This may also be provided by collecting other proximity messages from other device that the relying party can form a trust relationship with.</dd>
 </dl>
@@ -1012,12 +1013,10 @@ ul.toc li {
 <dd style="margin-left: 8">network management station</dd>
 <dt>Relying Party:</dt>
 <dd style="margin-left: 8">a network entity</dd>
-<dt>Claims used as evidence:</dt>
-<dd style="margin-left: 8">TBD</dd>
 <dt>Description:</dt>
-<dd style="margin-left: 8">A newly manufactured device needs to be onboarded into a network where many if not all device management duties are performed by the network owner. The device owner wants to verify the device originated from a legitimate vendor. A cryptographic device identity such as an IEEE802.1AR is embedded during manufacturing and a certificate identifying the device is delivered to the owner onboarding agent. The device authenticates using its 802.1AR IDevID to prove it originated from the expected vendor.</dd>
+<dd style="margin-left: 8">A newly manufactured device needs to be onboarded into a network where many if not all device management duties are performed by the network owner.  The device owner wants to verify the device originated from a legitimate vendor.  A cryptographic device identity such as an IEEE802.1AR is embedded during manufacturing and a certificate identifying the device is delivered to the owner  onboarding agent.  The device authenticates using its 802.1AR IDevID to prove it originated from the expected vendor.</dd>
 </dl>
-<p id="rfc.section.5.7.p.2">The device chain of custody from the original device manufacturer to the new owner may also be verified as part of device provenance attestation. The chain of custody history may be collected by a cloud service or similar capability that the supply chain and owner agree to use.</p>
+<p id="rfc.section.5.7.p.2">The device chain of custody from the original device manufacturer to the new owner may also be verified as part of device provenance attestation.  The chain of custody history may be collected by a cloud service or similar capability that the supply chain and owner agree to use.</p>
 <p><a href="#I-D.fedorkow-rats-network-device-attestation" class="xref">[I-D.fedorkow-rats-network-device-attestation]</a> section 1.2 refers to this as &#8220;Provable Device Identity&#8221;, and section 2.3 details the parties.</p>
 <h1 id="rfc.section.6">
 <a href="#rfc.section.6">6.</a> <a href="#security-considerations" id="security-considerations">Security Considerations</a>
@@ -1057,6 +1056,11 @@ ul.toc li {
 <td class="reference"><b id="fido">[fido]</b></td>
 <td class="top">
 <a>FIDO Alliance, .</a>, "<a href="https://fidoalliance.org/specifications/">FIDO Specification Overview</a>", 2019.</td>
+</tr>
+<tr>
+<td class="reference"><b id="I-D.birkholz-rats-tuda">[I-D.birkholz-rats-tuda]</b></td>
+<td class="top">
+<a>Fuchs, A.</a>, <a>Birkholz, H.</a>, <a>McDonald, I.</a> and <a>C. Bormann</a>, "<a href="https://tools.ietf.org/html/draft-birkholz-rats-tuda-01">Time-Based Uni-Directional Attestation</a>", Internet-Draft draft-birkholz-rats-tuda-01, September 2019.</td>
 </tr>
 <tr>
 <td class="reference"><b id="I-D.fedorkow-rats-network-device-attestation">[I-D.fedorkow-rats-network-device-attestation]</b></td>

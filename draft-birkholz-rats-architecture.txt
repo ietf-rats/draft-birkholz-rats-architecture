@@ -94,10 +94,10 @@ Table of Contents
    5.  Reference use cases . . . . . . . . . . . . . . . . . . . . .  18
      5.1.  Device Capabilities/Firmware Attestation  . . . . . . . .  18
      5.2.  IETF TEEP WG use case . . . . . . . . . . . . . . . . . .  18
-     5.3.  Time base unidirectional attestation  . . . . . . . . . .  19
+     5.3.  Safety Critical Systems . . . . . . . . . . . . . . . . .  19
      5.4.  Virtualized multi-tenant hosts  . . . . . . . . . . . . .  19
      5.5.  Cryptographic Key Attestation . . . . . . . . . . . . . .  20
-     5.6.  Geographic attestation  . . . . . . . . . . . . . . . . .  20
+     5.6.  Geographic attestation  . . . . . . . . . . . . . . . . .  21
      5.7.  Device provenance attestation . . . . . . . . . . . . . .  21
    6.  Security Considerations . . . . . . . . . . . . . . . . . . .  22
    7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  22
@@ -975,7 +975,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
    Attester:  varies
 
-   Message Flow:  usually passport
+   Message Flow:  sometimes passport and sometimes background check
 
    Relying Party:  varies
 
@@ -1017,18 +1017,17 @@ Internet-Draft              RATS Arch & Terms              November 2019
       compliance and the TAM needs to install updated code in the TEE to
       bring it back into compliance with the TAM's policy.
 
-5.3.  Time base unidirectional attestation
+5.3.  Safety Critical Systems
 
-   Use case name:  Time base unidirectional attestation (TUDA)
+   Use case name:  Safety Critical Systems
 
-   Who will use it:  high security facilities, with network diode: air
-      gap-ish firewall (information leaves, but never enters).  Any
-      network services that are RESTful can fall into this category!
-      Clients can GET/ the info, and it must be complete and stand-alone
-      without interaction.  Or it may be pushed via MQTT or CoAP
-      Observe.
+   Who will use it:  Power plants and other systems that need to assert
+      their current state, but which can not accept any inputs from the
+      outside.  The corollory system is a black-box (such as in an
+      aircraft), which needs to log the state of a system, but which can
+      never initiate a handshake.
 
-   Message Flow:  passport
+   Message Flow:  background check
 
    Attester:  web services and other sources of status/sensor
       information
@@ -1040,24 +1039,25 @@ Internet-Draft              RATS Arch & Terms              November 2019
       real time clock of the system itself.  A Root of Trust for time;
       the TPM has a relative time from startup.
 
-   Description:  The output of TUDA are typically a secure audit log,
-      where freshness is determined by synchronization to an source of
+   Description:  These requirements motivate the creation of the Time
+      Base Unidirectional Attestation (TUDA) [I-D.birkholz-rats-tuda],
+      the output of TUDA are typically a secure audit log, where
+      freshness is determined by synchronization to an source of
       external time.
 
-   The freshness is preserved in the evidence, allowing past states of
-   the device can be determined.
+      The freshness is preserved in the evidence by the use of a Time
+      Stamp Authority (TSA) which provides Time Stamp Tokens (TST).
 
 5.4.  Virtualized multi-tenant hosts
 
-   Use case name:  Multi-tenant hosts
+   Use case name:  Multi-Tenant Hosts
 
    Who will use it:  Virtual machine systems
 
-   Message Flow:  TBD
+   Message Flow:  passport
 
    Attester:  virtual machine hypervisor
 
-   Relying Party:  network operators
 
 
 
@@ -1066,39 +1066,38 @@ Birkholz, et al.           Expires May 7, 2020                 [Page 19]
 Internet-Draft              RATS Arch & Terms              November 2019
 
 
-   Claims used as evidence:  TBD
+   Relying Party:  network operators
 
    Description:  The host system will do verification as per Section 5.1
 
-   The tenant virtual machines will do verification as per Section 5.1.
+      The tenant virtual machines will do verification as per
+      Section 5.1.
 
-   The network operator wants to know if the system _as a whole_ is free
-   of malware, but the network operator is not allowed to know who the
-   tenants are.
+      The network operator wants to know if the system _as a whole_ is
+      free of malware, but the network operator is not allowed to know
+      who the tenants are.
 
-   This is contrasted to the Chassis + Line Cards case (To Be Defined:
-   TBD).
+      This is contrasted to the Chassis + Line Cards case (To Be
+      Defined: TBD).
 
-   Multiple Line Cards, but a small attestation system on the main card
-   can combine things together.  This is a kind of proxy.
+      Multiple Line Cards, but a small attestation system on the main
+      card can combine things together.  This is a kind of proxy.
 
 5.5.  Cryptographic Key Attestation
 
    Cryptographic Attestion includes subcategories such as Device Type
    Attestation (the FIDO use case), and Key storage Attestation (the
-   Android Keystore use case),
+   Android Keystore use case), and End-User Authorization.
 
    Use case name:  Key Attestation
 
    Who will use it:  network authentication systems
 
-   Message Flow:  TBD
+   Message Flow:  passport
 
    Attester:  device platform
 
    Relying Party:  internet peers
-
-   Claims used as evidence:  TBD
 
    Description:  The relying party wants to know how secure a private
       key that identifies an entity is.  Unlike the network attestation,
@@ -1106,13 +1105,14 @@ Internet-Draft              RATS Arch & Terms              November 2019
       do they necessarily have a business relationship (such as
       ownership) over the end device.
 
-5.6.  Geographic attestation
+      The Device Type Attestation is provided by a Firmware TPM
+      performing the Verifier function, creating Attestation Results
+      that indicate a particular model/type of device.  In TCG terms,
+      this is called Implicit Attestation, in this case the Attested
+      Environment is the (smartphone) Rich Execution Environment (REE)
+      ([I-D.ietf-teep-architecture] section 2), and the Attesting
+      Environment is within the TEE.
 
-   Use case name:  Location attestation
-
-   Who will use it:  geo-fenced systems
-
-   Message Flow:  passport (probably)
 
 
 
@@ -1122,11 +1122,17 @@ Birkholz, et al.           Expires May 7, 2020                 [Page 20]
 Internet-Draft              RATS Arch & Terms              November 2019
 
 
+5.6.  Geographic attestation
+
+   Use case name:  Location attestation
+
+   Who will use it:  geo-fenced systems
+
+   Message Flow:  passport (probably)
+
    Attester:  secure GPS system(s)
 
    Relying Party:  internet peers
-
-   Claims used as evidence:  TBD
 
    Description:  The relying party wants to know the physical location
       (on the planet earth) of the device.  This may be provided
@@ -1147,8 +1153,6 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
    Relying Party:  a network entity
 
-   Claims used as evidence:  TBD
-
    Description:  A newly manufactured device needs to be onboarded into
       a network where many if not all device management duties are
       performed by the network owner.  The device owner wants to verify
@@ -1165,10 +1169,6 @@ Internet-Draft              RATS Arch & Terms              November 2019
    cloud service or similar capability that the supply chain and owner
    agree to use.
 
-   [I-D.fedorkow-rats-network-device-attestation] section 1.2 refers to
-   this as "Provable Device Identity", and section 2.3 details the
-   parties.
-
 
 
 
@@ -1177,6 +1177,10 @@ Birkholz, et al.           Expires May 7, 2020                 [Page 21]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
+
+   [I-D.fedorkow-rats-network-device-attestation] section 1.2 refers to
+   this as "Provable Device Identity", and section 2.3 details the
+   parties.
 
 6.  Security Considerations
 
@@ -1221,10 +1225,6 @@ Internet-Draft              RATS Arch & Terms              November 2019
               protocols", IEEE Transactions on Information Theory Vol.
               29, pp. 198-208, DOI 10.1109/tit.1983.1056650, March 1983.
 
-   [fido]     FIDO Alliance, ., "FIDO Specification Overview", 2019,
-              <https://fidoalliance.org/specifications/>.
-
-
 
 
 
@@ -1233,6 +1233,14 @@ Birkholz, et al.           Expires May 7, 2020                 [Page 22]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
+
+   [fido]     FIDO Alliance, ., "FIDO Specification Overview", 2019,
+              <https://fidoalliance.org/specifications/>.
+
+   [I-D.birkholz-rats-tuda]
+              Fuchs, A., Birkholz, H., McDonald, I., and C. Bormann,
+              "Time-Based Uni-Directional Attestation", draft-birkholz-
+              rats-tuda-01 (work in progress), September 2019.
 
    [I-D.fedorkow-rats-network-device-attestation]
               Fedorkow, G. and J. Fitzgerald-McKay, "Network Device
@@ -1274,14 +1282,6 @@ Internet-Draft              RATS Arch & Terms              November 2019
               FYI 36, RFC 4949, DOI 10.17487/RFC4949, August 2007,
               <https://www.rfc-editor.org/info/rfc4949>.
 
-   [RFC5209]  Sangster, P., Khosravi, H., Mani, M., Narayan, K., and J.
-              Tardo, "Network Endpoint Assessment (NEA): Overview and
-              Requirements", RFC 5209, DOI 10.17487/RFC5209, June 2008,
-              <https://www.rfc-editor.org/info/rfc5209>.
-
-
-
-
 
 
 
@@ -1289,6 +1289,11 @@ Birkholz, et al.           Expires May 7, 2020                 [Page 23]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
+
+   [RFC5209]  Sangster, P., Khosravi, H., Mani, M., Narayan, K., and J.
+              Tardo, "Network Endpoint Assessment (NEA): Overview and
+              Requirements", RFC 5209, DOI 10.17487/RFC5209, June 2008,
+              <https://www.rfc-editor.org/info/rfc5209>.
 
 Authors' Addresses
 
@@ -1329,11 +1334,6 @@ Authors' Addresses
    Canada
 
    Email: mcr+ietf@sandelman.ca
-
-
-
-
-
 
 
 
