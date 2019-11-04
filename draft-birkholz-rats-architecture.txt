@@ -1181,7 +1181,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 5.4.  Principals (Entities?) - Containers for the Roles
 
    [The authors are unhappy with the term Principal, and have been
-   looking for something else.  JOSE uses the term Principal]
+   looking for something else.  JOSE/JWT uses the term Principal]
 
    Principals are Containers for the Roles.
 
