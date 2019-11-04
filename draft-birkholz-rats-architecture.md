@@ -287,7 +287,7 @@ Claim:
 
 : A statement about the construction, composition, validation or behavior of an Entity that affects trustworthiness. Evidence, Reference Values and Attestation Results are expressions that consists of one or more Claims.
 <!--
-Statements about trustworthiness characteristics of an Attested Computing Environment. The veracity of a Claim is determined by the reputation of the entity making the Claim. Reputation may involve identifying, authenticating and tracking transactions associated with an entity. RATS may be used to establish entity reputation, but not exclusively. Other reputation mechanisms are out-of-scope.
+Statements about trustworthiness characteristics of an Attested Environment. The veracity of a Claim is determined by the reputation of the entity making the Claim. Reputation may involve identifying, authenticating and tracking transactions associated with an entity. RATS may be used to establish entity reputation, but not exclusively. Other reputation mechanisms are out-of-scope.
 -->
 
 Conveyance:
@@ -673,11 +673,11 @@ RATS architecture has the following goals:
 
 Specifications developed by the RATS working group apply the following principles:
 
-* Freshness - replay of previously asserted Claims about an Attested Computing Environment can be detected.
-* Identity - the Attesting Computing Environment is identifiable (non-anonymous).
-* Context - the Attested Computing Environment is well-defined (unambiguous).
-* Provenance - the origin of Claims with respect to the Attested and Attesting Computing Environments are known.
-* Validity - the expected lifetime of Claims about an Attested Computing Environment is known.
+* Freshness - replay of previously asserted Claims about an Attested Environment can be detected.
+* Identity - the Attesting Environment is identifiable (non-anonymous).
+* Context - the Attested Environment is well-defined (unambiguous).
+* Provenance - the origin of Claims with respect to the Attested and Attesting Environments are known.
+* Validity - the expected lifetime of Claims about an Attested Environment is known.
 * Veracity - the believability (level of confidence) of Claims is based on verifiable proofs.
 
 ## Attestation Workflow
@@ -711,7 +711,7 @@ The creator of Evidence. The Role that designates an Entity to be assessed with 
 The Asserter role
 In reality there are likely to be many Entities that implement the Asserter and many instances of Reference Value messages.
 <!--
-An Attestation Function that generates reference Claims about both the Attesting Computing Environment and the Attested Computing Environment.
+An Attestation Function that generates reference Claims about both the Attesting Environment and the Attested Environment.
 The manufacturing and development processes are presumed to be trustworthy processes.
 In other words the Asserter is presumed, by a Verifier, to produce valid Claims.
 The function collects, formats and protects (e.g. signs) valid Claims known as Endorsements and Known-Good-Values.
@@ -770,8 +770,8 @@ NMS What about calling them "Reference Digests"? This is more to the point of wh
 
 Known-Good-Values:
 
-: Claims about the Attested Computing Environment. Typically, KGV Claims are message digests of firmware, software or configuration data supplied by various vendors.
-If an Attesting Computing Environment implements cryptography, they include Claims about key material.
+: Claims about the Attested Environment. Typically, Known-Good-Value (KGV) Claims are message digests of firmware, software or configuration data supplied by various vendors.
+If an Attesting Environment implements cryptography, they include Claims about key material.
 
 : Like Claims, Known-Good-Values SHOULD satisfy a Verifier's expectations for freshness, identity, context, provenance, validity, relevance and veracity.
 Known-Good-Values are reference Claims that are - like Evidence - well formatted and protected (e.g. signed).
@@ -781,7 +781,7 @@ A Message type created and distributed by the Asserter Role and consumed by the 
 
 Endorsements:
 
-: Claims about immutable and implicit characteristics of the Attesting Computing Environment. Typically, endorsement Claims are created by manufacturing or supply chain entities.
+: Claims about immutable and implicit characteristics of the Attesting Environment. Typically, endorsement Claims are created by manufacturing or supply chain entities.
 
 : Endorsements are intended to increase the level of confidence with respect to Evidence created by an Attester.
 <!--
