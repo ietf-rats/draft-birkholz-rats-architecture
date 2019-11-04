@@ -157,11 +157,11 @@ A number of niche solutions have emerged that provide for use-case specific remo
 
 ## Overview of Document
 
-The architecture described in this document (along with the accompanying solution and reference documents) enables the use of common formats for communicating Claims about an Attester to a Relying Party. [FIXME Attester? Flows? To what end?]
+The architecture described in this document (along with the accompanying solution and reference documents) enables the use of common formats for communicating Claims about an Attester to a Relying Party. \[FIXME Attester? Flows? To what end?\]
 
-Existing transports were not designed to carry attestation Claims.  It is therefore necessary to design serializations of Claims that fit into a variety of transports, for instance: X.509 certificates, TLS negotiations, YANG modules or EtherNet/IP.  There are also new, greenfield uses for remote attestation. Transport and serialization of these can be done without retrofitting. This is described in [FIXME what's the ref? The meaning is in the ref... style issue].
+Existing transports were not designed to carry attestation Claims.  It is therefore necessary to design serializations of Claims that fit into a variety of transports, for instance: X.509 certificates, TLS negotiations, YANG modules or EtherNet/IP.  There are also new, greenfield uses for remote attestation. Transport and serialization of these can be done without retrofitting. This is described in \[FIXME what's the ref? The meaning is in the ref... style issue].
 
-While it is not anticipated that the existing niche solutions described in the use cases section [FIXME shouldn't that be here by now?] will exchange claims directly, the use of a common format enables common code.
+While it is not anticipated that the existing niche solutions described in the use cases section \[FIXME shouldn't that be here by now?] will exchange claims directly, the use of a common format enables common code.
 As some of the code needs to be in intentionally hard to modify trusted modules, the use of a common formats and transfer protocols significantly reduces the cost of adoption to all parties.
 This commonality also significantly reduces the incidence of critical bugs.
 
@@ -172,7 +172,7 @@ This introduction gives an overview of the message flows and roles involved.
 Following this, is a terminology section that is referenced normatively by other documents and is a key part of this document.
 There is then a section on use cases and how they leverage the roles and workflows described.
 
-In this document, terms defined within this document are consistently Capitalized [work in progress. please raise issues, if there are Blatant inconsistencies].
+In this document, terms defined within this document are consistently Capitalized \[work in progress. please raise issues, if there are Blatant inconsistencies].
 
 Current verticals that use remote attestation include:
 * The Trusted Computing Group "Network Device Attestation Workflow" {{I-D.fedorkow-rats-network-device-attestation}}
@@ -346,7 +346,7 @@ being trustworthy to being untrustworthy.
 
 The RATS architecture provides a framework for anticipating when a relevant change with respect to a trustworthiness attribute occurs, what exactly changed and how relevant it is. The RATS architecture also creates a context for enabling an appropriate response by applications, system software and protocol endpoints when changes to trustworthiness attributes do occur.
 
-[FIXME suddenly - scope]
+\[FIXME suddenly - scope]
 The scope of this document is based on message flows and corresponding Roles based on the use cases defined in {{-rats-usecases}}.
 Protocol specifications for message flows are defined in separate documents.
 
