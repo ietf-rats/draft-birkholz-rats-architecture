@@ -107,6 +107,7 @@ informative:
   I-D.richardson-rats-usecases: rats-usecases
   I-D.fedorkow-rats-network-device-attestation:
   I-D.birkholz-rats-tuda: tuda
+  I-D.ietf-rats-eat: EAT
   keystore:
     target: "https://developer.android.com/training/articles/keystore"
     title: "Android Keystore System"
@@ -159,9 +160,10 @@ A number of niche solutions have emerged that provide for use-case specific remo
 
 The architecture described in this document (along with the accompanying solution and reference documents) enables the use of common formats for communicating Claims about an Attester to a Relying Party. \[FIXME Attester? Flows? To what end?\]
 
-Existing transports were not designed to carry attestation Claims.  It is therefore necessary to design serializations of Claims that fit into a variety of transports, for instance: X.509 certificates, TLS negotiations, YANG modules or EtherNet/IP.  There are also new, greenfield uses for remote attestation. Transport and serialization of these can be done without retrofitting. This is described in \[FIXME what's the ref? The meaning is in the ref... style issue].
+Existing transports were not designed to carry attestation Claims.  It is therefore necessary to design serializations of Claims that fit into a variety of transports, for instance: X.509 certificates, TLS negotiations, YANG modules or EtherNet/IP.  There are also new, greenfield uses for remote attestation. Transport and serialization of these can be done without retrofitting.
+This is (will be) described in \[INSERT reference to adopted document on transport].
 
-While it is not anticipated that the existing niche solutions described in the use cases section \[FIXME shouldn't that be here by now?] will exchange claims directly, the use of a common format enables common code.
+While it is not anticipated that the existing niche solutions described in the use cases section {{usecases}} will exchange claims directly, the use of a common format enables common code.
 As some of the code needs to be in intentionally hard to modify trusted modules, the use of a common formats and transfer protocols significantly reduces the cost of adoption to all parties.
 This commonality also significantly reduces the incidence of critical bugs.
 
@@ -175,6 +177,7 @@ There is then a section on use cases and how they leverage the roles and workflo
 In this document, terms defined within this document are consistently Capitalized \[work in progress. please raise issues, if there are Blatant inconsistencies].
 
 Current verticals that use remote attestation include:
+
 * The Trusted Computing Group "Network Device Attestation Workflow" {{I-D.fedorkow-rats-network-device-attestation}}
 * Android Keystore {{keystore}}
 * Fast Identity Online (FIDO) Alliance attestation {{fido}}
@@ -190,19 +193,22 @@ Things to be mentioned (XXX):
 
 ## RATS in a Nutshell
 
-* Remote Attestation message flows typically convey Claims that contain the trustworthiness properties associated with an Attested Environment (Evidence).
-* A corresponding provisioning message flows conveys Reference trustworthiness claims that can be compared with attestation Evidence. Reference Values typically consist of firmware or software digests and details about what makes the attesting module a trusted source of Evidence.
-* Relying Parties are performing tasks such as managing a resource, controlling access, and/or managing risk. Attestation Results helps Relying Parties determine levels of trust.
+1. Remote Attestation message flows typically convey Claims that contain the trustworthiness properties associated with an Attested Environment (Evidence).
+2. A corresponding provisioning message flows conveys Reference trustworthiness claims that can be compared with attestation Evidence. Reference Values typically consist of firmware or software digests and details about what makes the attesting module a trusted source of Evidence.
+3. Relying Parties are performing tasks such as managing a resource, controlling access, and/or managing risk. Attestation Results helps Relying Parties determine levels of trust.
 
 ## Remote Attestation Workflow
+
+The logical information flow is from Attester to Verifier to Relying Party.
+There are variations presented below on how this integrates into actual protocols.
 
 {:wholeflow: artwork-align="center"}
 ~~~~ WHOLEFLOW
 {::include wholeflow.txt}
 ~~~~
-{:wholeflow #wholeflow title="RATS Protocol Flows"}
+{:wholeflow #wholeflow title="RATS Workflow"}
 
-In the RATS architecture shown above, specific content items (payload conveyed in message flows) are identified:
+In the architecture shown above, specific content items (payload conveyed in message flows) are identified:
 
 * Evidence is as set of believable Claims about distinguishable Environments made by an Attester.
 * Known-Good-Values are reference Claims used to appraise Evidence by an Verifier.
@@ -211,13 +217,15 @@ In the RATS architecture shown above, specific content items (payload conveyed i
 
 Attestation Results are the output of RATS.
 
-Assessment of Attestation Results is be multi-faceted and out-of-scope for the RATS architecture.
+Assessment of Attestation Results is be multi-faceted and out-of-scope for the  architecture.
 
 If appropriate Endorsements about the Attester are available, Known-Good-Values about the Attester are available, and if the Attester is capable of creating believable Evidence - then the Verifier is able to create Attestation Results that enable Relying Parties to establish a level of confidence in the trustworthiness of the Attester.
 
 The Asserter role and the format for Known-Good-Values and Endorsements are not subject to standardization at this time.  The current verticals already include provisions for encoding and/or distributing these objects.
 
-## Message Flows
+## Message Flows {#messageflows}
+
+Two distinct flows have been identified for passage of Evidence and production of Attestation Results.  It is possible that there are additional situations which are not captured by these two flows.
 
 {: #passport}
 ### Passport Model
@@ -318,9 +326,10 @@ Verifier:
 
 : See {{verifier}}.
 
-# Reference use cases
+# Reference use cases {#usecases}
 
-
+This section provides an overview of a number of distinct use cases that benefit from a standardized claim format.
+In addition to outlining the user, the specific message flow is identified from among the flows detailed in {{messageflows}}.
 
 ## Device Capabilities/Firmware Attestation {#netattest}
 
@@ -588,7 +597,7 @@ being trustworthy to being untrustworthy.
 
 : An untrustworthy or compromised Environment must never be able to create valid Evidence expressing the intactness of an Attester.
 
-The RATS architecture provides a framework for anticipating when a relevant change with respect to a trustworthiness attribute occurs, what exactly changed and how relevant it is. The RATS architecture also creates a context for enabling an appropriate response by applications, system software and protocol endpoints when changes to trustworthiness attributes do occur.
+The architecture provides a framework for anticipating when a relevant change with respect to a trustworthiness attribute occurs, what exactly changed and how relevant it is. The architecture also creates a context for enabling an appropriate response by applications, system software and protocol endpoints when changes to trustworthiness attributes do occur.
 
 \[FIXME suddenly - scope]
 The scope of this document is based on message flows and corresponding Roles based on the use cases defined in {{-rats-usecases}}.
@@ -638,7 +647,11 @@ The appraisals compare Evidence with expected Known-Good-Values called obtained 
 There can be multiple forms of appraisal (e.g., software integrity verification, device composition and configuration verification, device identity and provenance verification).
 Attestation Results are the output of appraisals. Attestation Results are signed and conveyed to Relying Parties. Attestation Results provide the basis by which the Relying Party may determine a level of confidence to place in the application data or operations that follow.
 
-RATS architecture defines attestation Roles (i.e., Attester, Verifier, Asserter and Relying Party), the messages they exchange, their structure and the various legal ways in which Roles may be hosted, combined and divided (see Principals below). RATS messages are defined by an information model that defines Claims, environment and protocol semantics. Information Model representations are realized as data structure and conveyance protocol binding specifications.
+The architecture defines attestation Roles: Attester, Verifier, Asserter and Relying Party.
+Roles exchange messages, but their structure is not defined in this document.
+The detailed definition of the messages is in an appropriate document, such as {{-EAT}} or other protocols to be defined.
+Roles can be combined in various ways into Principals, depending upon the needs of the use case.
+Information Model representations are realized as data structure and conveyance protocol specifications.
 
 ## Interoperability between RATS
 
@@ -788,15 +801,17 @@ Attestation Results SHOULD satisfy Relying Party expectations for freshness, ide
 A Message type created by the Verifier Role and ultimately consumed by Relying Parties.
 -->
 
-## "Entities" -- Containers for the Roles
+## Principals (Entities?) -- Containers for the Roles
 
-Containers for the Roles.
+\[The authors have are happy with the term Principal, and have been looking for something else.  JOSE uses the term Principal]
 
-Entities are users, organizations, devices and computing environments (e.g., devices, platforms, services, peripherals).
+Principals are Containers for the Roles.
 
-RATS Principals may implement one or more RATS Roles. Massage flows occurring within the same RATS Principal are out-of-scope.
+Principals are users, organizations, devices and computing environments (e.g., devices, platforms, services, peripherals).
 
-The methods whereby RATS Principals may be identified, discovered, authenticated, connected and trusted, though important, are out-of-scope.
+Principals may implement one or more Roles. Massage flows occurring within the same Principal are out-of-scope.
+
+The methods whereby Principals may be identified, discovered, authenticated, connected and trusted, though important, are out-of-scope.
 
 Principal operations that apply resiliency, scaling, load balancing or replication are generally believed to be out-of-scope.
 
@@ -819,20 +834,20 @@ Principal operations that apply resiliency, scaling, load balancing or replicati
 |                  |   |                  |
 +------------------+   +------------------+
 ~~~~
-{:rats #Principals title="RATS Principals-Role Composition"}
+{:rats #Principals title="Principals-Role Composition"}
 
-RATS Principals have the following properties:
+Principals have the following properties:
 
-* Multiplicity - Multiple instances of RATS Principals that possess the same RATS Roles can exist.
-* Composition - RATS Principals possessing different RATS Roles can be combined into a singleton RATS Principal possessing the union of RATS Roles. Message flows  between combined RATS Principals is uninteresting.
-* Decomposition -  A singleton RATS Principal possessing multiple RATS Roles can be divided into multiple RATS Principals.
+* Multiplicity - Multiple instances of Principals that possess the same Roles can exist.
+* Composition - Principals possessing different Roles can be combined into a singleton Principal possessing the union of Roles. Message flows between combined Principals is uninteresting.
+* Decomposition -  A singleton Principal possessing multiple Roles can be divided into multiple Principals.
 
 # Security Considerations
 
-RATS Evidence, Verifiable Assertions and Attestation Results SHOULD use formats that support end-to-end integrity protection and MAY support end-to-end confidentiality protection.
+Evidence, Verifiable Assertions and Attestation Results SHOULD use formats that support end-to-end integrity protection and MAY support end-to-end confidentiality protection.
 Replay attack prevention MAY be supported if a Nonce Claim is included.
 Nonce Claims often piggy-back other information and can convey attestation semantics that are of essence to RATS, e.g. the last four bytes of a challenge nonce could be replaced by the IPv4 address-value of the Attester in its response.
 
-All other attacks involving RATS structures are not explicitly addressed by RATS architecture.
+All other attacks involving RATS structures are not explicitly addressed by the architecture.
 Additional security protections MAY be required of conveyance mechanisms.
 For example, additional means of authentication, confidentiality, integrity, replay, denial of service and privacy protection of RATS payloads and Principals may be needed.
