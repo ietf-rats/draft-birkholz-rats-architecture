@@ -708,18 +708,9 @@ The creator of Evidence. The Role that designates an Entity to be assessed with 
 
 #### Asserter {#asserter}
 
-The Asserter role
-In reality there are likely to be many Entities that implement the Asserter and many instances of Reference Value messages.
-<!--
-An Attestation Function that generates reference Claims about both the Attesting Environment and the Attested Environment.
-The manufacturing and development processes are presumed to be trustworthy processes.
-In other words the Asserter is presumed, by a Verifier, to produce valid Claims.
-The function collects, formats and protects (e.g. signs) valid Claims known as Endorsements and Known-Good-Values.
-It presents provable Claims to a Verifier using a conveyance mechanism or protocol.
--->
-<!--
-An Asserter is the origin of Endorsements and Known-Good-Values. The Role that designates an Entity that facilitates attestation provision workflows and potentially provides trust anchors.
--->
+The Asserter role is out of scope.
+The mechanism by which an Asserter communicates Known-Good-Values to a Verifier is also not subject to standardization.
+Users of the RATS architecture are assumed to have pre-existing mechanisms.
 
 #### Verifier {#verifier}
 
