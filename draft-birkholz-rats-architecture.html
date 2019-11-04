@@ -313,11 +313,12 @@ ul.toc li {
 <link href="#rfc.section.5.3.1" rel="Chapter" title="5.3.1 Roles">
 <link href="#rfc.section.5.3.2" rel="Chapter" title="5.3.2 Role Messages">
 <link href="#rfc.section.5.4" rel="Chapter" title="5.4 Principals (Entities?) &#8211; Containers for the Roles">
-<link href="#rfc.section.6" rel="Chapter" title="6 Security Considerations">
-<link href="#rfc.section.7" rel="Chapter" title="7 Acknowledgements">
-<link href="#rfc.references" rel="Chapter" title="8 References">
-<link href="#rfc.references.1" rel="Chapter" title="8.1 Normative References">
-<link href="#rfc.references.2" rel="Chapter" title="8.2 Informative References">
+<link href="#rfc.section.6" rel="Chapter" title="6 Privacy Considerations">
+<link href="#rfc.section.7" rel="Chapter" title="7 Security Considerations">
+<link href="#rfc.section.8" rel="Chapter" title="8 Acknowledgements">
+<link href="#rfc.references" rel="Chapter" title="9 References">
+<link href="#rfc.references.1" rel="Chapter" title="9.1 Normative References">
+<link href="#rfc.references.2" rel="Chapter" title="9.2 Informative References">
 <link href="#rfc.authors" rel="Chapter">
 
 
@@ -467,15 +468,17 @@ ul.toc li {
 </li>
 </ul><li>5.4.   <a href="#rfc.section.5.4">Principals (Entities?) &#8211; Containers for the Roles</a>
 </li>
-</ul><li>6.   <a href="#rfc.section.6">Security Considerations</a>
+</ul><li>6.   <a href="#rfc.section.6">Privacy Considerations</a>
 </li>
-<li>7.   <a href="#rfc.section.7">Acknowledgements</a>
+<li>7.   <a href="#rfc.section.7">Security Considerations</a>
 </li>
-<li>8.   <a href="#rfc.references">References</a>
+<li>8.   <a href="#rfc.section.8">Acknowledgements</a>
 </li>
-<ul><li>8.1.   <a href="#rfc.references.1">Normative References</a>
+<li>9.   <a href="#rfc.references">References</a>
 </li>
-<li>8.2.   <a href="#rfc.references.2">Informative References</a>
+<ul><li>9.1.   <a href="#rfc.references.1">Normative References</a>
+</li>
+<li>9.2.   <a href="#rfc.references.2">Informative References</a>
 </li>
 </ul><li><a href="#rfc.authors">Authors' Addresses</a>
 </li>
@@ -1042,18 +1045,26 @@ ul.toc li {
 <li>Decomposition -  A singleton Principal possessing multiple Roles can be divided into multiple Principals.</li>
 </ul>
 <h1 id="rfc.section.6">
-<a href="#rfc.section.6">6.</a> <a href="#security-considerations" id="security-considerations">Security Considerations</a>
+<a href="#rfc.section.6">6.</a> <a href="#privacy-considerations" id="privacy-considerations">Privacy Considerations</a>
 </h1>
-<p id="rfc.section.6.p.1">Evidence, Verifiable Assertions and Attestation Results SHOULD use formats that support end-to-end integrity protection and MAY support end-to-end confidentiality protection.  Replay attack prevention MAY be supported if a Nonce Claim is included.  Nonce Claims often piggy-back other information and can convey attestation semantics that are of essence to RATS, e.g. the last four bytes of a challenge nonce could be replaced by the IPv4 address-value of the Attester in its response.</p>
-<p id="rfc.section.6.p.2">All other attacks involving RATS structures are not explicitly addressed by the architecture.  Additional security protections MAY be required of conveyance mechanisms.  For example, additional means of authentication, confidentiality, integrity, replay, denial of service and privacy protection of RATS payloads and Principals may be needed.</p>
+<p id="rfc.section.6.p.1">The conveyance of Evidence and the resulting Attestation Results reveal a great deal of information about the internal state of a device.  In many cases the whole point of the Attestation process is to provided reliable evidence about the type of the device and the firmware that the device is running.  This information is particularly interesting to many attackers: knowing that a device is running a weak version of a the firmware provides a way to aim attacks better.</p>
+<p id="rfc.section.6.p.2">Just knowing the existence of a device is itself a disclosure.</p>
+<p id="rfc.section.6.p.3">Conveyance protocols must detail what kinds of information is disclosed, and to whom it is exposed.</p>
 <h1 id="rfc.section.7">
-<a href="#rfc.section.7">7.</a> <a href="#acknowledgements" id="acknowledgements">Acknowledgements</a>
+<a href="#rfc.section.7">7.</a> <a href="#security-considerations" id="security-considerations">Security Considerations</a>
 </h1>
-<p id="rfc.section.7.p.1">Dave Thaler created the concepts of &#8220;Passport&#8221; and &#8220;Background Check&#8221;.</p>
+<p id="rfc.section.7.p.1">Evidence, Verifiable Assertions and Attestation Results SHOULD use formats that support end-to-end integrity protection and MAY support end-to-end confidentiality protection.</p>
+<p id="rfc.section.7.p.2">Replay attacks are a concern that protocol implementations MUST deal with.  This is typically done via a Nonce Claim, but the details belong to the protocol.</p>
+<p id="rfc.section.7.p.3">All other attacks involving RATS structures are not explicitly addressed by the architecture.</p>
+<p id="rfc.section.7.p.4">Additional security protections MAY be required of conveyance mechanisms.  For example, additional means of authentication, confidentiality, integrity, replay, denial of service and privacy protection of RATS payloads and Principals may be needed.</p>
+<h1 id="rfc.section.8">
+<a href="#rfc.section.8">8.</a> <a href="#acknowledgements" id="acknowledgements">Acknowledgements</a>
+</h1>
+<p id="rfc.section.8.p.1">Dave Thaler created the concepts of &#8220;Passport&#8221; and &#8220;Background Check&#8221;.</p>
 <h1 id="rfc.references">
-<a href="#rfc.references">8.</a> References</h1>
+<a href="#rfc.references">9.</a> References</h1>
 <h1 id="rfc.references.1">
-<a href="#rfc.references.1">8.1.</a> Normative References</h1>
+<a href="#rfc.references.1">9.1.</a> Normative References</h1>
 <table><tbody>
 <tr>
 <td class="reference"><b id="RFC2119">[RFC2119]</b></td>
@@ -1067,7 +1078,7 @@ ul.toc li {
 </tr>
 </tbody></table>
 <h1 id="rfc.references.2">
-<a href="#rfc.references.2">8.2.</a> Informative References</h1>
+<a href="#rfc.references.2">9.2.</a> Informative References</h1>
 <table><tbody>
 <tr>
 <td class="reference"><b id="ABLP">[ABLP]</b></td>

@@ -99,13 +99,13 @@ Table of Contents
        5.3.1.  Roles . . . . . . . . . . . . . . . . . . . . . . . .  19
        5.3.2.  Role Messages . . . . . . . . . . . . . . . . . . . .  20
      5.4.  Principals (Entities?) - Containers for the Roles . . . .  22
-   6.  Security Considerations . . . . . . . . . . . . . . . . . . .  23
-   7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  23
-   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  23
-     8.1.  Normative References  . . . . . . . . . . . . . . . . . .  23
-     8.2.  Informative References  . . . . . . . . . . . . . . . . .  23
+   6.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .  23
+   7.  Security Considerations . . . . . . . . . . . . . . . . . . .  23
+   8.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  23
+   9.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  23
+     9.1.  Normative References  . . . . . . . . . . . . . . . . . .  24
+     9.2.  Informative References  . . . . . . . . . . . . . . . . .  24
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  25
-
 
 
 
@@ -1237,48 +1237,48 @@ Internet-Draft              RATS Arch & Terms              November 2019
    o  Decomposition - A singleton Principal possessing multiple Roles
       can be divided into multiple Principals.
 
-6.  Security Considerations
+6.  Privacy Considerations
+
+   The conveyance of Evidence and the resulting Attestation Results
+   reveal a great deal of information about the internal state of a
+   device.  In many cases the whole point of the Attestation process is
+   to provided reliable evidence about the type of the device and the
+   firmware that the device is running.  This information is
+   particularly interesting to many attackers: knowing that a device is
+   running a weak version of a the firmware provides a way to aim
+   attacks better.
+
+   Just knowing the existence of a device is itself a disclosure.
+
+   Conveyance protocols must detail what kinds of information is
+   disclosed, and to whom it is exposed.
+
+7.  Security Considerations
 
    Evidence, Verifiable Assertions and Attestation Results SHOULD use
    formats that support end-to-end integrity protection and MAY support
-   end-to-end confidentiality protection.  Replay attack prevention MAY
-   be supported if a Nonce Claim is included.  Nonce Claims often piggy-
-   back other information and can convey attestation semantics that are
-   of essence to RATS, e.g. the last four bytes of a challenge nonce
-   could be replaced by the IPv4 address-value of the Attester in its
-   response.
+   end-to-end confidentiality protection.
+
+   Replay attacks are a concern that protocol implementations MUST deal
+   with.  This is typically done via a Nonce Claim, but the details
+   belong to the protocol.
 
    All other attacks involving RATS structures are not explicitly
-   addressed by the architecture.  Additional security protections MAY
-   be required of conveyance mechanisms.  For example, additional means
-   of authentication, confidentiality, integrity, replay, denial of
-   service and privacy protection of RATS payloads and Principals may be
-   needed.
+   addressed by the architecture.
 
-7.  Acknowledgements
+   Additional security protections MAY be required of conveyance
+   mechanisms.  For example, additional means of authentication,
+   confidentiality, integrity, replay, denial of service and privacy
+   protection of RATS payloads and Principals may be needed.
+
+8.  Acknowledgements
 
    Dave Thaler created the concepts of "Passport" and "Background
    Check".
 
-8.  References
+9.  References
 
-8.1.  Normative References
 
-   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", BCP 14, RFC 2119,
-              DOI 10.17487/RFC2119, March 1997,
-              <https://www.rfc-editor.org/info/rfc2119>.
-
-   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
-              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
-              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
-
-8.2.  Informative References
-
-   [ABLP]     Abadi, M., Burrows, M., Lampson, B., and G. Plotkin, "A
-              Calculus for Access Control in Distributed Systems",
-              Springer Annual International Cryptology Conference,
-              page 1-23, DOI 10.1.1.36.691, 1991.
 
 
 
@@ -1289,6 +1289,24 @@ Birkholz, et al.           Expires May 7, 2020                 [Page 23]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
+
+9.1.  Normative References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+
+9.2.  Informative References
+
+   [ABLP]     Abadi, M., Burrows, M., Lampson, B., and G. Plotkin, "A
+              Calculus for Access Control in Distributed Systems",
+              Springer Annual International Cryptology Conference,
+              page 1-23, DOI 10.1.1.36.691, 1991.
 
    [DOLEV-YAO]
               Dolev, D. and A. Yao, "On the security of public key
@@ -1319,6 +1337,15 @@ Internet-Draft              RATS Arch & Terms              November 2019
               Architecture", draft-ietf-teep-architecture-03 (work in
               progress), July 2019.
 
+
+
+
+
+Birkholz, et al.           Expires May 7, 2020                 [Page 24]
+
+Internet-Draft              RATS Arch & Terms              November 2019
+
+
    [I-D.richardson-rats-usecases]
               Richardson, M., Wallace, C., and W. Pan, "Use cases for
               Remote Attestation common encodings", draft-richardson-
@@ -1338,13 +1365,6 @@ Internet-Draft              RATS Arch & Terms              November 2019
               Lampson, B., "Practical Principles for Computer Security",
               IOSPress Proceedings of Software System Reliability and
               Security, page 151-195, DOI 10.1.1.63.5360, 2007.
-
-
-
-Birkholz, et al.           Expires May 7, 2020                 [Page 24]
-
-Internet-Draft              RATS Arch & Terms              November 2019
-
 
    [RFC3552]  Rescorla, E. and B. Korver, "Guidelines for Writing RFC
               Text on Security Considerations", BCP 72, RFC 3552,
@@ -1371,6 +1391,17 @@ Authors' Addresses
    Email: henk.birkholz@sit.fraunhofer.de
 
 
+
+
+
+
+
+
+Birkholz, et al.           Expires May 7, 2020                 [Page 25]
+
+Internet-Draft              RATS Arch & Terms              November 2019
+
+
    Monty Wiseman
    GE Global Research
    USA
@@ -1394,42 +1425,11 @@ Authors' Addresses
    Email: ned.smith@intel.com
 
 
-
-
-
-Birkholz, et al.           Expires May 7, 2020                 [Page 25]
-
-Internet-Draft              RATS Arch & Terms              November 2019
-
-
    Michael Richardson
    Sandelman Software Works
    Canada
 
    Email: mcr+ietf@sandelman.ca
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
