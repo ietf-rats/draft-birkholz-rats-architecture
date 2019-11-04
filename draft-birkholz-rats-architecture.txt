@@ -90,7 +90,7 @@ Table of Contents
      4.1.  Two Types of Environments . . . . . . . . . . . . . . . .  15
      4.2.  Evidence Creation Prerequisites . . . . . . . . . . . . .  16
      4.3.  Trustworthiness . . . . . . . . . . . . . . . . . . . . .  17
-     4.4.  RATS Workflow . . . . . . . . . . . . . . . . . . . . . .  17
+     4.4.  Workflow  . . . . . . . . . . . . . . . . . . . . . . . .  17
      4.5.  Interoperability between RATS . . . . . . . . . . . . . .  18
    5.  RATS Architecture . . . . . . . . . . . . . . . . . . . . . .  18
      5.1.  Goals . . . . . . . . . . . . . . . . . . . . . . . . . .  18
@@ -876,7 +876,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 4.2.  Evidence Creation Prerequisites
 
-   One or more Environments that part of an Attester must be able to
+   One or more Environments that are part of an Attester must be able to
    conduct the following duties in order to create Evidence:
 
    o  monitoring trustworthiness attributes of other Environments,
@@ -920,24 +920,25 @@ Internet-Draft              RATS Arch & Terms              November 2019
    devices.
 
    A stronger level of security comes when information can be vouched
-   for by hardware or by ROM code, especially if such hardware is
-   physically resistant to hardware tampering.  The component that is
-   implicitly trusted is often referred to as a Root of Trust.
+   for by hardware or by (unchangeable) firmware, especially if such
+   hardware is physically resistant to hardware tampering.  The
+   component that is implicitly trusted is often referred to as a Root
+   of Trust.
 
-4.4.  RATS Workflow
+4.4.  Workflow
 
    The basic function of RATS is creation, conveyance and appraisal of
    attestation Evidence.  An Attester creates attestation Evidence that
    are conveyed to a Verifier for appraisal.  The appraisals compare
-   Evidence with expected Known-Good-Values called obtained from
-   Asserters (e.g.  Principals that are Supply Chain Entities).  There
-   can be multiple forms of appraisal (e.g., software integrity
-   verification, device composition and configuration verification,
-   device identity and provenance verification).  Attestation Results
-   are the output of appraisals.  Attestation Results are signed and
-   conveyed to Relying Parties.  Attestation Results provide the basis
-   by which the Relying Party may determine a level of confidence to
-   place in the application data or operations that follow.
+   Evidence with expected Known-Good-Values obtained from Asserters
+   (e.g.  Principals that are Supply Chain Entities).  There can be
+   multiple forms of appraisal (e.g., software integrity verification,
+   device composition and configuration verification, device identity
+   and provenance verification).  Attestation Results are the output of
+   appraisals.  Attestation Results are signed and conveyed to Relying
+   Parties.  Attestation Results provide the basis by which the Relying
+   Party may determine a level of confidence to place in the application
+   data or operations that follow.
 
    The architecture defines attestation Roles: Attester, Verifier,
    Asserter and Relying Party.  Roles exchange messages, but their
@@ -945,7 +946,6 @@ Internet-Draft              RATS Arch & Terms              November 2019
    of the messages is in an appropriate document, such as
    [I-D.ietf-rats-eat] or other protocols to be defined.  Roles can be
    combined in various ways into Principals, depending upon the needs of
-
 
 
 
@@ -960,9 +960,9 @@ Internet-Draft              RATS Arch & Terms              November 2019
 4.5.  Interoperability between RATS
 
    The RATS architecture anticipates use of information modeling
-   techniques that describe computing environment structures - their
-   components/computational elements and corresponding capabilities - so
-   that verification operations may rely on the information model as an
+   techniques that describe computing structures - their components/
+   computational elements and corresponding capabilities - so that
+   verification operations may rely on the information model as an
    interoperable way to navigate the structural complexity.
 
 5.  RATS Architecture
@@ -989,8 +989,8 @@ Internet-Draft              RATS Arch & Terms              November 2019
       that can create and appraise evidence about the trustworthiness of
       devices and services.
 
-   o  Use-case driven architecture and design (RATS use cases are
-      summarized in [I-D.richardson-rats-usecases]).
+   o  Use-case driven architecture and design (see
+      [I-D.richardson-rats-usecases] and Section 3)
 
    o  Terminology conventions that are consistently applied across RATS
       specifications.
