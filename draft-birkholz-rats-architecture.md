@@ -318,6 +318,250 @@ Verifier:
 
 : See {{verifier}}.
 
+# Reference use cases
+
+
+
+## Device Capabilities/Firmware Attestation {#netattest}
+
+This is a large category of claims that includes a number of subcategories,
+not detailed here.
+
+Use case name:
+
+: Device Identity
+
+Who will use it:
+
+: Network Operators, larger enterprises
+
+Attester:
+
+: varies
+
+Message Flow:
+
+: sometimes passport and sometimes background check
+
+Relying Party:
+
+: varies
+
+Description:
+
+: Network operators want a trustworth report of identity and version of
+information of the hardware and software on the machines attached to their
+network.
+The process starts with some kind of Root of Trust that provides device
+identity and protected storage for measurements. The mechanism performs a
+series of measurements, and expresses this
+with an attestation as to the hardware and firmware/software which is
+running.
+
+This is a general description for which there are many specific use cases,
+including {{I-D.fedorkow-rats-network-device-attestation}} section 1.2,
+"Software Inventory"
+
+## IETF TEEP WG Use-Case
+
+Use case name:
+
+: TAM validation
+
+Who will use it:
+
+: The TAM server
+
+Message Flow:
+
+: background check
+
+Attester:
+
+: Trusted Execution Environment (TEE)
+
+Relying Party:
+
+: end-application
+
+Description:
+
+: The "Trusted Application Manager (TAM)" server wants to verify the state of a
+TEE, or applications in the TEE, of a device.  The TEE attests to the TAM,
+which can then decide whether to install sensitive data in the TEE, or
+whether the TEE is out of compliance and the TAM needs to install updated
+code in the TEE to bring it back into compliance with the TAM's policy.
+
+## Safety Critical Systems
+
+Use case name:
+
+: Safety Critical Systems
+
+Who will use it:
+
+: Power plants and other systems that need to assert their current state, but which can not accept any inputs from the outside.  The corollary system is
+a black-box (such as in an aircraft), which needs to log the state of a system,
+but which can never initiate a handshake.
+
+Message Flow:
+
+: background check
+
+Attester:
+
+: web services and other sources of status/sensor information
+
+Relying Party:
+
+: open
+
+Claims used as Evidence:
+
+: the beginning and ending time as endorsed by a Time Stamp Authority,
+represented by a time stamp token.  The real time clock of the system
+itself.  A Root of Trust for time; the TPM has a relative time from
+startup.
+
+Description:
+
+: These requirements motivate the creation of the Time-Base Unidirectional Attestation (TUDA) {{-tuda}}, the output of TUDA is typically a secure audit log, where freshness is determined by synchronization to a trusted source of external time.
+
+: The freshness is preserved in the Evidence by the use of a Time Stamp Authority (TSA) which provides Time Stamp Tokens (TST).
+
+## Virtualized Multi-Tenant Hosts
+
+Use case name:
+
+: Multi-Tenant Hosts
+
+Who will use it:
+
+: Virtual machine systems
+
+Message Flow:
+
+: passport
+
+Attester:
+
+: virtual machine hypervisor
+
+Relying Party:
+
+: network operators
+
+Description:
+
+: The host system will do verification as per {{netattest}}
+
+: The tenant virtual machines will do verification as per {{netattest}}.
+
+: The network operator wants to know if the system *as a whole* is free of
+malware, but the network operator is not allowed to know who the tenants are.
+
+: This is contrasted to the Chassis + Line Cards case (To Be Defined: TBD).
+
+: Multiple Line Cards, but a small attestation system on the main card can
+combine things together.
+This is a kind of proxy.
+
+## Cryptographic Key Attestation {#cryptattest}
+
+Cryptographic Attestion includes subcategories such as Device Type
+Attestation (the FIDO use case), and Key storage Attestation (the Android
+Keystore use case), and End-User Authorization.
+
+Use case name:
+
+: Key Attestation
+
+Who will use it:
+
+: network authentication systems
+
+Message Flow:
+
+: passport
+
+Attester:
+
+: device platform
+
+Relying Party:
+
+: internet peers
+
+Description:
+
+: The relying party wants to know how secure a private key that identifies an entity is.
+Unlike the network attestation, the relying party is not part of the network infrastructure, nor do they necessarily have a business relationship (such as ownership) over the end device.
+
+: The Device Type Attestation is provided by a Firmware TPM performing the Verifier function, creating Attestation Results that indicate a particular model/type of device.  In TCG terms, this is called Implicit Attestation, in this case the Attested Environment is the (smartphone) Rich Execution Environment (REE) ({{I-D.ietf-teep-architecture}} section 2), and the Attesting Environment is within the TEE.
+
+## Geographic Evidence
+
+Use case name:
+
+: Location Evidence
+
+Who will use it:
+
+: geo-fenced systems
+
+Message Flow:
+
+: passport (probably)
+
+Attester:
+
+: secure GPS system(s)
+
+Relying Party:
+
+: internet peers
+
+Description:
+
+: The relying party wants to know the physical location (on the planet earth, using a geodetic system) of the device.
+This may be provided directly by a GPS/GLONASS/BeiDou/Galileo module that is incorporated into a TPM.
+This may also be provided by collecting other proximity messages from other device that the relying party can form a trust relationship with.
+
+## Device Provenance Attestation
+
+Use case name:
+
+: RIV - Device Provenance
+
+Who will use it:
+
+: Industrial IoT devices
+
+Message Flow:
+
+: passport
+
+Attester:
+
+: network management station
+
+Relying Party:
+
+: a network entity
+
+Description:
+
+: A newly manufactured device needs to be onboarded into a network where many
+if not all device management duties are performed by the network owner.
+The device owner wants to verify the device originated from a legitimate vendor.
+A cryptographic device identity such as an IEEE802.1AR is embedded during manufacturing and a certificate identifying the device is delivered to the owner  onboarding agent.
+The device authenticates using its 802.1AR IDevID to prove it originated from the expected vendor.
+
+The device chain of custody from the original device manufacturer to the new owner may also be verified as part of device provenance attestation.
+The chain of custody history may be collected by a cloud service or similar capability that the supply chain and owner agree to use.
+
+{{I-D.fedorkow-rats-network-device-attestation}} section 1.2 refers to this as "Provable Device Identity", and section 2.3 details the parties.
+
 # Conceptual Overview
 
 In network protocol exchanges, it is often the case that one entity (a Relying Party) requires an assessment of the trustworthiness of a remote entity (an Attester or specific system components {{RFC4949}} thereof).
@@ -582,252 +826,6 @@ RATS Principals have the following properties:
 * Multiplicity - Multiple instances of RATS Principals that possess the same RATS Roles can exist.
 * Composition - RATS Principals possessing different RATS Roles can be combined into a singleton RATS Principal possessing the union of RATS Roles. Message flows  between combined RATS Principals is uninteresting.
 * Decomposition -  A singleton RATS Principal possessing multiple RATS Roles can be divided into multiple RATS Principals.
-
-# Reference use cases
-
-
-
-## Device Capabilities/Firmware Attestation {#netattest}
-
-This is a large category of claims that includes a number of subcategories,
-not detailed here.
-
-Use case name:
-
-: Device Identity
-
-Who will use it:
-
-: Network Operators, larger enterprises
-
-Attester:
-
-: varies
-
-Message Flow:
-
-: sometimes passport and sometimes background check
-
-Relying Party:
-
-: varies
-
-Description:
-
-: Network operators want a trustworth report of identity and version of
-information of the hardware and software on the machines attached to their
-network.
-The process starts with some kind of Root of Trust that provides device
-identity and protected storage for measurements. The mechanism performs a
-series of measurements, and expresses this
-with an attestation as to the hardware and firmware/software which is
-running.
-
-This is a general description for which there are many specific use cases,
-including {{I-D.fedorkow-rats-network-device-attestation}} section 1.2,
-"Software Inventory"
-
-## IETF TEEP WG Use-Case
-
-Use case name:
-
-: TAM validation
-
-Who will use it:
-
-: The TAM server
-
-Message Flow:
-
-: background check
-
-Attester:
-
-: Trusted Execution Environment (TEE)
-
-Relying Party:
-
-: end-application
-
-Description:
-
-: The "Trusted Application Manager (TAM)" server wants to verify the state of a
-TEE, or applications in the TEE, of a device.  The TEE attests to the TAM,
-which can then decide whether to install sensitive data in the TEE, or
-whether the TEE is out of compliance and the TAM needs to install updated
-code in the TEE to bring it back into compliance with the TAM's policy.
-
-## Safety Critical Systems
-
-Use case name:
-
-: Safety Critical Systems
-
-Who will use it:
-
-: Power plants and other systems that need to assert their current state, but which can not accept any inputs from the outside.  The corollary system is
-a black-box (such as in an aircraft), which needs to log the state of a system,
-but which can never initiate a handshake.
-
-Message Flow:
-
-: background check
-
-Attester:
-
-: web services and other sources of status/sensor information
-
-Relying Party:
-
-: open
-
-Claims used as Evidence:
-
-: the beginning and ending time as endorsed by a Time Stamp Authority,
-represented by a time stamp token.  The real time clock of the system
-itself.  A Root of Trust for time; the TPM has a relative time from
-startup.
-
-Description:
-
-: These requirements motivate the creation of the Time-Base Unidirectional Attestation (TUDA) {{-tuda}}, the output of TUDA is typically a secure audit log, where freshness is determined by synchronization to a trusted source of external time.
-
-: The freshness is preserved in the Evidence by the use of a Time Stamp Authority (TSA) which provides Time Stamp Tokens (TST).
-
-## Virtualized Multi-Tenant Hosts
-
-Use case name:
-
-: Multi-Tenant Hosts
-
-Who will use it:
-
-: Virtual machine systems
-
-Message Flow:
-
-: passport
-
-Attester:
-
-: virtual machine hypervisor
-
-Relying Party:
-
-: network operators
-
-Description:
-
-: The host system will do verification as per {{netattest}}
-
-: The tenant virtual machines will do verification as per {{netattest}}.
-
-: The network operator wants to know if the system *as a whole* is free of
-malware, but the network operator is not allowed to know who the tenants are.
-
-: This is contrasted to the Chassis + Line Cards case (To Be Defined: TBD).
-
-: Multiple Line Cards, but a small attestation system on the main card can
-combine things together.
-This is a kind of proxy.
-
-## Cryptographic Key Attestation {#cryptattest}
-
-Cryptographic Attestion includes subcategories such as Device Type
-Attestation (the FIDO use case), and Key storage Attestation (the Android
-Keystore use case), and End-User Authorization.
-
-Use case name:
-
-: Key Attestation
-
-Who will use it:
-
-: network authentication systems
-
-Message Flow:
-
-: passport
-
-Attester:
-
-: device platform
-
-Relying Party:
-
-: internet peers
-
-Description:
-
-: The relying party wants to know how secure a private key that identifies an entity is.
-Unlike the network attestation, the relying party is not part of the network infrastructure, nor do they necessarily have a business relationship (such as ownership) over the end device.
-
-: The Device Type Attestation is provided by a Firmware TPM performing the Verifier function, creating Attestation Results that indicate a particular model/type of device.  In TCG terms, this is called Implicit Attestation, in this case the Attested Environment is the (smartphone) Rich Execution Environment (REE) ({{I-D.ietf-teep-architecture}} section 2), and the Attesting Environment is within the TEE.
-
-## Geographic Evidence
-
-Use case name:
-
-: Location Evidence
-
-Who will use it:
-
-: geo-fenced systems
-
-Message Flow:
-
-: passport (probably)
-
-Attester:
-
-: secure GPS system(s)
-
-Relying Party:
-
-: internet peers
-
-Description:
-
-: The relying party wants to know the physical location (on the planet earth, using a geodetic system) of the device.
-This may be provided directly by a GPS/GLONASS/BeiDou/Galileo module that is incorporated into a TPM.
-This may also be provided by collecting other proximity messages from other device that the relying party can form a trust relationship with.
-
-## Device Provenance Attestation
-
-Use case name:
-
-: RIV - Device Provenance
-
-Who will use it:
-
-: Industrial IoT devices
-
-Message Flow:
-
-: passport
-
-Attester:
-
-: network management station
-
-Relying Party:
-
-: a network entity
-
-Description:
-
-: A newly manufactured device needs to be onboarded into a network where many
-if not all device management duties are performed by the network owner.
-The device owner wants to verify the device originated from a legitimate vendor.
-A cryptographic device identity such as an IEEE802.1AR is embedded during manufacturing and a certificate identifying the device is delivered to the owner  onboarding agent.
-The device authenticates using its 802.1AR IDevID to prove it originated from the expected vendor.
-
-The device chain of custody from the original device manufacturer to the new owner may also be verified as part of device provenance attestation.
-The chain of custody history may be collected by a cloud service or similar capability that the supply chain and owner agree to use.
-
-{{I-D.fedorkow-rats-network-device-attestation}} section 1.2 refers to this as "Provable Device Identity", and section 2.3 details the parties.
-
-
 
 # Security Considerations
 
