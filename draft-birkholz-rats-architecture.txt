@@ -1071,15 +1071,16 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 5.3.1.2.  Asserter
 
-   The Asserter role In reality there are likely to be many Entities
-   that implement the Asserter and many instances of Reference Value
-   messages.
+   The Asserter role is out of scope.  The mechanism by which an
+   Asserter communicates Known-Good-Values to a Verifier is also not
+   subject to standardization.  Users of the RATS architecture are
+   assumed to have pre-existing mechanisms.
 
 5.3.1.3.  Verifier
 
    The Verifier workflow function accepts Evidence from an Attester and
    accepts Reference Values from one or more Asserters.  Reference
-   values may be supplied a'priori, cached or used to created policies.
+   values may be supplied a priori, cached or used to created policies.
    The Verifier performs an appraisal by matching Claims found in
    Evidence with Claims found in Reference Values and policies.  If an
    attested Claim value differs from an expected Claim value, the
@@ -1109,7 +1110,6 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
    Evidence SHOULD satisfy Verifier expectations for freshness,
    identity, context, provenance, validity, relevance and veracity.
-
 
 
 

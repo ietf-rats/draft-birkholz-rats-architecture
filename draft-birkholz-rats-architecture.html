@@ -962,11 +962,11 @@ ul.toc li {
 <h1 id="rfc.section.5.3.1.2">
 <a href="#rfc.section.5.3.1.2">5.3.1.2.</a> <a href="#asserter" id="asserter">Asserter</a>
 </h1>
-<p id="rfc.section.5.3.1.2.p.1">The Asserter role In reality there are likely to be many Entities that implement the Asserter and many instances of Reference Value messages.  </p>
+<p id="rfc.section.5.3.1.2.p.1">The Asserter role is out of scope.  The mechanism by which an Asserter communicates Known-Good-Values to a Verifier is also not subject to standardization.  Users of the RATS architecture are assumed to have pre-existing mechanisms.</p>
 <h1 id="rfc.section.5.3.1.3">
 <a href="#rfc.section.5.3.1.3">5.3.1.3.</a> <a href="#verifier" id="verifier">Verifier</a>
 </h1>
-<p id="rfc.section.5.3.1.3.p.1">The Verifier workflow function accepts Evidence from an Attester and accepts Reference Values from one or more Asserters. Reference values may be supplied a&#8217;priori, cached or used to created policies. The Verifier performs an appraisal by matching Claims found in Evidence with Claims found in Reference Values and policies. If an attested Claim value differs from an expected Claim value, the Verifier flags this as a change possibly impacting trust level.</p>
+<p id="rfc.section.5.3.1.3.p.1">The Verifier workflow function accepts Evidence from an Attester and accepts Reference Values from one or more Asserters. Reference values may be supplied a priori, cached or used to created policies. The Verifier performs an appraisal by matching Claims found in Evidence with Claims found in Reference Values and policies. If an attested Claim value differs from an expected Claim value, the Verifier flags this as a change possibly impacting trust level.</p>
 <p id="rfc.section.5.3.1.3.p.2">Endorsements may not have corresponding Claims in Evidence (because of their intrinsic nature). Consequently, the Verifier need only authenticate the endpoint and verify the Endorsements match the endpoint identity.</p>
 <p id="rfc.section.5.3.1.3.p.3">The result of appraisals and Endorsements, informed by owner policies, produces a new set of Claims that a Relying Party is suited to consume.  </p>
 <h1 id="rfc.section.5.3.1.4">
