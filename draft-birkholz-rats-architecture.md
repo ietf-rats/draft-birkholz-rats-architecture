@@ -746,7 +746,7 @@ The consumer or proxy of Attestation Results. The Role that designates an Entity
 
 Claims that are formatted and protected by an Attester.
 
-Evidence SHOULD satisfy Verifier expectations for freshness, identity, context, provenance, validity, relevance and veracity.
+Evidence SHOULD satisfy Verifier expectations for freshness, identity, context, provenance, validity, and veracity.
 <!--
  A Message type created and conveyed by the Attester Role. Attestation Evidence can be consumed and relayed by other Roles, primarily the Verifier Role to appraise the Evidence.
  -->
