@@ -131,8 +131,8 @@ An entity (a relying party) requires a source of truth and evidence about a remo
 
 # Introduction
 
-Remote Attestation provides a way for an entity (the Relying Party) to determine the health and provenance of an endpoint/host (the Attester).
-Knowledge of the health of the endpoint allows for a determination of trustworthiness of the endpoint.
+Remote Attestation provides a way for an entity (the Relying Party) to determine the health and provenance of an endpoint/host (the Attester) from which it accepts data or instruction.
+Knowledge of the health of the endpoint allows for a determination of trustworthiness of the endpoint. Attestation helps the Relying Party offset risk from interacting with an unknown or untrustworthy endpoint.
 
 ## Motivation
 
@@ -156,32 +156,28 @@ Smartphones commonly have either an actual TPM, or have the ability to emulate o
 
 A number of niche solutions have emerged that provide for use-case specific remote attestation, but none have the generality needed to be used across the Internet.
 
-## Overview of Document
-
-The architecture described in this document (along with the accompanying solution and reference documents) enables the use of common formats for communicating Claims about an Attester to a Relying Party. \[FIXME Attester? Flows? To what end?\]
-
 Existing transports were not designed to carry attestation Claims.  It is therefore necessary to design serializations of Claims that fit into a variety of transports, for instance: X.509 certificates, TLS negotiations, YANG modules or EtherNet/IP.  There are also new, greenfield uses for remote attestation. Transport and serialization of these can be done without retrofitting.
 This is (will be) described in \[INSERT reference to adopted document on transport].
 
-While it is not anticipated that the existing niche solutions described in the use cases section {{referenceusecases}} will exchange claims directly, the use of a common format enables common code.
+## Overview of Document
+
+An overview of the RATS architecture is described in {{nutshell}} that describes the roles involved in attestation workflow and common models for exchanging RATS messages. Relevant attestation terminology, defined in {{terminology}} is referenced normatively by other documents and is a key part of this document.  {{referenceusecases}} describes several use cases that motivate the RAT architecture and illustrate how to leverage the roles and workflows described. A summary of attestation related concepts is covered in {{overview}} while the RATS architecture is described in detail in {{architecture}}; this along with the accompanying solution and reference documents enables the use of common formats for communicating Claims about an Attester to a Relying Party. \[FIXME Attester? Flows? To what end?\]
+
+While it is not anticipated that the existing niche solutions described in the use cases will exchange claims directly, the use of a common format enables common code.
 As some of the code needs to be in intentionally hard to modify trusted modules, the use of a common formats and transfer protocols significantly reduces the cost of adoption to all parties.
 This commonality also significantly reduces the incidence of critical bugs.
 
 In some environments the collection of Evidence by the Attester to be provided to the Verifier is part of an existing protocol: this document does not change that, rather embraces those legacy mechanisms as part of the specification.  This is an evolutionary path forward, not revolutionary.
 Yet in other greenfield environments, there is a desire to have a standard for Evidence as well as for Attestation Results, and this architecture outlines how that is done.
 
-This introduction gives an overview of the message flows and roles involved.
-Following this, is a terminology section that is referenced normatively by other documents and is a key part of this document.
-There is then a section on use cases and how they leverage the roles and workflows described.
-
 In this document, terms defined within this document are consistently Capitalized \[work in progress. please raise issues, if there are Blatant inconsistencies].
 
 Current verticals that use remote attestation include:
 
-* The Trusted Computing Group "Network Device Attestation Workflow" {{I-D.fedorkow-rats-network-device-attestation}}
+* The Trusted Computing Group "Network Device Attestation Workflow" {{I-D.fedorkow-rats-network-device-attestation}} and "Hardware Requirements for a Device Identifier Composition Engine"
 * Android Keystore {{keystore}}
 * Fast Identity Online (FIDO) Alliance attestation {{fido}}
-* A number of Intel SGX niche systems based upon OTRP.
+* A number of Intel SGX niche systems based upon OTRP
 
 <!--
 Things to be mentioned (XXX):
@@ -191,13 +187,13 @@ Things to be mentioned (XXX):
 * Roots of Trust
 -->
 
-## RATS in a Nutshell
+## RATS in a Nutshell {#nutshell}
 
 1. Remote Attestation message flows typically convey Claims that contain the trustworthiness properties associated with an Attested Environment (Evidence).
 2. A corresponding provisioning message flows conveys Reference trustworthiness claims that can be compared with attestation Evidence. Reference Values typically consist of firmware or software digests and details about what makes the attesting module a trusted source of Evidence.
 3. Relying Parties are performing tasks such as managing a resource, controlling access, and/or managing risk. Attestation Results helps Relying Parties determine levels of trust.
 
-## Remote Attestation Workflow
+## Remote Attestation Workflow {#workflow}
 
 The logical information flow is from Attester to Verifier to Relying Party.
 There are variations presented below on how this integrates into actual protocols.
@@ -210,18 +206,18 @@ There are variations presented below on how this integrates into actual protocol
 
 In the architecture shown above, specific content items (payload conveyed in message flows) are identified:
 
-* Evidence is as set of believable Claims about distinguishable Environments made by an Attester.
-* Known-Good-Values are reference Claims used to appraise Evidence by an Verifier.
-* Endorsements are reference Claims about the type of protection that enables an Attester to create believable Evidence. Endorsements enable trust relationships towards system components or environments Evidence cannot be created for by an Attester.
-* Attestation Results are the output from the appraisal of Evidence, Known-Good-Values and Endorsements and are consumed by Relying Parties.
+* Evidence is as set of Claims about distinguishable Environments made by an Attester.
+* Reference Values are Claims used by an Verifier to validate and appraise Evidence.
+* Endorsements are Reference Values that describe the type of protection mechanisms used by an Attester to create believable Evidence. Endorsements establish trust in the system components and environment used by an Attester when collecting and protecting Evidence.
+* Attestation Results are the output from the appraisal of Evidence, Reference Values and Endorsements are consumed by Relying Parties.
 
 Attestation Results are the output of RATS.
 
 Assessment of Attestation Results is be multi-faceted and out-of-scope for the  architecture.
 
-If appropriate Endorsements about the Attester are available, Known-Good-Values about the Attester are available, and if the Attester is capable of creating believable Evidence - then the Verifier is able to create Attestation Results that enable Relying Parties to establish a level of confidence in the trustworthiness of the Attester.
+The Asserter role and the format for Reference Values are not subject to standardization at this time.  The current verticals already include provisions for encoding and/or distributing these objects.
 
-The Asserter role and the format for Known-Good-Values and Endorsements are not subject to standardization at this time.  The current verticals already include provisions for encoding and/or distributing these objects.
+Additional details about RATS Roles can be found in {{architecture}}.
 
 ## Message Flows {#messageflows}
 
@@ -255,7 +251,7 @@ The Relying Party sends this evidence to a Verifier of its choice.  The Verifier
 This flow is named in this way because of the resemblance of how employers and volunteer organizations
 perform background checks.  When a prospective employee provides claims about education or previous experience, the employer will contact the respective institutions or former employers to validate the claim.  Volunteer organizations often perform police background checks on volunteers in order to determine the volunteer's trustworthiness.
 
-# Terminology
+# Terminology {#terminology}
 
 {::boilerplate bcp14}
 
@@ -571,7 +567,7 @@ The chain of custody history may be collected by a cloud service or similar capa
 
 {{I-D.fedorkow-rats-network-device-attestation}} section 1.2 refers to this as "Provable Device Identity", and section 2.3 details the parties.
 
-# Conceptual Overview
+# Conceptual Overview {#overview}
 
 In network protocol exchanges, it is often the case that one entity (a Relying Party) requires an assessment of the trustworthiness of a remote entity (an Attester or specific system components {{RFC4949}} thereof).
 Remote ATtestation procedureS (RATS) enable Relying Parties to establish a level of confidence in the trustworthiness of Attesters through the
@@ -637,7 +633,7 @@ The trustworthiness of corresponding Attestation Results also relies on trust to
 A stronger level of security comes when information can be vouched for by hardware or by (unchangeable) firmware, especially if such hardware is physically resistant to hardware tampering.
 The component that is implicitly trusted is often referred to as a Root of Trust.
 
-## Workflow
+## Attestation Workflow
 
 The basic function of RATS is creation, conveyance and appraisal of attestation Evidence.
 An Attester creates attestation Evidence that are conveyed to a Verifier for appraisal.
@@ -645,17 +641,11 @@ The appraisals compare Evidence with expected Known-Good-Values obtained from As
 There can be multiple forms of appraisal (e.g., software integrity verification, device composition and configuration verification, device identity and provenance verification).
 Attestation Results are the output of appraisals. Attestation Results are signed and conveyed to Relying Parties. Attestation Results provide the basis by which the Relying Party may determine a level of confidence to place in the application data or operations that follow.
 
-The architecture defines attestation Roles: Attester, Verifier, Asserter and Relying Party.
-Roles exchange messages, but their structure is not defined in this document.
-The detailed definition of the messages is in an appropriate document, such as {{-EAT}} or other protocols to be defined.
-Roles can be combined in various ways into Principals, depending upon the needs of the use case.
-Information Model representations are realized as data structure and conveyance protocol specifications.
-
-## Interoperability between RATS
+## Interoperability
 
 The RATS architecture anticipates use of information modeling techniques that describe computing structures -- their components/computational elements and corresponding capabilities -- so that verification operations may rely on the information model as an interoperable way to navigate the structural complexity.
 
-# RATS Architecture
+# RATS Architecture {#architecture}
 
 ## Goals
 
@@ -682,7 +672,15 @@ Specifications developed by the RATS working group apply the following principle
 
 ## Attestation Workflow
 
+The basic function of RATS workflow is the creation, conveyance and appraisal of attestation Evidence. The architecture defines attestation Roles: Attester, Verifier, Asserter and Relying Party. An Attester creates attestation Evidence that are conveyed to a Verifier for appraisal. The appraisals compare Evidence with expected Known-Good-Values obtained from Asserters (e.g. Principals that are Supply Chain Entities).
+There can be multiple forms of appraisal (e.g., software integrity verification, device composition and configuration verification, device identity and provenance verification).
+Attestation Results are the output of appraisals. Attestation Results are signed and conveyed to Relying Parties. Attestation Results provide the basis by which the Relying Party may determine a level of confidence to place in the application data or operations that follow.
+
 Attestation workflow helps a Relying Party make better decisions by providing insight about the trustworthiness of endpoints participating in a distributed system. The workflow consists primarily of four roles; Relying Party, Verifier, Attester and Asserter. Attestation messages contain information useful for appraising the trustworthiness of an Attester endpoint and informing the Relying Party of the appraisal result.
+
+The detailed definition of workflow message syntax and semantics are found in an appropriate document, such as {{-EAT}} or other protocols to be defined.
+Roles can be combined in various ways into Principals, depending upon the needs of the use case.
+Information Model representations are realized as data structure and conveyance protocol specifications.
 
 <!--
 The RATS Roles (roles) are performed by RATS Principals.
@@ -861,5 +859,3 @@ For example, additional means of authentication, confidentiality, integrity, rep
 # Acknowledgements
 
 Dave Thaler created the concepts of "Passport" and "Background Check".
-
-
