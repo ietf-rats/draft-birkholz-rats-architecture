@@ -87,24 +87,24 @@ Table of Contents
      3.6.  Geographic Evidence . . . . . . . . . . . . . . . . . . .  13
      3.7.  Device Provenance Attestation . . . . . . . . . . . . . .  14
    4.  Conceptual Overview . . . . . . . . . . . . . . . . . . . . .  14
-     4.1.  Two Types of Environments . . . . . . . . . . . . . . . .  16
+     4.1.  Two Types of Environments . . . . . . . . . . . . . . . .  15
      4.2.  Evidence Creation Prerequisites . . . . . . . . . . . . .  16
      4.3.  Trustworthiness . . . . . . . . . . . . . . . . . . . . .  17
      4.4.  RATS Workflow . . . . . . . . . . . . . . . . . . . . . .  17
      4.5.  Interoperability between RATS . . . . . . . . . . . . . .  18
    5.  RATS Architecture . . . . . . . . . . . . . . . . . . . . . .  18
      5.1.  Goals . . . . . . . . . . . . . . . . . . . . . . . . . .  18
-     5.2.  Attestation Principles  . . . . . . . . . . . . . . . . .  19
+     5.2.  Attestation Principles  . . . . . . . . . . . . . . . . .  18
      5.3.  Attestation Workflow  . . . . . . . . . . . . . . . . . .  19
        5.3.1.  Roles . . . . . . . . . . . . . . . . . . . . . . . .  19
        5.3.2.  Role Messages . . . . . . . . . . . . . . . . . . . .  20
      5.4.  Principals (Entities?) - Containers for the Roles . . . .  22
    6.  Security Considerations . . . . . . . . . . . . . . . . . . .  23
-   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  23
-     7.1.  Normative References  . . . . . . . . . . . . . . . . . .  23
-     7.2.  Informative References  . . . . . . . . . . . . . . . . .  23
+   7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  23
+   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  23
+     8.1.  Normative References  . . . . . . . . . . . . . . . . . .  23
+     8.2.  Informative References  . . . . . . . . . . . . . . . . .  23
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  25
-
 
 
 
@@ -826,13 +826,13 @@ Internet-Draft              RATS Arch & Terms              November 2019
    applications, system software and protocol endpoints when changes to
    trustworthiness attributes do occur.
 
-   [FIXME suddenly - scope] The scope of this document is based on
-   message flows and corresponding Roles based on the use cases defined
-   in [I-D.richardson-rats-usecases].  Protocol specifications for
-   message flows are defined in separate documents.
+   Detailed protocol specifications for message flows are defined in
+   separate documents.
 
+4.1.  Two Types of Environments
 
-
+   An Attester produces Evidence about its own integrity, which means
+   "it measures itself".  To disambiguate this recursive or circular
 
 
 
@@ -842,10 +842,6 @@ Birkholz, et al.           Expires May 7, 2020                 [Page 15]
 Internet-Draft              RATS Arch & Terms              November 2019
 
 
-4.1.  Two Types of Environments
-
-   An Attester produces Evidence about its own integrity, which means
-   "it measures itself".  To disambiguate this recursive or circular
    looking relationships, two types of Environments inside an Attester
    are distinguished:
 
@@ -890,6 +886,10 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
    o  serialize Claims using interoperable representations,
 
+   o  provide integrity protection for the sets of Claims, and
+
+   o  add appropriate attestation provenance attributes about the sets
+      of Claims.
 
 
 
@@ -897,11 +897,6 @@ Birkholz, et al.           Expires May 7, 2020                 [Page 16]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
-
-   o  provide integrity protection for the sets of Claims, and
-
-   o  add appropriate attestation provenance attributes about the sets
-      of Claims.
 
 4.3.  Trustworthiness
 
@@ -946,6 +941,11 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
    The architecture defines attestation Roles: Attester, Verifier,
    Asserter and Relying Party.  Roles exchange messages, but their
+   structure is not defined in this document.  The detailed definition
+   of the messages is in an appropriate document, such as
+   [I-D.ietf-rats-eat] or other protocols to be defined.  Roles can be
+   combined in various ways into Principals, depending upon the needs of
+
 
 
 
@@ -954,10 +954,6 @@ Birkholz, et al.           Expires May 7, 2020                 [Page 17]
 Internet-Draft              RATS Arch & Terms              November 2019
 
 
-   structure is not defined in this document.  The detailed definition
-   of the messages is in an appropriate document, such as
-   [I-D.ietf-rats-eat] or other protocols to be defined.  Roles can be
-   combined in various ways into Principals, depending upon the needs of
    the use case.  Information Model representations are realized as data
    structure and conveyance protocol specifications.
 
@@ -1001,6 +997,10 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
    o  Reinforce trusted computing principles that include attestation.
 
+5.2.  Attestation Principles
+
+   Specifications developed by the RATS working group apply the
+   following principles:
 
 
 
@@ -1010,28 +1010,19 @@ Birkholz, et al.           Expires May 7, 2020                 [Page 18]
 Internet-Draft              RATS Arch & Terms              November 2019
 
 
-5.2.  Attestation Principles
-
-   Specifications developed by the RATS working group apply the
-   following principles:
-
    o  Freshness - replay of previously asserted Claims about an Attested
-      Computing Environment can be detected.
+      Environment can be detected.
 
-   o  Identity - the Attesting Computing Environment is identifiable
-      (non-anonymous).
+   o  Identity - the Attesting Environment is identifiable (non-
+      anonymous).
 
-   o  Context - the Attested Computing Environment is well-defined
-      (unambiguous).
+   o  Context - the Attested Environment is well-defined (unambiguous).
 
    o  Provenance - the origin of Claims with respect to the Attested and
-      Attesting Computing Environments are known.
+      Attesting Environments are known.
 
    o  Validity - the expected lifetime of Claims about an Attested
-      Computing Environment is known.
-
-   o  Relevance - the Claims associated with the Attested Computing
-      Environment pertain to trustworthiness metrics.
+      Environment is known.
 
    o  Veracity - the believability (level of confidence) of Claims is
       based on verifiable proofs.
@@ -1059,13 +1050,6 @@ Internet-Draft              RATS Arch & Terms              November 2019
    keys) that authenticate, integrity protect and optionally
    confidentiality protect attestation messages.
 
-
-
-Birkholz, et al.           Expires May 7, 2020                 [Page 19]
-
-Internet-Draft              RATS Arch & Terms              November 2019
-
-
 5.3.1.1.  Attester
 
    The Attester consists of both an Attesting Environment and an
@@ -1073,6 +1057,15 @@ Internet-Draft              RATS Arch & Terms              November 2019
    be combined.  Other implementations may have multiples of Attesting
    and Attested environments.  Although endpoint environments can be
    complex, and that complexity is security relevant, the basic function
+
+
+
+
+Birkholz, et al.           Expires May 7, 2020                 [Page 19]
+
+Internet-Draft              RATS Arch & Terms              November 2019
+
+
    of an Attester is to create Evidence that captures operational
    conditions affecting trustworthiness.
 
@@ -1110,6 +1103,13 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 5.3.2.  Role Messages
 
+5.3.2.1.  Evidence
+
+   Claims that are formatted and protected by an Attester.
+
+   Evidence SHOULD satisfy Verifier expectations for freshness,
+   identity, context, provenance, validity, relevance and veracity.
+
 
 
 
@@ -1121,13 +1121,6 @@ Birkholz, et al.           Expires May 7, 2020                 [Page 20]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
-
-5.3.2.1.  Evidence
-
-   Claims that are formatted and protected by an Attester.
-
-   Evidence SHOULD satisfy Verifier expectations for freshness,
-   identity, context, provenance, validity, relevance and veracity.
 
 5.3.2.2.  Reference Values
 
@@ -1145,11 +1138,11 @@ Internet-Draft              RATS Arch & Terms              November 2019
    vendors and installed on an endpoint.  This class of Reference-value
    is referred to as Known-Good-Value (KGV).
 
-   Known-Good-Values:  Claims about the Attested Computing Environment.
-      Typically, KGV Claims are message digests of firmware, software or
-      configuration data supplied by various vendors.  If an Attesting
-      Computing Environment implements cryptography, they include Claims
-      about key material.
+   Known-Good-Values:  Claims about the Attested Environment.
+      Typically, Known-Good-Value (KGV) Claims are message digests of
+      firmware, software or configuration data supplied by various
+      vendors.  If an Attesting Environment implements cryptography,
+      they include Claims about key material.
 
       Like Claims, Known-Good-Values SHOULD satisfy a Verifier's
       expectations for freshness, identity, context, provenance,
@@ -1158,8 +1151,8 @@ Internet-Draft              RATS Arch & Terms              November 2019
       (e.g. signed).
 
    Endorsements:  Claims about immutable and implicit characteristics of
-      the Attesting Computing Environment.  Typically, endorsement
-      Claims are created by manufacturing or supply chain entities.
+      the Attesting Environment.  Typically, endorsement Claims are
+      created by manufacturing or supply chain entities.
 
       Endorsements are intended to increase the level of confidence with
       respect to Evidence created by an Attester.
@@ -1169,6 +1162,13 @@ Internet-Draft              RATS Arch & Terms              November 2019
    Statements about the output of an appraisal of Evidence that are
    created, formatted and protected by a Verifier.
 
+   Attestation Results provide the basis for a Relying Party to
+   establish a level of confidence in the trustworthiness of an
+   Attester.  Attestation Results SHOULD satisfy Relying Party
+   expectations for freshness, identity, context, provenance, validity,
+   relevance and veracity.
+
+
 
 
 
@@ -1177,12 +1177,6 @@ Birkholz, et al.           Expires May 7, 2020                 [Page 21]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
-
-   Attestation Results provide the basis for a Relying Party to
-   establish a level of confidence in the trustworthiness of an
-   Attester.  Attestation Results SHOULD satisfy Relying Party
-   expectations for freshness, identity, context, provenance, validity,
-   relevance and veracity.
 
 5.4.  Principals (Entities?) - Containers for the Roles
 
@@ -1227,16 +1221,18 @@ Internet-Draft              RATS Arch & Terms              November 2019
    o  Multiplicity - Multiple instances of Principals that possess the
       same Roles can exist.
 
+   o  Composition - Principals possessing different Roles can be
+      combined into a singleton Principal possessing the union of Roles.
+      Message flows between combined Principals is uninteresting.
+
+
+
 
 
 Birkholz, et al.           Expires May 7, 2020                 [Page 22]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
-
-   o  Composition - Principals possessing different Roles can be
-      combined into a singleton Principal possessing the union of Roles.
-      Message flows between combined Principals is uninteresting.
 
    o  Decomposition - A singleton Principal possessing multiple Roles
       can be divided into multiple Principals.
@@ -1259,9 +1255,14 @@ Internet-Draft              RATS Arch & Terms              November 2019
    service and privacy protection of RATS payloads and Principals may be
    needed.
 
-7.  References
+7.  Acknowledgements
 
-7.1.  Normative References
+   Dave Thaler created the concepts of "Passport" and "Background
+   Check".
+
+8.  References
+
+8.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -1272,13 +1273,12 @@ Internet-Draft              RATS Arch & Terms              November 2019
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
-7.2.  Informative References
+8.2.  Informative References
 
    [ABLP]     Abadi, M., Burrows, M., Lampson, B., and G. Plotkin, "A
               Calculus for Access Control in Distributed Systems",
               Springer Annual International Cryptology Conference,
               page 1-23, DOI 10.1.1.36.691, 1991.
-
 
 
 
