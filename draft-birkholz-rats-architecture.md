@@ -678,7 +678,6 @@ Specifications developed by the RATS working group apply the following principle
 * Context - the Attested Computing Environment is well-defined (unambiguous).
 * Provenance - the origin of Claims with respect to the Attested and Attesting Computing Environments are known.
 * Validity - the expected lifetime of Claims about an Attested Computing Environment is known.
-* Relevance - the Claims associated with the Attested Computing Environment pertain to trustworthiness metrics.
 * Veracity - the believability (level of confidence) of Claims is based on verifiable proofs.
 
 ## Attestation Workflow
