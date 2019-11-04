@@ -617,7 +617,7 @@ In summary, the majority of the creation of evidence can take place in an Attest
 
 ## Evidence Creation Prerequisites
 
-One or more Environments that part of an Attester must be able to conduct the following duties in order to create Evidence:
+One or more Environments that are part of an Attester must be able to conduct the following duties in order to create Evidence:
 
 * monitoring trustworthiness attributes of other Environments,
 * collecting trustworthiness attributes and create Claims about them,
@@ -634,7 +634,7 @@ Trusting the assessment of a Verifier might com frome trusting the Verifier's ke
 
 The trustworthiness of corresponding Attestation Results also relies on trust towards manufacturers and those manufacturer's hardware in order to assess the integrity and resilience of that manufacturer's devices.
 
-A stronger level of security comes when information can be vouched for by hardware or by ROM code, especially if such hardware is physically resistant to hardware tampering.
+A stronger level of security comes when information can be vouched for by hardware or by (unchangeable) firmware, especially if such hardware is physically resistant to hardware tampering.
 The component that is implicitly trusted is often referred to as a Root of Trust.
 
 ## RATS Workflow
