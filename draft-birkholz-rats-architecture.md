@@ -147,7 +147,7 @@ In addition to the health of the device, knowledge of its provenance helps to de
 ## Opportunities
 
 The Trusted Platform Module (TPM) is now a commonly available peripheral on many commodity compute platforms,  both servers and desktops.
-Smartphones commonly have either an actual TPM, or have the ability to emulate one in software running in a trusted execution environment {{I-D.ietf-teep-architecture}}.  There are now few barriers to creating a standards-based system for remote attestation.
+Smartphones commonly have either an actual TPM, or have the ability to emulate one in software running in a trusted execution environment {{I-D.ietf-teep-architecture}}.  There are now few barriers to creating a standards-based system for remote attestation procedures.
 
 A number of niche solutions have emerged that provide for use-case specific remote attestation, but none have the generality needed to be used across the Internet.
 
@@ -168,9 +168,9 @@ This introduction gives an overview of the protocol, interaction models, messagi
 Following this, is a terminology section that is referenced normatively by other documents and is a key part of this document.
 There is then a section on use cases and how they leverage the roles and workflows described.
 
-In this document, terminology which is defined within this document are consistency Capitalized.
+In this document, terms defined within this document are consistently Capitalized [work in progress. please raise issues, if there are Blatant inconsistencies].
 
-Current verticals that use remote attestion include:
+Current verticals that use remote attestation include:
 * The Trusted Computing Group "Network Device Attestation Workflow" {{I-D.fedorkow-rats-network-device-attestation}}
 * Android Keystore {{keystore}}
 * Fast Identity Online (FIDO) Alliance attestation {{fido}}
@@ -184,14 +184,13 @@ Things to be mentioned (XXX):
 * Roots of Trust
 -->
 
-
 ## RATS in a Nutshell
 
-* Attestation workflows typically convey Claims that contain the trustworthiness properties associated with an Attested Environment.
-* A corresponding provisioning workflow conveys reference trustworthiness claims that can be compared with attestation Evidence. Reference values typically consist of firmware or software digests and details about what makes the attesting module trusted.
+* Remote Attestation Interactions typically convey Claims that contain the trustworthiness properties associated with an Attested Environment (Evidence).
+* A corresponding provisioning Interaction conveys Reference trustworthiness claims that can be compared with attestation Evidence. Reference Values typically consist of firmware or software digests and details about what makes the attesting module a trusted source of Evidence.
 * Relying Parties are performing tasks such as managing a resource, controlling access, and/or managing risk. Attestation Results helps Relying Parties determine levels of trust.
 
-## Attestation workflow
+## Remote Attestation Workflow
 
 {:wholeflow: artwork-align="center"}
 ~~~~ WHOLEFLOW
@@ -199,24 +198,24 @@ Things to be mentioned (XXX):
 ~~~~
 {:wholeflow #wholeflow title="RATS Protocol Flows"}
 
-In the RATS architecture shown above, specific content items are identified:
+In the RATS architecture shown above, specific content items (payload conveyed by Interactions) are identified:
 
-* Evidence is a provable Claim about a specific Computing Environment made by an Attester.
-* Known-Good-Values are reference Claims used to appraise Evidence by the Verifier.
-* Endorsements are reference Claims about the environment protecting the Attesters' capabilities to create believable Evidence (e.g. the type of protection for an attestation key). It answers the question "why Evidence is believable". [REWORD]
-* Attestation Results are the output from the appraisal of Evidence, Known-Good-Values and Endorsements.
+* Evidence is as set of believable Claims about distinguishable Environments made by an Attester.
+* Known-Good-Values are reference Claims used to appraise Evidence by an Verifier.
+* Endorsements are reference Claims about the type of protection that enables an Attester to create believable Evidence. Endorsements enable trust relationships towards system components or environments Evidence cannot be created for by an Attester.
+* Attestation Results are the output from the appraisal of Evidence, Known-Good-Values and Endorsements and are consumed by Relying Parties.
 
 Attestation Results are the output of RATS.
 
-Assessment of Attestation Results can be multi-faceted, but is out-of-scope for the RATS architecture.
+Assessment of Attestation Results is be multi-faceted and out-of-scope for the RATS architecture.
 
-If appropriate Endorsements about the Attester are available, Known-Good-Values about the Attester are available, and if the Attester is capable of creating believable Evidence -- then the Verifier is able to create Attestation Results that enable Relying Parties to establish a level of confidence in the trustworthiness of the Attester.
+If appropriate Endorsements about the Attester are available, Known-Good-Values about the Attester are available, and if the Attester is capable of creating believable Evidence - then the Verifier is able to create Attestation Results that enable Relying Parties to establish a level of confidence in the trustworthiness of the Attester.
 
-The Asserter role and the format for Known-Good-Values and Endorsements are not subject to standarization at this time.  The current verticals already includes provisions for encoding and/or distributing these objects already.
+The Asserter role and the format for Known-Good-Values and Endorsements are not subject to standardization at this time.  The current verticals already include provisions for encoding and/or distributing these objects.
 
 ## Passport Model {#passport}
 
-In the Passport Model protocol flow the Attester provides it's Evidence directly to the Verifier.  The Verifier will evaluate the Evidence and then sign a Claim.  This Claim is returned to the Attester, and it is up to the Attester to communicate the Claim to the Relying Party.
+In the Passport Model Interaction Model the Attester provides it's Evidence directly to the Verifier.  The Verifier will evaluate the Evidence and then sign an Attestation Result.  This Attestation Result is returned to the Attester, and it is up to the Attester to communicate the Attestation Result (potentially including the Evidence, if disclosable) to the Relying Party.
 
 {:passportflow: artwork-align="center"}
 ~~~~ PASSPORT
@@ -224,13 +223,12 @@ In the Passport Model protocol flow the Attester provides it's Evidence directly
 ~~~~
 {:passwordflow #passport_diag title="RATS Passport Flow"}
 
-This flow is named in this way because of the resemblance of how Nations issue Passports to their citizens. The nature of the Evidence that an individual needs to provide to it's local authority is specific to the country involved.  The citizen retains control of the resulting document and presents it to other entities when it
-needs to assert a citizenship or identity claim.
+This flow is named in this way because of the resemblance of how Nations issue Passports to their citizens. The nature of the Evidence that an individual needs to provide to it's local authority is specific to the country involved.  The citizen retains control of the resulting document and presents it to other entities when it needs to assert a citizenship or identity claim.
 
 ## Background Check {#background}
 
-In the Background Check Model protocol flow the Attester provides it's Evidence to the Relying Party.
-The Relying Party sends this evidence to a Verifier of its choice.  The Verifier will evaluate the Evidence and then sign a Claim.  This Claim is returned to the Relying Party, which processes it directly.
+In the Background-Check Interaction Model the Attester provides it's Evidence to the Relying Party.
+The Relying Party sends this evidence to a Verifier of its choice.  The Verifier will evaluate the Evidence and then sign an Attestation Result.  This Attestation Result is returned to the Relying Party, which processes it directly.
 
 {:passportflow: artwork-align="center"}
 ~~~~ BACKGROUND
@@ -239,7 +237,7 @@ The Relying Party sends this evidence to a Verifier of its choice.  The Verifier
 {:passwordflow #background_diag title="RATS Background Check Flow"}
 
 This flow is named in this way because of the resemblance of how employers and volunteer organizations
-perform background checks.  When a prospective employee provides claims about education or previous experience, the employer will contact the respective institutions or former employers to validate the claim.  Volunteer organizations often perform police background checks on volunteers in order to determine the volunteer's trust-worthyness.
+perform background checks.  When a prospective employee provides claims about education or previous experience, the employer will contact the respective institutions or former employers to validate the claim.  Volunteer organizations often perform police background checks on volunteers in order to determine the volunteer's trustworthiness.
 
 # Terminology
 
@@ -247,7 +245,7 @@ perform background checks.  When a prospective employee provides claims about ed
 
 Appraisal:
 
-: A Verifier process that compares Evidence to Reference values and produces Results.
+: A Verifier process that compares Evidence to Reference values while taking into account Endorsements and produces Results.
 
 Asserter:
 
@@ -265,7 +263,7 @@ Attesting Environment:
 
 : An environment capable of making trustworthiness Claims about an Attested Environment.
 
-Background-check Interaction Model:
+Background-Check Interaction Model:
 
 : An attestation workflow where the Attester provides Evidence to a Relying Party, who consults one or more Verifiers who supply Results to the Relying Party. See {{background}}.
 
@@ -278,11 +276,11 @@ Statements about trustworthiness characteristics of an Attested Computing Enviro
 
 Conveyance:
 
-: The process of transferring Evidence, Reference values and Results between Entities participating in attestation workflow.
+: The process of transferring Evidence, Reference Values and Results between Entities participating in attestation workflow.
 
 Entity:
 
-: A device, component (See $System Component {{RFC4949}}), or environment that implements one or more Roles.
+: A device, component (see System Component {{RFC4949}}), or environment that implements one or more Roles.
 
 Evidence:
 
@@ -294,7 +292,7 @@ Passport Interaction Model:
 
 Reference Values:
 
-: See {{reference}}.
+: See {{reference}}. Also referred to as Known-Good-Values.
 
 Relying Party:
 
@@ -306,7 +304,7 @@ Results:
 
 Role:
 
-: A function or process in an attestation workflow, typically described by; Attester, Verifier, Relying Party and Asserter.
+: A function or process in an attestation workflow, typically described by: Attester, Verifier, Relying Party and Asserter.
 
 Verifier:
 
@@ -315,42 +313,49 @@ Verifier:
 # Conceptual Overview
 
 In network protocol exchanges, it is often the case that one entity (a Relying Party) requires an assessment of the trustworthiness of a remote entity (an Attester or specific system components {{RFC4949}} thereof).
-Remote ATtestation procedureS (RATS) enable Relying Parties to establish a level of confidence in the trustworthiness of remote system components through the creation of attestation evidence by remote system components and a processing chain of architectural constituents towards the relying party.
+Remote ATtestation procedureS (RATS) enable Relying Parties to establish a level of confidence in the trustworthiness of Attesters through the
 
-The corresponding trustworthiness attributes processed may not be just a finite set of values. Additionally, the system characteristics of remote components themselves have an impact on the veracity of trustworthiness attributes included in Evidence.
-Attester environments can vary widely ranging from those highly resistant to attacks to those having little or no resistance to attacks.
+* Creation,
+* Conveyance, and
+* Appraisal
+
+of attestation Evidence.
+
+Qualities of Evidence:
+
+: Evidence is composed of Claims about trustworthiness. The number of Claims is not finite but continuously growing while technology advances. Additionally, the system characteristics of Attester, the Environments they are composed, and their continuous development have an impact on the veracity of trustworthiness Claims included in Evidence. Valid Evidence that includes trustworthy Claims about the intactness of an Attester must be impossible to create by an untrustworthy or compromised Environment of an Attester.
+
+Qualities of Environments:
+
+: The resilience of Environments that are part of an Attester can vary widely - ranging from those highly resistant to attacks to those having little or no resistance to attacks.
 Configuration options, if set poorly, can result in a highly resistant environment being operationally less resistant.
-Computing Environments are often malleable being constructed from re-programmable hardware, firmware, software and updatable memory.
-When a trustworthy environment changes, the question has to be asked whether the change transitioned the environment from a trustworthy state to an untrustworthy state.
-The RATS architecture provides a framework for anticipating when a relevant change with respect to a trustworthiness attribute occurs, what changed and how relevant it is.
-A remote attestation framework also creates a context for enabling an appropriate response by applications, system software and protocol endpoints when changes to trustworthiness attributes do occur.
+When a trustworthy Environment changes, it is possible that it transitions from a trustworthy operational state to an untrustworthy operational state. An untrustworthy or compromised Environment must never be able to create valid Evidence expressing the intactness of an Attester.
 
-## Computing Environments
+The RATS architecture provides a framework for anticipating when a relevant change with respect to a trustworthiness attribute occurs, what exactly changed and how relevant it is. The RATS architecture also creates a context for enabling an appropriate response by applications, system software and protocol endpoints when changes to trustworthiness attributes do occur.
 
-In the RATS context, a Claim is a specific trustworthiness attribute that pertains to a particular Computing Environment of an Attester.
-The set of possible Claims is expected to follow the possible computing environments that support attestation.
-In other words, identical (i.e. same type, model, versions, components and composition) Attesting Computing Environments can create different Claim values that still compose valid Evidence due to different computing contexts. Exemplary Claims include flight vectors or learned configuration.
+[FIXME suddenly - scope]
+The scope of this document is based on Interaction Models and corresponding Roles based on the use cases defined in {{-rats-usecases}}.
+Protocol specifications for Interaction Models are defined in separate documents.
 
-Likely, there are a set of Claims that is widely applicable across most, if not all environments.
-Conversely, there are Claims that are unique to specific environments.
-Consequently, the RATS architecture incorporates extensible mechanisms for representing Claims.
+## Two Types of Environments
 
-Computing Environments can be complex structurally. In general, every Attester consists of multiple components (e.g. memory, CPU, storage, networking, firmware, software).
-Components are computational elements that can be linked and composed to form computational pipelines, arrays and networks (e.g. a BIOS, a bootloader, or a trusted execution environment).
+An Attester produces Evidence about its own integrity, which means "it measures itself". To disambiguate this recursive or circular looking relationships, two types of Environments inside an Attester are distinguished:
 
-An Attester includes at least one Computing Environment that is able to create attestation Evidence (the Attesting Computing Environment) about other Computing Environments (the Attested Computing Environments).
-Not every computational element of an Attester is expected to be a Computing Environment capable of remote attestation.
-Analogously, remote attestation capable Computing Environments may not be capable of attesting to (creating evidence about) every computational element that interacts with the Computing Environment.
-A Computing Environment with an attestation capability can only be endorsed by an external entity and cannot create believable evidence about itself by its own.
+The attest-ED Environments and the attest-ING Environments.
 
-A Computing Environment with the capability of remote attestation:
+Attested Environments are measured. They provide the raw values and the information to be represented in Claims and ultimately expressed as Evidence.
 
-* is separate from other Attested Computing Environments (about which attestation evidence is created), and
-* is enabling the role of an Attester in the RATS architecture.
+Attesting Environments conduct the measuring. They collect the Claims, format them appropriately, and typically use key material and cryptographic functions, such as signing or cipher algorithms, to create Evidence.
 
-A Computing Environment with the capability of remote attestation and taking on the role of an Attester has the following duties in order to create Evidence:
+Attesting Environments use system components that have to be trusted. As a result, Evidence includes Claims about the Attested and the Attesting Environments. Claims about the Attested Environments are appraised using Reference Values and Claims about the Attesting Environments are appraised using Endorsements. It is not mandated that both Environments have to be separate, but it is highly encouraged. Examples of separated Environments that can be used as Attesting Environments include: Trusted Execution Environments (TEE), embedded Secure Elements (eSE), or Hardware Security Modules (HSM).
 
-* monitoring trustworthiness attributes of other Computing Environments,
+In summary, the majority of the creation of evidence can take place in an Attested Environments. Exemplary duties include the collection and formatting of Claim values, or the trigger for creating Evidence. A trusted sub-set of the creation of evidence can take place in an Attesting Environment, that provide special protection with respect to key material, identity documents, or primitive functions to create the Evidence itself.
+
+## Evidence Creation Prerequisites
+
+One or more Environments that part of an Attester must be able to conduct the following duties in order to create Evidence:
+
+* monitoring trustworthiness attributes of other Environments,
 * collecting trustworthiness attributes and create Claims about them,
 * serialize Claims using interoperable representations,
 * provide integrity protection for the sets of Claims, and
@@ -358,12 +363,15 @@ A Computing Environment with the capability of remote attestation and taking on 
 
 ## Trustworthiness
 
-The trustworthiness of remote attestation capabilities is also a consideration for the RATS architecture.
-It should be possible to understand the trustworthiness properties of the remote attestation capability for any set of claims of a remote attestation flow via verification operations.
-The RATS architecture anticipates recursive trustworthiness properties and the need for termination.
-Ultimately, a portion of a computing environment's trustworthiness is established via non-automated means.
-For example, design reviews, manufacturing process audits and physical security.
-For this reason, trustworthy RATS depend on trustworthy manufacturing and supply chain practices.
+The trustworthiness of an Attester and therefore the believability of the Evidence it creates relies on the protection methods in place to shield and restrict the use of key material and the duties conducted by the Attesting Environment. 
+In order to assess trustworthiness effectively, it is mandatory to understand the trustworthiness properties of the environments of an Attester. The corresponding appraisal of Evidence that leads to such an assessment of trustworthiness is the duty of a Verifier.
+
+Trusting the assessment of a Verifier might com frome trusting the Verifier's key material (direct trust), or trusting an Entity that the Verifier is associated with via a certification path (indirect trust).
+
+The trustworthiness of corresponding Attestation Results also relies on trust towards manufacturers and those manufacturer's hardware in order to assess the integrity and resilience of that manufacturer's devices.
+
+A stronger level of security comes when information can be vouched for by hardware or by ROM code, especially if such hardware is physically resistant to hardware tampering.
+The component that is implicitly trusted is often referred to as a Root of Trust.
 
 ## RATS Workflow
 
