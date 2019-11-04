@@ -287,15 +287,17 @@ ul.toc li {
 <link href="#rfc.section.1.2" rel="Chapter" title="1.2 Opportunities">
 <link href="#rfc.section.1.3" rel="Chapter" title="1.3 Overview of Document">
 <link href="#rfc.section.1.4" rel="Chapter" title="1.4 RATS in a Nutshell">
-<link href="#rfc.section.1.5" rel="Chapter" title="1.5 Attestation workflow">
-<link href="#rfc.section.1.6" rel="Chapter" title="1.6 Passport Model">
-<link href="#rfc.section.1.7" rel="Chapter" title="1.7 Background Check">
+<link href="#rfc.section.1.5" rel="Chapter" title="1.5 Remote Attestation Workflow">
+<link href="#rfc.section.1.6" rel="Chapter" title="1.6 Interaction models">
+<link href="#rfc.section.1.6.1" rel="Chapter" title="1.6.1 Passport Model">
+<link href="#rfc.section.1.6.2" rel="Chapter" title="1.6.2 Background Check">
 <link href="#rfc.section.2" rel="Chapter" title="2 Terminology">
 <link href="#rfc.section.3" rel="Chapter" title="3 Conceptual Overview">
-<link href="#rfc.section.3.1" rel="Chapter" title="3.1 Computing Environments">
-<link href="#rfc.section.3.2" rel="Chapter" title="3.2 Trustworthiness">
-<link href="#rfc.section.3.3" rel="Chapter" title="3.3 RATS Workflow">
-<link href="#rfc.section.3.4" rel="Chapter" title="3.4 Interoperability between RATS">
+<link href="#rfc.section.3.1" rel="Chapter" title="3.1 Two Types of Environments">
+<link href="#rfc.section.3.2" rel="Chapter" title="3.2 Evidence Creation Prerequisites">
+<link href="#rfc.section.3.3" rel="Chapter" title="3.3 Trustworthiness">
+<link href="#rfc.section.3.4" rel="Chapter" title="3.4 RATS Workflow">
+<link href="#rfc.section.3.5" rel="Chapter" title="3.5 Interoperability between RATS">
 <link href="#rfc.section.4" rel="Chapter" title="4 RATS Architecture">
 <link href="#rfc.section.4.1" rel="Chapter" title="4.1 Goals">
 <link href="#rfc.section.4.2" rel="Chapter" title="4.2 Attestation Principles">
@@ -315,7 +317,7 @@ ul.toc li {
 
   <meta name="dct.creator" content="Birkholz, H., Wiseman, M., Tschofenig, H., Smith, N., and M. Richardson" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-birkholz-rats-architecture-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2019-11-03" />
+  <meta name="dct.issued" scheme="ISO8601" content="2019-11-04" />
   <meta name="dct.abstract" content="An entity (a relying party) requires a source of truth and evidence about a remote peer to assess the peer&#8217;s trustworthiness. The evidence is typically a believable set of claims about its host, software or hardware platform. This document describes an architecture for such remote attestation procedures (RATS)." />
   <meta name="description" content="An entity (a relying party) requires a source of truth and evidence about a remote peer to assess the peer&#8217;s trustworthiness. The evidence is typically a believable set of claims about its host, software or hardware platform. This document describes an architecture for such remote attestation procedures (RATS)." />
 
@@ -339,7 +341,7 @@ ul.toc li {
 <td class="right">M. Wiseman</td>
 </tr>
 <tr>
-<td class="left">Expires: May 6, 2020</td>
+<td class="left">Expires: May 7, 2020</td>
 <td class="right">GE Global Research</td>
 </tr>
 <tr>
@@ -368,7 +370,7 @@ ul.toc li {
 </tr>
 <tr>
 <td class="left"></td>
-<td class="right">November 03, 2019</td>
+<td class="right">November 04, 2019</td>
 </tr>
 
     	
@@ -384,7 +386,7 @@ ul.toc li {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on May 6, 2020.</p>
+<p>This Internet-Draft will expire on May 7, 2020.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
 <p>Copyright (c) 2019 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
@@ -404,23 +406,27 @@ ul.toc li {
 </li>
 <li>1.4.   <a href="#rfc.section.1.4">RATS in a Nutshell</a>
 </li>
-<li>1.5.   <a href="#rfc.section.1.5">Attestation workflow</a>
+<li>1.5.   <a href="#rfc.section.1.5">Remote Attestation Workflow</a>
 </li>
-<li>1.6.   <a href="#rfc.section.1.6">Passport Model</a>
+<li>1.6.   <a href="#rfc.section.1.6">Interaction models</a>
 </li>
-<li>1.7.   <a href="#rfc.section.1.7">Background Check</a>
+<ul><li>1.6.1.   <a href="#rfc.section.1.6.1">Passport Model</a>
 </li>
-</ul><li>2.   <a href="#rfc.section.2">Terminology</a>
+<li>1.6.2.   <a href="#rfc.section.1.6.2">Background Check</a>
+</li>
+</ul></ul><li>2.   <a href="#rfc.section.2">Terminology</a>
 </li>
 <li>3.   <a href="#rfc.section.3">Conceptual Overview</a>
 </li>
-<ul><li>3.1.   <a href="#rfc.section.3.1">Computing Environments</a>
+<ul><li>3.1.   <a href="#rfc.section.3.1">Two Types of Environments</a>
 </li>
-<li>3.2.   <a href="#rfc.section.3.2">Trustworthiness</a>
+<li>3.2.   <a href="#rfc.section.3.2">Evidence Creation Prerequisites</a>
 </li>
-<li>3.3.   <a href="#rfc.section.3.3">RATS Workflow</a>
+<li>3.3.   <a href="#rfc.section.3.3">Trustworthiness</a>
 </li>
-<li>3.4.   <a href="#rfc.section.3.4">Interoperability between RATS</a>
+<li>3.4.   <a href="#rfc.section.3.4">RATS Workflow</a>
+</li>
+<li>3.5.   <a href="#rfc.section.3.5">Interoperability between RATS</a>
 </li>
 </ul><li>4.   <a href="#rfc.section.4">RATS Architecture</a>
 </li>
@@ -463,7 +469,7 @@ ul.toc li {
 <h1 id="rfc.section.1.2">
 <a href="#rfc.section.1.2">1.2.</a> <a href="#opportunities" id="opportunities">Opportunities</a>
 </h1>
-<p id="rfc.section.1.2.p.1">The Trusted Platform Module (TPM) is now a commonly available peripheral on many commodity compute platforms,  both servers and desktops.  Smartphones commonly have either an actual TPM, or have the ability to emulate one in software running in a trusted execution environment <a href="#I-D.ietf-teep-architecture" class="xref">[I-D.ietf-teep-architecture]</a>.  There are now few barriers to creating a standards-based system for remote attestation.</p>
+<p id="rfc.section.1.2.p.1">The Trusted Platform Module (TPM) is now a commonly available peripheral on many commodity compute platforms,  both servers and desktops.  Smartphones commonly have either an actual TPM, or have the ability to emulate one in software running in a trusted execution environment <a href="#I-D.ietf-teep-architecture" class="xref">[I-D.ietf-teep-architecture]</a>.  There are now few barriers to creating a standards-based system for remote attestation procedures.</p>
 <p id="rfc.section.1.2.p.2">A number of niche solutions have emerged that provide for use-case specific remote attestation, but none have the generality needed to be used across the Internet.</p>
 <h1 id="rfc.section.1.3">
 <a href="#rfc.section.1.3">1.3.</a> <a href="#overview-of-document" id="overview-of-document">Overview of Document</a>
@@ -473,20 +479,20 @@ ul.toc li {
 <p id="rfc.section.1.3.p.3">While it is not anticipated that the existing niche solutions described in the use cases section will exchange claims directly, the use of a common format enables common code.  As some of the code needs to be in intentionally hard to modify trusted modules, the use of a common format significantly reduces the cost of adoption to all parties.  This commonality also significantly reduces the incidence of critical bugs.</p>
 <p id="rfc.section.1.3.p.4">In some environments the collection of Evidence by the Attester to be provided to the Verifier is part of an existing protocol: this document does not change that, rather embraces those legacy mechanisms as part of the specification.  This is an evolutionary path forward, not revolutionary.  Yet in other greenfield environments, there is a desire to have a standard for Evidence as well as for Attestation Results, and this architecture outlines how that is done.</p>
 <p id="rfc.section.1.3.p.5">This introduction gives an overview of the protocol, interaction models, messaging models and roles involved.  Following this, is a terminology section that is referenced normatively by other documents and is a key part of this document.  There is then a section on use cases and how they leverage the roles and workflows described.</p>
-<p id="rfc.section.1.3.p.6">In this document, terminology which is defined within this document are consistency Capitalized.</p>
-<p id="rfc.section.1.3.p.7">Current verticals that use remote attestion include: * The Trusted Computing Group &#8220;Network Device Attestation Workflow&#8221; <a href="#I-D.fedorkow-rats-network-device-attestation" class="xref">[I-D.fedorkow-rats-network-device-attestation]</a> * Android Keystore <a href="#keystore" class="xref">[keystore]</a> * Fast Identity Online (FIDO) Alliance attestation <a href="#fido" class="xref">[fido]</a> * A number of Intel SGX niche systems based upon OTRP.</p>
+<p id="rfc.section.1.3.p.6">In this document, terms defined within this document are consistently Capitalized [work in progress. please raise issues, if there are Blatant inconsistencies].</p>
+<p id="rfc.section.1.3.p.7">Current verticals that use remote attestation include: * The Trusted Computing Group &#8220;Network Device Attestation Workflow&#8221; <a href="#I-D.fedorkow-rats-network-device-attestation" class="xref">[I-D.fedorkow-rats-network-device-attestation]</a> * Android Keystore <a href="#keystore" class="xref">[keystore]</a> * Fast Identity Online (FIDO) Alliance attestation <a href="#fido" class="xref">[fido]</a> * A number of Intel SGX niche systems based upon OTRP.</p>
 <h1 id="rfc.section.1.4">
 <a href="#rfc.section.1.4">1.4.</a> <a href="#rats-in-a-nutshell" id="rats-in-a-nutshell">RATS in a Nutshell</a>
 </h1>
 <p></p>
 
 <ul>
-<li>Attestation workflows typically convey Claims that contain the trustworthiness properties associated with an Attested Environment.</li>
-<li>A corresponding provisioning workflow conveys reference trustworthiness claims that can be compared with attestation Evidence. Reference values typically consist of firmware or software digests and details about what makes the attesting module trusted.</li>
+<li>Remote Attestation Interactions typically convey Claims that contain the trustworthiness properties associated with an Attested Environment (Evidence).</li>
+<li>A corresponding provisioning Interaction conveys Reference trustworthiness claims that can be compared with attestation Evidence. Reference Values typically consist of firmware or software digests and details about what makes the attesting module a trusted source of Evidence.</li>
 <li>Relying Parties are performing tasks such as managing a resource, controlling access, and/or managing risk. Attestation Results helps Relying Parties determine levels of trust.</li>
 </ul>
 <h1 id="rfc.section.1.5">
-<a href="#rfc.section.1.5">1.5.</a> <a href="#attestation-workflow" id="attestation-workflow">Attestation workflow</a>
+<a href="#rfc.section.1.5">1.5.</a> <a href="#remote-attestation-workflow" id="remote-attestation-workflow">Remote Attestation Workflow</a>
 </h1>
 <div id="rfc.figure.1"></div>
 <div id="wholeflow"></div>
@@ -519,23 +525,26 @@ ul.toc li {
        '---------------'                     '---------------'
 </pre>
 <p class="figure">Figure 1: RATS Protocol Flows</p>
-<p id="rfc.section.1.5.p.1">In the RATS architecture shown above, specific content items are identified:</p>
+<p id="rfc.section.1.5.p.1">In the RATS architecture shown above, specific content items (payload conveyed by Interactions) are identified:</p>
 <p></p>
 
 <ul>
-<li>Evidence is a provable Claim about a specific Computing Environment made by an Attester.</li>
-<li>Known-Good-Values are reference Claims used to appraise Evidence by the Verifier.</li>
-<li>Endorsements are reference Claims about the environment protecting the Attesters&#8217; capabilities to create believable Evidence (e.g. the type of protection for an attestation key). It answers the question &#8220;why Evidence is believable&#8221;. [REWORD]</li>
-<li>Attestation Results are the output from the appraisal of Evidence, Known-Good-Values and Endorsements.</li>
+<li>Evidence is as set of believable Claims about distinguishable Environments made by an Attester.</li>
+<li>Known-Good-Values are reference Claims used to appraise Evidence by an Verifier.</li>
+<li>Endorsements are reference Claims about the type of protection that enables an Attester to create believable Evidence. Endorsements enable trust relationships towards system components or environments Evidence cannot be created for by an Attester.</li>
+<li>Attestation Results are the output from the appraisal of Evidence, Known-Good-Values and Endorsements and are consumed by Relying Parties.</li>
 </ul>
 <p id="rfc.section.1.5.p.3">Attestation Results are the output of RATS.</p>
-<p id="rfc.section.1.5.p.4">Assessment of Attestation Results can be multi-faceted, but is out-of-scope for the RATS architecture.</p>
-<p id="rfc.section.1.5.p.5">If appropriate Endorsements about the Attester are available, Known-Good-Values about the Attester are available, and if the Attester is capable of creating believable Evidence &#8211; then the Verifier is able to create Attestation Results that enable Relying Parties to establish a level of confidence in the trustworthiness of the Attester.</p>
-<p id="rfc.section.1.5.p.6">The Asserter role and the format for Known-Good-Values and Endorsements are not subject to standarization at this time.  The current verticals already includes provisions for encoding and/or distributing these objects already.</p>
+<p id="rfc.section.1.5.p.4">Assessment of Attestation Results is be multi-faceted and out-of-scope for the RATS architecture.</p>
+<p id="rfc.section.1.5.p.5">If appropriate Endorsements about the Attester are available, Known-Good-Values about the Attester are available, and if the Attester is capable of creating believable Evidence - then the Verifier is able to create Attestation Results that enable Relying Parties to establish a level of confidence in the trustworthiness of the Attester.</p>
+<p id="rfc.section.1.5.p.6">The Asserter role and the format for Known-Good-Values and Endorsements are not subject to standardization at this time.  The current verticals already include provisions for encoding and/or distributing these objects.</p>
 <h1 id="rfc.section.1.6">
-<a href="#rfc.section.1.6">1.6.</a> <a href="#passport" id="passport">Passport Model</a>
+<a href="#rfc.section.1.6">1.6.</a> <a href="#interaction-models" id="interaction-models">Interaction models</a>
 </h1>
-<p id="rfc.section.1.6.p.1">In the Passport Model protocol flow the Attester provides it&#8217;s Evidence directly to the Verifier.  The Verifier will evaluate the Evidence and then sign a Claim.  This Claim is returned to the Attester, and it is up to the Attester to communicate the Claim to the Relying Party.</p>
+<h1 id="rfc.section.1.6.1">
+<a href="#rfc.section.1.6.1">1.6.1.</a> <a href="#passport" id="passport">Passport Model</a>
+</h1>
+<p id="rfc.section.1.6.1.p.1">In the Passport Model Interaction Model the Attester provides it&#8217;s Evidence directly to the Verifier.  The Verifier will evaluate the Evidence and then sign an Attestation Result.  This Attestation Result is returned to the Attester, and it is up to the Attester to communicate the Attestation Result (potentially including the Evidence, if disclosable) to the Relying Party.</p>
 <div id="rfc.figure.2"></div>
 <div id="passport_diag"></div>
 <pre>
@@ -567,11 +576,11 @@ ul.toc li {
        '---------------' (Claims)            '---------------'
 </pre>
 <p class="figure">Figure 2: RATS Passport Flow</p>
-<p id="rfc.section.1.6.p.2">This flow is named in this way because of the resemblance of how Nations issue Passports to their citizens. The nature of the Evidence that an individual needs to provide to it&#8217;s local authority is specific to the country involved.  The citizen retains control of the resulting document and presents it to other entities when it needs to assert a citizenship or identity claim.</p>
-<h1 id="rfc.section.1.7">
-<a href="#rfc.section.1.7">1.7.</a> <a href="#background" id="background">Background Check</a>
+<p id="rfc.section.1.6.1.p.2">This flow is named in this way because of the resemblance of how Nations issue Passports to their citizens. The nature of the Evidence that an individual needs to provide to it&#8217;s local authority is specific to the country involved.  The citizen retains control of the resulting document and presents it to other entities when it needs to assert a citizenship or identity claim.</p>
+<h1 id="rfc.section.1.6.2">
+<a href="#rfc.section.1.6.2">1.6.2.</a> <a href="#background" id="background">Background Check</a>
 </h1>
-<p id="rfc.section.1.7.p.1">In the Background Check Model protocol flow the Attester provides it&#8217;s Evidence to the Relying Party.  The Relying Party sends this evidence to a Verifier of its choice.  The Verifier will evaluate the Evidence and then sign a Claim.  This Claim is returned to the Relying Party, which processes it directly.</p>
+<p id="rfc.section.1.6.2.p.1">In the Background-Check Interaction Model the Attester provides it&#8217;s Evidence to the Relying Party.  The Relying Party sends this evidence to a Verifier of its choice.  The Verifier will evaluate the Evidence and then sign an Attestation Result.  This Attestation Result is returned to the Relying Party, which processes it directly.</p>
 <div id="rfc.figure.3"></div>
 <div id="background_diag"></div>
 <pre>
@@ -603,7 +612,7 @@ ul.toc li {
        '---------------'                     '---------------'
 </pre>
 <p class="figure">Figure 3: RATS Background Check Flow</p>
-<p id="rfc.section.1.7.p.2">This flow is named in this way because of the resemblance of how employers and volunteer organizations perform background checks.  When a prospective employee provides claims about education or previous experience, the employer will contact the respective institutions or former employers to validate the claim.  Volunteer organizations often perform police background checks on volunteers in order to determine the volunteer&#8217;s trust-worthyness.</p>
+<p id="rfc.section.1.6.2.p.2">This flow is named in this way because of the resemblance of how employers and volunteer organizations perform background checks.  When a prospective employee provides claims about education or previous experience, the employer will contact the respective institutions or former employers to validate the claim.  Volunteer organizations often perform police background checks on volunteers in order to determine the volunteer&#8217;s trustworthiness.</p>
 <h1 id="rfc.section.2">
 <a href="#rfc.section.2">2.</a> <a href="#terminology" id="terminology">Terminology</a>
 </h1>
@@ -612,7 +621,7 @@ ul.toc li {
 
 <dl>
 <dt>Appraisal:</dt>
-<dd style="margin-left: 8">A Verifier process that compares Evidence to Reference values and produces Results.</dd>
+<dd style="margin-left: 8">A Verifier process that compares Evidence to Reference values while taking into account Endorsements and produces Results.</dd>
 <dt>Asserter:</dt>
 <dd style="margin-left: 8">See <a href="#asserter" class="xref">Section 4.3.1.2</a>.</dd>
 <dt>Attester:</dt>
@@ -621,71 +630,89 @@ ul.toc li {
 <dd style="margin-left: 8">A target environment that is observed or controlled by an Attesting Environment.</dd>
 <dt>Attesting Environment:</dt>
 <dd style="margin-left: 8">An environment capable of making trustworthiness Claims about an Attested Environment.</dd>
-<dt>Background-check Interaction Model:</dt>
-<dd style="margin-left: 8">An attestation workflow where the Attester provides Evidence to a Relying Party, who consults one or more Verifiers who supply Results to the Relying Party. See <a href="#background" class="xref">Section 1.7</a>.</dd>
+<dt>Background-Check Interaction Model:</dt>
+<dd style="margin-left: 8">An attestation workflow where the Attester provides Evidence to a Relying Party, who consults one or more Verifiers who supply Results to the Relying Party. See <a href="#background" class="xref">Section 1.6.2</a>.</dd>
 <dt>Claim:</dt>
 <dd style="margin-left: 8">A statement about the construction, composition, validation or behavior of an Entity that affects trustworthiness. Evidence, Reference Values and Results are expressions that consists of one or more Claims.  </dd>
 <dt>Conveyance:</dt>
-<dd style="margin-left: 8">The process of transferring Evidence, Reference values and Results between Entities participating in attestation workflow.</dd>
+<dd style="margin-left: 8">The process of transferring Evidence, Reference Values and Results between Entities participating in attestation workflow.</dd>
 <dt>Entity:</dt>
-<dd style="margin-left: 8">A device, component (See $System Component <a href="#RFC4949" class="xref">[RFC4949]</a>), or environment that implements one or more Roles.</dd>
+<dd style="margin-left: 8">A device, component (see System Component <a href="#RFC4949" class="xref">[RFC4949]</a>), or environment that implements one or more Roles.</dd>
 <dt>Evidence:</dt>
 <dd style="margin-left: 8">See <a href="#evidence" class="xref">Section 4.3.2.1</a>.</dd>
 <dt>Passport Interaction Model:</dt>
-<dd style="margin-left: 8">An attestation workflow where the Attester provides Evidence to a Verifier who returns Results that are then forwarded to one or more Relying Parties. See <a href="#passport" class="xref">Section 1.6</a>.</dd>
+<dd style="margin-left: 8">An attestation workflow where the Attester provides Evidence to a Verifier who returns Results that are then forwarded to one or more Relying Parties. See <a href="#passport" class="xref">Section 1.6.1</a>.</dd>
 <dt>Reference Values:</dt>
-<dd style="margin-left: 8">See <a href="#reference" class="xref">Section 4.3.2.2</a>.</dd>
+<dd style="margin-left: 8">See <a href="#reference" class="xref">Section 4.3.2.2</a>. Also referred to as Known-Good-Values.</dd>
 <dt>Relying Party:</dt>
 <dd style="margin-left: 8">See <a href="#relyingparty" class="xref">Section 4.3.1.4</a>.</dd>
 <dt>Results:</dt>
 <dd style="margin-left: 8">See <a href="#results" class="xref">Section 4.3.2.3</a>.</dd>
 <dt>Role:</dt>
-<dd style="margin-left: 8">A function or process in an attestation workflow, typically described by; Attester, Verifier, Relying Party and Asserter.</dd>
+<dd style="margin-left: 8">A function or process in an attestation workflow, typically described by: Attester, Verifier, Relying Party and Asserter.</dd>
 <dt>Verifier:</dt>
 <dd style="margin-left: 8">See <a href="#verifier" class="xref">Section 4.3.1.3</a>.</dd>
 </dl>
 <h1 id="rfc.section.3">
 <a href="#rfc.section.3">3.</a> <a href="#conceptual-overview" id="conceptual-overview">Conceptual Overview</a>
 </h1>
-<p id="rfc.section.3.p.1">In network protocol exchanges, it is often the case that one entity (a Relying Party) requires an assessment of the trustworthiness of a remote entity (an Attester or specific system components <a href="#RFC4949" class="xref">[RFC4949]</a> thereof).  Remote ATtestation procedureS (RATS) enable Relying Parties to establish a level of confidence in the trustworthiness of remote system components through the creation of attestation evidence by remote system components and a processing chain of architectural constituents towards the relying party.</p>
-<p id="rfc.section.3.p.2">The corresponding trustworthiness attributes processed may not be just a finite set of values. Additionally, the system characteristics of remote components themselves have an impact on the veracity of trustworthiness attributes included in Evidence.  Attester environments can vary widely ranging from those highly resistant to attacks to those having little or no resistance to attacks.  Configuration options, if set poorly, can result in a highly resistant environment being operationally less resistant.  Computing Environments are often malleable being constructed from re-programmable hardware, firmware, software and updatable memory.  When a trustworthy environment changes, the question has to be asked whether the change transitioned the environment from a trustworthy state to an untrustworthy state.  The RATS architecture provides a framework for anticipating when a relevant change with respect to a trustworthiness attribute occurs, what changed and how relevant it is.  A remote attestation framework also creates a context for enabling an appropriate response by applications, system software and protocol endpoints when changes to trustworthiness attributes do occur.</p>
-<h1 id="rfc.section.3.1">
-<a href="#rfc.section.3.1">3.1.</a> <a href="#computing-environments" id="computing-environments">Computing Environments</a>
-</h1>
-<p id="rfc.section.3.1.p.1">In the RATS context, a Claim is a specific trustworthiness attribute that pertains to a particular Computing Environment of an Attester.  The set of possible Claims is expected to follow the possible computing environments that support attestation.  In other words, identical (i.e. same type, model, versions, components and composition) Attesting Computing Environments can create different Claim values that still compose valid Evidence due to different computing contexts. Exemplary Claims include flight vectors or learned configuration.</p>
-<p id="rfc.section.3.1.p.2">Likely, there are a set of Claims that is widely applicable across most, if not all environments.  Conversely, there are Claims that are unique to specific environments.  Consequently, the RATS architecture incorporates extensible mechanisms for representing Claims.</p>
-<p id="rfc.section.3.1.p.3">Computing Environments can be complex structurally. In general, every Attester consists of multiple components (e.g. memory, CPU, storage, networking, firmware, software).  Components are computational elements that can be linked and composed to form computational pipelines, arrays and networks (e.g. a BIOS, a bootloader, or a trusted execution environment).</p>
-<p id="rfc.section.3.1.p.4">An Attester includes at least one Computing Environment that is able to create attestation Evidence (the Attesting Computing Environment) about other Computing Environments (the Attested Computing Environments).  Not every computational element of an Attester is expected to be a Computing Environment capable of remote attestation.  Analogously, remote attestation capable Computing Environments may not be capable of attesting to (creating evidence about) every computational element that interacts with the Computing Environment.  A Computing Environment with an attestation capability can only be endorsed by an external entity and cannot create believable evidence about itself by its own.</p>
-<p id="rfc.section.3.1.p.5">A Computing Environment with the capability of remote attestation:</p>
+<p id="rfc.section.3.p.1">In network protocol exchanges, it is often the case that one entity (a Relying Party) requires an assessment of the trustworthiness of a remote entity (an Attester or specific system components <a href="#RFC4949" class="xref">[RFC4949]</a> thereof).  Remote ATtestation procedureS (RATS) enable Relying Parties to establish a level of confidence in the trustworthiness of Attesters through the</p>
 <p></p>
 
 <ul>
-<li>is separate from other Attested Computing Environments (about which attestation evidence is created), and</li>
-<li>is enabling the role of an Attester in the RATS architecture.</li>
+<li>Creation,</li>
+<li>Conveyance, and</li>
+<li>Appraisal</li>
 </ul>
-<p id="rfc.section.3.1.p.7">A Computing Environment with the capability of remote attestation and taking on the role of an Attester has the following duties in order to create Evidence:</p>
+<p id="rfc.section.3.p.3">of attestation Evidence.</p>
+<p></p>
+
+<dl>
+<dt>Qualities of Evidence:</dt>
+<dd style="margin-left: 8">Evidence is composed of Claims about trustworthiness. The number of Claims is not finite but continuously growing while technology advances. Additionally, the system characteristics of Attester, the Environments they are composed, and their continuous development have an impact on the veracity of trustworthiness Claims included in Evidence. Valid Evidence that includes trustworthy Claims about the intactness of an Attester must be impossible to create by an untrustworthy or compromised Environment of an Attester.</dd>
+<dt>Qualities of Environments:</dt>
+<dd style="margin-left: 8">The resilience of Environments that are part of an Attester can vary widely - ranging from those highly resistant to attacks to those having little or no resistance to attacks.  Configuration options, if set poorly, can result in a highly resistant environment being operationally less resistant.  When a trustworthy Environment changes, it is possible that it transitions from a trustworthy operational state to an untrustworthy operational state. An untrustworthy or compromised Environment must never be able to create valid Evidence expressing the intactness of an Attester.</dd>
+</dl>
+<p id="rfc.section.3.p.5">The RATS architecture provides a framework for anticipating when a relevant change with respect to a trustworthiness attribute occurs, what exactly changed and how relevant it is. The RATS architecture also creates a context for enabling an appropriate response by applications, system software and protocol endpoints when changes to trustworthiness attributes do occur.</p>
+<p id="rfc.section.3.p.6">[FIXME suddenly - scope] The scope of this document is based on Interaction Models and corresponding Roles based on the use cases defined in <a href="#I-D.richardson-rats-usecases" class="xref">[I-D.richardson-rats-usecases]</a>.  Protocol specifications for Interaction Models are defined in separate documents.</p>
+<h1 id="rfc.section.3.1">
+<a href="#rfc.section.3.1">3.1.</a> <a href="#two-types-of-environments" id="two-types-of-environments">Two Types of Environments</a>
+</h1>
+<p id="rfc.section.3.1.p.1">An Attester produces Evidence about its own integrity, which means &#8220;it measures itself&#8221;. To disambiguate this recursive or circular looking relationships, two types of Environments inside an Attester are distinguished:</p>
+<p id="rfc.section.3.1.p.2">The attest-ED Environments and the attest-ING Environments.</p>
+<p id="rfc.section.3.1.p.3">Attested Environments are measured. They provide the raw values and the information to be represented in Claims and ultimately expressed as Evidence.</p>
+<p id="rfc.section.3.1.p.4">Attesting Environments conduct the measuring. They collect the Claims, format them appropriately, and typically use key material and cryptographic functions, such as signing or cipher algorithms, to create Evidence.</p>
+<p id="rfc.section.3.1.p.5">Attesting Environments use system components that have to be trusted. As a result, Evidence includes Claims about the Attested and the Attesting Environments. Claims about the Attested Environments are appraised using Reference Values and Claims about the Attesting Environments are appraised using Endorsements. It is not mandated that both Environments have to be separate, but it is highly encouraged. Examples of separated Environments that can be used as Attesting Environments include: Trusted Execution Environments (TEE), embedded Secure Elements (eSE), or Hardware Security Modules (HSM).</p>
+<p id="rfc.section.3.1.p.6">In summary, the majority of the creation of evidence can take place in an Attested Environments. Exemplary duties include the collection and formatting of Claim values, or the trigger for creating Evidence. A trusted sub-set of the creation of evidence can take place in an Attesting Environment, that provide special protection with respect to key material, identity documents, or primitive functions to create the Evidence itself.</p>
+<h1 id="rfc.section.3.2">
+<a href="#rfc.section.3.2">3.2.</a> <a href="#evidence-creation-prerequisites" id="evidence-creation-prerequisites">Evidence Creation Prerequisites</a>
+</h1>
+<p id="rfc.section.3.2.p.1">One or more Environments that part of an Attester must be able to conduct the following duties in order to create Evidence:</p>
 <p></p>
 
 <ul>
-<li>monitoring trustworthiness attributes of other Computing Environments,</li>
+<li>monitoring trustworthiness attributes of other Environments,</li>
 <li>collecting trustworthiness attributes and create Claims about them,</li>
 <li>serialize Claims using interoperable representations,</li>
 <li>provide integrity protection for the sets of Claims, and</li>
 <li>add appropriate attestation provenance attributes about the sets of Claims.</li>
 </ul>
-<h1 id="rfc.section.3.2">
-<a href="#rfc.section.3.2">3.2.</a> <a href="#trustworthiness" id="trustworthiness">Trustworthiness</a>
-</h1>
-<p id="rfc.section.3.2.p.1">The trustworthiness of remote attestation capabilities is also a consideration for the RATS architecture.  It should be possible to understand the trustworthiness properties of the remote attestation capability for any set of claims of a remote attestation flow via verification operations.  The RATS architecture anticipates recursive trustworthiness properties and the need for termination.  Ultimately, a portion of a computing environment&#8217;s trustworthiness is established via non-automated means.  For example, design reviews, manufacturing process audits and physical security.  For this reason, trustworthy RATS depend on trustworthy manufacturing and supply chain practices.</p>
 <h1 id="rfc.section.3.3">
-<a href="#rfc.section.3.3">3.3.</a> <a href="#rats-workflow" id="rats-workflow">RATS Workflow</a>
+<a href="#rfc.section.3.3">3.3.</a> <a href="#trustworthiness" id="trustworthiness">Trustworthiness</a>
 </h1>
-<p id="rfc.section.3.3.p.1">The basic function of RATS is creation, conveyance and appraisal of attestation Evidence.  An Attester creates attestation Evidence that are conveyed to a Verifier for appraisal.  The appraisals compare Evidence with expected Known-Good-Values called obtained from Asserters (e.g. Principals that are Supply Chain Entities).  There can be multiple forms of appraisal (e.g., software integrity verification, device composition and configuration verification, device identity and provenance verification).  Attestation Results are the output of appraisals. Attestation Results are signed and conveyed to Relying Parties. Attestation Results provide the basis by which the Relying Party may determine a level of confidence to place in the application data or operations that follow.</p>
-<p id="rfc.section.3.3.p.2">RATS architecture defines attestation Roles (i.e., Attester, Verifier, Asserter and Relying Party), the messages they exchange, their structure and the various legal ways in which Roles may be hosted, combined and divided (see Principals below). RATS messages are defined by an information model that defines Claims, environment and protocol semantics. Information Model representations are realized as data structure and conveyance protocol binding specifications.</p>
+<p id="rfc.section.3.3.p.1">The trustworthiness of an Attester and therefore the believability of the Evidence it creates relies on the protection methods in place to shield and restrict the use of key material and the duties conducted by the Attesting Environment.  In order to assess trustworthiness effectively, it is mandatory to understand the trustworthiness properties of the environments of an Attester. The corresponding appraisal of Evidence that leads to such an assessment of trustworthiness is the duty of a Verifier.</p>
+<p id="rfc.section.3.3.p.2">Trusting the assessment of a Verifier might com frome trusting the Verifier&#8217;s key material (direct trust), or trusting an Entity that the Verifier is associated with via a certification path (indirect trust).</p>
+<p id="rfc.section.3.3.p.3">The trustworthiness of corresponding Attestation Results also relies on trust towards manufacturers and those manufacturer&#8217;s hardware in order to assess the integrity and resilience of that manufacturer&#8217;s devices.</p>
+<p id="rfc.section.3.3.p.4">A stronger level of security comes when information can be vouched for by hardware or by ROM code, especially if such hardware is physically resistant to hardware tampering.  The component that is implicitly trusted is often referred to as a Root of Trust.</p>
 <h1 id="rfc.section.3.4">
-<a href="#rfc.section.3.4">3.4.</a> <a href="#interoperability-between-rats" id="interoperability-between-rats">Interoperability between RATS</a>
+<a href="#rfc.section.3.4">3.4.</a> <a href="#rats-workflow" id="rats-workflow">RATS Workflow</a>
 </h1>
-<p id="rfc.section.3.4.p.1">The RATS architecture anticipates use of information modeling techniques that describe computing environment structures &#8211; their components/computational elements and corresponding capabilities &#8211; so that verification operations may rely on the information model as an interoperable way to navigate the structural complexity.</p>
+<p id="rfc.section.3.4.p.1">The basic function of RATS is creation, conveyance and appraisal of attestation Evidence.  An Attester creates attestation Evidence that are conveyed to a Verifier for appraisal.  The appraisals compare Evidence with expected Known-Good-Values called obtained from Asserters (e.g. Principals that are Supply Chain Entities).  There can be multiple forms of appraisal (e.g., software integrity verification, device composition and configuration verification, device identity and provenance verification).  Attestation Results are the output of appraisals. Attestation Results are signed and conveyed to Relying Parties. Attestation Results provide the basis by which the Relying Party may determine a level of confidence to place in the application data or operations that follow.</p>
+<p id="rfc.section.3.4.p.2">RATS architecture defines attestation Roles (i.e., Attester, Verifier, Asserter and Relying Party), the messages they exchange, their structure and the various legal ways in which Roles may be hosted, combined and divided (see Principals below). RATS messages are defined by an information model that defines Claims, environment and protocol semantics. Information Model representations are realized as data structure and conveyance protocol binding specifications.</p>
+<h1 id="rfc.section.3.5">
+<a href="#rfc.section.3.5">3.5.</a> <a href="#interoperability-between-rats" id="interoperability-between-rats">Interoperability between RATS</a>
+</h1>
+<p id="rfc.section.3.5.p.1">The RATS architecture anticipates use of information modeling techniques that describe computing environment structures &#8211; their components/computational elements and corresponding capabilities &#8211; so that verification operations may rely on the information model as an interoperable way to navigate the structural complexity.</p>
 <h1 id="rfc.section.4">
 <a href="#rfc.section.4">4.</a> <a href="#rats-architecture" id="rats-architecture">RATS Architecture</a>
 </h1>
@@ -720,14 +747,14 @@ ul.toc li {
 <li>Veracity - the believability (level of confidence) of Claims is based on verifiable proofs.</li>
 </ul>
 <h1 id="rfc.section.4.3">
-<a href="#rfc.section.4.3">4.3.</a> <a href="#attestation-workflow-1" id="attestation-workflow-1">Attestation Workflow</a>
+<a href="#rfc.section.4.3">4.3.</a> <a href="#attestation-workflow" id="attestation-workflow">Attestation Workflow</a>
 </h1>
 <p id="rfc.section.4.3.p.1">Attestation workflow helps a Relying Party make better decisions by providing insight about the trustworthiness of endpoints participating in a distributed system. The workflow consists primarily of four roles; Relying Party, Verifier, Attester and Asserter. Attestation messages contain information useful for appraising the trustworthiness of an Attester endpoint and informing the Relying Party of the appraisal result.</p>
 <p id="rfc.section.4.3.p.2">This section details the primary roles of an attestation workflow and the messages they exchange.</p>
 <h1 id="rfc.section.4.3.1">
 <a href="#rfc.section.4.3.1">4.3.1.</a> <a href="#roles" id="roles">Roles</a>
 </h1>
-<p id="rfc.section.4.3.1.p.1">An endpoint system (a.k.a., Entity) may implement one or more attestation Roles to accommodate a variety of possible interaction models. Exemplary interaction models are described in <a href="#passport" class="xref">Section 1.6</a> and <a href="#background" class="xref">Section 1.7</a>. Role messages are secured by the Entity that generated it. Entities possess credentials (e.g., cryptographic keys) that authenticate, integrity protect and optionally confidentiality protect attestation messages.</p>
+<p id="rfc.section.4.3.1.p.1">An endpoint system (a.k.a., Entity) may implement one or more attestation Roles to accommodate a variety of possible interaction models. Exemplary interaction models are described in <a href="#passport" class="xref">Section 1.6.1</a> and <a href="#background" class="xref">Section 1.6.2</a>. Role messages are secured by the Entity that generated it. Entities possess credentials (e.g., cryptographic keys) that authenticate, integrity protect and optionally confidentiality protect attestation messages.</p>
 <h1 id="rfc.section.4.3.1.1">
 <a href="#rfc.section.4.3.1.1">4.3.1.1.</a> <a href="#attester" id="attester">Attester</a>
 </h1>
@@ -848,7 +875,7 @@ ul.toc li {
 <tr>
 <td class="reference"><b id="fido">[fido]</b></td>
 <td class="top">
-<a>FIDO Alliance, .</a>, "<a href="https://fidoalliance.org/specifications/">FIDO Specification Overview</a>", n.d..</td>
+<a>FIDO Alliance, .</a>, "<a href="https://fidoalliance.org/specifications/">FIDO Specification Overview</a>", 2019.</td>
 </tr>
 <tr>
 <td class="reference"><b id="I-D.fedorkow-rats-network-device-attestation">[I-D.fedorkow-rats-network-device-attestation]</b></td>
@@ -873,7 +900,7 @@ ul.toc li {
 <tr>
 <td class="reference"><b id="keystore">[keystore]</b></td>
 <td class="top">
-<a>Google, .</a>, "<a href="https://developer.android.com/training/articles/keystore">Android Keystore System</a>", n.d..</td>
+<a>Google, .</a>, "<a href="https://developer.android.com/training/articles/keystore">Android Keystore System</a>", 2019.</td>
 </tr>
 <tr>
 <td class="reference"><b id="Lampson2007">[Lampson2007]</b></td>
