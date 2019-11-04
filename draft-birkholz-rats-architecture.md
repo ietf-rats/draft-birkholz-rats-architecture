@@ -221,7 +221,7 @@ The Asserter role and the format for Known-Good-Values and Endorsements are not 
 {: #passport}
 ### Passport Model
 
-In the Passport Model Interaction Model the Attester provides it's Evidence directly to the Verifier.  The Verifier will evaluate the Evidence and then sign an Attestation Result.  This Attestation Result is returned to the Attester, and it is up to the Attester to communicate the Attestation Result (potentially including the Evidence, if disclosable) to the Relying Party.
+In the Passport Model message flow the Attester provides it's Evidence directly to the Verifier.  The Verifier will evaluate the Evidence and then sign an Attestation Result.  This Attestation Result is returned to the Attester, and it is up to the Attester to communicate the Attestation Result (potentially including the Evidence, if disclosable) to the Relying Party.
 
 {:passportflow: artwork-align="center"}
 ~~~~ PASSPORT
@@ -234,7 +234,7 @@ This flow is named in this way because of the resemblance of how Nations issue P
 {: #background}
 ### Background Check
 
-In the Background-Check Interaction Model the Attester provides it's Evidence to the Relying Party.
+In the Background-Check message flow the Attester provides it's Evidence to the Relying Party.
 The Relying Party sends this evidence to a Verifier of its choice.  The Verifier will evaluate the Evidence and then sign an Attestation Result.  This Attestation Result is returned to the Relying Party, which processes it directly.
 
 {:passportflow: artwork-align="center"}
@@ -270,7 +270,7 @@ Attesting Environment:
 
 : An environment capable of making trustworthiness Claims about an Attested Environment.
 
-Background-Check Interaction Model:
+Background-Check message flow:
 
 : An attestation workflow where the Attester provides Evidence to a Relying Party, who consults one or more Verifiers who supply Results to the Relying Party. See {{background}}.
 
@@ -293,7 +293,7 @@ Evidence:
 
 : See {{evidence}}.
 
-Passport Interaction Model:
+Passport message flow:
 
 : An attestation workflow where the Attester provides Evidence to a Verifier who returns Results that are then forwarded to one or more Relying Parties. See {{passport}}.
 
@@ -341,8 +341,8 @@ When a trustworthy Environment changes, it is possible that it transitions from 
 The RATS architecture provides a framework for anticipating when a relevant change with respect to a trustworthiness attribute occurs, what exactly changed and how relevant it is. The RATS architecture also creates a context for enabling an appropriate response by applications, system software and protocol endpoints when changes to trustworthiness attributes do occur.
 
 [FIXME suddenly - scope]
-The scope of this document is based on Interaction Models and corresponding Roles based on the use cases defined in {{-rats-usecases}}.
-Protocol specifications for Interaction Models are defined in separate documents.
+The scope of this document is based on message flows and corresponding Roles based on the use cases defined in {{-rats-usecases}}.
+Protocol specifications for message flows are defined in separate documents.
 
 ## Two Types of Environments
 
@@ -370,7 +370,7 @@ One or more Environments that part of an Attester must be able to conduct the fo
 
 ## Trustworthiness
 
-The trustworthiness of an Attester and therefore the believability of the Evidence it creates relies on the protection methods in place to shield and restrict the use of key material and the duties conducted by the Attesting Environment. 
+The trustworthiness of an Attester and therefore the believability of the Evidence it creates relies on the protection methods in place to shield and restrict the use of key material and the duties conducted by the Attesting Environment.
 In order to assess trustworthiness effectively, it is mandatory to understand the trustworthiness properties of the environments of an Attester. The corresponding appraisal of Evidence that leads to such an assessment of trustworthiness is the duty of a Verifier.
 
 Trusting the assessment of a Verifier might com frome trusting the Verifier's key material (direct trust), or trusting an Entity that the Verifier is associated with via a certification path (indirect trust).
@@ -576,6 +576,276 @@ RATS Principals have the following properties:
 * Decomposition -  A singleton RATS Principal possessing multiple RATS Roles can be divided into multiple RATS Principals.
 
 RATS Interactions may occur between them.
+
+# Reference use cases
+
+## Device Capabilities/Firmware Attestation {#netattest}
+
+This is a large category of claims that includes a number of subcategories,
+not detailed here.
+
+Use case name:
+
+: Device Identity
+
+Who will use it:
+
+: Network Operators, larger enterprises
+
+Attester:
+
+: varies
+
+Message Flow:
+
+: usually passport
+
+Relying Party:
+
+: varies
+
+Description:
+
+: Network operators want a trustworth report of identity and version of
+information of the hardware and software on the machines attached to their
+network.
+The process starts with some kind of Root of Trust that provides device
+identity and protected storage for measurements. The mechanism performs a
+series of measurements, and expresses this
+with an attestation as to the hardware and firmware/software which is
+running.
+
+This is a general description for which there are many specific use cases,
+including {{I-D.fedorkow-rats-network-device-attestation}} section 1.2,
+"Software Inventory"
+
+## IETF TEEP WG use case
+
+Use case name:
+
+: TAM validation
+
+Who will use it:
+
+: The TAM server
+
+Message Flow:
+
+: background check
+
+Attester:
+
+: Trusted Execution Environment (TEE)
+
+Relying Party:
+
+: end-application
+
+Description:
+
+: The "Trusted Application Manager (TAM)" server wants to verify the state of a
+TEE, or applications in the TEE, of a device.  The TEE attests to the TAM,
+which can then decide whether to install sensitive data in the TEE, or
+whether the TEE is out of compliance and the TAM needs to install updated
+code in the TEE to bring it back into compliance with the TAM's policy.
+
+## Time base unidirectional attestation
+
+Use case name:
+
+: Time base unidirectional attestation (TUDA)
+
+Who will use it:
+
+: high security facilities, with network diode: air gap-ish firewall
+(information leaves, but never enters).  Any network services that are
+RESTful can fall into this category!  Clients can GET/ the info, and it must
+be complete and stand-alone without interaction.  Or it may be pushed via
+MQTT or CoAP Observe.
+
+Message Flow:
+
+: passport
+
+Attester:
+
+: web services and other sources of status/sensor information
+
+Relying Party:
+
+: open
+
+Claims used as evidence:
+
+: the beginning and ending time as endorsed by a Time Stamp Authority,
+represented by a time stamp token.  The real time clock of the system
+itself.  A Root of Trust for time; the TPM has a relative time from
+startup.
+
+Description:
+
+: The output of TUDA are typically a secure audit log, where freshness is
+determined by synchronization to an source of external time.
+
+The freshness is preserved in the evidence, allowing past states of the
+device can be determined.
+
+## Virtualized multi-tenant hosts
+
+Use case name:
+
+: Multi-tenant hosts
+
+Who will use it:
+
+: Virtual machine systems
+
+Message Flow:
+
+: TBD
+
+Attester:
+
+: virtual machine hypervisor
+
+Relying Party:
+
+: network operators
+
+Claims used as evidence:
+
+: TBD
+
+Description:
+
+: The host system will do verification as per {{netattest}}
+
+The tenant virtual machines will do verification as per {{netattest}}.
+
+The network operator wants to know if the system *as a whole* is free of
+malware, but the network operator is not allowed to know who the tenants are.
+
+This is contrasted to the Chassis + Line Cards case (To Be Defined: TBD).
+
+Multiple Line Cards, but a small attestation system on the main card can
+combine things together.  This is a kind of proxy.
+
+## Cryptographic Key Attestation {#cryptattest}
+
+Cryptographic Attestion includes subcategories such as Device Type
+Attestation (the FIDO use case), and Key storage Attestation (the Android
+Keystore use case),
+
+Use case name:
+
+: Key Attestation
+
+Who will use it:
+
+: network authentication systems
+
+Message Flow:
+
+: TBD
+
+Attester:
+
+: device platform
+
+Relying Party:
+
+: internet peers
+
+Claims used as evidence:
+
+: TBD
+
+Description:
+
+: The relying party wants to know how secure a private key that identifies
+an entity is.  Unlike the network attestation, the relying party is not part of
+the network infrastructure, nor do they necessarily have a business relationship (such as
+ownership) over the end device.
+
+## Geographic attestation
+
+Use case name:
+
+: Location attestation
+
+Who will use it:
+
+: geo-fenced systems
+
+Message Flow:
+
+: passport (probably)
+
+Attester:
+
+: secure GPS system(s)
+
+Relying Party:
+
+: internet peers
+
+Claims used as evidence:
+
+: TBD
+
+Description:
+
+: The relying party wants to know the physical location (on the planet earth)
+of the device.  This may be provided directly by a GPS/GLONASS/Galileo module
+that is incorporated into a TPM.  This may also be provided by collecting other
+proximity messages from other device that the relying party can form a trust
+relationship with.
+
+## Device provenance attestation
+
+Use case name:
+
+: RIV - Device Provenance
+
+Who will use it:
+
+: Industrial IoT devices
+
+Message Flow:
+
+: passport
+
+Attester:
+
+: network management station
+
+Relying Party:
+
+: a network entity
+
+Claims used as evidence:
+
+: TBD
+
+Description:
+
+: A newly manufactured device needs to be onboarded into a network where many
+if not all device management duties are performed by the network owner. The
+device owner wants to verify the device originated from a legitimate
+vendor. A cryptographic device identity such as an IEEE802.1AR is embedded
+during manufacturing and a certificate identifying the device is delivered to
+the owner onboarding agent. The device authenticates using its 802.1AR IDevID
+to prove it originated from the expected vendor.
+
+The device chain of custody from the original device manufacturer to the new
+owner may also be verified as part of device provenance attestation. The
+chain of custody history may be collected by a cloud service or similar
+capability that the supply chain and owner agree to use.
+
+{{I-D.fedorkow-rats-network-device-attestation}} section 1.2 refers to this
+as "Provable Device Identity", and section 2.3 details the parties.
+
+
 
 # Security Considerations
 
