@@ -836,6 +836,16 @@ Principals have the following properties:
 * Composition - Principals possessing different Roles can be combined into a singleton Principal possessing the union of Roles. Message flows between combined Principals is uninteresting.
 * Decomposition -  A singleton Principal possessing multiple Roles can be divided into multiple Principals.
 
+# Privacy Considerations
+
+The conveyance of Evidence and the resulting Attestation Results reveal a great deal of information about the internal state of a device.
+In many cases the whole point of the Attestation process is to provided reliable evidence about the type of the device and the firmware that the device is running.
+This information is particularly interesting to many attackers: knowing that a device is running a weak version of a the firmware provides a way to aim attacks better.
+
+Just knowing the existence of a device is itself a disclosure.
+
+Conveyance protocols must detail what kinds of information is disclosed, and to whom it is exposed.
+
 # Security Considerations
 
 Evidence, Verifiable Assertions and Attestation Results SHOULD use formats that support end-to-end integrity protection and MAY support end-to-end confidentiality protection.
