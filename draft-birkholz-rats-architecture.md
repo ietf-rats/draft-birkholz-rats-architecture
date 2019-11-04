@@ -168,7 +168,7 @@ This commonality also significantly reduces the incidence of critical bugs.
 In some environments the collection of Evidence by the Attester to be provided to the Verifier is part of an existing protocol: this document does not change that, rather embraces those legacy mechanisms as part of the specification.  This is an evolutionary path forward, not revolutionary.
 Yet in other greenfield environments, there is a desire to have a standard for Evidence as well as for Attestation Results, and this architecture outlines how that is done.
 
-This introduction gives an overview of the protocol, interaction models, messaging models and roles involved.
+This introduction gives an overview of the message flows and roles involved.
 Following this, is a terminology section that is referenced normatively by other documents and is a key part of this document.
 There is then a section on use cases and how they leverage the roles and workflows described.
 
@@ -190,8 +190,8 @@ Things to be mentioned (XXX):
 
 ## RATS in a Nutshell
 
-* Remote Attestation Interactions typically convey Claims that contain the trustworthiness properties associated with an Attested Environment (Evidence).
-* A corresponding provisioning Interaction conveys Reference trustworthiness claims that can be compared with attestation Evidence. Reference Values typically consist of firmware or software digests and details about what makes the attesting module a trusted source of Evidence.
+* Remote Attestation message flows typically convey Claims that contain the trustworthiness properties associated with an Attested Environment (Evidence).
+* A corresponding provisioning message flows conveys Reference trustworthiness claims that can be compared with attestation Evidence. Reference Values typically consist of firmware or software digests and details about what makes the attesting module a trusted source of Evidence.
 * Relying Parties are performing tasks such as managing a resource, controlling access, and/or managing risk. Attestation Results helps Relying Parties determine levels of trust.
 
 ## Remote Attestation Workflow
@@ -202,7 +202,7 @@ Things to be mentioned (XXX):
 ~~~~
 {:wholeflow #wholeflow title="RATS Protocol Flows"}
 
-In the RATS architecture shown above, specific content items (payload conveyed by Interactions) are identified:
+In the RATS architecture shown above, specific content items (payload conveyed in message flows) are identified:
 
 * Evidence is as set of believable Claims about distinguishable Environments made by an Attester.
 * Known-Good-Values are reference Claims used to appraise Evidence by an Verifier.
@@ -217,7 +217,7 @@ If appropriate Endorsements about the Attester are available, Known-Good-Values 
 
 The Asserter role and the format for Known-Good-Values and Endorsements are not subject to standardization at this time.  The current verticals already include provisions for encoding and/or distributing these objects.
 
-## Interaction models
+## Message Flows
 
 {: #passport}
 ### Passport Model
@@ -253,7 +253,7 @@ perform background checks.  When a prospective employee provides claims about ed
 
 Appraisal:
 
-: A Verifier process that compares Evidence to Reference values while taking into account Endorsements and produces Results.
+: A Verifier process that compares Evidence to Reference values while taking into account Endorsements and produces Attestation Results.
 
 Asserter:
 
@@ -271,20 +271,20 @@ Attesting Environment:
 
 : An environment capable of making trustworthiness Claims about an Attested Environment.
 
-Background-Check message flow:
+Background-Check Message Flow:
 
-: An attestation workflow where the Attester provides Evidence to a Relying Party, who consults one or more Verifiers who supply Results to the Relying Party. See {{background}}.
+: An attestation workflow where the Attester provides Evidence to a Relying Party, who consults one or more Verifiers who supply Attestation Results to the Relying Party. See {{background}}.
 
 Claim:
 
-: A statement about the construction, composition, validation or behavior of an Entity that affects trustworthiness. Evidence, Reference Values and Results are expressions that consists of one or more Claims.
+: A statement about the construction, composition, validation or behavior of an Entity that affects trustworthiness. Evidence, Reference Values and Attestation Results are expressions that consists of one or more Claims.
 <!--
 Statements about trustworthiness characteristics of an Attested Computing Environment. The veracity of a Claim is determined by the reputation of the entity making the Claim. Reputation may involve identifying, authenticating and tracking transactions associated with an entity. RATS may be used to establish entity reputation, but not exclusively. Other reputation mechanisms are out-of-scope.
 -->
 
 Conveyance:
 
-: The process of transferring Evidence, Reference Values and Results between Entities participating in attestation workflow.
+: The process of transferring Evidence, Reference Values and Attestation Results between Entities participating in attestation workflow.
 
 Entity:
 
@@ -294,9 +294,9 @@ Evidence:
 
 : See {{evidence}}.
 
-Passport message flow:
+Passport Message Flow:
 
-: An attestation workflow where the Attester provides Evidence to a Verifier who returns Results that are then forwarded to one or more Relying Parties. See {{passport}}.
+: An attestation workflow where the Attester provides Evidence to a Verifier who returns Attestation Results that are then forwarded to one or more Relying Parties. See {{passport}}.
 
 Reference Values:
 
@@ -306,7 +306,7 @@ Relying Party:
 
 : See {{relyingparty}}.
 
-Results:
+Attestation Results:
 
 : See {{results}}.
 
@@ -439,7 +439,7 @@ This section details the primary roles of an attestation workflow and the messag
 
 ### Roles {#roles}
 
-An endpoint system (a.k.a., Entity) may implement one or more attestation Roles to accommodate a variety of possible interaction models. Exemplary interaction models are described in {{passport}} and {{background}}. Role messages are secured by the Entity that generated it. Entities possess credentials (e.g., cryptographic keys) that authenticate, integrity protect and optionally confidentiality protect attestation messages.
+An endpoint system (a.k.a., Entity) may implement one or more attestation Roles to accommodate a variety of possible message flows. Exemplary message flows are described in {{passport}} and {{background}}. Role messages are secured by the Entity that generated it. Entities possess credentials (e.g., cryptographic keys) that authenticate, integrity protect and optionally confidentiality protect attestation messages.
 
 #### Attester {#attester}
 
@@ -487,7 +487,7 @@ The consumer of Evidence for appraisal. The Role that designates an Entity to cr
 
 #### Relying Party {#relyingparty}
 
-A Role in an attestation workflow that accepts Results from a Verifier that may be used by the Relying Party to inform application specific decision making. How Results are used to inform decision making is out-of-scope for this architecture.
+A Role in an attestation workflow that accepts Attestation Results from a Verifier that may be used by the Relying Party to inform application specific decision making. How Attestation Results are used to inform decision making is out-of-scope for this architecture.
 
 <!--
 It assesses Attestation Results protections, parses and assesses Attestation Results according to an assessent context (Note: definition of the assessment context is out-of-scope).
@@ -534,7 +534,7 @@ Endorsements:
 A Message type created and distributed by the Asserter Role and consumed by the Verifier Role. Endorsements provide Claims about Components of an Attester that an Attesting Environment cannot create Evidence about.
 -->
 
-#### Results {#results}
+#### Attestation Results {#results}
 
 Statements about the output of an appraisal of Evidence that are created, formatted and protected by a Verifier.
 
@@ -550,7 +550,7 @@ Containers for the Roles.
 
 Entities are users, organizations, devices and computing environments (e.g., devices, platforms, services, peripherals).
 
-RATS Principals may implement one or more RATS Roles. Role interactions occurring within the same RATS Principal are out-of-scope.
+RATS Principals may implement one or more RATS Roles. Massage flows occurring within the same RATS Principal are out-of-scope.
 
 The methods whereby RATS Principals may be identified, discovered, authenticated, connected and trusted, though important, are out-of-scope.
 
@@ -580,12 +580,12 @@ Principal operations that apply resiliency, scaling, load balancing or replicati
 RATS Principals have the following properties:
 
 * Multiplicity - Multiple instances of RATS Principals that possess the same RATS Roles can exist.
-* Composition - RATS Principals possessing different RATS Roles can be combined into a singleton RATS Principal possessing the union of RATS Roles. RATS Interactions between combined RATS Principals is uninteresting.
+* Composition - RATS Principals possessing different RATS Roles can be combined into a singleton RATS Principal possessing the union of RATS Roles. Message flows  between combined RATS Principals is uninteresting.
 * Decomposition -  A singleton RATS Principal possessing multiple RATS Roles can be divided into multiple RATS Principals.
 
-RATS Interactions may occur between them.
-
 # Reference use cases
+
+
 
 ## Device Capabilities/Firmware Attestation {#netattest}
 
@@ -627,7 +627,7 @@ This is a general description for which there are many specific use cases,
 including {{I-D.fedorkow-rats-network-device-attestation}} section 1.2,
 "Software Inventory"
 
-## IETF TEEP WG use case
+## IETF TEEP WG Use-Case
 
 Use case name:
 
@@ -665,7 +665,7 @@ Use case name:
 
 Who will use it:
 
-: Power plants and other systems that need to assert their current state, but which can not accept any inputs from the outside.  The corollory system is
+: Power plants and other systems that need to assert their current state, but which can not accept any inputs from the outside.  The corollary system is
 a black-box (such as in an aircraft), which needs to log the state of a system,
 but which can never initiate a handshake.
 
@@ -681,7 +681,7 @@ Relying Party:
 
 : open
 
-Claims used as evidence:
+Claims used as Evidence:
 
 : the beginning and ending time as endorsed by a Time Stamp Authority,
 represented by a time stamp token.  The real time clock of the system
@@ -690,11 +690,11 @@ startup.
 
 Description:
 
-: These requirements motivate the creation of the Time Base Unidirectional Attestation (TUDA) {{-tuda}}, the output of TUDA are typically a secure audit log, where freshness is determined by synchronization to an source of external time.
+: These requirements motivate the creation of the Time-Base Unidirectional Attestation (TUDA) {{-tuda}}, the output of TUDA is typically a secure audit log, where freshness is determined by synchronization to a trusted source of external time.
 
-: The freshness is preserved in the evidence by the use of a Time Stamp Authority (TSA) which provides Time Stamp Tokens (TST).
+: The freshness is preserved in the Evidence by the use of a Time Stamp Authority (TSA) which provides Time Stamp Tokens (TST).
 
-## Virtualized multi-tenant hosts
+## Virtualized Multi-Tenant Hosts
 
 Use case name:
 
@@ -764,11 +764,11 @@ Unlike the network attestation, the relying party is not part of the network inf
 
 : The Device Type Attestation is provided by a Firmware TPM performing the Verifier function, creating Attestation Results that indicate a particular model/type of device.  In TCG terms, this is called Implicit Attestation, in this case the Attested Environment is the (smartphone) Rich Execution Environment (REE) ({{I-D.ietf-teep-architecture}} section 2), and the Attesting Environment is within the TEE.
 
-## Geographic attestation
+## Geographic Evidence
 
 Use case name:
 
-: Location attestation
+: Location Evidence
 
 Who will use it:
 
@@ -788,11 +788,11 @@ Relying Party:
 
 Description:
 
-: The relying party wants to know the physical location (on the planet earth) of the device.
-This may be provided directly by a GPS/GLONASS/Galileo module that is incorporated into a TPM.
+: The relying party wants to know the physical location (on the planet earth, using a geodetic system) of the device.
+This may be provided directly by a GPS/GLONASS/BeiDou/Galileo module that is incorporated into a TPM.
 This may also be provided by collecting other proximity messages from other device that the relying party can form a trust relationship with.
 
-## Device provenance attestation
+## Device Provenance Attestation
 
 Use case name:
 
@@ -831,7 +831,7 @@ The chain of custody history may be collected by a cloud service or similar capa
 
 # Security Considerations
 
-RATS Evidence, Verifiable Assertions and Results SHOULD use formats that support end-to-end integrity protection and MAY support end-to-end confidentiality protection.
+RATS Evidence, Verifiable Assertions and Attestation Results SHOULD use formats that support end-to-end integrity protection and MAY support end-to-end confidentiality protection.
 Replay attack prevention MAY be supported if a Nonce Claim is included.
 Nonce Claims often piggy-back other information and can convey attestation semantics that are of essence to RATS, e.g. the last four bytes of a challenge nonce could be replaced by the IPv4 address-value of the Attester in its response.
 
