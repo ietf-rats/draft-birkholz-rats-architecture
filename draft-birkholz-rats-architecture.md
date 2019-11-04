@@ -797,7 +797,7 @@ A Message type created by the Verifier Role and ultimately consumed by Relying P
 
 ## Principals (Entities?) -- Containers for the Roles
 
-\[The authors have are happy with the term Principal, and have been looking for something else.  JOSE uses the term Principal]
+\[The authors are unhappy with the term Principal, and have been looking for something else.  JOSE uses the term Principal]
 
 Principals are Containers for the Roles.
 
