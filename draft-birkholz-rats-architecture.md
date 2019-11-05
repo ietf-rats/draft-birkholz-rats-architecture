@@ -60,6 +60,15 @@ author:
   city: ""
   region: ""
   country: Canada
+- ins: T. Hardjono
+  name: Thomas Hardjono
+  org: MIT
+  email: hardjono@mit.edu
+  street: ""
+  code: ""
+  city: ""
+  region: ""
+  country: USA
 
 normative:
   RFC2119:
