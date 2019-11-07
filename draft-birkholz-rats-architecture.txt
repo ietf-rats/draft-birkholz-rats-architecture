@@ -287,8 +287,8 @@ Internet-Draft              RATS Arch & Terms              November 2019
                             ************
                                   |
                                   |
-                                  |Known-Good-Values
-                                  |Endorsements
+                                  |Reference Values
+                                  |
                                   |
                                   v
                           .---------------.
@@ -397,8 +397,8 @@ Internet-Draft              RATS Arch & Terms              November 2019
             ************
             * Asserter *
             ************
-                  |Known-Good-Values
-                  |Endorsements
+                  |Reference Values
+                  |
                   |
                   v
           .---------------.
@@ -453,8 +453,8 @@ Internet-Draft              RATS Arch & Terms              November 2019
                                                ************
                                                * Asserter *
                                                ************
-                                                     |Known-Good-Values
-                                                     |Endorsements
+                                                     |Reference Values
+                                                     |
                                                      |
                                                      v
                                              .---------------.
