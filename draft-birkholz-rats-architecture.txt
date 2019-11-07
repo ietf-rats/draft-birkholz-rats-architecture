@@ -5,14 +5,16 @@
 RATS Working Group                                           H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                              M. Wiseman
-Expires: May 7, 2020                                  GE Global Research
+Expires: May 10, 2020                                 GE Global Research
                                                            H. Tschofenig
                                                                 ARM Ltd.
                                                                 N. Smith
                                                                    Intel
                                                            M. Richardson
                                                 Sandelman Software Works
-                                                       November 04, 2019
+                                                             T. Hardjono
+                                                                     MIT
+                                                       November 07, 2019
 
 
                Remote Attestation Procedures Architecture
@@ -41,23 +43,23 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on May 7, 2020.
+   This Internet-Draft will expire on May 10, 2020.
 
 Copyright Notice
 
    Copyright (c) 2019 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to BCP 78 and the IETF Trust's Legal
-   Provisions Relating to IETF Documents
 
 
 
-Birkholz, et al.           Expires May 7, 2020                  [Page 1]
+Birkholz, et al.          Expires May 10, 2020                  [Page 1]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
 
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
    (https://trustee.ietf.org/license-info) in effect on the date of
    publication of this document.  Please review these documents
    carefully, as they describe your rights and restrictions with respect
@@ -104,15 +106,16 @@ Table of Contents
    8.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  24
    9.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  24
      9.1.  Normative References  . . . . . . . . . . . . . . . . . .  24
-     9.2.  Informative References  . . . . . . . . . . . . . . . . .  24
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  26
 
 
 
-Birkholz, et al.           Expires May 7, 2020                  [Page 2]
+Birkholz, et al.          Expires May 10, 2020                  [Page 2]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
+
+     9.2.  Informative References  . . . . . . . . . . . . . . . . .  24
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  26
 
 1.  Introduction
 
@@ -158,17 +161,17 @@ Internet-Draft              RATS Arch & Terms              November 2019
    desktops.  Smartphones commonly have either an actual TPM, or have
    the ability to emulate one in software running in a Trusted Execution
    Environment [I-D.ietf-teep-architecture].  There are now few barriers
-   to creating a standards-based system for remote attestation
-   procedures.
 
 
 
 
-
-Birkholz, et al.           Expires May 7, 2020                  [Page 3]
+Birkholz, et al.          Expires May 10, 2020                  [Page 3]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
+
+   to creating a standards-based system for remote attestation
+   procedures.
 
    A number of niche solutions have emerged that provide for use-case
    specific remote attestation, but none have the generality needed to
@@ -214,17 +217,18 @@ Internet-Draft              RATS Arch & Terms              November 2019
    well as for Attestation Results, and this architecture outlines how
    that is done.
 
-   In this document, terms defined within this document are consistently
-   Capitalized [work in progress. please raise issues, if there are
-   Blatant inconsistencies].
 
 
 
 
-Birkholz, et al.           Expires May 7, 2020                  [Page 4]
+Birkholz, et al.          Expires May 10, 2020                  [Page 4]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
+
+   In this document, terms defined within this document are consistently
+   Capitalized [work in progress. please raise issues, if there are
+   Blatant inconsistencies].
 
    Current verticals that use remote attestation include:
 
@@ -273,11 +277,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-
-
-
-
-Birkholz, et al.           Expires May 7, 2020                  [Page 5]
+Birkholz, et al.          Expires May 10, 2020                  [Page 5]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -333,7 +333,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-Birkholz, et al.           Expires May 7, 2020                  [Page 6]
+Birkholz, et al.          Expires May 10, 2020                  [Page 6]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -389,7 +389,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-Birkholz, et al.           Expires May 7, 2020                  [Page 7]
+Birkholz, et al.          Expires May 10, 2020                  [Page 7]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -445,7 +445,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-Birkholz, et al.           Expires May 7, 2020                  [Page 8]
+Birkholz, et al.          Expires May 10, 2020                  [Page 8]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -501,7 +501,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-Birkholz, et al.           Expires May 7, 2020                  [Page 9]
+Birkholz, et al.          Expires May 10, 2020                  [Page 9]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -557,7 +557,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-Birkholz, et al.           Expires May 7, 2020                 [Page 10]
+Birkholz, et al.          Expires May 10, 2020                 [Page 10]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -613,7 +613,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-Birkholz, et al.           Expires May 7, 2020                 [Page 11]
+Birkholz, et al.          Expires May 10, 2020                 [Page 11]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -669,7 +669,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-Birkholz, et al.           Expires May 7, 2020                 [Page 12]
+Birkholz, et al.          Expires May 10, 2020                 [Page 12]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -725,7 +725,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-Birkholz, et al.           Expires May 7, 2020                 [Page 13]
+Birkholz, et al.          Expires May 10, 2020                 [Page 13]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -781,7 +781,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-Birkholz, et al.           Expires May 7, 2020                 [Page 14]
+Birkholz, et al.          Expires May 10, 2020                 [Page 14]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -837,7 +837,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-Birkholz, et al.           Expires May 7, 2020                 [Page 15]
+Birkholz, et al.          Expires May 10, 2020                 [Page 15]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -893,7 +893,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-Birkholz, et al.           Expires May 7, 2020                 [Page 16]
+Birkholz, et al.          Expires May 10, 2020                 [Page 16]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -949,7 +949,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-Birkholz, et al.           Expires May 7, 2020                 [Page 17]
+Birkholz, et al.          Expires May 10, 2020                 [Page 17]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -1005,7 +1005,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-Birkholz, et al.           Expires May 7, 2020                 [Page 18]
+Birkholz, et al.          Expires May 10, 2020                 [Page 18]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -1061,7 +1061,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-Birkholz, et al.           Expires May 7, 2020                 [Page 19]
+Birkholz, et al.          Expires May 10, 2020                 [Page 19]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -1117,7 +1117,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-Birkholz, et al.           Expires May 7, 2020                 [Page 20]
+Birkholz, et al.          Expires May 10, 2020                 [Page 20]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -1173,7 +1173,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-Birkholz, et al.           Expires May 7, 2020                 [Page 21]
+Birkholz, et al.          Expires May 10, 2020                 [Page 21]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -1229,7 +1229,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-Birkholz, et al.           Expires May 7, 2020                 [Page 22]
+Birkholz, et al.          Expires May 10, 2020                 [Page 22]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -1285,7 +1285,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-Birkholz, et al.           Expires May 7, 2020                 [Page 23]
+Birkholz, et al.          Expires May 10, 2020                 [Page 23]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -1341,7 +1341,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-Birkholz, et al.           Expires May 7, 2020                 [Page 24]
+Birkholz, et al.          Expires May 10, 2020                 [Page 24]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -1397,7 +1397,7 @@ Internet-Draft              RATS Arch & Terms              November 2019
 
 
 
-Birkholz, et al.           Expires May 7, 2020                 [Page 25]
+Birkholz, et al.          Expires May 10, 2020                 [Page 25]
 
 Internet-Draft              RATS Arch & Terms              November 2019
 
@@ -1453,4 +1453,60 @@ Authors' Addresses
 
 
 
-Birkholz, et al.           Expires May 7, 2020                 [Page 26]
+Birkholz, et al.          Expires May 10, 2020                 [Page 26]
+
+Internet-Draft              RATS Arch & Terms              November 2019
+
+
+   Thomas Hardjono
+   MIT
+   USA
+
+   Email: hardjono@mit.edu
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Birkholz, et al.          Expires May 10, 2020                 [Page 27]
