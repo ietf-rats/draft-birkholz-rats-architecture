@@ -5,8 +5,8 @@
          ************
          * Asserter *
          ************
-               |Known-Good-Values
-               |Endorsements     
+               |Reference Values 
+               |                 
                |
                v
        .---------------.
